@@ -1,0 +1,20 @@
+{
+    "api": {
+        "version": "0.1.0"
+    },
+    "chatGPT": {
+        "token": "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"
+    },
+    "db": {
+        "mainDB": {
+            "client": "mysql",
+            "database": "main",
+            "host": "cndb-initial.c3sdml17ue4d.us-east-1.rds.amazonaws.com",
+            "password": "cn2023fall",
+            "port": 3306,
+            "user": "admin",
+            "debug": true,
+            "ConnectionTimeoutInSecond": 10
+        }
+    }
+}
