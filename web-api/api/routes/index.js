@@ -6,11 +6,7 @@ const Joi = require('joi');
 const { rejectTheRequest } = require('../utils/error');
 const { auth } = require('../middleware/index');
 
-const createMyFavorite = require('../controllers/create-my-favorite');
-const deleteMyFavorite = require('../controllers/delete-my-favorite');
-const updateMyFavorite = require('../controllers/update-my-favorite');
 const getMyFavorite = require('../controllers/get-my-favorite');
-const callPredict = require('../controllers/call-predict');
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -77,28 +73,6 @@ router.get('/', async ctx => {
     ctx.body = 'success';
 });
 
-router.post(
-    '/my/favorite',
-    validate({
-        body: Joi.object().keys({
-            city: Joi.string().required(),
-            userId: Joi.number().required(),
-        }),
-    }),
-    createMyFavorite
-);
-
-router.put(
-    '/my/favorite',
-    validate({
-        body: Joi.object().keys({
-            city: Joi.string().required(),
-            userId: Joi.number().required(),
-        }),
-    }),
-    updateMyFavorite
-);
-
 router.get(
     '/my/favorite',
     validate({
@@ -108,18 +82,6 @@ router.get(
     }),
     getMyFavorite
 );
-
-router.delete(
-    '/my/favorite',
-    validate({
-        query: {
-            userId: Joi.number().required(),
-        }
-    }),
-    deleteMyFavorite
-);
-
-router.get('/call_predict', callPredict);
 
 // bad request example
 router.get('/error', async () => {

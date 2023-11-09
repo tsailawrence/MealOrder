@@ -8,11 +8,11 @@
     "db": {
         "mainDB": {
             "client": "mysql",
-            "database": "main",
-            "host": "cndb-initial.c3sdml17ue4d.us-east-1.rds.amazonaws.com",
-            "password": "cn2023fall",
+            "database": "foody",
+            "host": " 34.80.86.39",
+            "password": "ggit_member",
             "port": 3306,
-            "user": "admin",
+            "user": "ggit_member",
             "debug": true,
             "ConnectionTimeoutInSecond": 10
         }
