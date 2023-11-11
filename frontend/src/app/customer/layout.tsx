@@ -6,11 +6,11 @@ export default function CustomerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <div>
-        <Header />
-      </div>
-      <div className="container mx-auto px-4">{children}</div>
-    </>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex flex-col items-center justify-between p-4 grow">
+        {children}
+      </main>
+    </div>
   );
 }
