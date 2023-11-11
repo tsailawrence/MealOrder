@@ -15,8 +15,8 @@ const CategoryCard: React.FC<CategoryProps> = ({ uri, word }) => {
                     <Image
                         src={uri}
                         alt="Your Image Description"
-                        width={190}
-                        height={190}
+                        width={160}
+                        height={160}
                         layout="responsive"
                         objectFit="contain"
                         objectPosition="center"

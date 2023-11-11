@@ -1,16 +1,17 @@
 // components/CardComponent.js
 import React from 'react';
 import Image from 'next/image';
-
+import Link from 'next/link';
 type CardProps = {
     uri: string;
     word: string;
     starNumber: number;
     likes?: boolean;
 };
-
 const CardComponent: React.FC<CardProps> = ({ uri, word, starNumber, likes = false }) => {
     return (
+        // <Link href={`/customer/restaurant/${word}`} >
+        <Link href="/customer/restaurant/123" >
         <div className="flex flex-col items-center w-full max-w-xs mx-auto bg-white rounded-2xl overflow-hidden shadow-lg max-md:w-full">
             <div className="w-full">
                 <div className="relative w-full h-0" style={{ paddingBottom: '84%' }}>
@@ -38,6 +39,7 @@ const CardComponent: React.FC<CardProps> = ({ uri, word, starNumber, likes = fal
                 </div>
             </div>
         </div>
+        </Link>
     );
 };
 
