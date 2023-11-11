@@ -1,18 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
-import { Menu, ShoppingCart } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const Header = () => {
   const routes = [
-    {
-      href: "/",
-      label: "Restauarants",
-    },
+    // {
+    //   href: "/",
+    //   label: "Restauarants",
+    // },
     {
       href: "/",
       label: "Order",
@@ -35,7 +33,6 @@ const Header = () => {
               <Menu className="h-6 w-6" color="#E60012"></Menu>
             </SheetTrigger>
             <SheetContent side="left" className="w-[250px] sm:w-[300px]">
-              <UserButton afterSignOutUrl="/" />
               <nav className="flex flex-col gap-4">
                 {routes.map((route, i) => (
                   <Link
@@ -50,31 +47,15 @@ const Header = () => {
             </SheetContent>
           </Sheet>
           <Link href="/" className="">
-            <Image src={logo} alt="logo" width={90} height={30} />
+            <Image src="/logo.png" alt="logo" width={90} height={30} />
           </Link>
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>
-            <Button
-              variant="ghost"
-              size="icon"
-              className=""
-              aria-label="Shopping Cart"
-            >
-              <ShoppingCart className="h-6 w-6" color="#E60012" />
-            </Button>
-            {/* Mount the UserButton component */}
             <UserButton />
           </SignedIn>
         </div>
       </div>
-      {/* <div className="brand">
-                <Link to="/">Amazona</Link>
-            </div>
-            <div className="header-links">
-                <Link to="/cart">Cart</Link>
-                <Link to="/signin">Sign In</Link>
-            </div> */}
     </header>
   );
 };
