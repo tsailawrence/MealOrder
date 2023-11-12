@@ -19,7 +19,7 @@ const CustomerHome = () => {
         <div className="flex gap-5 whitespace-nowrap">
           {cardData.map((card, index) => (
             <div key={index} className="flex-none w-[calc(25%-1.25rem)] min-w-[200px]">
-              <CardComponent uri={card.uri} word={card.word} starNumber={card.starNumber} likes={card.likes} />
+              <CardComponent uri={card.uri} name={card.name} starNumber={card.starNumber} likes={card.likes} />
             </div>
           ))}
         </div>
@@ -38,7 +38,7 @@ const CustomerHome = () => {
         <div className="flex gap-5 whitespace-nowrap">
           {cardData.map((card, index) => (
             <div key={index} className="flex-none w-[calc(25%-1.25rem)] min-w-[200px]">
-              <CardComponent uri={card.uri} word={card.word} starNumber={card.starNumber} likes={card.likes} />
+              <CardComponent uri={card.uri} name={card.name} starNumber={card.starNumber} likes={card.likes} />
             </div>
           ))}
         </div>

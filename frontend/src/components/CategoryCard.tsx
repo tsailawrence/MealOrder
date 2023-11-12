@@ -4,10 +4,10 @@ import Image from 'next/image';
 
 type CategoryProps = {
     uri: string;
-    word: string;
+    name: string;
 };
 
-const CategoryCard: React.FC<CategoryProps> = ({ uri, word }) => {
+const CategoryCard: React.FC<CategoryProps> = ({ uri, name }) => {
     return (
         <section className="flex grow basis-[0%] flex-col items-stretch self-start">
             <div className="flex flex-col items-center">
@@ -25,7 +25,7 @@ const CategoryCard: React.FC<CategoryProps> = ({ uri, word }) => {
                 </div>
                 <div className="w-[190px] text-center">
                     <h2 className="text-xl font-bold pt-4">
-                        {word}
+                        {name}
                     </h2>
                 </div>
             </div>
