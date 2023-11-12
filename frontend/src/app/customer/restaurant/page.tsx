@@ -25,7 +25,7 @@ const CustomerHome = () => {
             >
               <CardComponent
                 uri={card.uri}
-                word={card.word}
+                name={card.name}
                 starNumber={card.starNumber}
                 likes={card.likes}
               />
@@ -53,7 +53,7 @@ const CustomerHome = () => {
             >
               <CardComponent
                 uri={card.uri}
-                word={card.word}
+                name={card.name}
                 starNumber={card.starNumber}
                 likes={card.likes}
               />

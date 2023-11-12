@@ -28,7 +28,7 @@ export default function allFavorite() {
           >
             <CardComponent
               uri={card.uri}
-              word={card.word}
+              name={card.name}
               starNumber={card.starNumber}
               likes={true}
             />
