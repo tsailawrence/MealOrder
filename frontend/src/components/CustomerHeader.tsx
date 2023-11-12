@@ -7,12 +7,12 @@ import { Menu, ShoppingCart } from "lucide-react";
 
 const Header = () => {
   const routes = [
-    // {
-    //   href: "/",
-    //   label: "Restauarants",
-    // },
     {
-      href: "/",
+      href: "/customer/restaurant",
+      label: "Restauarant",
+    },
+    {
+      href: "/customer/order",
       label: "Order",
     },
     {
