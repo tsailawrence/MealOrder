@@ -28,7 +28,7 @@ export default function ChooseRoleDialog() {
   const handleSave = () => {
     if (userRole === "employee") {
       // 跳轉到員工的註冊頁面
-      router.push("/customer");
+      router.push("/customer/restaurant");
     } else {
       // 跳轉到商家的註冊頁面
       router.push("/merchant");
