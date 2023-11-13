@@ -4,7 +4,7 @@ import Image from "next/image";
 type RestaurantCardProps = {
     name: string;
     imageSrc: string;
-    starRating: number;
+    starNumber: number;
     address: string;
     likes: boolean;
 };
@@ -12,7 +12,7 @@ type RestaurantCardProps = {
 const RestaurantCard: React.FC<RestaurantCardProps> = ({
     name,
     imageSrc,
-    starRating,
+    starNumber,
     address,
     likes,
 }) => {
@@ -24,7 +24,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
                     src={imageSrc}
                     width={86}
                     height={86}
-                    className="aspect-square object-contain object-center w-[86px] justify-center items-center overflow-hidden shrink-0 max-w-full"
+                    className="object-contain object-center w-[86px] h-[86px] justify-center items-center overflow-hidden shrink-0 max-w-full rounded-full" // Added h-[86px] and rounded-full
                     alt="Restaurant Image"
                 />
                 <div className="flex grow basis-[0%] flex-col items-stretch mt-2.5 self-start">
@@ -37,7 +37,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
                                 {likes ? '⭐' : '✫'}
                             </div>
                             <div className="text-red-600 text-2xl leading-7 self-stretch whitespace-nowrap">
-                                {starRating}
+                                {starNumber}
                             </div>
                         </div>
                     </div>

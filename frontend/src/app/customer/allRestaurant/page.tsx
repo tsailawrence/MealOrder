@@ -13,10 +13,10 @@ export default function allFavorite() {
                     back
                 </a>
             </header>
-            <div className="flex flex-wrap gap-4 w-full px-5 mt-6">
+            <div className="flex flex-wrap gap-4 w-[80%] px-5 mt-6">
                 {cardData.map((card, index) => (
-                    <div key={index} className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-[calc(25%-1.25rem)] min-w-[200px]">
-                        <CardComponent uri={card.uri} word={card.word} starNumber={card.starNumber} likes={true} />
+                    <div key={index} className="flex-none w-1/4 min-w-[150px] max-w-[200px]">
+                        <CardComponent uri={card.uri} name={card.name} starNumber={card.starNumber} likes={true} />
                     </div>
                 ))}
             </div>
