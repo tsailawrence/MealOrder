@@ -1,8 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+
+import { Cross2Icon } from "@radix-ui/react-icons";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { Menu, ShoppingCart } from "lucide-react";
 
 const Header = () => {
@@ -24,6 +31,7 @@ const Header = () => {
       label: "Settings",
     },
   ];
+
   return (
     <header className="sm:flex sm:justify-between px-10 border-b">
       <div className="relative  flex h-20 items-center justify-between w-full">
@@ -40,7 +48,7 @@ const Header = () => {
                     href={route.href}
                     className="block  py-1 text-lg"
                   >
-                    {route.label}
+                    <SheetClose>{route.label}</SheetClose>
                   </Link>
                 ))}
               </nav>
