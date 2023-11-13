@@ -8,7 +8,7 @@ export default function CustomerLayout({
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex flex-col items-center justify-between p-4 grow">
+      <main className="flex flex-col items-center p-4 grow">
         {children}
       </main>
     </div>

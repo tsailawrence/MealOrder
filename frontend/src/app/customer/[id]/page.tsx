@@ -6,10 +6,12 @@ import { restaurantData } from '@/app/dbTemplate/cardData';
 
 const RestaurantPage = () => {
     const { id } = useParams();
+    //change string[] to string   
+    const name = id.toString();
     // Use 'id' to fetch data or for other purposes
     return (
         <>
-            <RestaurantCard  name={restaurantData[0].name} address={restaurantData[0].address} starNumber={restaurantData[0].starNumber} imageSrc={restaurantData[0].uri} likes={true} />
+            <RestaurantCard  name={name} address={restaurantData[0].address} starNumber={restaurantData[0].starNumber} imageSrc={restaurantData[0].uri} likes={true} />
             <StoreMenu menu={restaurantData[0].menu} />
         </>
     );

@@ -1,75 +1,55 @@
-import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-} from "@/components/ui/tabs"
+} from "@/components/ui/tabs";
 
-function TabsDemo() {
-    return (
-        <Tabs className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="account">Account</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
-            </TabsList>
-            <TabsContent value="account">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Account</CardTitle>
-                        <CardDescription>
-                            Make changes to your account here. Click save when you are done.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <div className="space-y-1">
-                            <Label htmlFor="name">Name</Label>
-                            <Input id="name" defaultValue="Pedro Duarte" />
-                        </div>
-                        <div className="space-y-1">
-                            <Label htmlFor="username">Username</Label>
-                            <Input id="username" defaultValue="@peduarte" />
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button>Save changes</Button>
-                    </CardFooter>
-                </Card>
-            </TabsContent>
-            <TabsContent value="password">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Password</CardTitle>
-                        <CardDescription>
-                            Change your password here. After saving, you will be logged out.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <div className="space-y-1">
-                            <Label htmlFor="current">Current password</Label>
-                            <Input id="current" type="password" />
-                        </div>
-                        <div className="space-y-1">
-                            <Label htmlFor="new">New password</Label>
-                            <Input id="new" type="password" />
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button>Save password</Button>
-                    </CardFooter>
-                </Card>
-            </TabsContent>
-        </Tabs>
-    )
+import { CardPriceComponent } from "@/components/CardComponent";
+
+// Define the structure of the menu item
+interface MenuItem {
+    uri: string;
+    name: string;
+    price: number;
 }
-export default TabsDemo
+
+// Define the structure of each category in the menu
+interface MenuCategory {
+    categoryName: string;
+    items: MenuItem[];
+}
+
+// Define the structure of the restaurant data
+interface TabsDemoProps {
+    menu: MenuCategory[];
+}
+
+// Define the props for TabsDemo component
+
+const TabsDemo: React.FC<TabsDemoProps> = ({ menu }) => {
+    const defaultValue = menu[0].categoryName;
+    return (
+            <Tabs className="w-full" defaultValue={defaultValue}>
+                <TabsList className="grid w-full grid-cols-10 mt-6">
+                    {menu.map((category, index) => (
+                        <TabsTrigger key={index} value={category.categoryName}>{category.categoryName}</TabsTrigger>
+                    ))}
+                </TabsList>
+
+                {menu.map((category, index) => (
+                    <TabsContent key={index} value={category.categoryName}>
+                        <div className="flex flex-wrap gap-5 w-full px-5 mt-6">
+                            {category.items.map((item, itemIndex) => (
+                                <div key={itemIndex} className="flex-none w-1/4 min-w-[150px] max-w-[200px]">
+                                    <CardPriceComponent uri={item.uri} name={item.name} price={item.price} />
+                                </div>
+                            ))}
+                        </div>
+                    </TabsContent>
+                ))}
+            </Tabs>
+    );
+};
+
+export default TabsDemo;
