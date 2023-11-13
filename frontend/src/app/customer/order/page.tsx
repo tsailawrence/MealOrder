@@ -1,40 +1,71 @@
-import { cardData } from "../../dbTemplate/cardData";
-import CardComponent from "@/components/CardComponent";
-export default function allFavorite() {
+import React from "react";
+import styles from "./orders.module.css";
+
+const orderData = [
+  {
+    id: 1,
+    name: "美式餐酒館",
+    items: 2,
+    time: "10/28 9:05 AM",
+    total: "NT$200.00",
+    status: "Preparing",
+    pickupTime: "10/28 9:15 AM",
+  },
+  {
+    id: 2,
+    name: "Donuts hut",
+    items: 2,
+    time: "10/28 8:15 AM",
+    total: "NT$120.00",
+    status: "Confirmed",
+    pickupTime: "10/28 11:15 AM",
+  },
+  {
+    id: 3,
+    name: "美式餐酒館",
+    items: 5,
+    time: "10/27 7:05 AM",
+    total: "NT$520.00",
+    status: "Completed",
+    pickupTime: "10/28 9:15 AM",
+  },
+];
+
+const OrdersPage = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center p-4">
-      <header className="self-center flex w-full max-w-[1144px] items-start justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap max-md:mt-10">
-        <h1 className="text-black text-4xl font-semibold leading-[50.4px] self-center grow shrink basis-auto my-auto">
-          Your Favorite Restaurant
-        </h1>
-        <a
-          href="/customer/allRestaurant"
-          className="text-black-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border bg-white w-[95px] pl-6 pr-6 py-2 rounded-3xl border-solid border-black-600 max-md:px-5"
-        >
-          See All
-        </a>
-        <a
-          href="/customer"
-          className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border bg-white w-[95px] pl-6 pr-6 py-2 rounded-3xl border-solid border-red-600 max-md:px-5"
-        >
-          back
-        </a>
-      </header>
-      <div className="flex flex-wrap gap-4 w-full px-5 mt-6">
-        {cardData.map((card, index) => (
-          <div
-            key={index}
-            className="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-[calc(25%-1.25rem)] min-w-[200px]"
-          >
-            <CardComponent
-              uri={card.uri}
-              name={card.name}
-              starNumber={card.starNumber}
-              likes={true}
-            />
+    <div className={styles.container}>
+      <h1 className={styles.header}>Orders</h1>
+      {orderData.map((order) => (
+        <div key={order.id} className={styles.orderItem}>
+          <img
+            className={styles.image}
+            src="https://via.placeholder.com/86"
+            alt={order.name}
+          />
+          <div className={styles.details}>
+            <h2 className={styles.title}>{order.name}</h2>
+            <p
+              className={styles.info}
+            >{`${order.items} items, ${order.time}, Total ${order.total}`}</p>
           </div>
-        ))}
-      </div>
-    </main>
+          <div>
+            <div className={styles.pickup}>
+              <div>Pickup Time: {order.pickupTime}</div>
+            </div>
+            <div className={styles.status}>
+              <span
+                className={`${styles.statusBadge} ${
+                  styles[order.status.toLowerCase()]
+                }`}
+              >
+                {order.status}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
-}
+};
+
+export default OrdersPage;
