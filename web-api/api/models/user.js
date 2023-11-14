@@ -1,13 +1,19 @@
 const datastore = require('../../db/mainDB');
+
 const { getTaipeiNowStr } = require('../utils/index');
 
-const TABLE_NAME = 'favorite_city';
+const TABLE_NAME = 'User';
 
-exports.getByUserId = ({ userId, fields = '*' }) =>
+exports.AUTHENTICATION_METHOD = {
+    LINE: 'line',
+    GOOGLE: 'google'
+};
+
+exports.getUserByToken = ({ token, fields = '*' }) =>
     datastore
         .select(fields)
-        .from(TABLE_NAME)
-        .where('user_id', userId);
+        .from('User')
+        .where('token', token);
 
 exports.insert = async data =>
     datastore

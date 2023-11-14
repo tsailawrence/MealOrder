@@ -6,7 +6,7 @@ const Joi = require('joi');
 const { rejectTheRequest } = require('../utils/error');
 const { auth } = require('../middleware/index');
 
-const getMyFavorite = require('../controllers/get-my-favorite');
+const getMyInfo = require('../controllers/get-my-info');
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -74,13 +74,13 @@ router.get('/', async ctx => {
 });
 
 router.get(
-    '/my/favorite',
+    '/my/info',
     validate({
         query: {
-            userId: Joi.number().required(),
+            token: Joi.string().required(),
         }
     }),
-    getMyFavorite
+    getMyInfo
 );
 
 // bad request example
