@@ -1,13 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
+import { RestaurantCardProps } from "@/lib/types/db";
 
-type RestaurantCardProps = {
-    name: string;
-    imageSrc: string;
-    starNumber: number;
-    address: string;
-    likes: boolean;
-};
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({
     name,

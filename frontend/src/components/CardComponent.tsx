@@ -16,17 +16,18 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from './ui/button';
-type CardProps = {
-    uri: string;
-    name: string;
-    starNumber: number;
-    likes?: boolean;
-};
-type CardPriceProps = {
-    uri: string;
-    name: string;
-    price: number;
-};
+import { CardProps, CardPriceProps } from '@/lib/types/db';
+// type CardProps = {
+//     uri: string;
+//     name: string;
+//     starNumber: number;
+//     likes?: boolean;
+// };
+// type CardPriceProps = {
+//     uri: string;
+//     name: string;
+//     price: number;
+// };
 export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price }) => {
     const [number, setNumber] = useState(1);
     return (

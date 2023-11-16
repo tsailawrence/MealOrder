@@ -2,11 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-type CategoryProps = {
-    uri: string;
-    name: string;
-};
-
+import { CategoryProps } from '@/lib/types/db';
 const CategoryCard: React.FC<CategoryProps> = ({ uri, name }) => {
     return (
         <Link href={`/customer/${name}`} >

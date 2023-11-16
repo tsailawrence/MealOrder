@@ -1,8 +1,5 @@
 import React from 'react';
-
-type AddButtonProps = {
-    url: string;
-};
+import { AddButtonProps } from '@/lib/types/db';
 
 const AddButton = ({ url }: AddButtonProps) => {
     return (
