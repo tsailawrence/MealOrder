@@ -23,11 +23,11 @@ const Header = () => {
       label: "Order",
     },
     {
-      href: "/",
+      href: "/customer/monthlyPayment",
       label: "Monthly Payment",
     },
     {
-      href: "/",
+      href: "/customer/settings",
       label: "Settings",
     },
   ];
