@@ -72,8 +72,10 @@ const CustomerHome = () => {
           View All
         </a>
       </header>
-      <div className="self-center flex w-full max-w-[1094px] items-start justify-between gap-5 mt-12 mb-16 px-5 max-md:max-w-full max-md:flex-wrap max-md:justify-center max-md:my-10">
-        {categoryData.map((category, index) => CategoryCard(category))}
+      <div className="self-center w-full max-w-[1103px] mt-9 px-5 max-md:max-w-full overflow-x-auto">
+        <div className="flex gap-5 whitespace-nowrap">
+          {categoryData.map((category, index) => CategoryCard(category))}
+        </div>
       </div>
     </>
   );
