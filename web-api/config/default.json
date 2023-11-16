@@ -9,11 +9,10 @@
         "mainDB": {
             "client": "mysql",
             "database": "foody",
-            "host": " 34.80.86.39",
+            "host": "34.80.86.39",
             "password": "ggit_member",
             "port": 3306,
             "user": "ggit_member",
-            "debug": true,
             "ConnectionTimeoutInSecond": 10
         }
     }
