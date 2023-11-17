@@ -1,9 +1,9 @@
 "use client";
 
+import axios from 'axios';
+
 import { useEffect, useState } from "react";
-
 import { useRouter } from "next/navigation";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,10 +13,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { promises } from "dns";
 
-export default function ChooseRoleDialog() {
+export default function ChooseRoleDialog(user: any) {
   const router = useRouter();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [userRole, setUserRole] = useState("employee");
@@ -25,7 +27,7 @@ export default function ChooseRoleDialog() {
     setDialogOpen(true);
   }, []);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (userRole === "employee") {
       // 跳轉到員工的註冊頁面
       router.push("/customer/restaurant");
@@ -33,6 +35,12 @@ export default function ChooseRoleDialog() {
       // 跳轉到商家的註冊頁面
       router.push("/merchant");
     }
+
+    // await axios.post('/user', {
+    //     firstName: 'Fred',
+    //     lastName: 'Flintstone'
+    // });
+    
     setDialogOpen(false);
   };
 
