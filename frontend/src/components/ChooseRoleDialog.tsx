@@ -18,28 +18,41 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { promises } from "dns";
 
-export default function ChooseRoleDialog(user: any) {
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig() || {};
+
+export default function ChooseRoleDialog(props: any) {
   const router = useRouter();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [userRole, setUserRole] = useState("employee");
 
+  const { baseUrl } = process?.env ?? {};
+  
   useEffect(() => {
     setDialogOpen(true);
   }, []);
 
   const handleSave = async () => {
+    let path;
+    let type;
     if (userRole === "employee") {
       // 跳轉到員工的註冊頁面
-      router.push("/customer/restaurant");
+      path = '/customer/restaurant';
+      type = 'employee';
     } else {
       // 跳轉到商家的註冊頁面
-      router.push("/merchant");
+      path = '/merchant';
+      type = 'merchant';
     }
 
-    // await axios.post('/user', {
-    //     firstName: 'Fred',
-    //     lastName: 'Flintstone'
-    // });
+    router.push(path);
+
+    // await axios.post(`${baseUrl}/register`, Object.assign(
+    //   props?.props,
+    //   {
+    //     type
+    //   }
+    // ));
     
     setDialogOpen(false);
   };
