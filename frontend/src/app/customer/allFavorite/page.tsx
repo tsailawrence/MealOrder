@@ -3,7 +3,7 @@ import CardComponent from '@/components/CardComponent'
 export default function allFavorite() {
     return (
         <main className="flex min-h-screen flex-col items-center p-4">
-            <header className="self-center flex w-full max-w-[1144px] items-start justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap max-md:mt-10">
+            <header className="self-center flex w-full max-w-[90%] items-start justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap max-md:mt-10">
                 <h1 className="text-black text-4xl font-semibold leading-[50.4px] self-center grow shrink basis-auto my-auto">
                     Your Favorite Restaurant
                 </h1>
@@ -18,7 +18,7 @@ export default function allFavorite() {
                     back
                 </a>
             </header>
-            <div className="flex flex-wrap gap-4 w-[80%] px-5 mt-6">
+            <div className="flex flex-wrap gap-4 w-[85%] px-5 mt-6">
                 {cardData.map((card, index) => (
                     <div key={index} className="flex-none w-1/4 min-w-[150px] max-w-[200px]">
                         <CardComponent uri={card.uri} name={card.name} starNumber={card.starNumber} likes={true} />

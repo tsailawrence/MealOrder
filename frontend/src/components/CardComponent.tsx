@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
@@ -17,6 +16,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from './ui/button';
 import { CardProps, CardPriceProps } from '@/lib/types/db';
+import { Heart } from 'lucide-react';
+import { DatePickerDemo } from './DatePicker';
 // type CardProps = {
 //     uri: string;
 //     name: string;
@@ -30,6 +31,10 @@ import { CardProps, CardPriceProps } from '@/lib/types/db';
 // };
 export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price }) => {
     const [number, setNumber] = useState(1);
+    
+    const handleDecrease = () => {
+        if (number > 1) setNumber(number - 1);
+    }
     return (
         <Dialog>
             <DialogTrigger
@@ -79,16 +84,16 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price 
                             美式餐酒館
                         </div>
                         <div className="justify-center text-neutral-950 text-2xl font-semibold leading-8 tracking-normal self-stretch mt-5 max-md:max-w-full">
-                            Cheese Burger
+                            {name}
                         </div>
                     </DialogTitle>
                     <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
+                        Food Description if needed
                     </DialogDescription>
-
-                    <div className="text-neutral-950 text-xl tracking-wide w-56 max-w-full items-center justify-between gap-5 self-start">
-                        <div className="bg-red-600 bg-opacity-20 flex grow basis-[0%] flex-col items-stretch px-3 py-2 rounded-3xl max-sm:ml-7 max-sm:mr-4 max-sm:mt-4 max-sm:px-2.5">
+                    <span className='pt-5'>Pickup Time :</span>
+                    <DatePickerDemo />
+                    <div className="text-neutral-950 text-xl tracking-wide w-56 max-w-full items-center justify-between gap-6 self-start">
+                        <div className="bg-red-600 bg-opacity-20 flex grow flex-col items-stretch px-3 py-2 rounded-3xl max-sm:ml-7 max-sm:mr-4 max-sm:mt-4 max-sm:px-2.5">
                             <div className="w-30 justify-center text-red-600 text-center text-xs tracking-wide uppercase opacity-[0.84]">
                                 Required
                             </div>
@@ -121,16 +126,16 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price 
                             <Label htmlFor="option-6">Option 6</Label>
                         </div>
                     </RadioGroup>
-                    <span className='pt-5'>note：</span>
+                    <span className='pt-5'>note:</span>
                     <Textarea />
                     <div className="self-stretch flex w-full items-center justify-between gap-5 mt-6 max-md:max-w-full max-md:flex-wrap">
-                        <div className="text-black text-5xl font-semibold leading-[50.4px] my-auto">
+                        <div className="text-black text-3xl font-semibold leading-[50.4px] my-auto">
                             NT${price*number}
                         </div>
                         <div className="self-stretch flex items-center justify-between gap-5 max-md:justify-center">
                             <Button
                                 className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg border-opacity-10"
-                                onClick={() => setNumber(number - 1)}
+                                onClick={() => handleDecrease()}
                                 aria-label="Product Image"
                             >
                                 -
@@ -139,7 +144,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price 
                                 {number}
                             </div>
                             <Button
-                                className="items-stretch border self-stretch flex aspect-square flex-col p-3.5 rounded-lg border-solid"
+                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg border-solid"
                                 onClick={() => setNumber(number + 1)}
                                 aria-label="Product Image"
                             >
@@ -178,7 +183,7 @@ const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, likes = fal
                     </h2>
                     <div className="flex items-center justify-between mt-3">
                         <span className="text-red-600 text-2xl font-black">
-                            {likes ? '⭐' : '✫'}
+                            {likes ? <Heart fill='red'/> : <Heart/>}
                         </span>
                         <span className="text-red-600 text-xl">
                             {starNumber}

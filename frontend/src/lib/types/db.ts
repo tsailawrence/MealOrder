@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type AddButtonProps = {
     url: string;
 };
@@ -22,4 +24,17 @@ export type RestaurantCardProps = {
     starNumber: number;
     address: string;
     likes: boolean;
+};
+export type Item = {
+    reastaurantName: string;
+    name: string;
+    flavor: string;
+    note: string;
+    totalPrice: number;
+    quantity: number;
+};
+export type CartCardProps = {
+    username: string;
+    time: string;
+    item: Item[];
 };

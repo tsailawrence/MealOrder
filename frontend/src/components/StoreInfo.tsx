@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { RestaurantCardProps } from "@/lib/types/db";
-
+import { Heart } from 'lucide-react';
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({
     name,
@@ -28,7 +28,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
                         </h1>
                         <div className="flex gap-2">
                             <div className="text-red-600 text-2xl font-black leading-6">
-                                {likes ? '⭐' : '✫'}
+                                {likes ? <Heart fill='red' /> : <Heart />}
                             </div>
                             <div className="text-red-600 text-2xl leading-7 self-stretch whitespace-nowrap">
                                 {starNumber}
