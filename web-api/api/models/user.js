@@ -15,11 +15,18 @@ exports.getUserByToken = ({ token, fields = '*' }) =>
         .from('User')
         .where('token', token);
 
-exports.getUserByUserId = ({ userId , fields = '*' }) =>
+exports.getUserByUserId = ({ userId, fields = '*' }) =>
     datastore
         .select(fields)
         .from('User')
         .where('userId', userId);
+
+exports.getVerifiedUser = ({ userId, token, fields = '*' }) =>
+    datastore
+        .select(fields)
+        .from('User')
+        .where('userId', userId)
+        .andWhere('token', token);
 
 exports.insert = async data =>
     datastore

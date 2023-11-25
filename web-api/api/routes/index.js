@@ -79,9 +79,10 @@ router.get(
     '/my/info',
     validate({
         query: {
-            token: Joi.string().required(),
+            accessToken: Joi.string().required(),
         }
     }),
+    auth,
     getMyInfo
 );
 

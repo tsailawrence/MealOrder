@@ -1,6 +1,6 @@
 "use client";
 
-import axios from 'axios';
+import { instance } from '@/lib/utils';
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,11 +26,11 @@ const { publicRuntimeConfig } = getConfig() || {};
 export default function ChooseRoleDialog(props: any) {
   const router = useRouter();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [userRole, setUserRole] = useState("employee");
+  const [userRole, setUserRole] = useState('');
+  const [userInfo, setUserInfo] = useState({});
   const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken']);
 
   useEffect(() => {
-    setDialogOpen(true);
     // Check is login
     userInfoCheck();
   });
@@ -47,7 +47,7 @@ export default function ChooseRoleDialog(props: any) {
         throw new Error('AccessToken Exist.')
       }
 
-      const { data: response } = await axios.post(`${process?.env?.baseUrl}/token/refresh`, 
+      const { data: response } = await instance.post(`/token/refresh`, 
         {
           refreshToken
         }
@@ -72,6 +72,36 @@ export default function ChooseRoleDialog(props: any) {
     }
 
     // Get User Info
+    try {
+      if (!Object.values(userInfo).length) {
+        const { data: response } = await instance.get(
+          `/my/info`, 
+          {
+            params: {
+              accessToken
+            }
+          }
+        );
+  
+        setUserRole(response?.data?.type);
+        setUserInfo(response?.data);
+      }
+
+      if (userRole) {
+        router.push(
+          userRole === "employee"
+            ? '/customer/restaurant'
+            : '/merchant'
+        );
+      }
+      return true;
+    } catch (err) {
+      // 取得使用者資訊失敗
+      // TODO: logout
+    }
+
+    // 確認完才進行選擇框呼叫
+    setDialogOpen(true);
   }
   const handleSave = async () => {
     let path;
@@ -91,7 +121,7 @@ export default function ChooseRoleDialog(props: any) {
 
     // Register
     try {
-      const { data: response } = await axios.post(`${process?.env?.baseUrl}/register`, Object.assign(
+      const { data: response } = await instance.post(`/register`, Object.assign(
         props?.props,
         {
           type
