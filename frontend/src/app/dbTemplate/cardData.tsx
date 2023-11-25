@@ -325,3 +325,97 @@ export const restaurantData = [
         ]
     }
 ]
+export const orderData = [
+    {
+        "pickUpTime": "2023-11-26T10:30:00",
+        "orderNumber": "ORD789012",
+        "orderTime": "2023-11-26T08:15:00",
+        "items": [
+            {
+                "name": "Veggie Burger",
+                "price": 9.99,
+                "quantity": 1,
+                "specialInstructions": "No onions"
+            },
+            {
+                "name": "Chocolate Milkshake",
+                "price": 4.50,
+                "quantity": 1,
+                "specialInstructions": "Extra chocolate"
+            }
+        ],
+        "status": "Confirmed",
+    },
+    {
+        "pickUpTime": "2023-11-27T18:45:00",
+        "orderNumber": "ORD234567",
+        "orderTime": "2023-11-27T16:30:00",
+        "items": [
+            {
+                "name": "Grilled Salmon",
+                "price": 18.00,
+                "quantity": 2,
+                "specialInstructions": "Lemon on the side"
+            },
+            {
+                "name": "Greek Salad",
+                "price": 7.99,
+                "quantity": 1,
+                "specialInstructions": "No olives"
+            }
+        ],
+        "status": "Confirmed",
+    },
+    {
+        "pickUpTime": "2023-11-28T12:00:00",
+        "orderNumber": "ORD345678",
+        "orderTime": "2023-11-28T09:50:00",
+        "items": [
+            {
+                "name": "Chicken Wrap",
+                "price": 10.50,
+                "quantity": 3,
+                "specialInstructions": "Extra spicy"
+            },
+            {
+                "name": "French Fries",
+                "price": 3.99,
+                "quantity": 1,
+                "specialInstructions": "No salt"
+            },
+            {
+                "name": "Iced Tea",
+                "price": 2.50,
+                "quantity": 2,
+                "specialInstructions": "With lemon"
+            }
+        ],
+        "status": "Confirmed",
+    },
+    {
+        "pickUpTime": "2023-11-29T20:00:00",
+        "orderNumber": "ORD456789",
+        "orderTime": "2023-11-29T17:35:00",
+        "items": [
+            {
+                "name": "BBQ Chicken Pizza",
+                "price": 14.00,
+                "quantity": 1,
+                "specialInstructions": "Extra BBQ sauce"
+            },
+            {
+                "name": "Garlic Bread",
+                "price": 5.00,
+                "quantity": 2,
+                "specialInstructions": "Light on garlic"
+            },
+            {
+                "name": "Apple Pie",
+                "price": 6.50,
+                "quantity": 1,
+                "specialInstructions": "A la mode"
+            }
+        ],
+        "status": "Confirmed",
+    }
+]

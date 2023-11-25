@@ -18,22 +18,70 @@ import { Button } from './ui/button';
 import { CardProps, CardPriceProps } from '@/lib/types/db';
 import { Heart } from 'lucide-react';
 import { DatePickerDemo } from './DatePicker';
-// type CardProps = {
-//     uri: string;
-//     name: string;
-//     starNumber: number;
-//     likes?: boolean;
-// };
-// type CardPriceProps = {
-//     uri: string;
-//     name: string;
-//     price: number;
-// };
+
+type Item = {
+    name: string;
+    price: number;
+    quantity: number;
+}
+type Cart = {
+    reastaurantName: string;
+    imageSrc: string; //restaurant image
+    username: string;
+    pickupTime: Date;
+    status: string;
+    item: Item[]; //item name, price, quantity
+}
+const ItemTemplate = {
+    name: '',
+    price: 0,
+    quantity: 0,
+    flavor: '',
+    note: '',
+}
+const CartTemplate = {
+    reastaurantName: '',
+    imageSrc: null, //restaurant image
+    username: '',
+    pickupTime: new Date(),
+    status: '',
+    item:[], //item name, price, quantity
+}
 export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price }) => {
     const [number, setNumber] = useState(1);
-    
+
     const handleDecrease = () => {
         if (number > 1) setNumber(number - 1);
+    }
+    const handleAdd = () => {
+        setNumber(number + 1);
+    }
+    const addCart = () => {
+        const newItem = {
+            name: name,
+            price: price,
+            quantity: number,
+            note: '',
+            flavor: '',
+        }
+        const Cart = {
+            reastaurantName: '美式餐酒館',
+            imageSrc: null, //restaurant image
+            username: 'user',
+            pickupTime: new Date(),
+            status: 'pending',
+            item:[newItem], //item name, price, quantity
+        }
+        console.log(Cart)
+    }
+    const addItems = (cart:Cart) => {    
+        const newItem = {
+            name: name,
+            price: price,
+            quantity: number,
+        }
+        cart.item.push(newItem)
+        console.log(cart)
     }
     return (
         <Dialog>
@@ -90,8 +138,8 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price 
                     <DialogDescription>
                         Food Description if needed
                     </DialogDescription>
-                    <span className='pt-5'>Pickup Time :</span>
-                    <DatePickerDemo />
+                    {/* <span className='pt-5'>Pickup Time :</span>
+                    <DatePickerDemo /> */}
                     <div className="text-neutral-950 text-xl tracking-wide w-56 max-w-full items-center justify-between gap-6 self-start">
                         <div className="bg-red-600 bg-opacity-20 flex grow flex-col items-stretch px-3 py-2 rounded-3xl max-sm:ml-7 max-sm:mr-4 max-sm:mt-4 max-sm:px-2.5">
                             <div className="w-30 justify-center text-red-600 text-center text-xs tracking-wide uppercase opacity-[0.84]">
@@ -145,7 +193,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price 
                             </div>
                             <Button
                                 className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg border-solid"
-                                onClick={() => setNumber(number + 1)}
+                                onClick={() => handleAdd()}
                                 aria-label="Product Image"
                             >
                                 +
@@ -154,7 +202,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price 
                     </div>
                 </DialogHeader>
                 <DialogFooter>
-                    <Button variant="destructive">Add to Cart</Button>
+                    <Button variant="destructive" onClick={()=>{addCart()}}>Add to Cart</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
