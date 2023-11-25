@@ -15,6 +15,12 @@ exports.getUserByToken = ({ token, fields = '*' }) =>
         .from('User')
         .where('token', token);
 
+exports.getUserByUserId = ({ userId , fields = '*' }) =>
+    datastore
+        .select(fields)
+        .from('User')
+        .where('userId', userId);
+
 exports.insert = async data =>
     datastore
         .insert(
@@ -29,10 +35,10 @@ exports.updateByUserId = async ({ userId, data }) =>
     datastore
         .update(data)
         .from(TABLE_NAME)
-        .where('user_id', userId);
+        .where('userId', userId);
 
 exports.deleteByUserId = async ({ userId, data }) =>
     datastore
         .del()
         .from(TABLE_NAME)
-        .where('user_id', userId);
+        .where('userId', userId);

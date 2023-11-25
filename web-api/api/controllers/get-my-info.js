@@ -7,7 +7,11 @@ module.exports = async ctx => {
             query: {
                 token = null,
             } = {}
-        } = {}
+        } = {},
+        currentUser: {
+            userId = 'user_2YFWJPdzKRIfYlltWdEu3d03lh9',
+            name = '冠宇 魏',
+        }
     } = ctx;
     
     const [theUser] = await User.getUserByToken({

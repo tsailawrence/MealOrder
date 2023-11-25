@@ -7,6 +7,8 @@ const { rejectTheRequest } = require('../utils/error');
 const { auth } = require('../middleware/index');
 
 const getMyInfo = require('../controllers/get-my-info');
+const register = require('../controllers/register');
+const refreshToken = require('../controllers/refresh-token');
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -82,6 +84,34 @@ router.get(
     }),
     getMyInfo
 );
+
+router.post(
+    '/register',
+    validate({
+        body: {
+            userId: Joi.string().required(),
+            firstName: Joi.string(),
+            lastName: Joi.string(),
+            emailAddress: Joi.string(),
+            phoneNumber: Joi.string(),
+            imageUrl: Joi.string(),
+            authenticationMethod: Joi.string(),
+            type: Joi.string(),
+        }
+    }),
+    register
+);
+
+router.post(
+    '/token/refresh',
+    validate({
+        body: {
+            refreshToken: Joi.string().required(),
+        }
+    }),
+    refreshToken
+);
+
 
 // bad request example
 router.get('/error', async () => {

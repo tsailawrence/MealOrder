@@ -17,21 +17,62 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { promises } from "dns";
-
+import { useCookies } from 'react-cookie';
 import getConfig from 'next/config';
+import { access } from 'fs';
+
 const { publicRuntimeConfig } = getConfig() || {};
 
 export default function ChooseRoleDialog(props: any) {
   const router = useRouter();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [userRole, setUserRole] = useState("employee");
+  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken']);
 
-  const { baseUrl } = process?.env ?? {};
-  
   useEffect(() => {
     setDialogOpen(true);
-  }, []);
+    // Check is login
+    userInfoCheck();
+  });
 
+  const userInfoCheck = async () => {
+    let { accessToken, refreshToken } = cookies;
+
+    try {
+      if (!refreshToken) {
+        throw new Error('Invalid Token.')
+      }
+
+      if (accessToken) {
+        throw new Error('AccessToken Exist.')
+      }
+
+      const { data: response } = await axios.post(`${process?.env?.baseUrl}/token/refresh`, 
+        {
+          refreshToken
+        }
+      );
+
+      ({ accessToken, refreshToken } = response?.data);
+
+      setCookie("accessToken", accessToken, {
+        path: "/",
+        maxAge: 600,
+        sameSite: true,
+      })
+
+      setCookie("refreshToken", refreshToken, {
+        path: "/",
+        maxAge: 86400 * 7,
+        sameSite: true,
+      })
+    } catch (err) {
+      // TODO: login again
+      // console.log('導向重新登入', err);
+    }
+
+    // Get User Info
+  }
   const handleSave = async () => {
     let path;
     let type;
@@ -45,14 +86,33 @@ export default function ChooseRoleDialog(props: any) {
       type = 'merchant';
     }
 
-    router.push(path);
+    // console.log('cookies', cookies);
+    // router.push(path);
 
-    // await axios.post(`${baseUrl}/register`, Object.assign(
-    //   props?.props,
-    //   {
-    //     type
-    //   }
-    // ));
+    // Register
+    try {
+      const { data: response } = await axios.post(`${process?.env?.baseUrl}/register`, Object.assign(
+        props?.props,
+        {
+          type
+        },
+      ));
+
+      setCookie("accessToken", response?.data?.accessToken, {
+        path: "/",
+        maxAge: 600,
+        sameSite: true,
+      })
+
+      setCookie("refreshToken", response?.data?.refreshToken, {
+        path: "/",
+        maxAge: 86400 * 7,
+        sameSite: true,
+      })
+    } catch (err) {
+      // TODO: register error
+    }
+    
     
     setDialogOpen(false);
   };
