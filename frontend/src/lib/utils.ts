@@ -12,36 +12,36 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(async (config) => {
-  // try {
-  //   const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken']);
+  try {
+    const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken']);
 
-  //   let { accessToken, refreshToken} = cookies;
-  //   if (!accessToken) {
-  //     const { data: response } = await axios.post(`/token/refresh`, 
-  //         {
-  //           refreshToken
-  //         }
-  //       );
+    let { accessToken, refreshToken} = cookies;
+    if (!accessToken) {
+      const { data: response } = await axios.post(`/token/refresh`, 
+          {
+            refreshToken
+          }
+        );
 
-  //       ({ accessToken, refreshToken } = response?.data);
+        ({ accessToken, refreshToken } = response?.data);
 
-  //       console.info('Refresh', { accessToken, refreshToken});
+        console.info('Refresh', { accessToken, refreshToken});
 
-  //       setCookie("accessToken", accessToken, {
-  //         path: "/",
-  //         maxAge: 600,
-  //         sameSite: true,
-  //       })
+        setCookie("accessToken", accessToken, {
+          path: "/",
+          maxAge: 600,
+          sameSite: true,
+        })
 
-  //       setCookie("refreshToken", refreshToken, {
-  //         path: "/",
-  //         maxAge: 86400 * 7,
-  //         sameSite: true,
-  //       })
-  //   }
-  // } catch (err) {
-  //   console.error('Refresh error', err);
-  // }
+        setCookie("refreshToken", refreshToken, {
+          path: "/",
+          maxAge: 86400 * 7,
+          sameSite: true,
+        })
+    }
+  } catch (err) {
+    console.error('Refresh error', err);
+  }
   
 
   return config;
