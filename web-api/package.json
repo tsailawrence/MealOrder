@@ -9,12 +9,6 @@
     },
     "license": "MIT",
     "private": true,
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged",
-            "pre-push": "yarn run lint"
-        }
-    },
     "engines": {
         "node": "18.x"
     },
