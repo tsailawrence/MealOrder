@@ -4,10 +4,11 @@ const validate = require('koa2-validation');
 const Joi = require('joi');
 
 const { rejectTheRequest } = require('../utils/error');
-const { auth } = require('../middleware/index');
+const { auth, verifyClerk } = require('../middleware/index');
 
 const getMyInfo = require('../controllers/get-my-info');
 const register = require('../controllers/register');
+const clerkRegister = require('../controllers/clerk-register');
 const refreshToken = require('../controllers/refresh-token');
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -82,7 +83,7 @@ router.get(
             accessToken: Joi.string().required(),
         }
     }),
-    auth,
+    verifyClerk,
     getMyInfo
 );
 
@@ -111,6 +112,21 @@ router.post(
         }
     }),
     refreshToken
+);
+
+router.post(
+    'clerkRegister',
+    '/clerk/register',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+        body: {
+            type: Joi.string(),
+        }
+    }),
+    verifyClerk,
+    clerkRegister
 );
 
 

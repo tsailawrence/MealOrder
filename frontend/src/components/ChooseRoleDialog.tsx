@@ -28,7 +28,7 @@ export default function ChooseRoleDialog(props: any) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [userRole, setUserRole] = useState('');
   const [userInfo, setUserInfo] = useState({});
-  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken']);
+  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
 
   useEffect(() => {
     // Check is login
@@ -36,43 +36,13 @@ export default function ChooseRoleDialog(props: any) {
   });
 
   const userInfoCheck = async () => {
-    let { accessToken, refreshToken } = cookies;
+    const { __session: accessToken = '' } = cookies;
 
     try {
-      if (!refreshToken) {
-        throw new Error('Invalid Token.')
+      if (!accessToken) {
+        throw new Error('AccessToken Not Exist.')
       }
 
-      if (accessToken) {
-        throw new Error('AccessToken Exist.')
-      }
-
-      const { data: response } = await instance.post(`/token/refresh`, 
-        {
-          refreshToken
-        }
-      );
-
-      ({ accessToken, refreshToken } = response?.data);
-
-      setCookie("accessToken", accessToken, {
-        path: "/",
-        maxAge: 600,
-        sameSite: true,
-      })
-
-      setCookie("refreshToken", refreshToken, {
-        path: "/",
-        maxAge: 86400 * 7,
-        sameSite: true,
-      })
-    } catch (err) {
-      // TODO: login again
-      // console.log('導向重新登入', err);
-    }
-
-    // Get User Info
-    try {
       if (!Object.values(userInfo).length) {
         const { data: response } = await instance.get(
           `/my/info`, 
@@ -96,13 +66,14 @@ export default function ChooseRoleDialog(props: any) {
       }
       return true;
     } catch (err) {
-      // 取得使用者資訊失敗
-      // TODO: logout
+      // TODO: login again
+      console.log('導向重新登入', err);
     }
 
     // 確認完才進行選擇框呼叫
     setDialogOpen(true);
   }
+
   const handleSave = async () => {
     let path;
     let type;
@@ -115,34 +86,24 @@ export default function ChooseRoleDialog(props: any) {
       path = '/merchant';
       type = 'merchant';
     }
-
-    // console.log('cookies', cookies);
     // router.push(path);
 
     // Register
     try {
-      const { data: response } = await instance.post(`/register`, Object.assign(
+      let { __session: accessToken = '' } = cookies;
+      const { data: response } = await instance.post(`/clerk/register`, Object.assign(
         props?.props,
         {
           type
-        },
-      ));
+        }), {
+        params: {
+          accessToken
+        }
+      });
 
-      setCookie("accessToken", response?.data?.accessToken, {
-        path: "/",
-        maxAge: 600,
-        sameSite: true,
-      })
-
-      setCookie("refreshToken", response?.data?.refreshToken, {
-        path: "/",
-        maxAge: 86400 * 7,
-        sameSite: true,
-      })
     } catch (err) {
       // TODO: register error
     }
-    
     
     setDialogOpen(false);
   };
