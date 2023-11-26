@@ -20,7 +20,7 @@ export type CardPriceProps = {
     uri: string;
     name: string;
     price: number;
-    specialInstructions: SpecialInstruction[];
+    specialInstructions?: SpecialInstruction[];
 };
 export type CategoryProps = {
     uri: string;
