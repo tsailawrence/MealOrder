@@ -1,5 +1,12 @@
-import { type } from "os";
-
+import exp from "constants";
+export type SpecialInstruction = {
+    name: string;
+    required: boolean;
+    options: string[];
+};
+export type SpecialInstructionsProps = {
+    specialInstructions: SpecialInstruction[];
+};
 export type AddButtonProps = {
     url: string;
 };
@@ -13,6 +20,7 @@ export type CardPriceProps = {
     uri: string;
     name: string;
     price: number;
+    specialInstructions: SpecialInstruction[];
 };
 export type CategoryProps = {
     uri: string;

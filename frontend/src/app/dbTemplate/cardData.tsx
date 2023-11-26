@@ -108,12 +108,36 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 5.99,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": true,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": true,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 6.50,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": true,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": true,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     }
                 ]
             },
@@ -123,12 +147,36 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 5.99,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": true,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": true,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 6.50,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": true,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": true,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     },
                     {
                         "name": "Bruschetta",
@@ -218,12 +266,36 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 5.99,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": true,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": false,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 6.50,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": false,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": true,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     }
                 ]
             },
@@ -234,6 +306,7 @@ export const restaurantData = [
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
                         "price": 5.99
+
                     },
                     {
                         "name": "Stuffed Mushrooms",
@@ -243,12 +316,36 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 5.99,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": true,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": true,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 6.50,
+                        "specialInstructions": [
+                            {
+                                "name": "Toppings",
+                                "required": true,
+                                "options": ["Extra Cheese", "Basil", "Balsamic Glaze"]
+                            },
+                            {
+                                "name": "Spice Level",
+                                "required": true,
+                                "options": ["Mild", "Medium", "Hot", "Extra Hot"]
+                            }
+                        ]
                     },
                     {
                         "name": "Bruschetta",

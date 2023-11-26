@@ -6,18 +6,12 @@ import {
 } from "@/components/ui/tabs";
 
 import { CardPriceComponent } from "@/components/CardComponent";
-
-// Define the structure of the menu item
-interface MenuItem {
-    uri: string;
-    name: string;
-    price: number;
-}
+import { CardPriceProps } from "@/lib/types/db";
 
 // Define the structure of each category in the menu
 interface MenuCategory {
     categoryName: string;
-    items: MenuItem[];
+    items: CardPriceProps[];
 }
 
 // Define the structure of the restaurant data
@@ -42,7 +36,7 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ menu }) => {
                         <div className="flex flex-wrap gap-5 w-full px-5 mt-6">
                             {category.items.map((item, itemIndex) => (
                                 <div key={itemIndex} className="flex-none w-1/4 min-w-[150px] max-w-[200px]">
-                                    <CardPriceComponent uri={item.uri} name={item.name} price={item.price} />
+                                    <CardPriceComponent uri={item.uri} name={item.name} price={item.price} specialInstructions={item.specialInstructions}/>
                                 </div>
                             ))}
                         </div>
