@@ -37,7 +37,7 @@ export type Item = {
         name: string;
         price: number;
         quantity: number;
-        specialInstructions: string;
+        specialInstructions: string[];
     };
 export type CartCardProps = {
     username: string;

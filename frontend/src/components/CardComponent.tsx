@@ -137,44 +137,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price,
                     <DialogDescription>
                         Food Description if needed
                     </DialogDescription>
-                    {/* <span className='pt-5'>Pickup Time :</span>
-                    <DatePickerDemo /> */}
                     {specialInstructions && <SpecialInstruction specialInstructions={specialInstructions} />}
-                    {/* <div className="text-neutral-950 text-xl tracking-wide w-56 max-w-full items-center justify-between gap-6 self-start">
-                        <div className="bg-red-600 bg-opacity-20 flex grow flex-col items-stretch px-3 py-2 rounded-3xl max-sm:ml-7 max-sm:mr-4 max-sm:mt-4 max-sm:px-2.5">
-                            <div className="w-30 justify-center text-red-600 text-center text-xs tracking-wide uppercase opacity-[0.84]">
-                                Required
-                            </div>
-                        </div>
-                        Choose flavor
-                    </div>
-                    <RadioGroup defaultValue="option-one" className='gap-5'>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="option-one" id="option-one" />
-                            <Label htmlFor="option-one">Option One</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="option-two" id="option-two" />
-                            <Label htmlFor="option-two">Option Two</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="option-3" id="option-3" />
-                            <Label htmlFor="option-3">Option 3</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="option-4" id="option-4" />
-                            <Label htmlFor="option-4">Option 4</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="option-5" id="option-5" />
-                            <Label htmlFor="option-5">Option 5</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="option-6" id="option-6" />
-                            <Label htmlFor="option-6">Option 6</Label>
-                        </div>
-                    </RadioGroup> */}
-
                     <span className='pt-5'>note:</span>
                     <Textarea />
                     <div className="self-stretch flex w-full items-center justify-between gap-5 mt-6 max-md:max-w-full max-md:flex-wrap">

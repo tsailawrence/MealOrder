@@ -1,96 +1,96 @@
 //template data
 export const cardData = [
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Burger Master",
-    starNumber: 400,
-    likes: true,
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "BarBarbecue",
-    starNumber: 50,
-    likes: true,
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Donuts hut",
-    starNumber: 24,
-    likes: false,
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Sweetie",
-    starNumber: 22,
-    likes: true,
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Burger Master",
-    starNumber: 46,
-    likes: true,
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "BarBarbecue",
-    starNumber: 50,
-    likes: false,
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Donuts hut",
-    starNumber: 24,
-    likes: true,
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Sweetie",
-    starNumber: 22,
-    likes: false,
-  },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Burger Master",
+        starNumber: 400,
+        likes: true,
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "BarBarbecue",
+        starNumber: 50,
+        likes: true,
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Donuts hut",
+        starNumber: 24,
+        likes: false,
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Sweetie",
+        starNumber: 22,
+        likes: true,
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Burger Master",
+        starNumber: 46,
+        likes: true,
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "BarBarbecue",
+        starNumber: 50,
+        likes: false,
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Donuts hut",
+        starNumber: 24,
+        likes: true,
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Sweetie",
+        starNumber: 22,
+        likes: false,
+    },
 ];
 //template data
 export const categoryData = [
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3d690fc5-da56-4329-9fd1-97b67e5942d4?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Pizza",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "BarBarbecue",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Donuts hut",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Sweetie",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Master",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3d690fc5-da56-4329-9fd1-97b67e5942d4?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Pizza",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "BarBarbecue",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Donuts hut",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Sweetie",
-  },
-  {
-    uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
-    name: "Master",
-  },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3d690fc5-da56-4329-9fd1-97b67e5942d4?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Pizza",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "BarBarbecue",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Donuts hut",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Sweetie",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Master",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3d690fc5-da56-4329-9fd1-97b67e5942d4?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Pizza",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/7fd4e8c0-2a0b-4931-9aaa-7320720c7c5d?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "BarBarbecue",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/3ab70aa8-24e1-4686-8c85-0e6302728eda?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Donuts hut",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca5e8dd1-206f-42d6-ba04-4c15f582cbf2?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Sweetie",
+    },
+    {
+        uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0",
+        name: "Master",
+    },
 ];
 export const restaurantData = [
     {
@@ -432,13 +432,13 @@ export const orderData = [
                 "name": "Veggie Burger",
                 "price": 9.99,
                 "quantity": 1,
-                "specialInstructions": "No onions"
+                "specialInstructions": ["No onions", "Extra pickles"],
             },
             {
                 "name": "Chocolate Milkshake",
                 "price": 4.50,
                 "quantity": 1,
-                "specialInstructions": "Extra chocolate"
+                "specialInstructions": ["Extra chocolate"],
             }
         ],
         "status": "Confirmed",
@@ -452,13 +452,13 @@ export const orderData = [
                 "name": "Grilled Salmon",
                 "price": 18.00,
                 "quantity": 2,
-                "specialInstructions": "Lemon on the side"
+                "specialInstructions": ["Lemon on the side"],
             },
             {
                 "name": "Greek Salad",
                 "price": 7.99,
                 "quantity": 1,
-                "specialInstructions": "No olives"
+                "specialInstructions": ["No olives"],
             }
         ],
         "status": "Confirmed",
@@ -472,19 +472,19 @@ export const orderData = [
                 "name": "Chicken Wrap",
                 "price": 10.50,
                 "quantity": 3,
-                "specialInstructions": "Extra spicy"
+                "specialInstructions": ["Extra spicy"],
             },
             {
                 "name": "French Fries",
                 "price": 3.99,
                 "quantity": 1,
-                "specialInstructions": "No salt"
+                "specialInstructions": ["No salt", "Extra ketchup"],
             },
             {
                 "name": "Iced Tea",
                 "price": 2.50,
                 "quantity": 2,
-                "specialInstructions": "With lemon"
+                "specialInstructions": ["With lemon"],
             }
         ],
         "status": "Confirmed",
@@ -498,21 +498,38 @@ export const orderData = [
                 "name": "BBQ Chicken Pizza",
                 "price": 14.00,
                 "quantity": 1,
-                "specialInstructions": "Extra BBQ sauce"
+                "specialInstructions": ["Extra BBQ sauce", "Extra cheese"],
             },
             {
                 "name": "Garlic Bread",
                 "price": 5.00,
                 "quantity": 2,
-                "specialInstructions": "Light on garlic"
+                "specialInstructions": ["Light on garlic", "Extra butter"],
             },
             {
                 "name": "Apple Pie",
                 "price": 6.50,
                 "quantity": 1,
-                "specialInstructions": "A la mode"
+                "specialInstructions": ["A la mode", "Extra caramel"],
             }
         ],
         "status": "Confirmed",
     }
 ]
+export const shoppingCartData = {
+    "restaurantName": "Burger Master",
+    "items": [
+        {
+            "name": "Veggie Burger",
+            "price": 9.99,
+            "quantity": 1,
+            "specialInstructions": ["No onions", "Extra pickles"],
+        },
+        {
+            "name": "Chocolate Milkshake",
+            "price": 4.50,
+            "quantity": 1,
+            "specialInstructions": ["Extra chocolate"],
+        }
+    ]
+}

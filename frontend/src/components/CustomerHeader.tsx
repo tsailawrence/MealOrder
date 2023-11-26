@@ -10,10 +10,17 @@ import {
   SheetTrigger,
   SheetClose
 } from "@/components/ui/sheet";
-import { CustomerCartHeader } from "./CustomerCartHeader";
+import { Item } from "@/lib/types/db";
+import CustomerCartHeader from "./CustomerCartHeader";
 import { Menu } from "lucide-react";
-
-const Header = () => {
+interface OrderDetailsProps {
+  items: Item[];
+  restaurantName: string;
+}
+const Header: React.FC<OrderDetailsProps> = ({
+  items,
+  restaurantName
+}) => {
   const routes = [
     {
       href: "/customer/restaurant",
@@ -32,7 +39,6 @@ const Header = () => {
       label: "Settings"
     }
   ];
-
   return (
     <header className="sm:flex sm:justify-between px-10 border-b">
       <div className="relative  flex h-20 items-center justify-between w-full">
@@ -61,7 +67,7 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>
-            <CustomerCartHeader />
+            <CustomerCartHeader items={items} restaurantName={restaurantName}/>
             <UserButton />
           </SignedIn>
         </div>
