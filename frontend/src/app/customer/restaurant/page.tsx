@@ -11,7 +11,7 @@ const CustomerHome = () => {
         </h1>
         <a
           href="/customer/allFavorite"
-          className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border bg-white w-[95px] pl-6 pr-6 py-2 rounded-3xl border-solid border-red-600 max-md:px-5"
+          className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border pl-6 pr-6 py-2 rounded-3xl border-solid border-red-600 max-md:px-5"
         >
           View All
         </a>
@@ -39,7 +39,7 @@ const CustomerHome = () => {
         </h1>
         <a
           href="/customer/allRestaurant"
-          className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border bg-white w-[95px] pl-6 pr-6 py-2 rounded-3xl border-solid border-red-600 max-md:px-5"
+          className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border pl-6 pr-6 py-2 rounded-3xl border-solid border-red-600 max-md:px-5"
         >
           View All
         </a>
@@ -67,7 +67,7 @@ const CustomerHome = () => {
         </h1>
         <a
           href="/customer/allRestaurant"
-          className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border bg-white w-[95px] pl-6 pr-6 py-2 rounded-3xl border-solid border-red-600 max-md:px-5"
+          className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap justify-center items-center border pl-6 pr-6 py-2 rounded-3xl border-solid border-red-600 max-md:px-5"
         >
           View All
         </a>

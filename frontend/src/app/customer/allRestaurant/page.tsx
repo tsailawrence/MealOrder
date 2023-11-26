@@ -1,5 +1,5 @@
-import { cardData } from '../../dbTemplate/cardData'
-import CardComponent from '@/components/CardComponent'
+import { cardData } from "../../dbTemplate/cardData";
+import CardComponent from "@/components/CardComponent";
 export default function allFavorite() {
     return (
         <main className="flex min-h-screen flex-col items-center p-4">

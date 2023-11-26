@@ -9,12 +9,12 @@ export default async function Home() {
   // Get the User object when you need access to the user's information
   const user = {
     userId,
-    createdAt: theUser?.createdAt ?? '',
     firstName: theUser?.firstName ?? '',
     lastName: theUser?.lastName ?? '',
-    emailAddresses: theUser?.emailAddresses?.[0]?.emailAddress ?? null,
+    emailAddress: theUser?.emailAddresses?.[0]?.emailAddress ?? null,
     phoneNumber: theUser?.phoneNumbers?.[0]?.phoneNumber ?? null,
     imageUrl: theUser?.imageUrl ?? null,
+    authenticationMethod: theUser?.externalAccounts[0]?.verification?.strategy,
   };
 
   return (

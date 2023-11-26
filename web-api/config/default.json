@@ -1,6 +1,7 @@
 {
     "api": {
-        "version": "0.1.0"
+        "version": "0.1.0",
+        "privateKey": "koa-api"
     },
     "chatGPT": {
         "token": "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"

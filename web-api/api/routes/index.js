@@ -4,9 +4,12 @@ const validate = require('koa2-validation');
 const Joi = require('joi');
 
 const { rejectTheRequest } = require('../utils/error');
-const { auth } = require('../middleware/index');
+const { auth, verifyClerk } = require('../middleware/index');
 
 const getMyInfo = require('../controllers/get-my-info');
+const register = require('../controllers/register');
+const clerkRegister = require('../controllers/clerk-register');
+const refreshToken = require('../controllers/refresh-token');
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -77,11 +80,55 @@ router.get(
     '/my/info',
     validate({
         query: {
-            token: Joi.string().required(),
+            accessToken: Joi.string().required(),
         }
     }),
+    verifyClerk,
     getMyInfo
 );
+
+router.post(
+    '/register',
+    validate({
+        body: {
+            userId: Joi.string().required(),
+            firstName: Joi.string(),
+            lastName: Joi.string(),
+            emailAddress: Joi.string(),
+            phoneNumber: Joi.string(),
+            imageUrl: Joi.string(),
+            authenticationMethod: Joi.string(),
+            type: Joi.string(),
+        }
+    }),
+    register
+);
+
+router.post(
+    '/token/refresh',
+    validate({
+        body: {
+            refreshToken: Joi.string().required(),
+        }
+    }),
+    refreshToken
+);
+
+router.post(
+    'clerkRegister',
+    '/clerk/register',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+        body: {
+            type: Joi.string(),
+        }
+    }),
+    verifyClerk,
+    clerkRegister
+);
+
 
 // bad request example
 router.get('/error', async () => {

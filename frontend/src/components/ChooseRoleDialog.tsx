@@ -1,6 +1,6 @@
 "use client";
 
-import axios from 'axios';
+import { instance } from '@/lib/utils';
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -17,20 +17,62 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { promises } from "dns";
-
+import { useCookies } from 'react-cookie';
 import getConfig from 'next/config';
+import { access } from 'fs';
+
 const { publicRuntimeConfig } = getConfig() || {};
 
 export default function ChooseRoleDialog(props: any) {
   const router = useRouter();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [userRole, setUserRole] = useState("employee");
+  const [userRole, setUserRole] = useState('');
+  const [userInfo, setUserInfo] = useState({});
+  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
 
-  const { baseUrl } = process?.env ?? {};
-  
   useEffect(() => {
+    // Check is login
+    userInfoCheck();
+  });
+
+  const userInfoCheck = async () => {
+    const { __session: accessToken = '' } = cookies;
+
+    try {
+      if (!accessToken) {
+        throw new Error('AccessToken Not Exist.')
+      }
+
+      if (!Object.values(userInfo).length) {
+        const { data: response } = await instance.get(
+          `/my/info`, 
+          {
+            params: {
+              accessToken
+            }
+          }
+        );
+  
+        setUserRole(response?.data?.type);
+        setUserInfo(response?.data);
+      }
+
+      if (userRole) {
+        router.push(
+          userRole === "employee"
+            ? '/customer/restaurant'
+            : '/merchant'
+        );
+      }
+      return true;
+    } catch (err) {
+      // TODO: login again
+      console.log('導向重新登入', err);
+    }
+
+    // 確認完才進行選擇框呼叫
     setDialogOpen(true);
-  }, []);
+  }
 
   const handleSave = async () => {
     let path;
@@ -44,15 +86,24 @@ export default function ChooseRoleDialog(props: any) {
       path = '/merchant';
       type = 'merchant';
     }
+    // router.push(path);
 
-    router.push(path);
+    // Register
+    try {
+      let { __session: accessToken = '' } = cookies;
+      const { data: response } = await instance.post(`/clerk/register`, Object.assign(
+        props?.props,
+        {
+          type
+        }), {
+        params: {
+          accessToken
+        }
+      });
 
-    // await axios.post(`${baseUrl}/register`, Object.assign(
-    //   props?.props,
-    //   {
-    //     type
-    //   }
-    // ));
+    } catch (err) {
+      // TODO: register error
+    }
     
     setDialogOpen(false);
   };
