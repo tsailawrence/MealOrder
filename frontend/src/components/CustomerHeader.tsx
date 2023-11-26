@@ -8,28 +8,29 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetClose,
+  SheetClose
 } from "@/components/ui/sheet";
-import { Menu, ShoppingCart } from "lucide-react";
+import { CustomerCartHeader } from "./CustomerCartHeader";
+import { Menu } from "lucide-react";
 
 const Header = () => {
   const routes = [
     {
       href: "/customer/restaurant",
-      label: "Restauarant",
+      label: "Restauarant"
     },
     {
       href: "/customer/order",
-      label: "Order",
+      label: "Order"
     },
     {
       href: "/customer/monthlyPayment",
-      label: "Monthly Payment",
+      label: "Monthly Payment"
     },
     {
       href: "/customer/settings",
-      label: "Settings",
-    },
+      label: "Settings"
+    }
   ];
 
   return (
@@ -60,14 +61,7 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>
-            <Button
-              variant="ghost"
-              size="icon"
-              className=""
-              aria-label="Shopping Cart"
-            >
-              <ShoppingCart className="h-6 w-6" color="#E60012" />
-            </Button>
+            <CustomerCartHeader />
             <UserButton />
           </SignedIn>
         </div>

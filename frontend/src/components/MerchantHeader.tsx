@@ -4,7 +4,6 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-
 const Header = () => {
   const routes = [
     // {
@@ -13,16 +12,16 @@ const Header = () => {
     // },
     {
       href: "/",
-      label: "Order",
+      label: "Order"
     },
     {
       href: "/",
-      label: "Monthly Payment",
+      label: "Monthly Payment"
     },
     {
       href: "/",
-      label: "Settings",
-    },
+      label: "Settings"
+    }
   ];
   return (
     <header className="sm:flex sm:justify-between px-10 border-b">
