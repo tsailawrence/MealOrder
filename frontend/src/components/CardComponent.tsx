@@ -82,6 +82,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price,
         cart.item.push(newItem)
         console.log(cart)
     }
+    const [isOptionSelected, setIsOptionSelected] = useState(false);
     return (
         <Dialog>
             <DialogTrigger
@@ -137,7 +138,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price,
                     <DialogDescription>
                         Food Description if needed
                     </DialogDescription>
-                    {specialInstructions && <SpecialInstruction specialInstructions={specialInstructions} />}
+                    {specialInstructions && <SpecialInstruction specialInstructions={specialInstructions} onOptionChange={setIsOptionSelected}/>}
                     <span className='pt-5'>note:</span>
                     <Textarea />
                     <div className="self-stretch flex w-full items-center justify-between gap-5 mt-6 max-md:max-w-full max-md:flex-wrap">
@@ -166,7 +167,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price,
                     </div>
                 </DialogHeader>
                 <DialogFooter>
-                    <Button variant="destructive" onClick={()=>{addCart()}}>Add to Cart</Button>
+                    <Button  disabled={!isOptionSelected} variant="destructive" onClick={()=>{addCart()}}>Add to Cart</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

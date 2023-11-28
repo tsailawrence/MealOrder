@@ -25,7 +25,7 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ menu }) => {
     const defaultValue = menu[0].categoryName;
     return (
             <Tabs className="w-full" defaultValue={defaultValue}>
-                <TabsList className="grid w-full grid-cols-10 mt-6">
+                <TabsList className="grid w-full grid-flow-row-dense mt-6 auto-cols-min" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))' }}>
                     {menu.map((category, index) => (
                         <TabsTrigger key={index} value={category.categoryName}>{category.categoryName}</TabsTrigger>
                     ))}
