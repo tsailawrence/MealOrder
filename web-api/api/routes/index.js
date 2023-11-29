@@ -10,10 +10,14 @@ const getMyInfo = require('../controllers/get-my-info');
 const register = require('../controllers/register');
 const clerkRegister = require('../controllers/clerk-register');
 const refreshToken = require('../controllers/refresh-token');
+const handleLineWebhook = require('../controllers/handle-line-webhook');
+
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const router = new Router();
+
+router.post('/webhook', handleLineWebhook);
 
 router.use('*', async (ctx, next) => {
     const meta = {
