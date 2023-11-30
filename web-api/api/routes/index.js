@@ -12,6 +12,9 @@ const clerkRegister = require('../controllers/clerk-register');
 const refreshToken = require('../controllers/refresh-token');
 const handleLineWebhook = require('../controllers/handle-line-webhook');
 const getMyStoreOrders = require('../controllers/get-my-store-orders');
+const addMyStoreMenuType = require('../controllers/add-my-store-menu-type');
+const addMyStoreMenu = require('../controllers/add-my-store-menu');
+const getMyStoreProducts = require('../controllers/get-my-store-products');
 
 const router = new Router();
 
@@ -141,6 +144,53 @@ router.get(
     }),
     verifyClerk,
     getMyStoreOrders
+);
+
+router.post(
+    'addMyStoreMenuType',
+    '/my/store/:storeId/menu/type',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+        body: {
+            value: Joi.string(),
+        }
+    }),
+    verifyClerk,
+    addMyStoreMenuType
+);
+
+router.post(
+    'addMyStoreMenu',
+    '/my/store/:storeId/menu',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+        body: {
+            name: Joi.string().required(),
+            description: Joi.string().required(),
+            price: Joi.number().required(),
+            menuTypeId: Joi.number().required(),
+            amount: Joi.number().allow(null).required(),
+        }
+    }),
+    verifyClerk,
+    addMyStoreMenu
+);
+
+
+router.get(
+    'getMyStoreProducts',
+    '/my/store/:storeId/products',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    getMyStoreProducts
 );
 
 // bad request example

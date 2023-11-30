@@ -14,7 +14,6 @@ exports.TYPE = {
     EMPLOYEE: 'employee'
 };
 
-
 exports.getUserByToken = ({ token, fields = '*' }) =>
     datastore
         .select(fields)
