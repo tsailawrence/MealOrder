@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Label } from '@/components/ui/label';
 import { SpecialInstruction } from '@/lib/types/db';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Value } from '@radix-ui/react-select';
 type SpecialInstructionProps = {
     specialInstructions: SpecialInstruction[];
     onOptionChange: (allRequiredSelected: boolean) => void;

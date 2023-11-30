@@ -1,5 +1,5 @@
+"use client";
 import Header from "@/components/MerchantHeader";
-
 export default function CustomerLayout({
   children,
 }: {

@@ -4,7 +4,7 @@ import { Item } from "@/lib/types/db";
 
 interface OrderDetailsProps {
     pickUpTime: string;
-    orderNumber: string;
+    orderNumber: number;
     orderTime: string;
     items: Item[];
     status: string;
