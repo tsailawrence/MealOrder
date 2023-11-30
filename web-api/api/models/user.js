@@ -9,22 +9,28 @@ exports.AUTHENTICATION_METHOD = {
     GOOGLE: 'google'
 };
 
+exports.TYPE = {
+    MERCHANT: 'merchant',
+    EMPLOYEE: 'employee'
+};
+
+
 exports.getUserByToken = ({ token, fields = '*' }) =>
     datastore
         .select(fields)
-        .from('User')
+        .from(TABLE_NAME)
         .where('token', token);
 
 exports.getUserByUserId = ({ userId, fields = '*' }) =>
     datastore
         .select(fields)
-        .from('User')
+        .from(TABLE_NAME)
         .where('userId', userId);
 
 exports.getVerifiedUser = ({ userId, token, fields = '*' }) =>
     datastore
         .select(fields)
-        .from('User')
+        .from(TABLE_NAME)
         .where('userId', userId)
         .andWhere('token', token);
 
