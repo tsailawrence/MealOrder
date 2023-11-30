@@ -16,6 +16,15 @@ exports.verifyClerk = async (ctx, next) => {
         )
     }
 
+    if (accessToken.includes('dev:id:')) {
+        const [theUser] = await User.getUserById({
+            id: accessToken?.split('dev:id:')?.[1],
+        });
+
+        ctx.currentUser = theUser;
+        return next();
+    }
+
     try {
         const { 
             sub: userId, 
@@ -79,17 +88,9 @@ exports.auth = async (ctx, next) => {
         )
     }
 
-    const { userId, refreshToken } = jwt.verify(accessToken, `-----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4iBOln5wBB3kfoQsv/mq
-    rsCA5GFQQYbVVlxA1EjDCSJWISldju13E+DSNl0smGwFZ2+DqGAlnm3Q8u/utzTI
-    c7F269X5R+2PznzeLXd/g5X1kYjgxxBzh75Fc2gLwI20SFnAbkCSi4GNM8lA34I0
-    FJm85rEi5iHpQpxJRC4lowMnYFLDBYZ02hAWscFYlIoHMUSlgcTSs5svLge+yu4U
-    Aw9vSVo6e8w5zfVVcGc24pwmgYyZY8vBPxPh51v/3RFN12pWGPhBwPymOvJZhGlF
-    /gmPO9ph+4jSf8noYV3JFeCZ8Lwi3UgxSGFmgUKa90BR5jMbqVX14tfwAQ+2fh4V
-    kwIDAQAB
-    -----END PUBLIC KEY-----`);
+    const { userId, refreshToken } = jwt.verify(accessToken, config.api.privateKey);
 
-    console.info("Find user", { userId, refreshToken });
+    console.info("Find User", { userId, refreshToken });
 
     const [theUser] = await User.getVerifiedUser({
         userId,

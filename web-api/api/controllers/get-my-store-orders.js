@@ -7,9 +7,9 @@ const User = require('../models/user');
 module.exports = async ctx => {
     const {
         currentUser: {
-            userId,
+            id: userId,
             type,
-        }
+        } = {},
     } = ctx;
 
     const [theStore] = await Store.getStoreByUserId({
@@ -27,7 +27,7 @@ module.exports = async ctx => {
         );
     }
 
-    const theOrders = await Order.getOrderByStoreId({
+    const theOrders = await Order.getOrdersDetailByStoreId({
         storeId: theStore?.id,
     });
 

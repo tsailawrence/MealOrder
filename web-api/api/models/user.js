@@ -14,7 +14,6 @@ exports.TYPE = {
     EMPLOYEE: 'employee'
 };
 
-
 exports.getUserByToken = ({ token, fields = '*' }) =>
     datastore
         .select(fields)
@@ -26,6 +25,12 @@ exports.getUserByUserId = ({ userId, fields = '*' }) =>
         .select(fields)
         .from(TABLE_NAME)
         .where('userId', userId);
+
+exports.getUserById = ({ id, fields = '*' }) =>
+    datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('id', id);
 
 exports.getVerifiedUser = ({ userId, token, fields = '*' }) =>
     datastore
