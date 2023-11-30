@@ -11,9 +11,7 @@ const register = require('../controllers/register');
 const clerkRegister = require('../controllers/clerk-register');
 const refreshToken = require('../controllers/refresh-token');
 const handleLineWebhook = require('../controllers/handle-line-webhook');
-
-
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const getMyStoreOrders = require('../controllers/get-my-store-orders');
 
 const router = new Router();
 
@@ -133,6 +131,17 @@ router.post(
     clerkRegister
 );
 
+router.get(
+    'getMyStoreOrders',
+    '/my/store/orders',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    getMyStoreOrders
+);
 
 // bad request example
 router.get('/error', async () => {
