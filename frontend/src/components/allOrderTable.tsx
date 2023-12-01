@@ -42,44 +42,17 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    orderId: "dzcscs",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    orderId: "dczczc",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    orderId: "Monserrat44",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    orderId: "Silas22",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderId: "carmella",
-  },
-]
 
 export type Payment = {
-  id: string
+  id: string;
   amount: number
   status: "pending" | "processing" | "success" | "failed"
-  orderId: string
+    customerId: number;
+    orderItems: any[]; // Replace 'any' with a more specific type if possible
+    payment: number;
+    pickupTime: string;
+    storeId: number;
+    time: string;
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -151,7 +124,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export function DataTableDemo() {
+export function DataTableDemo(data: Payment[]) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

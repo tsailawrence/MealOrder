@@ -39,6 +39,16 @@ const OrderBox = () => {
         setLoading(false);
       });
   }, [accessToken]); // Dependency array
+  const todayOrders = orders && orders.filter((order) => {
+    const today = new Date();
+    const orderDate = new Date(order.pickupTime);
+    return today.getDate() === orderDate.getDate() && today.getMonth() === orderDate.getMonth() && today.getFullYear() === orderDate.getFullYear();
+  });
+  const upcomingOrders = orders && orders.filter((order) => {
+    const today = new Date();
+    const orderDate = new Date(order.pickupTime);
+    return today.getDate() < orderDate.getDate() || today.getMonth() < orderDate.getMonth() || today.getFullYear() < orderDate.getFullYear();
+  });
   return (
     <Tabs className="w-full" defaultValue={defaultValue}>
       <TabsList className="grid w-full grid-cols-6 mt-6">
@@ -50,7 +60,7 @@ const OrderBox = () => {
       <TabsContent value="Today">
         <div className="flex justify-center">
           <div className="flex flex-wrap gap-4 w-[90%] px-5 mt-6">
-            {orders && orders.map((order, index) => (
+            {todayOrders && todayOrders.map((order, index) => (
               <div key={index} className="flex-none min-w-[150px]">
                 <OrderDetails
                   pickUpTime={order.pickupTime}
@@ -67,13 +77,13 @@ const OrderBox = () => {
       <TabsContent value="Upcoming">
         <div className="flex justify-center">
           <div className="flex flex-wrap gap-4 w-[90%] px-5 mt-6">
-            {orderData.map((order, index) => (
+            {upcomingOrders && upcomingOrders.map((order, index) => (
               <div key={index} className="flex-none min-w-[150px]">
                 <OrderDetails
-                  pickUpTime={order.pickUpTime}
-                  orderNumber={order.orderNumber}
-                  orderTime={order.orderTime}
-                  items={order.items}
+                  pickUpTime={order.pickupTime}
+                  orderNumber={order.id}
+                  orderTime={order.time}
+                  items={order.orderItems}
                   status={order.status}
                 />
               </div>
@@ -82,7 +92,7 @@ const OrderBox = () => {
         </div>
       </TabsContent>
       <TabsContent value="All_Orders">
-        <DataTableDemo />
+        {orders && <DataTableDemo data={orders}/>}
       </TabsContent>
     </Tabs>
   );

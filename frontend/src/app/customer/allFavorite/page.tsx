@@ -1,5 +1,5 @@
 import { cardData } from "../../dbTemplate/cardData";
-import CardComponent from "@/components/CardComponent";
+import { CardComponent} from "@/components/CardComponent";
 export default function allFavorite() {
   return (
     <main className="flex min-h-screen flex-col items-center p-4">
@@ -8,7 +8,7 @@ export default function allFavorite() {
           Your Favorite Restaurant
         </h1>
         <a
-          href="/customer/allRestaurant"
+          href="/customer/all"
           className="text-sm font-semibold border pl-6 pr-6 py-2 rounded-3xl mx-1"
         >
           See All

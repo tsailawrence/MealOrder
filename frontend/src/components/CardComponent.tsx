@@ -173,7 +173,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ uri, name, price,
         </Dialog>
     );
 };
-const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, likes = false }) => {
+export const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, likes = false }) => {
 
     return (
         <Link href="/customer/restaurant/restaurant_id" >
@@ -208,4 +208,3 @@ const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, likes = fal
     );
 };
 
-export default CardComponent;

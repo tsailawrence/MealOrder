@@ -1,0 +1,62 @@
+import * as React from "react";
+import Image from "next/image";
+import { Heart } from 'lucide-react';
+
+type CategoryBarProps = {
+    name: string;
+    imageSrc: string;
+    starNumber: number;
+    likes: boolean;
+};
+
+const CategoryBar: React.FC<CategoryBarProps> = ({
+    name,
+    imageSrc,
+    starNumber,
+    likes,
+}) => {
+    return (
+        <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
+            <div className="flex items-stretch justify-between gap-5">
+                <Image
+                    loading="lazy"
+                    src={imageSrc}
+                    width={86}
+                    height={86}
+                    className="object-contain object-center w-[86px] h-[86px] justify-center items-center overflow-hidden shrink-0 max-w-full rounded-full" // Added h-[86px] and rounded-full
+                    alt="Restaurant Image"
+                />
+                <div className="flex grow basis-[0%] flex-col items-stretch mt-2.5 self-start">
+                    <div className="flex justify-between gap-4">
+                        <h1 className="text-black text-3xl font-semibold mt-3">
+                            {name}
+                        </h1>
+                        <div className="flex gap-2">
+                            <div className="text-red-600 text-2xl font-black mt-5">
+                                {likes ? <Heart fill='red' /> : <Heart />}
+                            </div>
+                            <div className="text-red-600 text-2xl mt-4">
+                                {starNumber}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="justify-center items-stretch border border-[color:var(--Red,#E60012)] shadow-lg flex gap-2 mt-3 pl-8 pr-8 py-3.5 rounded-3xl border-solid self-start max-md:px-5">
+                <Image
+                    loading="lazy"
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/61e469bf-3fa4-4814-928e-fdf1a9b6b529?apiKey=5d949b60a548481d8fbc5fec7da626b0"
+                    width={5}
+                    height={5}
+                    className="aspect-square object-contain object-center w-5 overflow-hidden shrink-0 max-w-full"
+                    alt="Favorite Icon"
+                />
+                <div className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap">
+                    <a href="#">Add to favorite</a>
+                </div>
+            </div>
+        </article>
+    );
+};
+
+export default CategoryBar;
