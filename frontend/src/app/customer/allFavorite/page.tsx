@@ -1,6 +1,7 @@
-import { cardData } from "../../dbTemplate/cardData";
-import { CardComponent} from "@/components/CardComponent";
+import { getFavoriteStore } from "./_components/actions";
+import { CardComponent} from "./_components/CardComponent";
 export default function allFavorite() {
+  const cardData = getFavoriteStore();
   return (
     <main className="flex min-h-screen flex-col items-center p-4">
       <header className="self-center flex w-full max-w-[90%] items-start justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap max-md:mt-10">

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { DateBar } from "@/components/DateBar";
+import { DateBar } from "@/components/DateBar"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -43,19 +43,19 @@ import {
 } from "@/components/ui/table"
 
 
-export type Payment = {
+type Order = {
   id: string;
   amount: number
   status: "pending" | "processing" | "success" | "failed"
-    customerId: number;
-    orderItems: any[]; // Replace 'any' with a more specific type if possible
-    payment: number;
-    pickupTime: string;
-    storeId: number;
-    time: string;
+  customerId: number;
+  orderItems: any[]; // Replace 'any' with a more specific type if possible
+  payment: number;
+  pickupTime: string;
+  storeId: number;
+  time: string;
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -124,7 +124,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export function DataTableDemo(data: Payment[]) {
+export function AllOrderTable(data: Order[]) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

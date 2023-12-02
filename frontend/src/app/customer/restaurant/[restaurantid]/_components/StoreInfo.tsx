@@ -3,7 +3,7 @@ import Image from "next/image";
 import { RestaurantCardProps } from "@/lib/types/db";
 import { Heart } from 'lucide-react';
 
-const RestaurantCard: React.FC<RestaurantCardProps> = ({
+const StoreInfo: React.FC<RestaurantCardProps> = ({
     name,
     imageSrc,
     starNumber,
@@ -57,4 +57,4 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
     );
 };
 
-export default RestaurantCard;
+export default StoreInfo;

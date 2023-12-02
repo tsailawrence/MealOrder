@@ -1,19 +1,19 @@
 "use client"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Item } from "@/lib/types/db";
-import OrderDetails from "@/components/OrderDetail";
-import { orderData } from "../../dbTemplate/cardData";
-import { DataTableDemo } from "@/components/allOrderTable";
+import OrderDetails from "./_components/OrderDetail";
+import { AllOrderTable } from "./_components/AllOrderTable";
 import { useCookies } from "react-cookie";
 import { getAllOrders } from "./_components/actions";
 import { useEffect, useState } from "react";
+ 
 type Order = {
   customerId: number;
   id: number;
-  orderItems: any[]; // Replace 'any' with a more specific type if possible
+  orderItems: Item[]; // Replace 'any' with a more specific type if possible
   payment: number;
   pickupTime: string;
-  status: string;
+  status: "Confirmed" | "Preparing" | "To Pick Up" | "Completed" | "Canceled"
   storeId: number;
   time: string;
 };
@@ -21,7 +21,7 @@ type Order = {
 const OrderBox = () => {
   const defaultValue = "All_Orders";
   const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
-  const [orders, setOrders] = useState<Order[] | null>(null);
+  const [orders, setOrders] = useState<Order[] | null>(null);          
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { __session: accessToken = '' } = cookies;
@@ -92,7 +92,7 @@ const OrderBox = () => {
         </div>
       </TabsContent>
       <TabsContent value="All_Orders">
-        {orders && <DataTableDemo data={orders}/>}
+        {orders && <AllOrderTable data={orders} />}
       </TabsContent>
     </Tabs>
   );

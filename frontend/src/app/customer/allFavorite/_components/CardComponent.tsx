@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Textarea } from "@/components/ui/textarea"
-import SpecialInstruction from './SpecialInstruction';
+import SpecialInstruction from '../../../../components/SpecialInstruction';
 import {
     Dialog,
     DialogContent,
@@ -13,10 +13,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from './ui/button';
+import { Button } from '../../../../components/ui/button';
 import { CardProps, CardPriceProps } from '@/lib/types/db';
 import { Heart } from 'lucide-react';
-import { DatePickerDemo } from './DatePicker';
+import { DatePickerDemo } from '../../../../components/DatePicker';
 
 type Item = {
     name: string;

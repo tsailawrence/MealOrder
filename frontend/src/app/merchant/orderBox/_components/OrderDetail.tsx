@@ -20,8 +20,24 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
     const num = items.length;
     //add all the prices together
     const price = items.reduce((a, b) => a + b.price * b.quantity, 0);
+    function statusColor(status: string) {
+        switch (status) {
+            case "Confirmed":
+                return "bg-white text-green-400 border-green-500";
+            case "Preparing":
+                return "bg-white text-yellow-400 border-yellow-500";
+            case "To Pick Up":
+                return "bg-white text-blue-400 border-blue-500";
+            case "Completed":
+                return "bg-white text-purple-400 border-purple-500";
+            case "Canceled":
+                return "bg-white text-red-400 border-red-500";
+            default:
+                return "bg-white text-amber-500 border-amber-500";
+        }
+    }
     return (
-        <div className="border bg-white flex w-full grow flex-col mx-auto pl-6 pr-6 py-5 rounded-lg border-solid border-black border-opacity-50 max-md:mt-8 max-md:px-5">
+        <div className="border bg-white flex w-full grow flex-col mx-auto pl-6 pr-6 py-5 rounded-lg border-solid border-black">
             <div className="text-black text-base font-medium leading-5 self-stretch">
                 Pick Up Time: {pickUpTime}
             </div>
@@ -38,15 +54,15 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
                     Total {price}
                 </div>
             </div>
-            <div className="flex w-[231px] max-w-full pr-0 items-stretch gap-3.5 mt-7 self-end">
-                <div className="text-zinc-500 text-base font-medium leading-6 whitespace-nowrap justify-center items-center border bg-white grow px-5 py-2.5 rounded-3xl border-solid border-zinc-500">
+            <div className="flex max-w-full items-stretch gap-3.5 mt-5 self-end">
+                <div className="text-zinc-500 text-base font-medium justify-center items-center border bg-white grow px-5 py-2.5 rounded-3xl border-solid border-zinc-500">
                     Cancel
                 </div>
-                <div className="text-amber-500 text-base font-medium leading-6 whitespace-nowrap justify-center items-center border bg-white z-[1] grow px-5 py-2.5 rounded-3xl border-solid border-amber-500">
+                <div className={`text-base font-medium justify-center items-center px-5 py-2.5 rounded-3xl border border-solid ${statusColor(status)} grow`}>
                     {status}
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

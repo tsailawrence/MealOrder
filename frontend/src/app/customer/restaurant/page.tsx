@@ -1,7 +1,7 @@
 import React from "react";
 import { cardData, categoryData } from "../../dbTemplate/cardData";
-import { CardComponent} from "@/components/CardComponent";
-import CategoryCard from "@/components/CategoryCard";
+import { CardComponent} from "./_components/CardComponent";
+import CategoryCard from "./_components/CategoryCard";
 const CustomerHome = () => {
   return (
     <>

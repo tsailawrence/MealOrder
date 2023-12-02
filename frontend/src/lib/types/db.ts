@@ -34,11 +34,11 @@ export type RestaurantCardProps = {
     likes: boolean;
 };
 export type Item = {
-        name: string;
-        price: number;
-        quantity: number;
-        specialInstructions: string[];
-    };
+    name: string;
+    price: number;
+    quantity: number;
+    specialInstructions: string[];
+};
 export type CartCardProps = {
     username: string;
     time: string;
