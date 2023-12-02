@@ -610,7 +610,7 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99,
+                        "price": 599,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -627,7 +627,7 @@ export const restaurantData = [
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50,
+                        "price": 650,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -649,7 +649,7 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99,
+                        "price": 599,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -666,7 +666,7 @@ export const restaurantData = [
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50,
+                        "price": 650,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -683,82 +683,82 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 100
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 100
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 100
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 100
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 100
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 110
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 110
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 110
                     }
                 ]
             },
@@ -768,7 +768,7 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99,
+                        "price": 150,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -785,7 +785,7 @@ export const restaurantData = [
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50,
+                        "price": 110,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -807,18 +807,18 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
 
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 120
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99,
+                        "price": 150,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -835,7 +835,7 @@ export const restaurantData = [
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50,
+                        "price": 120,
                         "specialInstructions": [
                             {
                                 "name": "Toppings",
@@ -852,72 +852,72 @@ export const restaurantData = [
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 220
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 220
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 220
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 220
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 220
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 220
                     },
                     {
                         "name": "Bruschetta",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 5.99
+                        "price": 150
                     },
                     {
                         "name": "Stuffed Mushrooms",
                         "uri": "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100",
-                        "price": 6.50
+                        "price": 100
                     }
                 ]
             },
@@ -1010,7 +1010,7 @@ export const orderData = [
             },
             {
                 "name": "Apple Pie",
-                "price": 6.50,
+                "price": 100,
                 "quantity": 1,
                 "specialInstructions": ["A la mode", "Extra caramel"],
             }

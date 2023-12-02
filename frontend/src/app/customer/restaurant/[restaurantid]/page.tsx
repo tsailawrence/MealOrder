@@ -11,7 +11,7 @@ const RestaurantPage = () => {
     return (
         <>
             <StoreInfo  name={restaurantData[0].name} address={restaurantData[0].address} starNumber={restaurantData[0].starNumber} imageSrc={restaurantData[0].uri} likes={true} />
-            <StoreMenu menu={restaurantData[0].menu} />
+            <StoreMenu restaurantName={restaurantData[0].name} menu={restaurantData[0].menu} />
         </>
     );
 }

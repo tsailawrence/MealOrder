@@ -23,11 +23,11 @@ const OrderDetails: React.FC<OrdersProps> = ({ items }) => {
                     </div>
                     <div className="self-stretch flex grow flex-col items-stretch">
                         <div className="text-black text-base">{item.name}</div>
-                        <div className="text-zinc-500 text-sm leading-4 mt-4">
+                        {item.specialInstructions&&<div className="text-zinc-500 text-sm leading-4 mt-4">
                             {item.specialInstructions.map((instruction, index) => (
                                 <div key={index}>{instruction}</div>
                             ))}
-                        </div>
+                        </div>}
                     </div>
                     <div className="text-black text-right text-base leading-5 grow whitespace-nowrap self-end">
                         ${item.price * item.quantity}

@@ -1,6 +1,6 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
@@ -13,14 +13,7 @@ import {
 import { Item } from "@/lib/types/db";
 import CustomerCartHeader from "./CustomerCartHeader";
 import { Menu } from "lucide-react";
-interface OrderDetailsProps {
-  items: Item[];
-  restaurantName: string;
-}
-const Header: React.FC<OrderDetailsProps> = ({
-  items,
-  restaurantName
-}) => {
+const Header = () => {
   const routes = [
     {
       href: "/customer/restaurant",
@@ -67,7 +60,7 @@ const Header: React.FC<OrderDetailsProps> = ({
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>
-            <CustomerCartHeader items={items} restaurantName={restaurantName}/>
+            <CustomerCartHeader/>
             <UserButton />
           </SignedIn>
         </div>

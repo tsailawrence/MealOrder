@@ -5,7 +5,7 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs";
 
-import { CardPriceComponent } from "@/app/customer/allFavorite/_components/CardComponent";
+import { CardPriceComponent } from "./CardPriceComponent";
 import { CardPriceProps } from "@/lib/types/db";
 
 // Define the structure of each category in the menu
@@ -16,12 +16,13 @@ interface MenuCategory {
 
 // Define the structure of the restaurant data
 interface TabsDemoProps {
+    restaurantName: string;
     menu: MenuCategory[];
 }
 
 // Define the props for TabsDemo component
 
-const TabsDemo: React.FC<TabsDemoProps> = ({ menu }) => {
+const TabsDemo: React.FC<TabsDemoProps> = ({ restaurantName, menu }) => {
     const defaultValue = menu[0].categoryName;
     return (
         <Tabs className="w-full" defaultValue={defaultValue}>
@@ -39,7 +40,7 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ menu }) => {
                     <div className="flex flex-wrap gap-5 w-full px-5 mt-6">
                         {category.items.map((item, itemIndex) => (
                             <div key={itemIndex} className="flex-none w-1/4 min-w-[150px] max-w-[200px]">
-                                <CardPriceComponent uri={item.uri} name={item.name} price={item.price} specialInstructions={item.specialInstructions} />
+                                <CardPriceComponent restaurantName={restaurantName} uri={item.uri} name={item.name} price={item.price} specialInstructions={item.specialInstructions} />
                             </div>
                         ))}
                     </div>

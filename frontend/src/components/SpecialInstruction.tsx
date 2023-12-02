@@ -6,9 +6,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 type SpecialInstructionProps = {
     specialInstructions: SpecialInstruction[];
     onOptionChange: (allRequiredSelected: boolean) => void;
+    onSelectionsChange?: (selectedOptions: string[]) => void;
 };
     
-const SpecialInstruction = ({ specialInstructions, onOptionChange }: SpecialInstructionProps) => {
+const SpecialInstruction = ({ specialInstructions, onOptionChange, onSelectionsChange }: SpecialInstructionProps) => {
     const [selections, setSelections] = useState<{ [key: string]: string }>({});
     // Handle the change in RadioGroup selection
     const handleOptionChange = (instructionName:string, selectedValue:string) => {
@@ -17,14 +18,23 @@ const SpecialInstruction = ({ specialInstructions, onOptionChange }: SpecialInst
             [instructionName]: selectedValue
         }));
     };
-
+    const getSelectedOptions = () => {
+        return Object.values(selections);
+    };    
     // Effect to update the external button state
     useEffect(() => {
         const allRequiredSelected = specialInstructions.every(instruction => 
             !instruction.required || selections[instruction.name] != null
         );
         onOptionChange(allRequiredSelected);
-    }, [selections, specialInstructions, onOptionChange]);
+
+        // Call the new function when selections change
+        if (onSelectionsChange) {
+            onSelectionsChange(getSelectedOptions());
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selections, specialInstructions, onOptionChange, onSelectionsChange]); // include onSelectionsChange in dependency array
+
     return (
         <>
             {specialInstructions.map((SpecialInstruction, index) => (
