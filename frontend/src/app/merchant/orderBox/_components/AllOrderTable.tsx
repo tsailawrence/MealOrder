@@ -41,19 +41,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
+import { Item } from "@/lib/types/db"
 
 type Order = {
-  id: string;
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
   customerId: number;
-  orderItems: any[]; // Replace 'any' with a more specific type if possible
+  id: number;
+  orderItems: Item[]; // Replace 'any' with a more specific type if possible
   payment: number;
   pickupTime: string;
-  storeId: number;
+  status: "Confirmed" | "Preparing" | "To Pick Up" | "Completed" | "Canceled"
   time: string;
-}
+};
 
 export const columns: ColumnDef<Order>[] = [
   {
@@ -64,7 +62,7 @@ export const columns: ColumnDef<Order>[] = [
     ),
   },
   {
-    accessorKey: "orderId",
+    accessorKey: "id",
     header: ({ column }) => {
       return (
         <Button
@@ -76,13 +74,27 @@ export const columns: ColumnDef<Order>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("orderId")}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue("id")?.toString()}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "pickupTime",
+    header: "Pick Up Time",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("pickupTime")}</div>
+    ),
+  },
+  {
+    accessorKey: "time",
+    header: "Order Time",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("time")}</div>
+    ),
+  },
+  {
+    accessorKey: "payment",
+    header: () => <div className="text-right">Payment</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
+      const amount = parseFloat(row.getValue("payment"))
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
@@ -110,7 +122,7 @@ export const columns: ColumnDef<Order>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(payment.id?.toString())}
             >
               Copy payment ID
             </DropdownMenuItem>
@@ -123,8 +135,10 @@ export const columns: ColumnDef<Order>[] = [
     },
   },
 ]
-
-export function AllOrderTable(data: Order[]) {
+type AllOrderTableProps = {
+  orders: Order[];
+};
+export function AllOrderTable({ orders }: AllOrderTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -134,7 +148,7 @@ export function AllOrderTable(data: Order[]) {
   const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
-    data,
+    data: orders,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -178,9 +192,11 @@ export function AllOrderTable(data: Order[]) {
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value="All">All</SelectItem>
-                  <SelectItem value="Success">Success</SelectItem>
-                  <SelectItem value="Processing">Processing</SelectItem>
-                  <SelectItem value="Failed">Failed</SelectItem>
+                  <SelectItem value="Confirmed">Confirmed</SelectItem>
+                  <SelectItem value="Preparing">Preparing</SelectItem>
+                  <SelectItem value="To Pick Up">To Pick Up</SelectItem>
+                  <SelectItem value="Completed">Completed</SelectItem>
+                  <SelectItem value="Canceled">Canceled</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -189,9 +205,10 @@ export function AllOrderTable(data: Order[]) {
         <div className="items-center flex rounded-2xl border-solid border-black">
           <Input
             placeholder="Filter OrderId..."
-            value={(table.getColumn("orderId")?.getFilterValue() as string) ?? ""}
+            value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
-              table.getColumn("orderId")?.setFilterValue(event.target.value)
+
+              table.getColumn("id")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />

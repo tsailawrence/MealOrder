@@ -14,7 +14,6 @@ type Order = {
   payment: number;
   pickupTime: string;
   status: "Confirmed" | "Preparing" | "To Pick Up" | "Completed" | "Canceled"
-  storeId: number;
   time: string;
 };
 // Define the props for TabsDemo component
@@ -92,7 +91,7 @@ const OrderBox = () => {
         </div>
       </TabsContent>
       <TabsContent value="All_Orders">
-        {orders && <AllOrderTable data={orders} />}
+        {orders && <AllOrderTable orders={orders} />}
       </TabsContent>
     </Tabs>
   );
