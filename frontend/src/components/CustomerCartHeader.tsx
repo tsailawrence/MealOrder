@@ -34,7 +34,18 @@ type Orders = {
 };
 const CustomerCartHeader = () => {
   const [cart, setCart] = useState<Cart>({ restaurantName: '', items: [] });
+  const [dateTime, setDateTime] = useState<Date | null>(null);
 
+  const handleDateTimeChange = (date: Date, hour: string, minute: string, ampm: string) => {
+      console.log('date:');
+      if (date && hour && minute) {
+          const updatedDate = new Date(date);
+          const hourNumber = ampm === 'PM' ? parseInt(hour) % 12 + 12 : parseInt(hour) % 12;
+          updatedDate.setHours(hourNumber, parseInt(minute));
+          console.log('updatedDate:', updatedDate);
+          setDateTime(updatedDate);
+      }
+  };
   // Effect to load cart data from localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -59,12 +70,12 @@ const CustomerCartHeader = () => {
         }
         // Save the updated cart back to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
-        //refresh the page
         setCart(cart);
+        //refresh the page
+        window.location.reload();
       }
     }
   }
-
   const handleAdd = (index: number) => {
     updateItemQuantity(index, 1);
   }
@@ -74,9 +85,22 @@ const CustomerCartHeader = () => {
   }
 
   const handleSubmit = () => {
+    if (!dateTime) {
+      alert('Please select a pickup time');
+      return;
+    }
+    if (dateTime < new Date()) {
+      alert('Please select a future pickup time');
+      return;
+    }
+    // if cart is empty, then alert
+    if (cart.items.length === 0) {
+      alert('Please add items to cart');
+      return;
+    }
     let orders: Orders = {
       cart: cart,
-      pickupTime: new Date(),
+      pickupTime: dateTime || new Date(),
       userId: '1'
     }
     console.log('orders:', orders);
@@ -103,7 +127,8 @@ const CustomerCartHeader = () => {
           <SheetTitle>Shopping Cart</SheetTitle>
           <SheetDescription>
             Choose Pick Up Time : <br/>
-            <DatePicker /> 
+            <DatePicker onDateChange={(date) => handleDateTimeChange(date, '00', '00', 'AM')} />
+            <HourMinute onTimeChange={(hour, minute, ampm) => dateTime && handleDateTimeChange(dateTime, hour, minute, ampm)} /> 
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 py-4">
@@ -166,6 +191,7 @@ const CustomerCartHeader = () => {
         </div>
         <SheetFooter>
           <SheetClose asChild>
+            
             <Button type="reset" onClick={handleSubmit}>Place Order</Button>
           </SheetClose>
         </SheetFooter>
