@@ -182,6 +182,12 @@ const Menu =[
         ]
     },
 ]
+
+
 export const getMenus = () => {
     return Menu
+}
+
+export const getCategory = (categoryData: string) => {
+    return Menu.filter((item) => item.categoryName === categoryData)[0]
 }

@@ -1,8 +1,11 @@
 import React from "react";
-import { cardData, categoryData } from "../../dbTemplate/cardData";
 import { CardComponent} from "./_components/CardComponent";
 import CategoryCard from "./_components/CategoryCard";
+import { getCardData, getFavoriteData, getCategoryData } from "./_components/actions";
 const CustomerHome = () => {
+  const cardData = getCardData();
+  const categoryData = getCategoryData();
+  const favoriteData = getFavoriteData();
   return (
     <>
       <header className="self-center flex w-full max-w-[90%] items-start justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap max-md:mt-10">
@@ -17,7 +20,7 @@ const CustomerHome = () => {
         </a>
       </header>
       <div className="self-center w-full max-w-[80%] mt-9 px-5 max-md:max-w-full overflow-x-auto flex gap-5 whitespace-nowrap">
-          {cardData.map((card, index) => (
+          {favoriteData.map((card, index) => (
             <div
               key={index}
               className="flex-none w-[calc(25%-1.25rem)] min-w-[200px] max-w-[275px]"

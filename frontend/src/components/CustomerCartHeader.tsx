@@ -21,8 +21,8 @@ import {
   AccordionTrigger
 } from "@/components/ui/accordion";
 import { Item } from "@/lib/types/db";
-import {DatePicker} from "@/components/DatePicker";
-import {HourMinute} from "@/components/HourMinute";
+import { DatePicker } from "@/components/DatePicker";
+import { HourMinute } from "@/components/HourMinute";
 type Cart = {
   restaurantName: string;
   items: Item[]; //item name, price, quantity
@@ -37,14 +37,14 @@ const CustomerCartHeader = () => {
   const [dateTime, setDateTime] = useState<Date | null>(null);
 
   const handleDateTimeChange = (date: Date, hour: string, minute: string, ampm: string) => {
-      console.log('date:');
-      if (date && hour && minute) {
-          const updatedDate = new Date(date);
-          const hourNumber = ampm === 'PM' ? parseInt(hour) % 12 + 12 : parseInt(hour) % 12;
-          updatedDate.setHours(hourNumber, parseInt(minute));
-          console.log('updatedDate:', updatedDate);
-          setDateTime(updatedDate);
-      }
+    console.log('date:');
+    if (date && hour && minute) {
+      const updatedDate = new Date(date);
+      const hourNumber = ampm === 'PM' ? parseInt(hour) % 12 + 12 : parseInt(hour) % 12;
+      updatedDate.setHours(hourNumber, parseInt(minute));
+      console.log('updatedDate:', updatedDate);
+      setDateTime(updatedDate);
+    }
   };
   // Effect to load cart data from localStorage
   useEffect(() => {
@@ -71,8 +71,6 @@ const CustomerCartHeader = () => {
         // Save the updated cart back to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         setCart(cart);
-        //refresh the page
-        window.location.reload();
       }
     }
   }
@@ -105,10 +103,11 @@ const CustomerCartHeader = () => {
     }
     console.log('orders:', orders);
     // Delete cart from local storage
-    let newCart = {restaurantName: '', items: [] }
+    let newCart = { restaurantName: '', items: [] }
     localStorage.setItem('cart', JSON.stringify(newCart));
     console.log('newCart:', newCart);
-    // window.location.reload(); // Refresh the page
+    //refresh the page
+    window.location.reload();
   }
   return (
     <Sheet>
@@ -126,9 +125,9 @@ const CustomerCartHeader = () => {
         <SheetHeader>
           <SheetTitle>Shopping Cart</SheetTitle>
           <SheetDescription>
-            Choose Pick Up Time : <br/>
+            Choose Pick Up Time : <br />
             <DatePicker onDateChange={(date) => handleDateTimeChange(date, '00', '00', 'AM')} />
-            <HourMinute onTimeChange={(hour, minute, ampm) => dateTime && handleDateTimeChange(dateTime, hour, minute, ampm)} /> 
+            <HourMinute onTimeChange={(hour, minute, ampm) => dateTime && handleDateTimeChange(dateTime, hour, minute, ampm)} />
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 py-4">
@@ -137,7 +136,7 @@ const CustomerCartHeader = () => {
             <Separator className="mt-2 mb-2" />
             <Accordion type="single" collapsible className="w-full">
               {cart.items.map((item: Item, index: number) => (
-                <AccordionItem value={item.name} key={index}>
+                <AccordionItem value={index?.toString()} key={index}>
                   <div className="flex items-center w-full text-left">
                     <div className="flex flex-col w-[50%]">
                       <div className="text-neutral-400 mt-1">
@@ -191,7 +190,6 @@ const CustomerCartHeader = () => {
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            
             <Button type="reset" onClick={handleSubmit}>Place Order</Button>
           </SheetClose>
         </SheetFooter>

@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./orders.module.css";
-
+import styles from "./_components/orders.module.css";
+import { OrderTable } from "./_components/OrderTable";
 const orderData = [
   {
     id: 1,
@@ -35,34 +35,8 @@ const OrdersPage = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Orders</h1>
-      {orderData.map((order) => (
-        <div key={order.id} className={styles.orderItem}>
-          <img
-            className={styles.image}
-            src="https://via.placeholder.com/86"
-            alt={order.name}
-          />
-          <div className={styles.details}>
-            <h2 className={styles.title}>{order.name}</h2>
-            <p
-              className={styles.info}
-            >{`${order.items} items, ${order.time}, Total ${order.total}`}</p>
-          </div>
-          <div>
-            <div className={styles.pickup}>
-              <div>Pickup Time: {order.pickupTime}</div>
-            </div>
-            <div className={styles.status}>
-              <span
-                className={`${styles.statusBadge} ${
-                  styles[order.status.toLowerCase()]
-                }`}
-              >
-                {order.status}
-              </span>
-            </div>
-          </div>
-        </div>
+      {orderData.map((order,index) => (
+        <OrderTable key={index} order={order} />
       ))}
     </div>
   );
