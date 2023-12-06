@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CardProps, CardPriceProps } from '@/lib/types/db';
+import { CardProps } from '@/lib/types/db';
 import { Heart } from 'lucide-react';
 
 export const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, likes = false }) => {

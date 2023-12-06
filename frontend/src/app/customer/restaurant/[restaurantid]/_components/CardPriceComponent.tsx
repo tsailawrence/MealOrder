@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { restaurantData } from '@/app/dbTemplate/cardData';
-import { el } from 'date-fns/locale';
+
 type Item = {
     name: string;
     price: number;
@@ -87,13 +87,11 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({restaurantName, ur
             }
         });
         if (!isSameItem){
+            // Add new item to cart
             cart.items.push(newItem);
         } else {
             isSameItem = false;
         }
-
-        // Add new item to cart
-        
 
         // Update local storage
         localStorage.setItem('cart', JSON.stringify(cart));

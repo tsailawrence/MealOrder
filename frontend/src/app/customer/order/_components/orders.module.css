@@ -24,11 +24,13 @@
 }
 
 .details {
+  text-align: left;
   flex-grow: 1;
 }
 
 .title {
   font-size: 1.25rem;
+  font-weight: 600;
   color: #333;
   margin: 0 0 5px 0;
 }

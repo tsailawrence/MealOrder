@@ -1,17 +1,19 @@
 import React from "react";
 import styles from "./orders.module.css";
 import Image from "next/image";
-
+import Link from "next/link";
+import { Item } from "@/lib/types/db";
 type Order = {
     id: number;
     name: string;
-    items: number;
+    items: Item[];
     time: string;
     total: string;
     status: string;
     pickupTime: string;
 };
 export const OrderTable = ({ order }: { order: Order }) => {
+  const itemnumber = order.items.length;
   return (
         <div key={order.id} className={styles.orderItem}>
           <Image
@@ -22,10 +24,15 @@ export const OrderTable = ({ order }: { order: Order }) => {
             alt={order.name}
           />
           <div className={styles.details}>
-            <h2 className={styles.title}>{order.name}</h2>
+            <h2 className={styles.title}>
+              {order.name}
+              <Link href={`/customer/restaurant/${order.name}`}>
+                <span className="bg-red-500 text-white text-xs rounded-full p-1 ml-2"> order again </span>
+              </Link>
+            </h2>
             <p
               className={styles.info}
-            >{`${order.items} items, ${order.time}, Total ${order.total}`}</p>
+            >{`${itemnumber} items, ${order.time}, Total ${order.total}`}</p>
           </div>
           <div>
             <div className={styles.pickup}>
