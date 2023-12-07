@@ -27,7 +27,7 @@ export const OrderTable = ({ order }: { order: Order }) => {
             <h2 className={styles.title}>
               {order.name}
               <Link href={`/customer/restaurant/${order.name}`}>
-                <span className="bg-red-500 text-white text-xs rounded-full p-1 ml-2"> order again </span>
+                <span className="bg-red-400 text-white text-xs rounded-full p-1 ml-2"> order again </span>
               </Link>
             </h2>
             <p

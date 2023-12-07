@@ -10,7 +10,7 @@ export default function CustomerLayout({
       <div>
         <Header />
       </div>
-      <div className="container mx-auto px-4">{children}</div>
+      <div className="container mx-auto px-4 mt-20">{children}</div>
     </>
   );
 }

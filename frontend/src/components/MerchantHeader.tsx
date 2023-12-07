@@ -24,8 +24,8 @@ const Header = () => {
     }
   ];
   return (
-    <header className="sm:flex sm:justify-between px-10 border-b">
-      <div className="relative  flex h-20 items-center justify-between w-full">
+    <header className="fixed top-0 left-0 z-50 w-full bg-white border-b px-10">
+      <div className="flex justify-between items-center w-full h-20">
         <div className="flex items-center gap-8">
           <Sheet>
             <SheetTrigger>

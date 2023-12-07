@@ -1,16 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Cross2Icon } from "@radix-ui/react-icons";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
   SheetClose
 } from "@/components/ui/sheet";
-import { Item } from "@/lib/types/db";
 import CustomerCartHeader from "./CustomerCartHeader";
 import { Menu } from "lucide-react";
 const Header = () => {
@@ -33,8 +30,8 @@ const Header = () => {
     }
   ];
   return (
-    <header className="sm:flex sm:justify-between px-10 border-b">
-      <div className="relative  flex h-20 items-center justify-between w-full">
+    <header className="fixed top-0 left-0 z-50 w-full bg-white border-b px-10">
+      <div className="flex justify-between items-center w-full h-20">
         <div className="flex items-center gap-8">
           <Sheet>
             <SheetTrigger>
@@ -60,7 +57,7 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>
-            <CustomerCartHeader/>
+            <CustomerCartHeader />
             <UserButton />
           </SignedIn>
         </div>
