@@ -8,6 +8,7 @@ import {
   SheetTrigger,
   SheetClose
 } from "@/components/ui/sheet";
+import { useLocation } from "@/app/customer/LocationContext";
 import CustomerCartHeader from "./CustomerCartHeader";
 import { Menu } from "lucide-react";
 const Header = () => {
@@ -29,6 +30,8 @@ const Header = () => {
       label: "Settings"
     }
   ];
+  const { location } = useLocation();
+
   return (
     <header className="fixed top-0 left-0 z-50 w-full bg-white border-b px-10">
       <div className="flex justify-between items-center w-full h-20">
@@ -54,6 +57,9 @@ const Header = () => {
           <Link href="/" className="">
             <Image src="/logo.png" alt="logo" width={90} height={30} />
           </Link>
+          <div className="text-lg font-semibold text-black">
+            {location ? location : 'Loading...'}
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>

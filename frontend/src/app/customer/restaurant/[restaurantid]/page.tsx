@@ -5,7 +5,8 @@ import StoreMenu from './_components/StoreMenu';
 import { restaurantData } from '@/app/dbTemplate/cardData';
 
 const RestaurantPage = () => {
-    const { id } = useParams();
+    const { restaurantid } = useParams();
+    const id = restaurantid.toString();
     console.log(id);
     // Use 'id' to fetch data or for other purposes
     return (

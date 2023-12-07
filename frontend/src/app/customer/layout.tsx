@@ -1,6 +1,7 @@
 "use client";
 import Header from "@/components/CustomerHeader";
-import { shoppingCartData } from "../dbTemplate/cardData";
+import { LocationProvider } from './LocationContext';
+import type { AppProps } from 'next/app';
 type Item = {
   name: string;
   price: number;
@@ -26,11 +27,13 @@ export default function CustomerLayout({
     }
   }
   return (
+    <LocationProvider>
     <div className="flex flex-col min-h-screen">
-      <Header/>
-      <main className="flex flex-col items-center p-4 pt-20 grow">
-        {children}
-      </main>
+        <Header/>
+        <main className="flex flex-col items-center p-4 pt-20 grow">
+          {children}
+        </main>
     </div>
+    </LocationProvider>
   );
 }

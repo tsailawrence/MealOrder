@@ -44,9 +44,8 @@ export const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, like
                         <Image
                             src={uri}
                             alt={name}
-                            layout="fill"
-                            objectFit="contain"
-                            objectPosition="center"
+                            width={86}
+                            height={86}
                             className="absolute w-full h-full"
                         />
                     </div>

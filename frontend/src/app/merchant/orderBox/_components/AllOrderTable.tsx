@@ -15,6 +15,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { DateRange } from "react-day-picker"
 import {
   Select,
   SelectContent,
@@ -99,7 +100,7 @@ export const columns: ColumnDef<Order>[] = [
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: "TWD",
       }).format(amount)
 
       return <div className="text-right font-medium">{formatted}</div>
@@ -172,19 +173,33 @@ export function AllOrderTable({ orders }: AllOrderTableProps) {
       table.getColumn("status")?.setFilterValue(value)
     }
   }
+  function handleDateChange(dateRange: DateRange) {
+    // Process the date range
+    //change Date to epich time
+    table.getColumn("time")?.setFilterValue(dateRange.from?.toString())
+    console.log(table.getColumn("time")?.getFilterValue());
+  }
+  function handleDatePickupChange(dateRange: DateRange) {
+    // Process the date range
+    dateRange.from
+    console.log("Selected Pickup Date Range:", dateRange);
+    console.log(dateRange.from?.toString());
+    table.getColumn("pickupTime")?.setFilterValue(dateRange.from?.toString())
+    console.log(table.getColumn("pickupTime")?.getFilterValue());
+  }
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-
-
+      <div className="flex items-center py-4 justify-between">
         <div className="flex items-stretch my-auto px-5 gap-2 max-md:max-w-full max-md:flex-wrap max-md:justify-center">
           <div className="text-black text-sm font-medium">
-            Pick up Time: <DateBar />
+            Pick up Time: <DateBar onDateChange={handleDatePickupChange}/>
           </div>
           <div className="text-black text-sm font-medium">
-            Order Time: <DateBar />
+            Order Time: <DateBar onDateChange={handleDateChange}/>
           </div>
-          <div className="bottom-0 text-black text-sm font-medium leading-5 my-auto justify-end">
+        </div>
+        <div className="items-center flex rounded-2xl border-solid border-black">
+          <div className="bottom-0 text-black text-sm font-medium leading-5 my-auto mr-2">
             <Select onValueChange={(value) => handleSelectStatus(value)} defaultValue="All">
               <SelectTrigger>
                 <SelectValue placeholder="Status" />
@@ -201,8 +216,6 @@ export function AllOrderTable({ orders }: AllOrderTableProps) {
               </SelectContent>
             </Select>
           </div>
-        </div>
-        <div className="items-center flex rounded-2xl border-solid border-black">
           <Input
             placeholder="Filter OrderId..."
             value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}

@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { useState } from "react"
 import { addDays, format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { DateRange } from "react-day-picker"
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -14,13 +14,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function DateBar({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
-  })
+
+interface DateBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  onDateChange: (dateRange: DateRange) => void;
+}
+export const DateBar: React.FC<DateBarProps> = ({ className, onDateChange }) => {
+  const [date, setDate] = useState<DateRange>({
+    from: new Date(2023, 10, 20),
+    to: addDays(new Date(2023, 10, 20), 20),
+  });
+
+  const handleSelect = (selectedRange: DateRange | undefined) => {
+    if (selectedRange && selectedRange.from && selectedRange.to) {
+      setDate(selectedRange);
+      onDateChange(selectedRange);
+    }
+  };
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -55,7 +64,7 @@ export function DateBar({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={handleSelect}
             numberOfMonths={2}
           />
         </PopoverContent>

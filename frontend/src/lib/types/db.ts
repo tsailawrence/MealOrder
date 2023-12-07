@@ -51,3 +51,8 @@ export type CartCardProps = {
     time: string;
     item: Item[];
 };
+
+export interface LocationContextType {
+    location: string | null;
+    setLocation: (location: string) => void;
+}

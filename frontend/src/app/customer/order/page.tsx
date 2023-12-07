@@ -26,12 +26,10 @@ const OrdersPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { __session: accessToken = '' } = cookies;
-  console.log(accessToken);
   useEffect(() => {
     getOrders(accessToken)
       .then(data => {
         setOrders(data); // Assuming 'data' is the array of orders
-        console.log(data);
         setLoading(false);
       })
       .catch(err => {

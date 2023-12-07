@@ -35,7 +35,7 @@ type Orders = {
 const CustomerCartHeader = () => {
   const [cart, setCart] = useState<Cart>({ restaurantName: '', items: [] });
   const [dateTime, setDateTime] = useState<Date | null>(null);
-
+  
   const handleDateTimeChange = (date: Date, hour: string, minute: string, ampm: string) => {
     console.log('date:');
     if (date && hour && minute) {
@@ -55,7 +55,6 @@ const CustomerCartHeader = () => {
       }
     }
   }, []);
-
 
   const updateItemQuantity = (index: number, change: number) => {
     if (typeof window !== 'undefined') {
