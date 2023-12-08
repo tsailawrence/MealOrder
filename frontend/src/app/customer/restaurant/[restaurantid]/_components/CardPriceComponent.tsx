@@ -136,9 +136,8 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                     <Image
                         src={uri}
                         alt={name}
-                        layout="fill"
-                        objectFit="contain"
-                        objectPosition="center"
+                        width={86}
+                        height={86}
                         className="absolute w-full h-full"
                     />
                 </div>
