@@ -12,13 +12,13 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
 }) => {
     return (
         <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
-            <div className="flex items-stretch justify-between gap-5">
+            <div className="flex items-stretch justify-between gap-5 mt-2">
                 <Image
                     loading="lazy"
                     src={imageSrc}
                     width={86}
                     height={86}
-                    className="object-contain object-center w-[86px] h-[86px] justify-center items-center overflow-hidden shrink-0 max-w-full rounded-full" // Added h-[86px] and rounded-full
+                    className="object-contain object-center w-[90px] h-[90px] justify-center items-center overflow-hidden shrink-0 max-w-full rounded-full mt-1" // Added h-[86px] and rounded-full
                     alt="Restaurant Image"
                 />
                 <div className="flex grow basis-[0%] flex-col items-stretch mt-2.5 self-start">
@@ -40,7 +40,7 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                     </p>
                 </div>
             </div>
-            <div className="justify-center items-stretch border border-[color:var(--Red,#E60012)] shadow-lg flex gap-2 mt-3 pl-8 pr-8 py-3.5 rounded-3xl border-solid self-start max-md:px-5">
+            <div className="justify-center items-stretch border border-[color:var(--Red,#E60012)] flex gap-2 mt-4 pl-8 pr-8 py-3 rounded-3xl border-solid self-start ">
                 <Image
                     loading="lazy"
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/61e469bf-3fa4-4814-928e-fdf1a9b6b529?apiKey=5d949b60a548481d8fbc5fec7da626b0"

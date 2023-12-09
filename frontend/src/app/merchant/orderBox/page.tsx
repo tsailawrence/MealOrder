@@ -24,7 +24,6 @@ const OrderBox = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { __session: accessToken = '' } = cookies;
-  console.log(accessToken);
   useEffect(() => {
     getAllOrders(accessToken)
       .then(data => {
@@ -50,7 +49,7 @@ const OrderBox = () => {
   });
   return (
     <Tabs className="w-full" defaultValue={defaultValue}>
-      <TabsList className="grid w-full grid-cols-6 mt-6">
+      <TabsList className="tabs-list grid w-full grid-flow-col mt-6 overflow-x-auto">
         <TabsTrigger value="Today">Today</TabsTrigger>
         <TabsTrigger value="Upcoming">Upcoming</TabsTrigger>
         <TabsTrigger value="All_Orders">All Orders</TabsTrigger>

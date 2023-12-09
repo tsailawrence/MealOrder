@@ -39,7 +39,7 @@ export const HourMinute: React.FC<HourMinuteProps> = ({ onTimeChange }) => {
     }
 
     return (
-        <div className="flex space-x-2">
+        <span className="flex justify-center items-center">
             {/* Hours */}
             <Select onValueChange={setHour}>
                 <SelectTrigger className="w-[60px] text-xs">
@@ -76,6 +76,6 @@ export const HourMinute: React.FC<HourMinuteProps> = ({ onTimeChange }) => {
                     </SelectGroup>
                 </SelectContent>
             </Select>
-        </div>
+        </span>
     )
 }

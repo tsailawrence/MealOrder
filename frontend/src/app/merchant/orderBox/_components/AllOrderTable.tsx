@@ -227,7 +227,7 @@ export function AllOrderTable({ orders }: AllOrderTableProps) {
           />
         </div>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border text-center">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

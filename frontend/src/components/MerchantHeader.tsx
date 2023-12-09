@@ -11,11 +11,11 @@ const Header = () => {
     //   label: "Restauarants",
     // },
     {
-      href: "/",
+      href: "/merchant/orderBox",
       label: "Order"
     },
     {
-      href: "/",
+      href: "/merchant/payment",
       label: "Monthly Payment"
     },
     {

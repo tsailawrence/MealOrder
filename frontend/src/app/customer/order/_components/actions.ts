@@ -194,6 +194,5 @@ export const getOrders = async (accessToken:string) => {
     //     console.log('getOrders error', err);
     // }
     // FakeData
-    console.log('getOrders accessToken', accessToken);
     return orderData;
 }

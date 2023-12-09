@@ -12,11 +12,7 @@
 
 async function fetchPlaceName(latitude: number, longitude: number): Promise<string | null> {
     try {
-        // Replace this URL with the actual URL of your geocoding service
-        console.log(process.env.GOOGLE_MAP_API_KEY);
-
         const response = await fetch(`https://api.nlsc.gov.tw/other/TownVillagePointQuery/${longitude}/${latitude}`);
-        console.log('response', response);
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
@@ -24,8 +20,8 @@ async function fetchPlaceName(latitude: number, longitude: number): Promise<stri
         console.log('data', data);
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(data, "text/xml");
-        console.log('xmlDoc', xmlDoc);
         const cityNode = xmlDoc.getElementsByTagName('ctyName')[0];
+        console.log('cityNode', cityNode);
         const townNode = xmlDoc.getElementsByTagName('townName')[0];
         return townNode.textContent; // This will be '臺北市' in your case
     } catch (error) {

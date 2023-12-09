@@ -1,7 +1,7 @@
 "use client";
 import Header from "@/components/CustomerHeader";
 import { LocationProvider } from './LocationContext';
-import type { AppProps } from 'next/app';
+
 type Item = {
   name: string;
   price: number;
@@ -9,10 +9,12 @@ type Item = {
   note?: string;
   specialInstructions?: string[];
 };
+
 type Cart = {
   restaurantName: string;
   items: Item[]; //item name, price, quantity
 };
+
 export default function CustomerLayout({
   children,
 }: {
