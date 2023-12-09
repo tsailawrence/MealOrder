@@ -50,8 +50,8 @@ const PaymentsPage: React.FC = () => {
                     <table className={styles.paymentTable}>
                         <thead>
                             <tr>
-                                <th>EMPLOYEE NAME</th>
-                                <th>EMPPLOYEE ID</th>
+                                <th>NAME</th>
+                                <th>ID</th>
                                 <th>ORDER TIMES</th>
                                 <th>TOTAL COSTS</th>
                                 <th>DETAIL</th>

@@ -26,10 +26,10 @@ export const OrderTable = ({ order }: { order: Order }) => {
           <div className={styles.details}>
             <h2 className={styles.title}>
               {order.name}
-              <Link href={`/customer/restaurant/${order.name}`}>
-                <span className="bg-red-400 text-white text-xs rounded-full p-1 ml-2"> order again </span>
-              </Link>
             </h2>
+            <Link href={`/customer/restaurant/${order.name}`}>
+                <span className="bg-red-400 text-white text-xs rounded-full p-1"> order again </span>
+            </Link>
             <p
               className={styles.info}
             >{`${itemnumber} items, ${order.time}, Total ${order.total}`}</p>

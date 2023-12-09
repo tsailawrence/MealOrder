@@ -26,7 +26,7 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                         <h1 className="text-black text-3xl font-semibold leading-10">
                             {name}
                         </h1>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 mt-2">
                             <div className="text-red-600 text-2xl font-black leading-6">
                                 {likes ? <Heart fill='red' /> : <Heart />}
                             </div>

@@ -30,7 +30,7 @@ export default function CustomerLayout({
     <LocationProvider>
     <div className="flex flex-col min-h-screen">
         <Header/>
-        <main className="flex flex-col items-center p-4 pt-20 grow">
+        <main className="flex flex-col items-center p-4 pt-20 mx-auto w-[95%] grow">
           {children}
         </main>
     </div>

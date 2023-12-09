@@ -1,5 +1,5 @@
 "use client"
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./_components/orders.module.css";
 import { OrderTable } from "./_components/OrderTable";
 import { useCookies } from "react-cookie";
@@ -22,7 +22,7 @@ type Order = {
 };
 const OrdersPage = () => {
   const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
-  const [orderData, setOrders] = useState<Order[] | null>(null);          
+  const [orderData, setOrders] = useState<Order[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { __session: accessToken = '' } = cookies;
@@ -39,7 +39,7 @@ const OrdersPage = () => {
       });
   }, [accessToken]); // Dependency array
   return (
-      <div className={styles.container}>
+    <div className={styles.container}>
       <h1 className={styles.header}>Orders</h1>
       {!loading ? (<Accordion type="single" collapsible className="w-full">
         {orderData ? (orderData.map((order, index) => (
@@ -48,14 +48,16 @@ const OrdersPage = () => {
             <AccordionContent >
               {order.items.map((item, index) => (
                 <div key={index}>
-                    {item.name} ${item.price} x {item.quantity}
-                    <div className="flex text-neutral-400" key={index}> note : {item.specialInstructions} {item.note}</div>
+                  {item.name} ${item.price} x {item.quantity}
+                  <div className="flex text-neutral-400" key={index}>
+                    note : {item.specialInstructions} {item.note}
+                  </div>
                 </div>
               ))}
             </AccordionContent>
           </AccordionItem>
         ))
-        ):(
+        ) : (
           <div>no order</div>
         )}
       </Accordion>

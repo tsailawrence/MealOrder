@@ -13,7 +13,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import { restaurantData } from '@/app/dbTemplate/cardData';
+import { Separator } from '@radix-ui/react-separator';
 
 type Item = {
     name: string;
@@ -103,7 +103,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
     return (
         <Dialog>
             <DialogTrigger
-                className="flex flex-col items-center w-full max-w-xs bg-white rounded-2xl overflow-hidden shadow-lg "
+                className="flex flex-col items-center w-[95%] max-w-xs bg-white rounded-2xl overflow-hidden shadow-lg "
             >
                 <div
                     className="flex flex-col items-center w-full max-w-xs bg-white rounded-2xl overflow-hidden shadow-lg max-md:w-full"
@@ -154,7 +154,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                         Food Description if needed
                     </DialogDescription>
                     {specialInstructions && <SpecialInstruction specialInstructions={specialInstructions} onOptionChange={setIsOptionSelected} onSelectionsChange={handleSelectionsChange} />}
-                    <span className='pt-5'>note:</span>
+                    <div className='pt-5 font-bold text-left'>note:</div>
                     <Textarea value={textAreaValue} onChange={handleTextAreaChange} />
                     <div className="self-stretch flex w-full items-center justify-between gap-5 mt-6 max-md:max-w-full max-md:flex-wrap">
                         <div className="text-black text-3xl font-semibold leading-[50.4px] my-auto">
@@ -162,7 +162,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                         </div>
                         <div className="self-stretch flex items-center justify-between gap-5 max-md:justify-center">
                             <Button
-                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg border-opacity-10"
+                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg mt-1"
                                 onClick={() => handleDecrease()}
                                 aria-label="Product Image"
                             >
@@ -172,7 +172,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                                 {itemQuantity}
                             </div>
                             <Button
-                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg border-solid"
+                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg mt-1"
                                 onClick={() => handleAdd()}
                                 aria-label="Product Image"
                             >
@@ -180,6 +180,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                             </Button>
                         </div>
                     </div>
+                    <div>Total Cost : </div>
                 </DialogHeader>
                 <DialogFooter>
                     <Button

@@ -26,8 +26,8 @@ async function fetchPlaceName(latitude: number, longitude: number): Promise<stri
         const xmlDoc = parser.parseFromString(data, "text/xml");
         console.log('xmlDoc', xmlDoc);
         const cityNode = xmlDoc.getElementsByTagName('ctyName')[0];
-        const townNode = xmlDoc.getElementsByTagName('twnName')[0];
-        return cityNode.textContent; // This will be '臺北市' in your case
+        const townNode = xmlDoc.getElementsByTagName('townName')[0];
+        return townNode.textContent; // This will be '臺北市' in your case
     } catch (error) {
         console.error("Failed to fetch place name:", error);
         return null;

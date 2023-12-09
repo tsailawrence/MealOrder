@@ -37,9 +37,9 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ restaurantName, menu }) => {
 
             {menu.map((category, index) => (
                 <TabsContent key={index} value={category.categoryName}>
-                    <div className="flex flex-wrap gap-5 w-full px-5 mt-6">
+                    <div className="flex flex-wrap w-full mt-6">
                         {category.items.map((item, itemIndex) => (
-                            <div key={itemIndex} className="flex-none w-1/4 min-w-[150px] max-w-[200px]">
+                            <div key={itemIndex} className="flex-none w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-[250px] mb-3">
                                 <CardPriceComponent restaurantName={restaurantName} uri={item.uri} name={item.name} price={item.price} specialInstructions={item.specialInstructions} />
                             </div>
                         ))}
