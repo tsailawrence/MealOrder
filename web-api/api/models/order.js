@@ -79,7 +79,8 @@ exports.getOrderByCustomerId = async ({ userId, fields = '*' }) =>{
             const orderItem = await datastore
             .select(fields)
             .from(TABLE_ITEM)
-            .where('orderId', order.id);
+            .where('orderId', order.id)
+            .andWhere('token', token);;
 
             return {
                 ...order,
@@ -88,6 +89,23 @@ exports.getOrderByCustomerId = async ({ userId, fields = '*' }) =>{
         }));
     return theOrderWithItems;
 }
+
+exports.getCurrentMonthOrderByCustomerId = async ({ userId, fields = '*' }) =>{
+    const currentMonthStart = new Date();
+    currentMonthStart.setDate(1); // 將日期設為本月的第一天
+
+    const currentMonthEnd = new Date();
+    currentMonthEnd.setMonth(currentMonthEnd.getMonth() + 1, 0); // 將日期設為本月的最後一天
+
+    const orders =  await datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('customerId', userId)
+        .whereBetween('time', [currentMonthStart, currentMonthEnd]);
+
+    return orders;
+}
+
 
 exports.insert = async (data,items) => {
     let returnId = -1;

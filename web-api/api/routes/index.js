@@ -23,6 +23,7 @@ const getRestaurant = require('../controllers/get-restaurant');
 const addMyFavoriteRestaurant = require('../controllers/add-my-favorite-restaurant');
 const addMyOrder = require('../controllers/add-my-order');
 const getMyOrder = require('../controllers/get-my-order');
+const getMyCurrentMonthPayment = require('../controllers/get-my-current-month-payment')
 const router = new Router();
 
 router.post('/webhook', handleLineWebhook);
@@ -283,6 +284,18 @@ router.post(
     verifyClerk,
     addMyOrder
 );
+router.get(
+    'getMyCurrentMonthPayment',
+    '/my/order/getMyCurrentMonthPayment',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    getMyCurrentMonthPayment
+);
+
 router.get(
     'getMyOrder',
     '/my/order/get',
