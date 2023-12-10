@@ -68,3 +68,48 @@ exports.getOrdersDetailByStoreId = async ({ storeId }) => {
             }))
     }));
 }
+
+exports.getOrderByCustomerId = async ({ userId, fields = '*' }) =>{
+    const orders =  await datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('customerId', userId);
+
+    const theOrderWithItems = await Promise.all(orders.map( async (order)=>{
+            const orderItem = await datastore
+            .select(fields)
+            .from(TABLE_ITEM)
+            .where('orderId', order.id);
+
+            return {
+                ...order,
+                orderItem: orderItem
+            };
+        }));
+    return theOrderWithItems;
+}
+
+exports.insert = async (data,items) => {
+    let returnId = -1;
+    await datastore
+        .insert(
+            Object.assign(data, {
+                time: getTaipeiNowStr('YYYY-MM-DD HH:mm:ss')
+            })
+        )
+        .into(TABLE_NAME)
+        .returning('id')
+        .then(function ([id]) {
+            returnId = id
+          });;
+    
+    await items.map(async (orderItem)=>{
+        await datastore
+        .insert(
+            Object.assign(orderItem,{
+                orderId :returnId
+            })
+        )
+        .into(TABLE_ITEM);
+    })
+}

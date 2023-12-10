@@ -16,11 +16,25 @@ exports.getStoreByStoreId = ({ storeId, fields = '*' }) =>
         .from(TABLE_NAME)
         .where('id', storeId);
 
-exports.getStoreBySearch = ({ SearchString, fields = '*' }) =>
+exports.getStoreByStoreIdArray = ({ theFavoriteStoresIds, fields = '*' }) =>
+        datastore
+            .select(fields)
+            .from(TABLE_NAME)
+            .whereIn('id', theFavoriteStoresIds);
+    
+
+exports.getStoreBySearch = ({ searchString, fields = '*' }) =>
     datastore
         .select(fields)
         .from(TABLE_NAME)
-        .where('name', SearchString);
+        .where('name', searchString);
+
+exports.getStoreByCategory = ({ categoryId, fields = '*' }) =>
+        datastore
+            .select(fields)
+            .from(TABLE_NAME)
+            .where('category', categoryId);
+    
 
 exports.getTopFavoriteStore = ({fields = '*' }) =>
     datastore
