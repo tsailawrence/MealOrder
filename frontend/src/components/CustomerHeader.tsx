@@ -30,6 +30,7 @@ const Header = () => {
       label: "Settings"
     }
   ];
+
   const { location } = useLocation();
 
   return (

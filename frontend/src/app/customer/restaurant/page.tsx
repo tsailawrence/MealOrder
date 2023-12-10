@@ -1,11 +1,48 @@
+"use client";
 import React from "react";
+import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
 import { CardComponent } from "./_components/CardComponent";
 import CategoryCard from "./_components/CategoryCard";
-import { getCardData, getFavoriteData, getCategoryData } from "./_components/actions";
+import { getCardData, getFavoriteData, getCategoryData, getRestaurantCategoryData } from "./_components/actions";
+import { CategoryProps, RestaurantCard } from "@/lib/types/db";
+import { get } from "https";
 const CustomerHome = () => {
-  const cardData = getCardData();
+  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+  const [cardData, setCardData] = useState<RestaurantCard[] | null>(null);
+  const [categoryDat, setCategoryData] = useState<CategoryProps[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { __session: accessToken = '' } = cookies;
+  // const cardData= getCardData(accessToken);
+  // console.log(cardData);
   const categoryData = getCategoryData();
   const favoriteData = getFavoriteData();
+  useEffect(() => {
+    getCardData(accessToken)
+      .then(data => {
+        setCardData(data); // Assuming 'data' is the array of orders
+        console.log(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching orders:', err);
+        setError(err);
+        setLoading(false);
+      });
+    getRestaurantCategoryData(accessToken)
+      .then(data => {
+        setCategoryData(data); // Assuming 'data' is the array of orders
+        console.log(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching orders:', err);
+        setError(err);
+        setLoading(false);
+      });
+  }, [accessToken]);
+  console.log(categoryDat);
   return (
     <>
       <header className="self-center flex w-full max-w-[90%] justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap">
@@ -26,6 +63,7 @@ const CustomerHome = () => {
             className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
           >
             <CardComponent
+              id={card.id}
               uri={card.uri}
               name={card.name}
               starNumber={card.starNumber}
@@ -46,19 +84,40 @@ const CustomerHome = () => {
         </a>
       </header>
       <div className="self-center w-full max-w-[84%] mt-9 px-5 max-md:max-w-full overflow-x-auto flex gap-5 whitespace-nowrap">
-        {cardData.map((card, index) => (
-          <div
-            key={index}
-            className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
-          >
-            <CardComponent
-              uri={card.uri}
-              name={card.name}
-              starNumber={card.starNumber}
-              likes={card.likes}
-            />
-          </div>
-        ))}
+        {/* {loading ? <div>Loading...</div> :
+          (
+            cardData ? {cardData.map((card, index) => (
+              <div
+                key={index}
+                className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
+              >
+                <CardComponent
+                  uri={card.uri}
+                  name={card.name}
+                  starNumber={card.starNumber}
+                  likes={card.likes}
+                />
+              </div>
+            ))
+          } : <div>No data</div>
+          )} */}
+        {loading ? <div>Loading...</div> :
+          (cardData ? (cardData.map((card, index) => (
+            <div
+              key={index}
+              className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
+            >
+              <CardComponent
+                id={card.id}
+                uri={card.uri}
+                name={card.name}
+                starNumber={card.favoriteCount}
+                likes={card.liked}
+              />
+            </div>
+          ))
+          ) : <div>No data</div>
+          )}
       </div>
       <header className="self-center flex w-full max-w-[90%] items-start justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap max-md:mt-10">
         <h1 className="text-black text-3xl font-semibold self-center grow shrink basis-auto my-auto">
@@ -72,14 +131,15 @@ const CustomerHome = () => {
         </a>
       </header>
       <div className="self-center w-full max-w-[80%] mt-9 px-5 max-md:max-w-full overflow-x-auto flex gap-5 whitespace-nowrap ">
-        {categoryData.map((category, index) =>
+        {categoryDat && categoryDat.map((category, index) =>
           <div
             key={index}
             className="flex-none min-w-[100px] max-w-[200px]"
           >
             <CategoryCard
-              uri={category.uri}
-              name={category.name}
+              id={category.id}
+              categoryImage={category.categoryImage ? category.categoryImage : ''}
+              categoryName={category.categoryName}
             />
           </div>)}
       </div>

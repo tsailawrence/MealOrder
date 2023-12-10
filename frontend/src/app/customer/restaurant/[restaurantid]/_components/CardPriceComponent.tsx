@@ -13,7 +13,6 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import { Separator } from '@radix-ui/react-separator';
 
 type Item = {
     name: string;
