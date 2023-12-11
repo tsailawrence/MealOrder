@@ -1,7 +1,6 @@
 const { errorResponser } = require("../libs/controller-helper");
 
 const Store = require("../models/store");
-const Order = require("../models/order");
 const User = require("../models/user");
 
 module.exports = async (ctx) => {
@@ -15,11 +14,7 @@ module.exports = async (ctx) => {
     return errorResponser(ctx, 401, "Not a valid merchant");
   }
 
-  const theOrders = await Order.getOrdersDetailByStoreId({
-    storeId: theStore?.id,
-  });
-
-  ctx.body = theOrders;
+  ctx.body = theStore;
 
   return true;
 };
