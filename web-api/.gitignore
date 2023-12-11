@@ -1,0 +1,10 @@
+.DS_Store
+yarn-error.log
+node_modules/
+
+package-lock.json
+
+# IDE config
+.vscode
+namecheap.*
+
