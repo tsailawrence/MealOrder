@@ -5,17 +5,26 @@ const Joi = require("joi");
 
 const { rejectTheRequest } = require("../utils/error");
 const { auth, verifyClerk } = require("../middleware/index");
-
 const getMyInfo = require("../controllers/get-my-info");
 const register = require("../controllers/register");
 const clerkRegister = require("../controllers/clerk-register");
 const refreshToken = require("../controllers/refresh-token");
 const handleLineWebhook = require("../controllers/handle-line-webhook");
-const getMyStore = require("../controllers/get-my-store");
 const getMyStoreOrders = require("../controllers/get-my-store-orders");
 const addMyStoreMenuType = require("../controllers/add-my-store-menu-type");
 const addMyStoreMenu = require("../controllers/add-my-store-menu");
 const getMyStoreProducts = require("../controllers/get-my-store-products");
+const getMyFavoriteRestaurant = require("../controllers/get-my-favorite-restaurant");
+const getTopRestaurant = require("../controllers/get-top-restaurant");
+const getRestaurantCategory = require("../controllers/get-restaurant-category");
+const getRestaurantByCategory = require("../controllers/get-restaurant-by-category");
+const getRestaurant = require("../controllers/get-restaurant");
+const addMyFavoriteRestaurant = require("../controllers/add-my-favorite-restaurant");
+const addMyOrder = require("../controllers/add-my-order");
+const getMyOrder = require("../controllers/get-my-order");
+const getMyCurrentMonthPayment = require("../controllers/get-my-current-month-payment");
+const addMyStore = require("../controllers/add-my-store");
+const getMyStore = require("../controllers/get-my-store");
 
 const router = new Router();
 
@@ -205,6 +214,125 @@ router.get(
   }),
   verifyClerk,
   getMyStoreProducts
+);
+
+router.get(
+  "getMyFavoriteRestaurant",
+  "/my/favoriteRestaurant/:userId",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  getMyFavoriteRestaurant
+);
+
+router.get(
+  "getTopRestaurant",
+  "/store/topRestaurant",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  getTopRestaurant
+);
+
+router.get(
+  "getRestaurantCategory",
+  "/store/restaurantCategory",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  getRestaurantCategory
+);
+
+router.get(
+  "getRestaurantByCategory",
+  "/store/restaurantByCategory/:categoryId",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  getRestaurantByCategory
+);
+
+router.get(
+  "getRestaurant",
+  "/store/restaurant/:storeId",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  getRestaurant
+);
+
+router.post(
+  "addMyFavoriteRestaurant",
+  "/my/favoriteStore/add/:storeId",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  addMyFavoriteRestaurant
+);
+
+router.post(
+  "addMyOrder",
+  "/my/order/add",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  addMyOrder
+);
+router.get(
+  "getMyCurrentMonthPayment",
+  "/my/order/getMyCurrentMonthPayment",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  getMyCurrentMonthPayment
+);
+
+router.get(
+  "getMyOrder",
+  "/my/order/get",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  getMyOrder
+);
+
+router.post(
+  "addMyStore",
+  "/my/store/add",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  addMyStore
 );
 
 // bad request example

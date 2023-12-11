@@ -68,3 +68,66 @@ exports.getOrdersDetailByStoreId = async ({ storeId }) => {
             }))
     }));
 }
+
+exports.getOrderByCustomerId = async ({ userId, fields = '*' }) =>{
+    const orders =  await datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('customerId', userId);
+
+    const theOrderWithItems = await Promise.all(orders.map( async (order)=>{
+            const orderItem = await datastore
+            .select(fields)
+            .from(TABLE_ITEM)
+            .where('orderId', order.id)
+            .andWhere('token', token);;
+
+            return {
+                ...order,
+                orderItem: orderItem
+            };
+        }));
+    return theOrderWithItems;
+}
+
+exports.getCurrentMonthOrderByCustomerId = async ({ userId, fields = '*' }) =>{
+    const currentMonthStart = new Date();
+    currentMonthStart.setDate(1); // 將日期設為本月的第一天
+
+    const currentMonthEnd = new Date();
+    currentMonthEnd.setMonth(currentMonthEnd.getMonth() + 1, 0); // 將日期設為本月的最後一天
+
+    const orders =  await datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('customerId', userId)
+        .whereBetween('time', [currentMonthStart, currentMonthEnd]);
+
+    return orders;
+}
+
+
+exports.insert = async (data,items) => {
+    let returnId = -1;
+    await datastore
+        .insert(
+            Object.assign(data, {
+                time: getTaipeiNowStr('YYYY-MM-DD HH:mm:ss')
+            })
+        )
+        .into(TABLE_NAME)
+        .returning('id')
+        .then(function ([id]) {
+            returnId = id
+          });;
+    
+    await items.map(async (orderItem)=>{
+        await datastore
+        .insert(
+            Object.assign(orderItem,{
+                orderId :returnId
+            })
+        )
+        .into(TABLE_ITEM);
+    })
+}
