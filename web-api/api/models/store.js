@@ -10,6 +10,13 @@ exports.getStoreByUserId = ({ userId, fields = '*' }) =>
         .from(TABLE_NAME)
         .where('userId', userId);
 
+exports.addStoreByUserId = ({data, fields = '*' }) =>
+    datastore
+        .insert(
+            data
+        )
+        .into(TABLE_NAME)
+
 exports.getStoreByStoreId = ({ storeId, fields = '*' }) =>
     datastore
         .select(fields)

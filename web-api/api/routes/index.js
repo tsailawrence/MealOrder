@@ -24,6 +24,8 @@ const addMyFavoriteRestaurant = require('../controllers/add-my-favorite-restaura
 const addMyOrder = require('../controllers/add-my-order');
 const getMyOrder = require('../controllers/get-my-order');
 const getMyCurrentMonthPayment = require('../controllers/get-my-current-month-payment')
+const addMyStore  = require('../controllers/add-my-store')
+
 const router = new Router();
 
 router.post('/webhook', handleLineWebhook);
@@ -306,6 +308,18 @@ router.get(
     }),
     verifyClerk,
     getMyOrder
+);
+
+router.post(
+    'addMyStore',
+    '/my/store/add',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    addMyStore
 );
 
 // bad request example
