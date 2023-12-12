@@ -1,19 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import ScheduleSelector from "react-schedule-selector";
+
+import {
+  getMenuHour,
+  updateMenuHour,
+} from "@/app/merchant/[storeId]/menu/components/actions";
 
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
 import { CalendarClock } from "lucide-react";
-import { useParams } from "next/navigation";
 
 export const MenuHourModal = () => {
+  const [cookies, setCookie] = useCookies([
+    "refreshToken",
+    "accessToken",
+    "__session",
+  ]);
+  const { __session: accessToken = "" } = cookies;
+
   const [isMounted, setIsMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [menuHour, setMenuHour] = useState<Date[]>([]);
+  const [menuHour, setMenuHour] = useState([]);
   const params = useParams();
 
   //當 modal 打開時，會去取得 menu hour 的資料，並且將資料放入 menuHour state 中
@@ -21,7 +34,7 @@ export const MenuHourModal = () => {
   useEffect(() => {
     if (open) {
       // setLoading(true);
-      // getMenuHour(params.storeId)
+      // getMenuHour(accessToken, params.storeId)
       //   .then((data) => {
       //     setMenuHour(data);
       //     setLoading(false);
@@ -32,8 +45,6 @@ export const MenuHourModal = () => {
       //     setLoading(false);
       //     setOpen(false);
       //   });
-    } else {
-      setMenuHour([]);
     }
   }, [open]);
 
@@ -45,7 +56,7 @@ export const MenuHourModal = () => {
     try {
       setLoading(true);
       console.log("menuHour", menuHour);
-      // await axios.update(`/api/${params.storeId}/categories/${data.id}`, menuHour);
+      // await updateMenuHour(accessToken, params.storeId, menuHour);
       toast.success("Menu hour updated");
     } catch (error) {
       toast.error("Something went wrong when updating menu hour");

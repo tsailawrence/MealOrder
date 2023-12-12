@@ -16,35 +16,50 @@ export const getStore = async (accessToken: string) => {
   }
 };
 
-export const createStore = async (userId: String, data: any) => {
+export const getCategories = async (accessToken: string) => {
   try {
-    if (!userId) {
-      throw new Error("User ID is required");
+    if (!accessToken) {
+      throw new Error("AccessToken Not Exist.");
     }
-    // const response = await instance.post(`/api/store/${userId}`, data);
-    // return response.data;
-    return {
-      id: 16,
-      name: "Sally's Store",
-      description: "123",
-      categoryId: "1",
-    };
-  } catch (error) {
-    throw error;
+    const { data: response } = await instance.get(`/store/restaurantCategory`, {
+      params: {
+        accessToken,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    return;
   }
 };
 
-export const getCategories = async () => {
+export const createStore = async (accessToken: string, data: any) => {
   try {
-    // const response = await instance.get(`/api/store/category`);
-    // return response.data;
-    return [
-      { id: "1", name: "手搖" },
-      { id: "2", name: "日式" },
-      { id: "3", name: "西式" },
-      { id: "4", name: "中式" },
-    ];
-  } catch (error) {
-    throw error;
+    if (!accessToken) {
+      throw new Error("AccessToken Not Exist.");
+    }
+    const { data: response } = await instance.post(`/my/store/add`, data, {
+      params: {
+        accessToken,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    return;
+  }
+};
+
+export const updateStore = async (accessToken: string, data: any) => {
+  try {
+    if (!accessToken) {
+      throw new Error("AccessToken Not Exist.");
+    }
+    const { data: response } = await instance.put(`/my/store/update`, data, {
+      params: {
+        accessToken,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    return;
   }
 };

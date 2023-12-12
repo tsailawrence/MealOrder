@@ -9,42 +9,38 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { TabsTrigger } from "@/components/ui/tabs";
+import { TabsTrigger } from "@/components/ui/tabs2";
 import { Pencil, Trash2 } from "lucide-react";
-import { deleteMenuCategory } from "@/app/merchant1/[storeId]/menu/components/actions";
-import { useCategoryModal } from "@/hooks/use-category-modal";
+import {
+  deleteMenuType,
+  updateMenuType,
+} from "@/app/merchant/[storeId]/menu/components/actions";
 import { useParams } from "next/navigation";
 
 export type MenuTabProps = {
   categoryId: string;
   categoryName: string;
+  onEdit?: () => void;
 };
 
 export const MenuTab: React.FC<MenuTabProps> = ({
   categoryId,
   categoryName,
+  onEdit,
 }) => {
   const params = useParams();
-  const categoryModal = useCategoryModal();
 
-  const onEdit = () => {
-    console.log("edit");
-    categoryModal.isEdit = true;
-    categoryModal.categoryId = categoryId;
-    categoryModal.categoryName = categoryName;
-    categoryModal.onOpen();
-  };
   const onDelete = async () => {
     console.log("delete");
-    try {
-      await deleteMenuCategory(params.storeId, categoryId);
+    // try {
+    //   await deleteMenuCategory(params.storeId, categoryId);
 
-      window.location.reload();
-      toast.success("Category deleted");
-    } catch (error) {
-      toast.error("Something went wrong deleting the category");
-      console.log(error);
-    }
+    //   window.location.reload();
+    //   toast.success("Category deleted");
+    // } catch (error) {
+    //   toast.error("Something went wrong deleting the category");
+    //   console.log(error);
+    // }
   };
   return (
     <ContextMenu>

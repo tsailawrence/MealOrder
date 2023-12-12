@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/merchant2/orderBox"
+    "src/app/merchant/orderBox"
   ],
   "exclude": ["node_modules"]
 }

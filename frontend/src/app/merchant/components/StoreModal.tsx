@@ -4,14 +4,14 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
-
-import { useStoreModal } from "@/hooks/use-store-modal";
+import { useRouter } from "next/navigation";
 
 import {
-  getStore,
   getCategories,
   createStore,
+  updateStore,
 } from "@/app/merchant/components/actions";
 
 import { Modal } from "@/components/ui/modal";
@@ -35,51 +35,82 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   name: z.string().min(1),
-  address: z.string().min(1),
-  categoryId: z.string(),
+  area: z.string().min(1),
+  category: z.string(),
 });
 
 type Category = {
-  id: string;
-  name: string;
+  id: number;
+  categoryName: string;
 };
 
-export const StoreModal = () => {
+type Store = {
+  id: number;
+  name: string;
+  area: string;
+  category: number;
+};
+interface StoreModalProps {
+  storeInfo: Store | undefined;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+export const StoreModal = ({ open, setOpen, storeInfo }: StoreModalProps) => {
+  const [cookies, setCookie] = useCookies([
+    "refreshToken",
+    "accessToken",
+    "__session",
+  ]);
+  const { __session: accessToken = "" } = cookies;
+  const router = useRouter();
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
-  const storeModal = useStoreModal();
-
-  useEffect(() => {
-    if (storeModal.isOpen) {
-      getCategories().then((categories) => setCategories(categories));
-    } else {
-      form.reset();
-      setCategories([]);
-    }
-  }, [storeModal.isOpen]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      address: "",
-      categoryId: "",
-    },
   });
-
+  useEffect(() => {
+    if (open) {
+      getCategories(accessToken).then((data) => {
+        setCategories(data);
+      });
+      // Set default values for editing
+      if (storeInfo) {
+        form.reset({
+          name: storeInfo.name,
+          area: storeInfo.area,
+          category: storeInfo.category.toString(),
+        });
+      }
+    } else {
+      form.reset({
+        name: "",
+        area: "",
+        category: "",
+      });
+    }
+  }, [open, storeInfo]);
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      const store = await createStore(values);
-      storeModal.onClose();
-      if (store) {
-        toast.success("Store created");
+      if (storeInfo) {
+        const store = await updateStore(accessToken, values);
+        if (store) {
+          toast.success("Store updated");
+        }
+      } else {
+        const store = await createStore(accessToken, values);
+        if (store) {
+          toast.success("Store created");
+        }
       }
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong when updating store");
     } finally {
       setLoading(false);
+      setOpen(false);
     }
   };
 
@@ -87,93 +118,91 @@ export const StoreModal = () => {
     <Modal
       title="Store Details"
       description="Edit your store details here."
-      isOpen={storeModal.isOpen}
-      onClose={storeModal.onClose}
+      isOpen={open}
+      onClose={() => setOpen(false)}
     >
-      <div>
-        <div className="py-3">
-          <div>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
+      <div className="py-3">
+        <div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={loading}
+                        placeholder="Stroe Name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="area"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={loading}
+                        placeholder="Store Address"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value.toString()}
+                    >
                       <FormControl>
-                        <Input
-                          disabled={loading}
-                          placeholder="Stroe Name"
-                          {...field}
-                        />
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
                       </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Address</FormLabel>
-                      <FormControl>
-                        <Input
-                          disabled={loading}
-                          placeholder="Store Address"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="categoryId"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Category</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select category" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {categories.map((category) => (
-                            <SelectItem key={category.id} value={category.id}>
-                              {category.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormItem>
-                  )}
-                />
-                <div className="pt-5 space-x-2 flex items-center justify-end w-full">
-                  <Button
-                    type="button"
-                    disabled={loading}
-                    variant="outline"
-                    onClick={storeModal.onClose}
-                  >
-                    Cancel
-                  </Button>
-                  <Button disabled={loading} type="submit">
-                    Continue
-                  </Button>
-                </div>
-              </form>
-            </Form>
-          </div>
+                      <SelectContent>
+                        {categories?.map((category) => (
+                          <SelectItem
+                            key={category.id}
+                            value={category.id.toString()}
+                          >
+                            {category.categoryName}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+              <div className="pt-5 space-x-2 flex items-center justify-end w-full">
+                <Button
+                  type="button"
+                  disabled={loading}
+                  variant="outline"
+                  onClick={() => setOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button disabled={loading} type="submit">
+                  Save
+                </Button>
+              </div>
+            </form>
+          </Form>
         </div>
       </div>
     </Modal>
