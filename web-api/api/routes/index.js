@@ -195,9 +195,6 @@ router.post(
       description: Joi.string().required(),
       price: Joi.number().required(),
       menuTypeId: Joi.number().required(),
-      amount: Joi.number()
-        .allow(null)
-        .required(),
     },
   }),
   verifyClerk,
