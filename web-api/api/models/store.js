@@ -49,3 +49,9 @@ exports.getTopFavoriteStore = ({fields = '*' }) =>
         .from(TABLE_NAME)
         .limit(10).offset(0)
         .orderBy('favoriteCount', 'desc')
+
+exports.updateStoreByStoreId = async ({ storeId, data }) =>
+    datastore
+        .from(TABLE_NAME)
+        .where('id', storeId)
+        .update(data);

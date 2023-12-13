@@ -131,3 +131,9 @@ exports.insert = async (data,items) => {
         .into(TABLE_ITEM);
     })
 }
+
+exports.updateOrderByOrderId = async ({ orderId, data }) =>
+    datastore
+        .from(TABLE_NAME)
+        .where('id', orderId)
+        .update(data);
