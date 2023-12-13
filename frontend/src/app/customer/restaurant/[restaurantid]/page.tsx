@@ -1,18 +1,69 @@
 "use client"
+import { useCookies } from "react-cookie";
+import React, { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
 import StoreInfo from './_components/StoreInfo';
 import StoreMenu from './_components/StoreMenu';
 import { restaurantData } from '@/app/dbTemplate/cardData';
+import { getRestaurantData } from './_components/actions';
+interface MenuItem {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    storeId: number;
+    menuTypeId: number;
+    amount: number;
+    onShelfStatus: number;
+    updated_time: string;
+}
+
+interface Store {
+    id: number;
+    name: string;
+    userId: number;
+    phoneNumber: number;
+    emailAddress: string;
+    area: string;
+    favoriteCount: number;
+    category: number;
+    menu: MenuItem[];
+}
 
 const RestaurantPage = () => {
+    const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [restaurant, setRestaurant] = useState<Store | null>(null);
+    const { __session: accessToken = '' } = cookies;
     const { restaurantid } = useParams();
     const id = restaurantid.toString();
-    console.log(id);
+    const test = getRestaurantData(accessToken, id);
+    useEffect(() => {
+        getRestaurantData(accessToken, id)
+            .then(data => {
+                setRestaurant(data);
+                console.log(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Error fetching orders:', err);
+                setError(err);
+                setLoading(false);
+            });
+    }, [accessToken, id]); // Dependency array
     // Use 'id' to fetch data or for other purposes
     return (
         <>
-            <StoreInfo  name={restaurantData[0].name} address={restaurantData[0].address} starNumber={restaurantData[0].starNumber} imageSrc={restaurantData[0].uri} likes={true} />
-            <StoreMenu restaurantName={restaurantData[0].name} menu={restaurantData[0].menu} />
+            {loading ? <div>Loading...</div> :
+                (restaurant ?
+                    <>
+                        <StoreInfo id={1} name={restaurant.name} address={restaurantData[0].address} phoneNumber={restaurant.phoneNumber} starNumber={restaurant.favoriteCount} imageSrc={restaurantData[0].uri} likes={true} />
+                        <StoreMenu restaurantName={restaurantData[0].name} menu={restaurantData[0].menu} />
+                    </>
+                    : <div>No data</div>
+                )
+            }
         </>
     );
 }

@@ -20,6 +20,7 @@ async function fetchPlaceName(latitude: number, longitude: number): Promise<stri
         console.log('data', data);
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(data, "text/xml");
+        console.log('xmlDoc', xmlDoc);
         const cityNode = xmlDoc.getElementsByTagName('ctyName')[0];
         console.log('cityNode', cityNode);
         const townNode = xmlDoc.getElementsByTagName('townName')[0];

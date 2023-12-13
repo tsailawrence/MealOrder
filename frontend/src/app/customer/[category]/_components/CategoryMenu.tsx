@@ -52,7 +52,7 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ menu, defaultValue }) => {
                 </div>
             </div>
         </article>
-        <Tabs className="w-full" defaultValue={defaultValue}>
+        <Tabs className="w-full" defaultValue={defaultValue} onValueChange={(value)=>setCategory(value)}>
             <TabsList
                 className="grid grid-flow-col mt-6 overflow-x-auto"
                 style={{ gridAutoColumns: 'minmax(100px, 1fr)' }}

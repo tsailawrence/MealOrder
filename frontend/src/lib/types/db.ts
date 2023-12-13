@@ -13,6 +13,7 @@ export type AddButtonProps = {
 };
 
 export type CardProps = {
+    id: number;
     uri: string;
     name: string;
     starNumber: number;
@@ -26,14 +27,17 @@ export type CardPriceProps = {
     specialInstructions?: SpecialInstruction[];
 }; 
 export type CategoryProps = {
-    uri: string;
-    name: string;
+    id: number;
+    categoryName: string;
+    categoryImage: string;
 };
 
 export type RestaurantCardProps = {
+    id: number;
     name: string;
     imageSrc: string;
     starNumber: number;
+    phoneNumber: number;
     address: string;
     likes: boolean;
 };
@@ -55,4 +59,16 @@ export type CartCardProps = {
 export interface LocationContextType {
     location: string | null;
     setLocation: (location: string) => void;
+}
+
+export type RestaurantCard = {
+    area: string;
+    category: number; 
+    emailAddress: string; 
+    favoriteCount: number;
+    id: number;
+    liked: boolean;
+    name: string;
+    phoneNumber: number;
+    userId: number;
 }
