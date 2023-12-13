@@ -6,7 +6,6 @@ import { CardComponent } from "./_components/CardComponent";
 import CategoryCard from "./_components/CategoryCard";
 import { getCardData, getFavoriteData, getCategoryData, getRestaurantCategoryData } from "./_components/actions";
 import { CategoryProps, RestaurantCard } from "@/lib/types/db";
-import { get } from "https";
 const CustomerHome = () => {
   const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
   const [cardData, setCardData] = useState<RestaurantCard[] | null>(null);
@@ -84,23 +83,6 @@ const CustomerHome = () => {
         </a>
       </header>
       <div className="self-center w-full max-w-[84%] mt-9 px-5 max-md:max-w-full overflow-x-auto flex gap-5 whitespace-nowrap">
-        {/* {loading ? <div>Loading...</div> :
-          (
-            cardData ? {cardData.map((card, index) => (
-              <div
-                key={index}
-                className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
-              >
-                <CardComponent
-                  uri={card.uri}
-                  name={card.name}
-                  starNumber={card.starNumber}
-                  likes={card.likes}
-                />
-              </div>
-            ))
-          } : <div>No data</div>
-          )} */}
         {loading ? <div>Loading...</div> :
           (cardData ? (cardData.map((card, index) => (
             <div

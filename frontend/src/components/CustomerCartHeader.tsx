@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useCookies } from "react-cookie";
 import {
   Sheet,
   SheetClose,
@@ -23,6 +24,8 @@ import {
 import { Item } from "@/lib/types/db";
 import { DatePicker } from "@/components/DatePicker";
 import { HourMinute } from "@/components/HourMinute";
+import { addMyOrder } from "./actions";
+import { CartCardProps } from "@/lib/types/db";
 type Cart = {
   restaurantName: string;
   items: Item[]; //item name, price, quantity
@@ -32,10 +35,14 @@ type Orders = {
   pickupTime: Date;
   userId: string;
 };
+
 const CustomerCartHeader = () => {
   const [cart, setCart] = useState<Cart>({ restaurantName: '', items: [] });
   const [dateTime, setDateTime] = useState<Date | null>(null);
-  
+  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { __session: accessToken = '' } = cookies;
   const handleDateTimeChange = (date: Date, hour: string, minute: string, ampm: string) => {
     console.log('date:');
     if (date && hour && minute) {
@@ -70,7 +77,7 @@ const CustomerCartHeader = () => {
         // Save the updated cart back to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         setCart(cart);
-      }
+      } 
     }
   }
   const handleAdd = (index: number) => {
@@ -105,6 +112,15 @@ const CustomerCartHeader = () => {
     let newCart = { restaurantName: '', items: [] }
     localStorage.setItem('cart', JSON.stringify(newCart));
     console.log('newCart:', newCart);
+    // Add order to database
+    const ordersData:CartCardProps = {
+      storeId: 1,
+      payment: 0,
+      item: cart.items,
+      pickupTime: orders.pickupTime?.toString(),
+    }
+    console.log('ordersData:', ordersData);
+    // addMyOrder(accessToken,ordersData);
     //refresh the page
     window.location.reload();
   }
@@ -189,7 +205,7 @@ const CustomerCartHeader = () => {
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="reset" onClick={handleSubmit}>Place Order</Button>
+            <Button type="submit" onClick={handleSubmit}>Place Order</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

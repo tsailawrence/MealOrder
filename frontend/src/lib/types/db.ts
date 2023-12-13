@@ -51,8 +51,9 @@ export type Item = {
 };
 
 export type CartCardProps = {
-    username: string;
-    time: string;
+    storeId: number;
+    payment: number;
+    pickupTime: string;
     item: Item[];
 };
 
