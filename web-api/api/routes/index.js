@@ -27,6 +27,7 @@ const getMyCurrentMonthPayment = require('../controllers/get-my-current-month-pa
 const addMyStore  = require('../controllers/add-my-store')
 const updateMyStore  = require('../controllers/update-my-store')
 const updateMyStoreOrder  = require('../controllers/update-my-store-order')
+const deleteMyOrder   = require('../controllers/delete-my-order')
 const router = new Router();
 
 router.post('/webhook', handleLineWebhook);
@@ -345,6 +346,18 @@ router.post(
     }),
     verifyClerk,
     updateMyStoreOrder
+);
+
+router.post(
+    'deleteMyOrder',
+    '/my/order/delete/:orderId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    deleteMyOrder
 );
 
 // bad request example
