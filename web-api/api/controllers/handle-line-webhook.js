@@ -1,4 +1,4 @@
-// const request = require('superagent');
+const request = require('superagent');
 // const charset = require('charset');
 // const cheerio = require('cheerio');
 // const jschardet = require('jschardet');
@@ -12,10 +12,10 @@
 // } = require('../models/user-favorite-list');
 // const { sendChatGPTRequest } = require('../libs/chatgpt-api');
 
-// const TOKEN =
-//     'jraAxfyL1+3W8myFthVsJFltDhQ1MMOmm36V4RuDoF7mukuarrfcITwFAEUDAy18WUaZ28dnK+OJnMgW' +
-//     '5gLQbNWbKNgj3hoEnehjovBTLhERSBMKRDmMUjJmPdxtva4mb4SIFbh2H5JnaNa/uIt63wdB04t89/1O/w1cDnyilFU=';
-// const API_ENDPOINT = 'https://api.line.me';
+const TOKEN =
+    'kSXOd/NaV69WN+iSslfDYC8nWhs1rKy2aasv08bFz8dxDevRlCcT4TDWbphVeK6C/DhiswZq5sBULp/CiQ6DlqIyP3JbuFt'
+    + 's8Fj6x30FVdmK8ZGimLmEvR8NPEg6uOnePeeymnHRtaT5e6Q5sflWDAdB04t89/1O/w1cDnyilFU=';
+const API_ENDPOINT = 'https://api.line.me';
 // const DEFAULT_USER_AGENT =
 //     'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
 // const DEFAULT_REFERER = 'http://www.facebook.com/';
@@ -178,13 +178,35 @@
 // };
 
 module.exports = async ctx => {
-    // const data = {};
+    
+    const data = {};
     // const tasks = [];
 
-    // const [event] = ctx?.request?.body?.events ?? [];
+    const [event] = ctx?.request?.body?.events ?? [];
+    const { type, source, message, replyToken } = event || {};
 
-    // const { type, source, message, replyToken } = event || {};
+    console.log(event);
+    
+    
 
+    // if (type === 'message') {
+    //     data.replyToken = replyToken;
+    //     data.messages = [];
+
+    //     if (message?.text === '訂餐') {
+    //         data.messages.push({
+    //             type: 'text',
+    //             text:
+    //                 '請點擊以下連結訂餐 \n 待補'
+    //         });
+    //     } else if (message?.text === '訂單') {
+    //         data.messages.push({
+    //             type: 'text',
+    //             text:
+    //                 '請點擊以下連結訂餐 \n 待補'
+    //         });
+    //     }
+    // }
     // if (type === 'message') {
     //     data.replyToken = replyToken;
     //     data.messages = [];
@@ -260,16 +282,190 @@ module.exports = async ctx => {
     //     }
     // }
 
-    // await request
-    //     .post(`${API_ENDPOINT}/v2/bot/message/reply`)
-    //     .set('Authorization', `Bearer ${TOKEN}`)
-    //     .set('Content-Type', 'application/json')
-    //     .send(data);
+    // try {
+    //     await request
+    //         .post(`${API_ENDPOINT}/v2/bot/message/reply`)
+    //         .set('Authorization', `Bearer ${TOKEN}`)
+    //         .set('Content-Type', 'application/json')
+    //         .send(data);
+    // } catch (err) {
+    //     console.log('reply', err);
+    // }
+
+    try {
+        await request
+        .post(`${API_ENDPOINT}/v2/bot/message/push`)
+        .set('Authorization', `Bearer ${TOKEN}`)
+        .set('Content-Type', 'application/json')
+        .send({
+            to: "Ue58b74645bc9f723811406a1ad72562c",
+            messages:[
+                {
+                    type: "flex",
+                    altText: "Order",
+                    contents: {
+                        "type": "bubble",
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "weight": "bold",
+                              "color": "#1DB446",
+                              "size": "sm",
+                              "text": "Order #351"
+                            },
+                            {
+                              "type": "text",
+                              "text": "餐廳名稱",
+                              "weight": "bold",
+                              "size": "xxl",
+                              "margin": "md"
+                            },
+                            {
+                              "type": "text",
+                              "text": "2023/10/30, 08:28 PM",
+                              "size": "xs",
+                              "color": "#aaaaaa",
+                              "wrap": true
+                            },
+                            {
+                              "type": "separator",
+                              "margin": "xxl"
+                            },
+                            {
+                              "type": "box",
+                              "layout": "vertical",
+                              "margin": "xxl",
+                              "spacing": "sm",
+                              "contents": [
+                                {
+                                  "type": "box",
+                                  "layout": "horizontal",
+                                  "contents": [
+                                    {
+                                      "type": "text",
+                                      "text": "［1］",
+                                      "margin": "none",
+                                      "size": "xs",
+                                      "flex": 0
+                                    },
+                                    {
+                                      "type": "text",
+                                      "text": "Vegetable Mixups",
+                                      "size": "sm",
+                                      "color": "#555555",
+                                      "flex": 0
+                                    },
+                                    {
+                                      "type": "text",
+                                      "text": "NT$150.00",
+                                      "size": "sm",
+                                      "color": "#111111",
+                                      "align": "end"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "box",
+                                  "layout": "horizontal",
+                                  "contents": [
+                                    {
+                                      "type": "text",
+                                      "text": "No Spicy",
+                                      "margin": "xxl",
+                                      "size": "xs",
+                                      "color": "#aaaaaa"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "box",
+                                  "layout": "horizontal",
+                                  "contents": [
+                                    {
+                                      "type": "text",
+                                      "text": "No Cheese",
+                                      "margin": "xxl",
+                                      "size": "xs",
+                                      "color": "#aaaaaa"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "box",
+                                  "layout": "horizontal",
+                                  "contents": [
+                                    {
+                                      "type": "text",
+                                      "text": "［2］",
+                                      "flex": 0,
+                                      "size": "xs"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "text": "Grilled Chicken",
+                                      "size": "sm",
+                                      "color": "#555555",
+                                      "flex": 0
+                                    },
+                                    {
+                                      "type": "text",
+                                      "text": "NT$500.00",
+                                      "size": "sm",
+                                      "color": "#111111",
+                                      "align": "end"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "separator",
+                              "margin": "xxl"
+                            },
+                            {
+                              "type": "box",
+                              "layout": "horizontal",
+                              "margin": "md",
+                              "contents": [
+                                {
+                                  "type": "text",
+                                  "text": "3 Items",
+                                  "size": "xs",
+                                  "color": "#aaaaaa",
+                                  "flex": 0
+                                },
+                                {
+                                  "type": "text",
+                                  "text": "NT$650.00",
+                                  "color": "#aaaaaa",
+                                  "size": "xs",
+                                  "align": "end"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "styles": {
+                          "footer": {
+                            "separator": true
+                          }
+                        }
+                      }
+                }
+            ]
+        });
+    } catch (err) {
+        console.log('push', err);
+    }
+    
 
     // await Promise.all([tasks]);
 
-    // ctx.set('Content-Type', 'text/plain');
-    // ctx.body = 'success';
+    ctx.set('Content-Type', 'text/plain');
+    ctx.body = 'success';
 
     return true;
 };
