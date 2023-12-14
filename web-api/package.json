@@ -13,7 +13,7 @@
         "node": "18.x"
     },
     "scripts": {
-        "dev": "NODE_ENV=development HOST='localhost' node app.js",
+        "dev": "NODE_ENV=development node app.js",
         "start:dev": "NODE_ENV=development PORT=3000 pm2 start app.js --name 'name' --node-args='--expose-gc' --max-memory-restart 300M --log-date-format='YYYY-MM-DD HH:mm Z'",
         "start:staging": "NODE_ENV=staging PORT=3000 pm2 start app.js --name 'name' --node-args='--expose-gc' --max-memory-restart 1024M --log-date-format='YYYY-MM-DD HH:mm Z'",
         "start:prod": "NODE_ENV=prod PORT=3000 pm2 start app.js --name 'name' --node-args='--expose-gc' --max-memory-restart 1024M --log-date-format='YYYY-MM-DD HH:mm Z'",
