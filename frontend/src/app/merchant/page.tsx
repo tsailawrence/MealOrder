@@ -1,7 +1,5 @@
-import React from "react";
-
-const MerchantHome = () => {
-  return <div>MerchantHome</div>;
+const MerchantSetupPage = () => {
+  return null;
 };
 
-export default MerchantHome;
+export default MerchantSetupPage;
