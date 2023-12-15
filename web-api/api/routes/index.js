@@ -23,6 +23,10 @@ const getRestaurant = require('../controllers/get-restaurant');
 const addMyFavoriteRestaurant = require('../controllers/add-my-favorite-restaurant');
 const addMyOrder = require('../controllers/add-my-order');
 const getMyOrder = require('../controllers/get-my-order');
+const getMyCurrentMonthPayment = require('../controllers/get-my-current-month-payment')
+const addMyStore  = require('../controllers/add-my-store')
+const updateMyStore  = require('../controllers/update-my-store')
+const updateMyStoreOrder  = require('../controllers/update-my-store-order')
 const router = new Router();
 
 router.post('/webhook', handleLineWebhook);
@@ -284,6 +288,18 @@ router.post(
     addMyOrder
 );
 router.get(
+    'getMyCurrentMonthPayment',
+    '/my/order/getMyCurrentMonthPayment',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    getMyCurrentMonthPayment
+);
+
+router.get(
     'getMyOrder',
     '/my/order/get',
     validate({
@@ -293,6 +309,42 @@ router.get(
     }),
     verifyClerk,
     getMyOrder
+);
+
+router.post(
+    'addMyStore',
+    '/my/store/add',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    addMyStore
+);
+
+router.post(
+    'updateMyStore',
+    '/my/store/update/:storeId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    updateMyStore
+);
+
+router.post(
+    'updateMyStoreOrder',
+    '/my/store/updateOrder/:orderId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    updateMyStoreOrder
 );
 
 // bad request example

@@ -10,6 +10,13 @@ exports.getStoreByUserId = ({ userId, fields = '*' }) =>
         .from(TABLE_NAME)
         .where('userId', userId);
 
+exports.addStoreByUserId = ({data, fields = '*' }) =>
+    datastore
+        .insert(
+            data
+        )
+        .into(TABLE_NAME)
+
 exports.getStoreByStoreId = ({ storeId, fields = '*' }) =>
     datastore
         .select(fields)
@@ -42,3 +49,9 @@ exports.getTopFavoriteStore = ({fields = '*' }) =>
         .from(TABLE_NAME)
         .limit(10).offset(0)
         .orderBy('favoriteCount', 'desc')
+
+exports.updateStoreByStoreId = async ({ storeId, data }) =>
+    datastore
+        .from(TABLE_NAME)
+        .where('id', storeId)
+        .update(data);
