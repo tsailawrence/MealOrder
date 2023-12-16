@@ -1,181 +1,11 @@
 const request = require('superagent');
-// const charset = require('charset');
-// const cheerio = require('cheerio');
-// const jschardet = require('jschardet');
-// const encoding = require('encoding');
-// const striptags = require('striptags');
 
-// const { getUserBySenderId } = require('../models/user');
-// const {
-//     insert: insertFavoriteList,
-//     insertTag
-// } = require('../models/user-favorite-list');
-// const { sendChatGPTRequest } = require('../libs/chatgpt-api');
+const User = require('../models/user');
 
 const TOKEN =
     'kSXOd/NaV69WN+iSslfDYC8nWhs1rKy2aasv08bFz8dxDevRlCcT4TDWbphVeK6C/DhiswZq5sBULp/CiQ6DlqIyP3JbuFt'
     + 's8Fj6x30FVdmK8ZGimLmEvR8NPEg6uOnePeeymnHRtaT5e6Q5sflWDAdB04t89/1O/w1cDnyilFU=';
 const API_ENDPOINT = 'https://api.line.me';
-// const DEFAULT_USER_AGENT =
-//     'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
-// const DEFAULT_REFERER = 'http://www.facebook.com/';
-
-// const extractURLs = text =>
-//     text.match(/(https?:\/\/[^\s\uFF00-\uFFFF<>"'!]+)/g);
-
-// const getCharSet = response => {
-//     const detected =
-//         charset(response.header, response.data) ||
-//         jschardet.detect(response.data).encoding;
-
-//     return detected ? detected.toUpperCase() : 'UTF-8';
-// };
-
-// const fetch = async ({ url }) => {
-//     try {
-//         const result = await request('GET', url)
-//             .set('User-Agent', DEFAULT_USER_AGENT)
-//             .set('Referer', DEFAULT_REFERER)
-//             .timeout({
-//                 response: 5000,
-//                 deadline: 20000
-//             });
-
-//         return {
-//             data: result?.text || result?.data || null,
-//             header: result?.header || null
-//         };
-//     } catch (err) {
-//         if (err.response || err.code) {
-//             return {
-//                 header: err.response.header,
-//                 status: err.status,
-//                 content: err.response.text || err.response.body
-//             };
-//         }
-
-//         return false;
-//     }
-// };
-
-// const htmlEscapes = {
-//     '&': '&amp;',
-//     '<': '&lt;',
-//     '>': '&gt;',
-//     '"': '&quot;',
-//     "'": '&#x27;',
-//     '/': '&#x2F;'
-// };
-
-// const htmlEscaper = /[&<>"'/]/g;
-
-// const escapeHTML = str => {
-//     if (!str) return '';
-//     return `${str}`.replace(htmlEscaper, match => htmlEscapes[match]);
-// };
-
-// const getTitle = $ =>
-//     escapeHTML(
-//         $('meta[property="og:title"]').attr('content') ||
-//             $('title')
-//                 .text()
-//                 .trim()
-//     ).replace(/\s+/g, ' ');
-
-// const getDescriptionFromBody = $ =>
-//     striptags(
-//         $('body')
-//             .first()
-//             .text()
-//             .replace('#<script(.*?)>(.*?)</script>#is', '')
-//             .replace('#<style(.*?)>(.*?)</style>#is', '')
-//     );
-
-// const getDescription = $ => {
-//     const ogDescription = $('meta[property="og:description"]').attr('content');
-//     const metadescription = $('meta[name="description"]').attr('content');
-//     const metaDescription = $('meta[name="Description"]').attr('content');
-//     const twitterDescription = $('meta[name="twitter:description"]').attr(
-//         'content'
-//     );
-
-//     return escapeHTML(
-//         (ogDescription && ogDescription.length ? ogDescription : null) ||
-//             (metadescription && metadescription.length
-//                 ? metadescription
-//                 : null) ||
-//             (metaDescription && metaDescription.length
-//                 ? metaDescription
-//                 : null) ||
-//             (twitterDescription && twitterDescription.length
-//                 ? twitterDescription
-//                 : null) ||
-//             striptags(
-//                 $('p')
-//                     .first()
-//                     .text()
-//             ) ||
-//             getDescriptionFromBody($)
-//     ).replace(/\s+/g, ' ');
-// };
-
-// const parseInfoFromUrlResponse = async ({ response }) => {
-//     if (!response || !response?.header) return null;
-
-//     try {
-//         const charSet = getCharSet(response);
-//         const options = { decodeEntities: false };
-//         const data = encoding.convert(response.data, 'UTF-8', charSet);
-//         const $ = cheerio.load(data, options);
-
-//         const title = getTitle($);
-//         const description = getDescription($);
-//         const images = [];
-
-//         $('meta[property="og:image"]').each((i, img) => {
-//             const src = $(img).attr('src') || $(img).attr('content');
-
-//             if (src && !images.includes(src)) {
-//                 images.push(src);
-//             }
-//         });
-
-//         console.log('title', title, description, images);
-//         return {
-//             title,
-//             description,
-//             images
-//         };
-//     } catch {
-//         return {};
-//     }
-// };
-
-// const insertFavoriteListTask = async ({
-//     userId,
-//     url,
-//     title,
-//     description,
-//     imageUrl,
-//     tags
-// }) => {
-//     const [favoriteListId] = await insertFavoriteList({
-//         user_id: userId,
-//         url,
-//         title,
-//         description,
-//         image_url: imageUrl
-//     });
-
-//     return Promise.all(
-//         tags.map(tag =>
-//             insertTag({
-//                 favorite_list_id: favoriteListId,
-//                 name: tag
-//             })
-//         )
-//     );
-// };
 
 module.exports = async ctx => {
     
@@ -184,9 +14,40 @@ module.exports = async ctx => {
 
     const [event] = ctx?.request?.body?.events ?? [];
     const { type, source, message, replyToken } = event || {};
-
-    console.log(event);
     
+    if (type === 'message') {
+      data.replyToken = replyToken;
+      data.messages = [];
+
+      if (message?.text === '訂餐') {
+        data.messages.push({
+          type: 'text',
+          text:
+              '請點擊以下連結訂餐 \n 待補'
+        });
+      } else if (message?.text === '訂單') {
+        const [theUser] = await User.getUserBySenderId({
+          senderId: source?.userId,
+          fields: ['id', 'name']
+        });
+
+        if (!theUser) {
+          data.messages.push({
+            type: 'text',
+            text:
+                '回傳綁定連結'
+          });
+        } else {
+          data.messages.push({
+            type: 'text',
+            text:
+                '回應近期最接近訂單 \n 待補'
+          });
+        }
+
+        
+      }
+    }
     
 
     // if (type === 'message') {
@@ -297,166 +158,7 @@ module.exports = async ctx => {
         .post(`${API_ENDPOINT}/v2/bot/message/push`)
         .set('Authorization', `Bearer ${TOKEN}`)
         .set('Content-Type', 'application/json')
-        .send({
-            to: "Ue58b74645bc9f723811406a1ad72562c",
-            messages:[
-                {
-                    type: "flex",
-                    altText: "Order",
-                    contents: {
-                        "type": "bubble",
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "weight": "bold",
-                              "color": "#1DB446",
-                              "size": "sm",
-                              "text": "Order #351"
-                            },
-                            {
-                              "type": "text",
-                              "text": "餐廳名稱",
-                              "weight": "bold",
-                              "size": "xxl",
-                              "margin": "md"
-                            },
-                            {
-                              "type": "text",
-                              "text": "2023/10/30, 08:28 PM",
-                              "size": "xs",
-                              "color": "#aaaaaa",
-                              "wrap": true
-                            },
-                            {
-                              "type": "separator",
-                              "margin": "xxl"
-                            },
-                            {
-                              "type": "box",
-                              "layout": "vertical",
-                              "margin": "xxl",
-                              "spacing": "sm",
-                              "contents": [
-                                {
-                                  "type": "box",
-                                  "layout": "horizontal",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "［1］",
-                                      "margin": "none",
-                                      "size": "xs",
-                                      "flex": 0
-                                    },
-                                    {
-                                      "type": "text",
-                                      "text": "Vegetable Mixups",
-                                      "size": "sm",
-                                      "color": "#555555",
-                                      "flex": 0
-                                    },
-                                    {
-                                      "type": "text",
-                                      "text": "NT$150.00",
-                                      "size": "sm",
-                                      "color": "#111111",
-                                      "align": "end"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "box",
-                                  "layout": "horizontal",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "No Spicy",
-                                      "margin": "xxl",
-                                      "size": "xs",
-                                      "color": "#aaaaaa"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "box",
-                                  "layout": "horizontal",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "No Cheese",
-                                      "margin": "xxl",
-                                      "size": "xs",
-                                      "color": "#aaaaaa"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "box",
-                                  "layout": "horizontal",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "［2］",
-                                      "flex": 0,
-                                      "size": "xs"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "text": "Grilled Chicken",
-                                      "size": "sm",
-                                      "color": "#555555",
-                                      "flex": 0
-                                    },
-                                    {
-                                      "type": "text",
-                                      "text": "NT$500.00",
-                                      "size": "sm",
-                                      "color": "#111111",
-                                      "align": "end"
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "separator",
-                              "margin": "xxl"
-                            },
-                            {
-                              "type": "box",
-                              "layout": "horizontal",
-                              "margin": "md",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "3 Items",
-                                  "size": "xs",
-                                  "color": "#aaaaaa",
-                                  "flex": 0
-                                },
-                                {
-                                  "type": "text",
-                                  "text": "NT$650.00",
-                                  "color": "#aaaaaa",
-                                  "size": "xs",
-                                  "align": "end"
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        "styles": {
-                          "footer": {
-                            "separator": true
-                          }
-                        }
-                      }
-                }
-            ]
-        });
+        .send(data);
     } catch (err) {
         console.log('push', err);
     }
@@ -469,3 +171,154 @@ module.exports = async ctx => {
 
     return true;
 };
+
+const sendMessage = async ({
+  to = 'Ue58b74645bc9f723811406a1ad72562c',
+  orderNum = 351,
+  storeName = 'Store Name',
+  time = '2023/10/30, 08:28 PM',
+  items = [],
+  amount = 3,
+  price,
+}) => {
+  const contents = [];
+
+  
+  contents.push({
+    type: "box",
+    layout: "horizontal",
+    contents: [
+      // 數量
+      {
+        type: "text",
+        text: "［1］",
+        margin: "none",
+        size: "xs",
+        flex: 0
+      },
+      // 名稱
+      {
+        type: "text",
+        text: "Vegetable Mixups",
+        size: "sm",
+        color: "#555555",
+        flex: 0
+      },
+      // 金額
+      {
+        type: "text",
+        text: "NT$150.00",
+        size: "sm",
+        color: "#111111",
+        align: "end"
+      }
+    ]
+  });
+
+  // 備註類
+  contents.push([
+    {
+      type: "box",
+      layout: "horizontal",
+      contents: [
+        {
+          type: "text",
+          text: "No Spicy",
+          margin: "xxl",
+          size: "xs",
+          color: "#aaaaaa"
+        }
+      ]
+    }
+  ]);
+
+  try {
+    await request
+      .post(`${API_ENDPOINT}/v2/bot/message/push`)
+      .set('Authorization', `Bearer ${TOKEN}`)
+      .set('Content-Type', 'application/json')
+      .send({
+        to,
+          messages:[ // order
+            {
+              type: "flex",
+              altText: "Order",
+                contents: {
+                    type: "bubble",
+                    body: {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          weight: "bold",
+                          color: "#1DB446",
+                          size: "sm",
+                          text: `Order #${orderNum}`
+                        },
+                        {
+                          type: "text",
+                          text: storeName,
+                          weight: "bold",
+                          size: "xxl",
+                          margin: "md"
+                        },
+                        {
+                          type: "text",
+                          text: time,
+                          size: "xs",
+                          color: "#aaaaaa",
+                          wrap: true
+                        },
+                        {
+                          type: "separator",
+                          margin: "xxl"
+                        },
+                        {
+                          type: "box",
+                          layout: "vertical",
+                          margin: "xxl",
+                          spacing: "sm",
+                          contents
+                        },
+                        {
+                          type: "separator",
+                          margin: "xxl"
+                        },
+                        // 結算區域
+                        {
+                          type: "box",
+                          layout: "horizontal",
+                          margin: "md",
+                          contents: [
+                            {
+                              type: "text",
+                              text: `${amount} Items`,
+                              size: "xs",
+                              color: "#aaaaaa",
+                              flex: 0
+                            },
+                            {
+                              type: "text",
+                              text: `NT$${price}`,
+                              color: "#aaaaaa",
+                              size: "xs",
+                              align: "end"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    styles: {
+                      footer: {
+                        separator: true
+                      }
+                    }
+                }
+              }
+          ]
+      });
+  } catch (err) {
+      console.log('push', err);
+  }
+}

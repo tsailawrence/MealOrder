@@ -26,6 +26,12 @@ exports.getUserByUserId = ({ userId, fields = '*' }) =>
         .from(TABLE_NAME)
         .where('userId', userId);
 
+exports.getUserBySenderId = ({ senderId, fields = '*' }) =>
+    datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('senderId', senderId);
+
 exports.getUserById = ({ id, fields = '*' }) =>
     datastore
         .select(fields)
