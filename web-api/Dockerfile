@@ -1,15 +1,14 @@
-FROM node:18
+FROM node:18-alpine
+
+RUN yarn install
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN yarn install && yarn cache clean
-
-RUN npm install -f
-
-COPY . /app
-
-CMD ["yarn", "start"]
+COPY . .
 
 EXPOSE 3001
+
+CMD ["npm", "run", "dev"]
+
