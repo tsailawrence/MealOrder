@@ -2,9 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { toast } from "react-hot-toast";
 import { useParams } from "next/navigation";
 
-import { getMenu } from "@/app/merchant/[storeId]/menu/components/actions";
+import {
+  getMenu,
+  deleteMenuType,
+} from "@/app/merchant/[storeId]/menu/components/actions";
 import { MenuTab } from "@/app/merchant/[storeId]/menu/components/MenuTab";
 import { MenuTypeModal } from "@/app/merchant/[storeId]/menu/components/MenuTypeModal";
 import { ProductSheet } from "@/app/merchant/[storeId]/menu/components/ProductSheet";
@@ -46,6 +50,18 @@ export const Menu = () => {
       });
   };
 
+  const onDelete = async (menuTypeId) => {
+    try {
+      await deleteMenuType(accessToken, params.storeId, menuTypeId);
+      toast.success("Category deleted");
+    } catch (error) {
+      toast.error("Something went wrong deleting the category");
+      console.log(error);
+    } finally {
+      fetchMenu();
+    }
+  };
+
   useEffect(() => {
     fetchMenu();
   }, [accessToken]);
@@ -82,6 +98,9 @@ export const Menu = () => {
                   onEdit={() => {
                     setMenuTypeModalOpen(true);
                     setEditMenuType(type);
+                  }}
+                  onDelete={() => {
+                    onDelete(type.id);
                   }}
                 />
               ))}

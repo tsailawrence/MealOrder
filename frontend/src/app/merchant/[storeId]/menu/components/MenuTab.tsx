@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 
 import {
@@ -21,27 +22,23 @@ export type MenuTabProps = {
   categoryId: string;
   categoryName: string;
   onEdit?: () => void;
+  onDelete: () => void;
 };
 
 export const MenuTab: React.FC<MenuTabProps> = ({
   categoryId,
   categoryName,
   onEdit,
+  onDelete,
 }) => {
+  const [cookies, setCookie] = useCookies([
+    "refreshToken",
+    "accessToken",
+    "__session",
+  ]);
+  const { __session: accessToken = "" } = cookies;
   const params = useParams();
 
-  const onDelete = async () => {
-    console.log("delete");
-    // try {
-    //   await deleteMenuCategory(params.storeId, categoryId);
-
-    //   window.location.reload();
-    //   toast.success("Category deleted");
-    // } catch (error) {
-    //   toast.error("Something went wrong deleting the category");
-    //   console.log(error);
-    // }
-  };
   return (
     <ContextMenu>
       <ContextMenuTrigger>
