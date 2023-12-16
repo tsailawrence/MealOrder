@@ -1,16 +1,18 @@
-import Header from "@/components/MerchantHeader";
+import { ToastProvider } from "@/providers/toast-provider";
+import MerchantHeader from "@/app/merchant/components/MerchantHeader";
 
-export default function CustomerLayout({
+export default async function MerchantLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div>
       <div>
-        <Header />
+        <ToastProvider />
+        <MerchantHeader />
+        {children}
       </div>
-      <div className="container mx-auto px-4">{children}</div>
-    </>
+    </div>
   );
 }

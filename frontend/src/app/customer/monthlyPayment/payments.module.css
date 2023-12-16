@@ -47,7 +47,6 @@
 
 .paymentTable {
   height: 100%;
-  min-width: 70vw;
   border-radius: 5px;
   border: 1px solid rgba(230, 0, 18, 0.15);
 }
@@ -80,4 +79,76 @@
 .viewButton:hover {
   background-color: #e6392f;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    background-color: #fff;
+  }
+  .main {
+    flex-direction: column;
+  }
+
+  .summary,
+  .paymentSection {
+    width: 100%; /* Full width for smaller screens */
+    margin-left: 0; /* Reset any left margin */
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow items to wrap */
+  }
+
+  .totalCost,
+  .orders,
+  .restaurants {
+    flex: 1 1 30%; /* Flex grow, shrink, and basis */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Space below each section */
+    margin-right: 10px; /* Space to the right of each section */
+    background-color: #e9dad2;
+  }
+
+  .paymentTable {
+    width: 100%; /* Ensure table does not exceed viewport width */
+
+    border-radius: 5px;
+    border: 1px solid rgba(230, 0, 18, 0.15);
+    box-sizing: border-box;
+  }
+
+  .paymentTable thead {
+    background: #fee;
+  }
+
+  .paymentTable th,
+  .paymentTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+
+  .viewButton {
+    width: 64px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    border: 1px solid #e60012;
+    background: #fff;
+    color: var(--Red, #e60012);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .viewButton:hover {
+    background-color: #e6392f;
+    color: white;
+  }
 }
