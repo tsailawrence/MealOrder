@@ -26,7 +26,12 @@ const init = () => {
         })
     );
     // cross domain
-    app.use(cors());
+    app.use(cors({
+        origin: 'http://localhost:3000', // Allow only http://localhost:3000 to access
+        allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these methods
+        allowHeaders: ['Content-Type', 'Authorization', 'Accept'], // Allow these headers
+        credentials: true, // Allow cookies
+    }));
 
     // register routers
     app.use(router.routes()).use(router.allowedMethods());
