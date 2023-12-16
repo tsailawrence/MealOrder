@@ -4,6 +4,10 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useCookies } from "react-cookie";
+import { toast } from "react-hot-toast";
+
 import Image from "next/image";
 
 import {
@@ -30,6 +34,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+import { updateProduct } from "@/app/merchant/[storeId]/menu/components/actions";
+import { parse } from "path";
 
 const shelfStatus = [
   ///已下架
@@ -66,12 +73,39 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, onClick }: ProductCardProps) => {
+  const [cookies, setCookie] = useCookies([
+    "refreshToken",
+    "accessToken",
+    "__session",
+  ]);
+  const { __session: accessToken = "" } = cookies;
+
+  const params = useParams();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       onShelfStatus: product.onShelfStatus.toString(),
     },
   });
+
+  // 一旦選單狀態改變，就會觸發這個函式
+
+  // useEffect(() => {
+  //   if (form.formState.isDirty) {
+  //     handleChangeStatus();
+  //   }
+  // }, [values: z.infer<typeof formSchema>]);
+  const ChangeStatus = async () => {
+    try {
+      await updateProduct(accessToken, params.storeId, product.id, {
+        onShelfStatus: parseInt(form.getValues("onShelfStatus")),
+      });
+      toast.success("Product updated");
+    } catch (error) {
+      toast.error("Something went wrong updating the product");
+      console.log(error);
+    }
+  };
   return (
     <Card
       key={product.id}
@@ -109,7 +143,10 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
                   render={({ field }) => (
                     <FormItem>
                       <Select
-                        onValueChange={field.onChange}
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          ChangeStatus();
+                        }}
                         defaultValue={field.value}
                       >
                         <FormControl>
