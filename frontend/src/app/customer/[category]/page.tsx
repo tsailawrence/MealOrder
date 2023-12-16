@@ -24,7 +24,6 @@ const RestaurantPage = () => {
                 console.error('Error fetching orders:', err);
             });
     }, [accessToken]); // Dependency array
-    console.log(categoryData);
     // Use 'id' to fetch data or for other purposes
     return (
         <>

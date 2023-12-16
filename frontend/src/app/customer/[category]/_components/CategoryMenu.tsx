@@ -63,7 +63,6 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ category, defaultId, defaultVal
         const id = category.find((category) => category.categoryName === value)?.id;
         setCategory(id || 0);
     }
-    console.log(restaurant);
     return (
         <>
             <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
