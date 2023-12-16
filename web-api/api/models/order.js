@@ -103,7 +103,21 @@ exports.getCurrentMonthOrderByCustomerId = async ({ userId, fields = '*' }) =>{
         .where('customerId', userId)
         .whereBetween('time', [currentMonthStart, currentMonthEnd]);
 
-    return orders;
+    
+    const theOrderWithItems = await Promise.all(orders.map( async (order)=>{
+        const orderItem = await datastore
+        .select(fields)
+        .from(TABLE_ITEM)
+        .where('orderId', order.id)
+        .andWhere('token', token);;
+
+        return {
+            ...order,
+            orderItem: orderItem
+        };
+    }));
+
+    return theOrderWithItems;
 }
 
 
@@ -131,3 +145,15 @@ exports.insert = async (data,items) => {
         .into(TABLE_ITEM);
     })
 }
+
+exports.updateOrderByOrderId = async ({ orderId, data }) =>
+    datastore
+        .from(TABLE_NAME)
+        .where('id', orderId)
+        .update(data);
+
+exports.deleteOrderByOrderId  = ({ orderId,}) =>
+        datastore
+            .from(TABLE_NAME)
+            .where({ 'id': orderId })
+            .del()

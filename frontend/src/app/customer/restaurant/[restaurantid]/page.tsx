@@ -6,6 +6,7 @@ import StoreInfo from './_components/StoreInfo';
 import StoreMenu from './_components/StoreMenu';
 import { restaurantData } from '@/app/dbTemplate/cardData';
 import { getRestaurantData } from './_components/actions';
+
 interface MenuItem {
     id: number;
     name: string;
@@ -31,14 +32,14 @@ interface Store {
 }
 
 const RestaurantPage = () => {
-    const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+    const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [restaurant, setRestaurant] = useState<Store | null>(null);
     const { __session: accessToken = '' } = cookies;
     const { restaurantid } = useParams();
     const id = restaurantid.toString();
-    const test = getRestaurantData(accessToken, id);
+
     useEffect(() => {
         getRestaurantData(accessToken, id)
             .then(data => {
@@ -58,7 +59,7 @@ const RestaurantPage = () => {
             {loading ? <div>Loading...</div> :
                 (restaurant ?
                     <>
-                        <StoreInfo id={1} name={restaurant.name} address={restaurantData[0].address} phoneNumber={restaurant.phoneNumber} starNumber={restaurant.favoriteCount} imageSrc={restaurantData[0].uri} likes={true} />
+                        <StoreInfo id={restaurant.id} name={restaurant.name} area={restaurant.area} phoneNumber={restaurant.phoneNumber} starNumber={restaurant.favoriteCount} imageSrc={restaurantData[0].uri}/>
                         <StoreMenu restaurantName={restaurantData[0].name} menu={restaurantData[0].menu} />
                     </>
                     : <div>No data</div>

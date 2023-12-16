@@ -19,3 +19,15 @@ exports.insert = async data =>
             ['id']
         )
         .into(TABLE_NAME);
+
+exports.update =  async ({ menuTypeId, data }) =>
+    datastore
+        .from(TABLE_NAME)
+        .where('id', menuTypeId)
+        .update(data);
+
+exports.delete =  async ({ menuTypeId }) =>
+        datastore
+            .from(TABLE_NAME)
+            .where('id', menuTypeId)
+            .del();

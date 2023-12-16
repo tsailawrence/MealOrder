@@ -1,3 +1,5 @@
+import { CartCardProps } from "@/lib/types/db";
+import { instance } from "@/lib/utils";
 //get tthe city name from the lat and lng
 // interface GeocodingApiResponse {
 //     results: {
@@ -34,4 +36,27 @@ async function fetchPlaceName(latitude: number, longitude: number): Promise<stri
 export async function getPlace(latitude: number, longitude: number): Promise<{ nowCity: string | null }> {
     const placeName = await fetchPlaceName(latitude, longitude);
     return { nowCity: placeName };
+}
+
+export async function addMyOrder(accessToken: string, cart: CartCardProps) {
+    // Register
+    try {
+        if (!accessToken) {
+            throw new Error('AccessToken Not Exist.')
+        }
+        const { data: response } = await instance.post(
+            `/my/order/add`,
+            {
+                path:{
+                    accessToken
+                },
+                data:{
+                    cart
+                }
+            },
+        )
+        return response.data;
+    } catch (err) {
+        console.log('addMyOrder error', err);
+    }
 }

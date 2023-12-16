@@ -38,8 +38,7 @@ export type RestaurantCardProps = {
     imageSrc: string;
     starNumber: number;
     phoneNumber: number;
-    address: string;
-    likes: boolean;
+    area: string;
 };
 
 export type Item = {
@@ -51,8 +50,9 @@ export type Item = {
 };
 
 export type CartCardProps = {
-    username: string;
-    time: string;
+    storeId: number;
+    payment: number;
+    pickupTime: string;
     item: Item[];
 };
 

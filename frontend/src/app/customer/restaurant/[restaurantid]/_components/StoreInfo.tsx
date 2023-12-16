@@ -12,8 +12,7 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
     imageSrc,
     starNumber,
     phoneNumber,
-    address,
-    likes,
+    area,
 }) => {
     const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
     const { __session: accessToken = '' } = cookies;
@@ -35,19 +34,19 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                         </h1>
                         <div className="flex gap-2 mt-2">
                             <div className="text-red-600 text-2xl font-black leading-6">
-                                {likes ? <Heart fill='red' /> : <Heart />}
+                                <Heart fill='red' /> 
                             </div>
                             <div className="text-red-600 text-2xl leading-7 self-stretch whitespace-nowrap">
                                 {starNumber}
                             </div>
                         </div>
                     </div>
-                    <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
-                        <MapPin /> {address}
-                    </span>
-                    <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
+                    {area && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
+                        <MapPin /> {area}
+                    </span>}
+                    {phoneNumber && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
                         <Phone /> {phoneNumber}
-                    </span>
+                    </span>}
                 </div>
             </div>
             <div className="justify-center items-stretch border border-[color:var(--Red,#E60012)] flex gap-2 mt-4 pl-8 pr-8 py-3 rounded-3xl border-solid self-start ">
