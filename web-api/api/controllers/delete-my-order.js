@@ -9,13 +9,19 @@ module.exports = async ctx => {
             id: userId,
             type,
         } = {},
+        params: {
+            orderId
+        } = {},
     } = ctx;
 
-    const theUserOrders = await Order.getCurrentMonthOrderByCustomerId({
-        userId,
+    const theOrder = await Order.deleteOrderByOrderId({
+        orderId,
     });
 
-    ctx.body = theUserOrders;
+    ctx.body = {
+        result: 'success'
+    }
+    
     
     return true;
 }
