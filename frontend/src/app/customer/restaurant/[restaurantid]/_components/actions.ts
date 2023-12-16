@@ -19,19 +19,61 @@ export const getRestaurantData = async (accessToken: string, id: string) => {
         console.log('getAllOrders error', err);
     }
 }
-export const addMyFavoriteRestaurant = async (accessToken: string, id: number) => {
+
+export async function addMyFavoriteRestaurant(accessToken: string, id: number) {
     // Register
     try {
         if (!accessToken) {
             throw new Error('AccessToken Not Exist.')
         }
-        console.log('addMyFavoriteRestaurant', id);
-        console.log('addMyFavoriteRe', accessToken);
         const { data: response } = await instance.post(
             `/my/favoriteStore/add/${id}`,
+            {
+                params: {
+                    accessToken,
+                },
+            }
         )
         return response.data;
     } catch (err) {
-        console.log('addMyFavoriteRestaurant error', err);
+        console.log('addMyOrder error', err);
     }
 }
+
+export const getMenu = async (accessToken: string, storeId: string) => {
+    try {
+        if (!accessToken) {
+            throw new Error("AccessToken Not Exist.");
+        }
+        const { data: response } = await instance.get(
+            `/my/store/${storeId}/products`,
+            {
+                params: {
+                    accessToken,
+                },
+            }
+        );
+        return response.data;
+    } catch (err) {
+        return;
+    }
+};
+
+export const getMenuHour = async (accessToken: string, storeId: string) => {
+    try {
+        if (!accessToken) {
+            throw new Error("AccessToken Not Exist.");
+        }
+        const { data: response } = await instance.get(
+            `/my/store/${storeId}/menu/hour`,
+            {
+                params: {
+                    accessToken,
+                },
+            }
+        );
+        return response.data;
+    } catch (err) {
+        return;
+    }
+};

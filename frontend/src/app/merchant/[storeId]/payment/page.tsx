@@ -1,4 +1,4 @@
-// pages/payments.tsx
+"use client";
 import React, { useEffect, useState } from "react";
 import styles from "./_components/payments.module.css";
 import { useCookies } from "react-cookie";

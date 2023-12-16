@@ -15,8 +15,20 @@ exports.insert = async data =>
         )
         .into(TABLE_NAME);
 
+exports.update = async ({ data, menuId}) =>
+        datastore
+            .from(TABLE_NAME)
+            .where('id', menuId)
+            .update(data);
+
 exports.getMenuByStoreId = ({ storeId, fields = '*' }) =>
     datastore
         .select(fields)
         .from(TABLE_NAME)
         .where('storeId', storeId);
+
+exports.delete = async ({ menuId}) =>
+    datastore
+        .from(TABLE_NAME)
+        .where('id', menuId)
+        .del();

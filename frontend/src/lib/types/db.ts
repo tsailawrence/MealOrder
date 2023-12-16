@@ -38,8 +38,7 @@ export type RestaurantCardProps = {
     imageSrc: string;
     starNumber: number;
     phoneNumber: number;
-    address: string;
-    likes: boolean;
+    area: string;
 };
 
 export type Item = {

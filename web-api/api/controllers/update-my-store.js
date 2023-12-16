@@ -27,6 +27,13 @@ module.exports = async ctx => {
         area,
     }
 
+    // 遍历 data 对象的属性，如果属性值为 undefined 或 null 或空字符串，则从对象中删除该属性
+    for (const key in data) {
+        if (data[key] === undefined || data[key] === null || data[key] === "") {
+        delete data[key];
+        }
+        }
+
     if (
         type !== User.TYPE.MERCHANT
     ) {

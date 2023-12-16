@@ -48,7 +48,7 @@ const OrderBox = () => {
     return today.getDate() < orderDate.getDate() || today.getMonth() < orderDate.getMonth() || today.getFullYear() < orderDate.getFullYear();
   });
   return (
-    <Tabs className="w-full" defaultValue={defaultValue}>
+    <Tabs className="w-[95%]" defaultValue={defaultValue}>
       <TabsList className="tabs-list grid w-full grid-flow-col mt-6 overflow-x-auto">
         <TabsTrigger value="Today">Today</TabsTrigger>
         <TabsTrigger value="Upcoming">Upcoming</TabsTrigger>
