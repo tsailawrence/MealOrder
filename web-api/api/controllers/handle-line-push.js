@@ -16,14 +16,13 @@ exports.sendMessage = async ({
 }) => {
   const contents = [];
 
-  contents.push({
-    type: "box",
-    layout: "horizontal",
-    contents: [
+  const itemContents = items.forEach(item => {
+    console.log(item);
+    const itemContents = ([
       // 數量
       {
         type: "text",
-        text: "［1］",
+        text: `［${item?.quantity}］`,
         margin: "none",
         size: "xs",
         flex: 0
@@ -31,7 +30,7 @@ exports.sendMessage = async ({
       // 名稱
       {
         type: "text",
-        text: "Vegetable Mixups",
+        text: `${item?.name}`,
         size: "sm",
         color: "#555555",
         flex: 0
@@ -39,30 +38,36 @@ exports.sendMessage = async ({
       // 金額
       {
         type: "text",
-        text: "NT$150.00",
+        text: `NT$${item?.itemPayment}.00`,
         size: "sm",
         color: "#111111",
         align: "end"
       }
-    ]
-  });
-
-  // 備註類
-  contents.push(
-    {
+    ]);
+    contents.push({
       type: "box",
       layout: "horizontal",
-      contents: [
-        {
-          type: "text",
-          text: "No Spicy",
-          margin: "xxl",
-          size: "xs",
-          color: "#aaaaaa"
-        }
-      ]
-    }
-  );
+      contents: itemContents,
+    });
+    // 備註類
+    contents.push(
+      {
+        type: "box",
+        layout: "horizontal",
+        contents: [
+          {
+            type: "text",
+            text: item?.specialInstructions ?? 'xxxx',
+            margin: "xxl",
+            size: "xs",
+            color: "#aaaaaa"
+          }
+        ]
+      }
+    );
+  });
+
+  console.log(contents);
 
   try {
     await request
