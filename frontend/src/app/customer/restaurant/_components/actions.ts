@@ -173,6 +173,29 @@ export const getCardData = async (accessToken: string) => {
         console.log('getAllOrders error', err);
     }
 }
+
+export const lineBinding = async (accessToken: string, lineId: string) => {
+    // line Binding
+    try {
+        if (!accessToken) {
+            throw new Error('AccessToken Not Exist.')
+        }
+        const { data: response } = await instance.post(
+            `/line/${lineId}`,
+            {},
+            {
+                params: {
+                    accessToken
+                }
+            }
+        )
+        return response.data;
+    } catch (err) {
+        // TODO: login again
+        console.log('lineBinding error', err);
+    }
+}
+
 export const getCategoryData = () => {
     //top 10 categories, restrict to 10
     const top10 = categoryData.slice(0, 10);

@@ -4,11 +4,13 @@ import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import { CardComponent } from "./_components/CardComponent";
 import CategoryCard from "./_components/CategoryCard";
-import { getCardData, getFavoriteData, getCategoryData, getRestaurantCategoryData } from "./_components/actions";
+import { getCardData, getFavoriteData, getCategoryData, getRestaurantCategoryData, lineBinding } from "./_components/actions";
 import { CategoryProps, RestaurantCard } from "@/lib/types/db";
 import { get } from "https";
+import { useSearchParams } from 'next/navigation';
+
 const CustomerHome = () => {
-  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session', 'senderId']);
   const [cardData, setCardData] = useState<RestaurantCard[] | null>(null);
   const [categoryDat, setCategoryData] = useState<CategoryProps[] | null>(null);
   const [loading, setLoading] = useState(true);
@@ -22,7 +24,6 @@ const CustomerHome = () => {
     getCardData(accessToken)
       .then(data => {
         setCardData(data); // Assuming 'data' is the array of orders
-        console.log(data);
         setLoading(false);
       })
       .catch(err => {
@@ -42,7 +43,17 @@ const CustomerHome = () => {
         setLoading(false);
       });
   }, [accessToken]);
-  console.log(categoryDat);
+
+  const params = useSearchParams();
+  const senderId = params.get('sender_id');
+  
+  if (senderId) {
+    if (!cookies?.senderId) {
+      lineBinding(accessToken, senderId);
+      setCookie('senderId', senderId);
+    }
+  }
+
   return (
     <>
       <header className="self-center flex w-full max-w-[90%] justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap">
