@@ -125,6 +125,7 @@ export const updateProduct = async (
   data: any
 ) => {
   try {
+    data.menuTypeId = parseInt(data.menuTypeId);
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
     }
@@ -154,6 +155,7 @@ export const deleteProduct = async (
     }
     const { data: response } = await instance.post(
       `/my/store/delete/${storeId}/menu/${productId}`,
+      {},
       {
         params: {
           accessToken,
