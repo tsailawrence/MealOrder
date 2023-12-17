@@ -2,6 +2,7 @@ const { errorResponser } = require('../libs/controller-helper');
 
 const Order = require('../models/order');
 const Store = require('../models/store');
+const Menu = require('../models/menu');
 
 module.exports = async ctx => {
     const {
