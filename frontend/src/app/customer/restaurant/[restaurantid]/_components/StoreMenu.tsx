@@ -38,7 +38,8 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ restaurantName, menus, menutypes })
         const menuTypeObj = menutypes.find((type) => type.id === id);
         return menuTypeObj?.type || '';
     }
-    const defaultValue = menus[0].menuTypeId.toString();
+    let defaultValue ='0';
+    if (menutypes.length > 0) defaultValue = menus[0].menuTypeId.toString();
     return (
         <Tabs className="w-full" defaultValue={defaultValue}>
             <TabsList
@@ -63,6 +64,7 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ restaurantName, menus, menutypes })
                                         restaurantName={restaurantName} 
                                         storeId={item.storeId} 
                                         uri={item.menuImage ? item.menuImage : ''} 
+                                        menuId={item.id}
                                         name={item.name} 
                                         price={item.price} 
                                         description={item.description} 

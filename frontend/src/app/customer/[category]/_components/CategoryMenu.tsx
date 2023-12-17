@@ -40,6 +40,10 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
     const [restaurant, setRestaurant] = useState<MenuCategory[]>([]);
     const [restaurantNum, setRestaurantNum] = useState<number>(0);
     useEffect(() => {
+        if (!accessToken) return;
+        if (!categorys) return;
+        if (!categoryOption) return;
+        if (restaurant.length > 0) return;
         setRestaurant([]);
         setLoading(true);
         Promise.all(categorys.map(category =>
@@ -60,7 +64,7 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
                 console.error('Error fetching stores:', err);
                 setLoading(false);
             });
-    }, [accessToken, categorys, categoryOption]); // Dependency array
+    }, [accessToken, restaurant, categorys, categoryOption]); // Dependency array
     console.log(restaurant);
     const handleCategory = (value: string) => {
         //find id by name

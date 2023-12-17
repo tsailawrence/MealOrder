@@ -10,26 +10,29 @@ import {
   AccordionTriggerV2,
 } from "@/components/ui/accordion"
 import { getOrders } from "./_components/actions";
-import { Item } from "@/lib/types/db";
-type Order = {
+import { ItemDb } from "@/lib/types/db";
+
+interface Orders{
   id: number;
   name: string;
-  items: Item[];
-  time: string;
-  total: string;
+  orderItem: ItemDb[];
+  payment: string;
   status: string;
   pickupTime: string;
+  storeId: number;
 };
 const OrdersPage = () => {
   const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
-  const [orderData, setOrders] = useState<Order[] | null>(null);
+  const [orderData, setOrders] = useState<Orders[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { __session: accessToken = '' } = cookies;
   useEffect(() => {
     getOrders(accessToken)
       .then(data => {
+        console.log(data);
         setOrders(data); // Assuming 'data' is the array of orders
+
         setLoading(false);
       })
       .catch(err => {
@@ -46,11 +49,11 @@ const OrdersPage = () => {
           <AccordionItem key={`item-${index}`} value={`item-${index}`} className="w-full">
             <AccordionTriggerV2 className="w-full"><OrderTable key={index} order={order} /></AccordionTriggerV2>
             <AccordionContent >
-              {order.items.map((item, index) => (
+              {order.orderItem && order.orderItem.map((item, index) => (
                 <div key={index}>
-                  {item.name} ${item.price} x {item.quantity}
+                  {item.id} x {item.quantity} ${item.payment}
                   <div className="flex text-neutral-400" key={index}>
-                    note : {item.specialInstructions} {item.note}
+                    note : {item.specialInstructions || item.note ? (item.specialInstructions) : 'empty'}
                   </div>
                 </div>
               ))}

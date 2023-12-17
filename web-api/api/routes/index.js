@@ -227,7 +227,6 @@ router.get(
 router.get(
   "getMyFavoriteRestaurant",
   "/my/favoriteRestaurant",
-  "/my/favoriteRestaurant",
   validate({
     query: {
       accessToken: Joi.string().required(),

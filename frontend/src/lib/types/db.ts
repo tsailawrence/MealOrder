@@ -42,6 +42,7 @@ export type RestaurantCardProps = {
 };
 
 export type Item = {
+    menuId: number;
     name: string;
     price: number;
     quantity: number;
@@ -49,11 +50,31 @@ export type Item = {
     specialInstructions?: string[];
 };
 
+export type ItemDb = {
+    id: number;
+    menuId: number;
+    orderId: string;
+    payment: number;
+    quantity: number;
+    note?: string;
+    specialInstructions?: string[];
+};
+
+
+export type ItemToBackend = {
+    menuId: number;
+    payment: number;
+    quantity: number;
+    // note?: string;
+    // specialInstructions?: string[];
+    specialInstructions?: string;
+};
+
 export type CartCardProps = {
     storeId: number;
     payment: number;
     pickupTime: string;
-    items: Item[];
+    items: ItemToBackend[];
 };
 
 export interface LocationContextType {

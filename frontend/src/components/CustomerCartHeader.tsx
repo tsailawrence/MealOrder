@@ -89,6 +89,7 @@ const CustomerCartHeader = () => {
         } else {
           cart.items[index].quantity = Math.max(1, cart.items[index].quantity + change);
         }
+        console.log('cart:', cart);
         // Save the updated cart back to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         setCart(cart);
@@ -127,16 +128,21 @@ const CustomerCartHeader = () => {
     const ordersData: CartCardProps = {
       storeId: cart.storeId,
       payment: cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0),
-      items: cart.items,
+      items: cart.items.map((item) => ({
+        menuId: item.menuId,
+        quantity: item.quantity,
+        payment: item.price * item.quantity,
+        specialInstructions: item.note,
+      })),
       pickupTime: formatDateForMySQL(orders.pickupTime?.toString()),
     }
     console.log('ordersData:', ordersData);
-    addMyOrder(accessToken,ordersData);
+    // addMyOrder(accessToken,ordersData);
     //refresh the page
     // Delete cart from local storage
-    let newCart = { restaurantName: '', storeid: 0, items: [] }
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    console.log('newCart:', newCart);
+    // let newCart = { restaurantName: '', storeid: 0, items: [] }
+    // localStorage.setItem('cart', JSON.stringify(newCart));
+    // console.log('newCart:', newCart);
     // window.location.reload();
   }
   return (
@@ -226,9 +232,17 @@ const CustomerCartHeader = () => {
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="submit" onClick={handleSubmit}>Place Order</Button>
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              disabled={!dateTime || dateTime<new Date()}
+            >
+              Place Order
+            </Button>
           </SheetClose>
         </SheetFooter>
+        {cart.items.length === 0 && <div className='text-red-600 text-end'>Please add items to cart</div>}
+        {dateTime && dateTime<new Date() && <div className='text-red-600 text-end'>Please select a future pickup time</div>}
       </SheetContent>
     </Sheet>
   );

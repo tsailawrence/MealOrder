@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
 type Item = {
+    menuId: number;
     name: string;
     price: number;
     quantity: number;
@@ -24,7 +25,7 @@ type Item = {
 }
 type Cart = {
     restaurantName: string;
-    storeid: number;
+    storeId: number;
     items: Item[]; //item name, price, quantity
 }
 type CardPriceProps = {
@@ -32,11 +33,12 @@ type CardPriceProps = {
     restaurantName: string;
     uri: string;
     name: string;
+    menuId: number;
     price: number;
     description: string;
     specialInstructions?: SpecialInstruction[];
 }
-export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaurantName, uri, name, price, description }) => {
+export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaurantName, uri, name, menuId , price, description }) => {
     const [itemQuantity, setitemQuantity] = useState(1);
     // const [isOptionSelected, setIsOptionSelected] = useState(true);
     // const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -65,6 +67,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
     // };
     const addCart = () => {
         const newItem = {
+            menuId,
             name,
             price,
             quantity: itemQuantity,
@@ -74,24 +77,19 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
         console.log('newItem:', newItem);
         // Retrieve existing cart data from local storage
         let cart: Cart = JSON.parse(localStorage.getItem('cart') || '{}');
-
-        if (!cart || Object.keys(cart).length === 0) {
+        //cart storeid is different from current storeid or Empty, then clear cart
+        if (cart.storeId !== storeId || !cart.storeId) {
             cart = {
                 restaurantName: restaurantName,
-                storeid: storeId,
+                storeId: storeId,
                 items: []
             };
         }
         //if have same item, then add quantity
         let isSameItem = false;
-        // cart.items.forEach((item) => {
-        //     if (item.name === newItem.name && item.price === newItem.price && item.note === newItem.note && item.specialInstructions === newItem.specialInstructions) {
-        //         item.quantity += newItem.quantity;
-        //         isSameItem = true;
-        //     }
-        // });
+
         cart.items.forEach((item) => {
-            if (item.name === newItem.name && item.price === newItem.price && item.note === newItem.note) {
+            if (item.menuId === newItem.menuId && item.note === newItem.note) {
                 item.quantity += newItem.quantity;
                 isSameItem = true;
             }
@@ -197,11 +195,13 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
                     <Button
                         onClick={() => handleSubmit()}
                         // disabled={!isOptionSelected || itemQuantity < 1}
+                        disabled={itemQuantity < 1}
                         variant="destructive"
                     >
                         Add to Cart
                     </Button>
                 </DialogFooter>
+                {itemQuantity < 1 && <div className='text-red-600 text-end'>Please select at least one item</div>}
             </DialogContent>
         </Dialog>
     );
