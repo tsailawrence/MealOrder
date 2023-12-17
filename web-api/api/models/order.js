@@ -80,7 +80,6 @@ exports.getOrderByCustomerId = async ({ userId, fields = '*' }) =>{
             .select(fields)
             .from(TABLE_ITEM)
             .where('orderId', order.id)
-            .andWhere('token', token);;
 
             return {
                 ...order,
@@ -108,8 +107,7 @@ exports.getCurrentMonthOrderByCustomerId = async ({ userId, fields = '*' }) =>{
         const orderItem = await datastore
         .select(fields)
         .from(TABLE_ITEM)
-        .where('orderId', order.id)
-        .andWhere('token', token);;
+        .where('orderId', order.id);
 
         return {
             ...order,

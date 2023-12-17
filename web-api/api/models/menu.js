@@ -27,6 +27,12 @@ exports.getMenuByStoreId = ({ storeId, fields = '*' }) =>
         .from(TABLE_NAME)
         .where('storeId', storeId);
 
+exports.getMenuByMenuId = ({ menuId, fields = '*' }) =>
+    datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('id', menuId);
+
 exports.delete = async ({ menuId}) =>
     datastore
         .from(TABLE_NAME)
