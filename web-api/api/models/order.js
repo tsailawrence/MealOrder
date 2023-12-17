@@ -79,7 +79,7 @@ exports.getOrderByCustomerId = async ({ userId, fields = '*' }) => {
         const orderItem = await datastore
             .select(fields)
             .from(TABLE_ITEM)
-            .where('orderId', order.id);      
+            .where('orderId', order.id)
 
         return {
             ...order,
@@ -107,7 +107,7 @@ exports.getCurrentMonthOrderByCustomerId = async ({ userId, fields = '*' }) => {
         const orderItem = await datastore
             .select(fields)
             .from(TABLE_ITEM)
-            .where('orderId', order.id)
+            .where('orderId', order.id);
 
         return {
             ...order,

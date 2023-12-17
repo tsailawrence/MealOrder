@@ -53,6 +53,7 @@ export type Item = {
 export type ItemDb = {
     id: number;
     menuId: number;
+    name: string;
     orderId: string;
     payment: number;
     quantity: number;

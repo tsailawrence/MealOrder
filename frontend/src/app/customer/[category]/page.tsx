@@ -19,7 +19,6 @@ const RestaurantPage = () => {
             .then(data => {
                 setCategoryData(data);
                 setLoading(false);
-                console.log(data);
             })
             .catch(err => {
                 console.error('Error fetching orders:', err);

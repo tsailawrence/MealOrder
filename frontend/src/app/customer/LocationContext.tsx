@@ -13,7 +13,6 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) 
     useEffect(() => {
         const handleSuccess = async (position: GeolocationPosition) => {
             const { nowCity } = await getPlace(position.coords.latitude, position.coords.longitude);
-            console.log('nowCity:', nowCity);
             if (nowCity) {
                 setLocation(nowCity);
             }
