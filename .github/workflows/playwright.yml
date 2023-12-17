@@ -13,16 +13,24 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+
       - name: Build Docker image
         run: docker build -t myapp ./web-api
+
       - name: Start Docker container
         run: docker run -d --name myapp-container --network host myapp
+
       - name: Install dependencies
         run: npm ci
         working-directory: ./qa
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         working-directory: ./qa
+
+      - name: Check Docker container logs
+        run: docker logs myapp-container
+
       - name: Run Playwright tests
         run: npx playwright test
         working-directory: ./qa
