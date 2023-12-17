@@ -79,7 +79,11 @@ exports.getOrderByCustomerId = async ({ userId, fields = '*' }) => {
         const orderItem = await datastore
             .select(fields)
             .from(TABLE_ITEM)
+<<<<<<< HEAD
+            .where('orderId', order.id)
+=======
             .where('orderId', order.id);      
+>>>>>>> main
 
         return {
             ...order,
@@ -105,9 +109,15 @@ exports.getCurrentMonthOrderByCustomerId = async ({ userId, fields = '*' }) => {
 
     const theOrderWithItems = await Promise.all(orders.map(async (order) => {
         const orderItem = await datastore
+<<<<<<< HEAD
+        .select(fields)
+        .from(TABLE_ITEM)
+        .where('orderId', order.id);
+=======
             .select(fields)
             .from(TABLE_ITEM)
             .where('orderId', order.id)
+>>>>>>> main
 
         return {
             ...order,
