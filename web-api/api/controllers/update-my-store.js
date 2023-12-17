@@ -16,6 +16,7 @@ module.exports = async ctx => {
                 name,
                 category,
                 area,
+                uri,
             } = {}
         } = {}
     } = ctx;

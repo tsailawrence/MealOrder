@@ -21,6 +21,7 @@ module.exports = async ctx => {
                 description,
                 price,
                 menuTypeId,
+                uri,
             } = {}
         } = {}
     } = ctx;
