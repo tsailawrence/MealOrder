@@ -27,8 +27,7 @@ const OrderBox = () => {
   useEffect(() => {
     getAllOrders(accessToken)
       .then(data => {
-        setOrders(data); // Assuming 'data' is the array of orders
-        console.log(data);
+        setOrders(data);
         setLoading(false);
       })
       .catch(err => {

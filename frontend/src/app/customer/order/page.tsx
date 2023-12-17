@@ -46,7 +46,6 @@ const OrdersPage = () => {
   const handleDelete = async (orderId: number) => {
     // Call API to delete the item
     try {
-      console.log(orderId);
       await deleteMyOrder(accessToken, orderId);
       // Update orders by getting the latest data from the API
       const newOrders = await getOrders(accessToken);
@@ -61,7 +60,6 @@ const OrdersPage = () => {
     getOrders(accessToken)
       .then(data => {
         setOrders(data); // Assuming 'data' is the array of orders
-        console.log(data);
         setLoading(false);
       })
       .catch(err => {
@@ -70,7 +68,6 @@ const OrdersPage = () => {
         setLoading(false);
       });
   }, [accessToken]); // Dependency array
-  console.log(accessToken);
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Orders</h1>

@@ -78,7 +78,6 @@ export const deleteMenuType = async (
       throw new Error("AccessToken Not Exist.");
     }
 
-    console.log(accessToken);
     const { data: response } = await instance.post(
       `/my/store/${storeId}/delete/menu/type/${typeId}`,
       {},
