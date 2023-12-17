@@ -55,7 +55,6 @@ const RestaurantPage = () => {
         getRestaurantData(accessToken, id)
             .then(data => {
                 setRestaurant(data);
-                console.log(data);
                 setLoading(false);
             })
             .catch(err => {
@@ -64,8 +63,6 @@ const RestaurantPage = () => {
                 setLoading(false);
             });
     }, [accessToken, id]); // Dependency array
-    // Use 'id' to fetch data or for other purposes
-    console.log(restaurant);
     return (
         <>
             {loading ? <div>Loading...</div> :

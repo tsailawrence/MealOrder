@@ -81,6 +81,7 @@ exports.getOrderByCustomerId = async ({ userId, fields = "*" }) => {
         .select(fields)
         .from(TABLE_ITEM)
         .where("orderId", order.id);
+
       return {
         ...order,
         orderItem: orderItem,
@@ -109,6 +110,7 @@ exports.getCurrentMonthOrderByCustomerId = async ({ userId, fields = "*" }) => {
         .select(fields)
         .from(TABLE_ITEM)
         .where("orderId", order.id);
+
       return {
         ...order,
         orderItem: orderItem,
