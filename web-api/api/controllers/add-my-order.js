@@ -22,7 +22,7 @@ module.exports = async ctx => {
     await Order.insert({
         customerId: userId,
         storeId: storeId,
-        status: 'Comfirmed',
+        status: 'Confirmed',
         payment: payment,
         pickupTime: pickupTime,
     },items);

@@ -12,10 +12,14 @@ interface Orders {
   pickupTime: string;
   storeId: number;
 };
+function formatStatusForClass(status:string) {
+  return status.toLowerCase().replace(/\s+/g, '_');
+}
+
 export const OrderTable = ({ order }: { order: Orders }) => {
   let itemnumber = 0;
   if (order.orderItem) itemnumber = order.orderItem.length;
-
+  console.log(order);
   return (
     <div key={order.id} className={styles.orderItem}>
       <Image
@@ -27,9 +31,9 @@ export const OrderTable = ({ order }: { order: Orders }) => {
       />
       <div className={styles.details}>
         <h2 className={styles.title}>
-          {order.name}
+          {order.storeId}
         </h2>
-        <Link href={`/customer/restaurant/${order.name}`}>
+        <Link href={`/customer/restaurant/${order.storeId}`}>
           <span className="bg-red-400 text-white text-xs rounded-full p-1"> order again </span>
         </Link>
         <p
@@ -46,8 +50,7 @@ export const OrderTable = ({ order }: { order: Orders }) => {
         </div>
         <div className={styles.status}>
           <span
-            className={`${styles.statusBadge} ${styles[order.status.toLowerCase()]
-              }`}
+            className={`${styles.statusBadge} ${styles[formatStatusForClass(order.status)]}`}
           >
             {order.status}
           </span>
