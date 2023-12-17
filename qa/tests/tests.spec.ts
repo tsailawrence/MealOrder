@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const baseURL = "http://127.0.0.1:3001";
+const baseURL = "http://localhost:3001";
 const customerToken = "dev:id:12";
 const merchantToken = "dev:id:19";
 
