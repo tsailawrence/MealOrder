@@ -39,7 +39,6 @@ const PaymentsPage: React.FC = () => {
         getMyCurrentMonthPayment(accessToken)
             .then(data => {
                 setPayments(data); // Assuming 'data' is the array of orders
-                console.log(data);
                 setLoading(false);
             })
             .catch(err => {

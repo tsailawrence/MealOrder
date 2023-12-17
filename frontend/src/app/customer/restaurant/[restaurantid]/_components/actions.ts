@@ -21,17 +21,17 @@ export const getRestaurantData = async (accessToken: string, id: string) => {
 }
 
 export async function addMyFavoriteRestaurant(accessToken: string, id: number) {
-    // Register
     try {
         if (!accessToken) {
             throw new Error('AccessToken Not Exist.')
         }
         const { data: response } = await instance.post(
             `/my/favoriteStore/add/${id}`,
+            {},
             {
                 params: {
-                    accessToken,
-                },
+                    accessToken
+                }
             }
         )
         return response.data;

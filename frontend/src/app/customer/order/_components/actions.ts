@@ -34,3 +34,20 @@ export const getNamebyId = async (accessToken:string, id:string) => {
         console.log('getNamebyId error', err);
     }
 }
+
+export const deleteMyOrder = async (accessToken:string, orderId:number) => {
+    try {
+        if (!accessToken) {
+            throw new Error('AccessToken Not Exist.');
+        }
+        const { data: response } = await instance.post(`/my/order/delete/${orderId}`, {}, {
+            params: {
+                accessToken,
+            },
+        });
+        return response.data;
+    }
+    catch (err) {
+        console.log('deleteMyOrder error', err);
+    }
+}

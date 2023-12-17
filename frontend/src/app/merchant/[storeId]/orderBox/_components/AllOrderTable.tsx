@@ -177,15 +177,12 @@ export function AllOrderTable({ orders }: AllOrderTableProps) {
     // Process the date range
     //change Date to epich time
     table.getColumn("time")?.setFilterValue(dateRange.from?.toString())
-    console.log(table.getColumn("time")?.getFilterValue());
   }
   function handleDatePickupChange(dateRange: DateRange) {
     // Process the date range
     dateRange.from
     console.log("Selected Pickup Date Range:", dateRange);
-    console.log(dateRange.from?.toString());
     table.getColumn("pickupTime")?.setFilterValue(dateRange.from?.toString())
-    console.log(table.getColumn("pickupTime")?.getFilterValue());
   }
   return (
     <div className="w-full">
