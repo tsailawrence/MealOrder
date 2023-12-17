@@ -13,9 +13,10 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import { Separator } from '@radix-ui/react-separator';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type Item = {
+    menuId: number;
     name: string;
     price: number;
     quantity: number;
@@ -24,19 +25,23 @@ type Item = {
 }
 type Cart = {
     restaurantName: string;
+    storeId: number;
     items: Item[]; //item name, price, quantity
 }
 type CardPriceProps = {
+    storeId: number;
     restaurantName: string;
     uri: string;
     name: string;
+    menuId: number;
     price: number;
+    description: string;
     specialInstructions?: SpecialInstruction[];
 }
-export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, uri, name, price, specialInstructions }) => {
+export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaurantName, uri, name, menuId , price, description }) => {
     const [itemQuantity, setitemQuantity] = useState(1);
-    const [isOptionSelected, setIsOptionSelected] = useState(true);
-    const [selectedOption, setSelectedOption] = useState<string[]>([]);
+    // const [isOptionSelected, setIsOptionSelected] = useState(true);
+    // const [selectedOption, setSelectedOption] = useState<string[]>([]);
     const [textAreaValue, setTextAreaValue] = useState('');
     const handleDecrease = () => {
         if (itemQuantity >= 1) setitemQuantity(itemQuantity - 1);
@@ -56,32 +61,35 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
         window.location.reload(); // Refresh the page
     }
 
-    const handleSelectionsChange = (selectedOptions: string[]) => {
-        // Process the selectedOptions array as needed
-        setSelectedOption(selectedOptions);
-    };
+    // const handleSelectionsChange = (selectedOptions: string[]) => {
+    //     // Process the selectedOptions array as needed
+    //     setSelectedOption(selectedOptions);
+    // };
     const addCart = () => {
         const newItem = {
+            menuId,
             name,
             price,
             quantity: itemQuantity,
             note: textAreaValue,
-            specialInstructions: selectedOption || [],
+            // specialInstructions: selectedOption || [],
         }
         console.log('newItem:', newItem);
         // Retrieve existing cart data from local storage
         let cart: Cart = JSON.parse(localStorage.getItem('cart') || '{}');
-
-        if (!cart || Object.keys(cart).length === 0) {
+        //cart storeid is different from current storeid or Empty, then clear cart
+        if (cart.storeId !== storeId || !cart.storeId) {
             cart = {
                 restaurantName: restaurantName,
+                storeId: storeId,
                 items: []
             };
         }
         //if have same item, then add quantity
         let isSameItem = false;
+
         cart.items.forEach((item) => {
-            if (item.name === newItem.name && item.price === newItem.price && item.note === newItem.note && item.specialInstructions === newItem.specialInstructions) {
+            if (item.menuId === newItem.menuId && item.note === newItem.note) {
                 item.quantity += newItem.quantity;
                 isSameItem = true;
             }
@@ -99,7 +107,8 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
         console.log('Item added to cart:', newItem);
         console.log('Updated cart:', cart.items);
     }
-
+    let cart: Cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    const totalcost = cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0)
     return (
         <Dialog>
             <DialogTrigger
@@ -151,9 +160,9 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                         </div>
                     </DialogTitle>
                     <DialogDescription>
-                        Food Description if needed
+                        {description}
                     </DialogDescription>
-                    {specialInstructions && <SpecialInstruction specialInstructions={specialInstructions} onOptionChange={setIsOptionSelected} onSelectionsChange={handleSelectionsChange} />}
+                    {/* {specialInstructions && <SpecialInstruction specialInstructions={specialInstructions} onOptionChange={setIsOptionSelected} onSelectionsChange={handleSelectionsChange} />} */}
                     <div className='pt-5 font-bold text-left'>note:</div>
                     <Textarea value={textAreaValue} onChange={handleTextAreaChange} />
                     <div className="self-stretch flex w-full items-center justify-between gap-5 mt-6 max-md:max-w-full max-md:flex-wrap">
@@ -162,7 +171,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                         </div>
                         <div className="self-stretch flex items-center justify-between gap-5 max-md:justify-center">
                             <Button
-                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg mt-1"
+                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg mt-2"
                                 onClick={() => handleDecrease()}
                                 aria-label="Product Image"
                             >
@@ -172,7 +181,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                                 {itemQuantity}
                             </div>
                             <Button
-                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg mt-1"
+                                className="items-stretch border self-stretch flex aspect-square flex-col p-3 rounded-lg mt-2"
                                 onClick={() => handleAdd()}
                                 aria-label="Product Image"
                             >
@@ -180,17 +189,19 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ restaurantName, u
                             </Button>
                         </div>
                     </div>
-                    <div>Total Cost : </div>
+                    <div className='text-neutral-400 text-end'>Total Cost : {totalcost + price * itemQuantity}</div>
                 </DialogHeader>
                 <DialogFooter>
                     <Button
                         onClick={() => handleSubmit()}
-                        disabled={!isOptionSelected || itemQuantity < 1}
+                        // disabled={!isOptionSelected || itemQuantity < 1}
+                        disabled={itemQuantity < 1}
                         variant="destructive"
                     >
                         Add to Cart
                     </Button>
                 </DialogFooter>
+                {itemQuantity < 1 && <div className='text-red-600 text-end'>Please select at least one item</div>}
             </DialogContent>
         </Dialog>
     );

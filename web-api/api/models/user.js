@@ -26,6 +26,12 @@ exports.getUserByUserId = ({ userId, fields = '*' }) =>
         .from(TABLE_NAME)
         .where('userId', userId);
 
+exports.getUserBySenderId = ({ senderId, fields = '*' }) =>
+    datastore
+        .select(fields)
+        .from(TABLE_NAME)
+        .where('senderId', senderId);
+
 exports.getUserById = ({ id, fields = '*' }) =>
     datastore
         .select(fields)
@@ -54,6 +60,12 @@ exports.updateByUserId = async ({ userId, data }) =>
         .update(data)
         .from(TABLE_NAME)
         .where('userId', userId);
+
+exports.updateById = async ({ id, data }) =>
+    datastore
+        .update(data)
+        .from(TABLE_NAME)
+        .where('id', id);
 
 exports.deleteByUserId = async ({ userId, data }) =>
     datastore

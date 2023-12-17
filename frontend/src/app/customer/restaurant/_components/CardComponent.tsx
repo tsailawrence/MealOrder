@@ -34,10 +34,10 @@ const CartTemplate = {
     item:[], //item name, price, quantity
 }
 
-export const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, likes = false }) => {
-
+export const CardComponent: React.FC<CardProps> = ({ id, uri, name, starNumber, likes = false }) => {
+    const RestauarantId = id.toString();
     return (
-        <Link href="/customer/restaurant/restaurant_id" >
+        <Link href={`/customer/restaurant/${RestauarantId}`} >
             <div className="flex flex-col items-center w-full max-w-xs mx-auto bg-white rounded-2xl overflow-hidden shadow-lg max-md:w-full">
                 <div className="w-full">
                     <div className="relative w-full h-0" style={{ paddingBottom: '84%' }}>

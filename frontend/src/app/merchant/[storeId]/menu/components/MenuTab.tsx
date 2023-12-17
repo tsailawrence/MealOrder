@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { useCookies } from "react-cookie";
-import { toast } from "react-hot-toast";
 
 import {
   ContextMenu,
@@ -12,11 +10,6 @@ import {
 } from "@/components/ui/context-menu";
 import { TabsTrigger } from "@/components/ui/tabs2";
 import { Pencil, Trash2 } from "lucide-react";
-import {
-  deleteMenuType,
-  updateMenuType,
-} from "@/app/merchant/[storeId]/menu/components/actions";
-import { useParams } from "next/navigation";
 
 export type MenuTabProps = {
   categoryId: string;
@@ -31,14 +24,6 @@ export const MenuTab: React.FC<MenuTabProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [cookies, setCookie] = useCookies([
-    "refreshToken",
-    "accessToken",
-    "__session",
-  ]);
-  const { __session: accessToken = "" } = cookies;
-  const params = useParams();
-
   return (
     <ContextMenu>
       <ContextMenuTrigger>

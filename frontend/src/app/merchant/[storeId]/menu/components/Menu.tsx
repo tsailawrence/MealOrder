@@ -13,12 +13,7 @@ import { MenuTab } from "@/app/merchant/[storeId]/menu/components/MenuTab";
 import { MenuTypeModal } from "@/app/merchant/[storeId]/menu/components/MenuTypeModal";
 import { ProductSheet } from "@/app/merchant/[storeId]/menu/components/ProductSheet";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs2";
+import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs2";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { ProductCard } from "./ProductCard";
@@ -41,7 +36,6 @@ export const Menu = () => {
   const fetchMenu = () => {
     getMenu(accessToken, params.storeId)
       .then((data) => {
-        console.log(data);
         setMenuType(data.menuTypes);
         setProducts(data.menus);
       })

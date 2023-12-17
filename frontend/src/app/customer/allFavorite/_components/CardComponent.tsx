@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { CardProps } from '@/lib/types/db';
 import { Heart } from 'lucide-react';
 
-export const CardComponent: React.FC<CardProps> = ({ uri, name, starNumber, likes = false }) => {
+export const CardComponent: React.FC<CardProps> = ({id, uri, name, starNumber, likes = true}) => {
 
     return (
-        <Link href="/customer/restaurant/restaurant_id" >
+        <Link href={`/customer/restaurant/${id}`} >
             <div className="flex flex-col items-center w-[95%] max-w-xs mx-auto bg-white rounded-2xl overflow-hidden shadow-lg ">
                 <div className="w-full">
                     <div className="relative w-full h-0" style={{ paddingBottom: '84%' }}>

@@ -114,7 +114,6 @@ export const ProductSheet = ({
   }, [open, productInfo, form.reset, menuTypes]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
       setLoading(true);
       if (productInfo) {
@@ -147,6 +146,23 @@ export const ProductSheet = ({
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      if (productInfo) {
+        await deleteProduct(accessToken, params.storeId, productInfo.id);
+        toast.success("Product deleted");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong when deleting product");
+    } finally {
+      onChange();
+      setLoading(false);
+      setOpen(false);
+    }
+  };
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetContent>
@@ -167,12 +183,27 @@ export const ProductSheet = ({
                     <FormItem>
                       <FormLabel>Image</FormLabel>
                       <FormControl>
-                        <Input type="file" disabled={loading} {...field} />
+                        <Input
+                          type="file"
+                          disabled={loading}
+                          onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                              const file = e.target.files[0];
+                              const reader = new FileReader();
+                              reader.onloadend = () => {
+                                const base64String = reader.result;
+                                form.setValue("uri", base64String);
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
                 <FormField
                   control={form.control}
                   name="name"
@@ -257,6 +288,17 @@ export const ProductSheet = ({
                   )}
                 />
                 <div className="pt-5 space-x-2 flex items-center justify-end w-full">
+                  {productInfo && (
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      disabled={loading}
+                      className="mr-auto"
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  )}
                   <Button
                     type="button"
                     disabled={loading}

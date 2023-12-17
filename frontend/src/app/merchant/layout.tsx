@@ -1,3 +1,4 @@
+import React from "react";
 import { ToastProvider } from "@/providers/toast-provider";
 import MerchantHeader from "@/app/merchant/components/MerchantHeader";
 

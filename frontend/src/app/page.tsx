@@ -1,5 +1,7 @@
+import React from "react";
 import { auth, currentUser } from "@clerk/nextjs";
 import ChooseRoleDialog from "@/components/ChooseRoleDialog";
+
 
 export default async function Home() {
   // Get the userId from auth() -- if null, the user is not logged in
