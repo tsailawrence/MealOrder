@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/accordion"
 import { getOrders, deleteMyOrder } from "./_components/actions";
 import { ItemDb } from "@/lib/types/db";
+import { Trash2 } from 'lucide-react';
+
 
 type StoreInfo = {
   area: string;
@@ -90,14 +92,16 @@ const OrdersPage = () => {
                     </div>
                   ))}
                 </div>
-                <div>
-                  <button
-                    className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
-                    onClick={() => handleDelete(order.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
+                {order.status === 'Confirmed' &&
+                  <div>
+                    <button
+                      className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                      onClick={() => handleDelete(order.id)}
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
+                }
               </div>
             </AccordionContent>
           </AccordionItem>
