@@ -30,7 +30,6 @@ const OrdersPage = () => {
   useEffect(() => {
     getOrders(accessToken)
       .then(data => {
-        console.log(data);
         setOrders(data); // Assuming 'data' is the array of orders
 
         setLoading(false);

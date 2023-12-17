@@ -19,7 +19,6 @@ function formatStatusForClass(status:string) {
 export const OrderTable = ({ order }: { order: Orders }) => {
   let itemnumber = 0;
   if (order.orderItem) itemnumber = order.orderItem.length;
-  console.log(order);
   return (
     <div key={order.id} className={styles.orderItem}>
       <Image
