@@ -43,7 +43,7 @@ module.exports = async ctx => {
     
             return {
                 ...orderItem,
-                menuInfo: theMenu
+                name: theMenu.name
             }
     
     
