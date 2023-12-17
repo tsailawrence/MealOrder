@@ -61,6 +61,12 @@ exports.updateByUserId = async ({ userId, data }) =>
         .from(TABLE_NAME)
         .where('userId', userId);
 
+exports.updateById = async ({ id, data }) =>
+    datastore
+        .update(data)
+        .from(TABLE_NAME)
+        .where('id', id);
+
 exports.deleteByUserId = async ({ userId, data }) =>
     datastore
         .del()

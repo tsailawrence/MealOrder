@@ -25,6 +25,8 @@ const getMyOrder = require("../controllers/get-my-order");
 const getMyCurrentMonthPayment = require("../controllers/get-my-current-month-payment");
 const addMyStore = require("../controllers/add-my-store");
 const getMyStore = require("../controllers/get-my-store");
+const lineBinding = require("../controllers/handle-line-binding");
+
 const updateMyStore  = require('../controllers/update-my-store')
 const updateMyStoreOrder  = require('../controllers/update-my-store-order')
 const deleteMyOrder   = require('../controllers/delete-my-order')
@@ -338,6 +340,23 @@ router.post(
   }),
   verifyClerk,
   addMyStore
+);
+
+router.post(
+  "lineBinding",
+  "/line/:lineId",
+  validate({
+    query: {
+      accessToken: Joi.string()
+        .required(),
+    },
+    params: {
+      lineId: Joi.string()
+          .required()
+    }
+  }),
+  verifyClerk,
+  lineBinding
 );
 
 router.post(
