@@ -13,6 +13,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Build Docker image
+        run: docker build -t myapp ./web-api
+      - name: Start Docker container
+        run: docker run -d --name myapp-container -p 3001:3001 myapp
       - name: Install dependencies
         run: npm ci
         working-directory: ./qa
@@ -22,6 +26,11 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
         working-directory: ./qa
+      - name: Stop and remove Docker container
+        if: always()
+        run: |
+          docker stop myapp-container
+          docker rm myapp-container
       - uses: actions/upload-artifact@v3
         if: always()
         with:
