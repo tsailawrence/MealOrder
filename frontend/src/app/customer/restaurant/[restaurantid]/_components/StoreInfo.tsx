@@ -14,7 +14,7 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
     phoneNumber,
     area,
 }) => {
-    const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+    const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
     const { __session: accessToken = '' } = cookies;
     return (
         <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">

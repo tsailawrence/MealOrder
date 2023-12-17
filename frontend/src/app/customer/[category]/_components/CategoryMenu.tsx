@@ -65,7 +65,6 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
                 setLoading(false);
             });
     }, [accessToken, restaurant, categorys, categoryOption]); // Dependency array
-    console.log(restaurant);
     const handleCategory = (value: string) => {
         //find id by name
         const id = categorys.find((category) => category.categoryName === value)?.id;
