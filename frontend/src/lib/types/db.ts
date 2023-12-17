@@ -53,7 +53,7 @@ export type CartCardProps = {
     storeId: number;
     payment: number;
     pickupTime: string;
-    item: Item[];
+    items: Item[];
 };
 
 export interface LocationContextType {

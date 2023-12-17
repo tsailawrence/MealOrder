@@ -5,18 +5,28 @@ import { useParams } from 'next/navigation';
 import StoreInfo from './_components/StoreInfo';
 import StoreMenu from './_components/StoreMenu';
 import { restaurantData } from '@/app/dbTemplate/cardData';
-import { getRestaurantData } from './_components/actions';
+import { getRestaurantData, getMenu } from './_components/actions';
 
 interface MenuItem {
     id: number;
     name: string;
+    menuImage: string;
     description: string;
     price: number;
     storeId: number;
     menuTypeId: number;
-    amount: number;
     onShelfStatus: number;
     updated_time: string;
+}
+
+type menuType = {
+    id: number,
+    type: string
+}
+
+interface MenuCategory {
+    category: menuType[];
+    items: MenuItem[];
 }
 
 interface Store {
@@ -29,6 +39,7 @@ interface Store {
     favoriteCount: number;
     category: number;
     menu: MenuItem[];
+    menuTypes: menuType[];
 }
 
 const RestaurantPage = () => {
@@ -54,13 +65,14 @@ const RestaurantPage = () => {
             });
     }, [accessToken, id]); // Dependency array
     // Use 'id' to fetch data or for other purposes
+    console.log(restaurant);
     return (
         <>
             {loading ? <div>Loading...</div> :
                 (restaurant ?
                     <>
-                        <StoreInfo id={restaurant.id} name={restaurant.name} area={restaurant.area} phoneNumber={restaurant.phoneNumber} starNumber={restaurant.favoriteCount} imageSrc={restaurantData[0].uri}/>
-                        <StoreMenu restaurantName={restaurantData[0].name} menu={restaurantData[0].menu} />
+                        <StoreInfo id={restaurant.id} name={restaurant.name} area={restaurant.area} phoneNumber={restaurant.phoneNumber} starNumber={restaurant.favoriteCount} imageSrc={restaurantData[0].uri} />
+                        <StoreMenu restaurantName={restaurant.name} menus={restaurant.menu} menutypes={restaurant.menuTypes}/>
                     </>
                     : <div>No data</div>
                 )

@@ -26,14 +26,13 @@ interface MenuCategory {
 
 // Define the structure of the restaurant data
 interface TabsDemoProps {
-    category: CategoryProps[];
+    categorys: CategoryProps[];
     defaultId: number;
-    defaultValue: string;
 }
 
 // Define the props for TabsDemo component
 
-const CategoryMenu: React.FC<TabsDemoProps> = ({ category, defaultId, defaultValue }) => {
+const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
     const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
     const [loading, setLoading] = useState(true);
     const { __session: accessToken = '' } = cookies;
@@ -41,27 +40,35 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ category, defaultId, defaultVal
     const [restaurant, setRestaurant] = useState<MenuCategory[]>([]);
     const [restaurantNum, setRestaurantNum] = useState<number>(0);
     useEffect(() => {
-        // getStores(accessToken) get all store info
         setRestaurant([]);
-        category.map((category) => (
-            getStores(accessToken, category.id)
-                .then(data => {
-                    setRestaurant((restaurant) => [...restaurant, { categoryName: category.categoryName, items: data }]);
-                    if (category.id === categoryOption) {
-                        setRestaurantNum(data.length);
-                    }
-                    setLoading(false);
-                })
-                .catch(err => {
-                    console.error('Error fetching orders:', err);
-                }))
-        );
-
-    }, [accessToken, category, categoryOption]); // Dependency array
+        setLoading(true);
+        Promise.all(categorys.map(category =>
+            getStores(accessToken, category.id).then(data => ({
+                categoryName: category.categoryName,
+                items: data,
+                count: category.id === categoryOption ? data.length : 0
+            }))
+        ))
+            .then(results => {
+                setRestaurant(results);
+                // Calculate the total count for the specified category
+                const totalCount = results.reduce((acc, curr) => curr.count > 0 ? curr.count : acc, 0);
+                setRestaurantNum(totalCount);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Error fetching stores:', err);
+                setLoading(false);
+            });
+    }, [accessToken, categorys, categoryOption]); // Dependency array
+    console.log(restaurant);
     const handleCategory = (value: string) => {
         //find id by name
-        const id = category.find((category) => category.categoryName === value)?.id;
+        const id = categorys.find((category) => category.categoryName === value)?.id;
         setCategory(id || 0);
+    }
+    const idToName = (id: number) => {
+        return categorys.find((category) => category.id === id)?.categoryName;
     }
     return (
         <>
@@ -70,9 +77,9 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ category, defaultId, defaultVal
                     <div className="flex grow basis-[0%] flex-col items-stretch mt-2.5 self-start">
                         <div className="flex justify-between gap-4">
                             <h1 className="text-black text-3xl font-semibold mt-3">
-                                {categoryOption ? category.find((category) => category.id === categoryOption)?.categoryName : "All"}
+                                {categoryOption ? categorys.find((category) => category.id === categoryOption)?.categoryName : "All"}
                             </h1>
-                            { categoryOption ? <div className="flex gap-2">
+                            {categoryOption ? <div className="flex gap-2">
                                 <div className="text-red-600 text-2xl font-black mt-5">
                                     <Utensils />
                                 </div>
@@ -84,19 +91,19 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ category, defaultId, defaultVal
                     </div>
                 </div>
             </article>
-            <Tabs className="w-full" defaultValue={defaultValue} onValueChange={(value) => handleCategory(value)}>
+            <Tabs className="w-full" defaultValue={idToName(defaultId)} onValueChange={(value) => handleCategory(value)}>
                 <TabsList
                     className="grid grid-flow-col mt-6 overflow-x-auto"
                     style={{ gridAutoColumns: 'minmax(100px, 1fr)' }}
                 >
                     <TabsTrigger value="all" >All</TabsTrigger>
-                    {category.map((category) => (
+                    {categorys.map((category) => (
                         <TabsTrigger key={category.id} value={category.categoryName}>{category.categoryName}</TabsTrigger>
                     ))}
                 </TabsList>
                 <TabsContent value="all" >
                     <div className="flex flex-wrap w-full mt-6">
-                        {restaurant.map((category, index) => (
+                        {restaurant.map((category) => (
                             category.items.map((item, itemIndex) => (
                                 <div key={itemIndex} className="flex-none w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-[250px] mb-3">
                                     <CardComponent id={item.id} uri={item.storeImage ? item.storeImage : ''} name={item.name} starNumber={item.favoriteCount} />

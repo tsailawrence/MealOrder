@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useParams } from 'next/navigation';
 import CategoryMenu from './_components/CategoryMenu';
-import { getStores, getCategorys } from './_components/actions';
+import { getCategorys } from './_components/actions';
 import { CategoryProps } from '@/lib/types/db';
+import { ca } from 'date-fns/locale';
 
 const RestaurantPage = () => {
     const { category } = useParams();
@@ -28,7 +29,7 @@ const RestaurantPage = () => {
     return (
         <>
             {loading||categoryData===null ? <div>Loading...</div> :
-                (<CategoryMenu category={categoryData} defaultValue={categoryString} defaultId={1} />)
+                (<CategoryMenu categorys={categoryData} defaultId={Number(categoryString)} />)
             }
         </>
     );

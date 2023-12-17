@@ -46,14 +46,12 @@ export async function addMyOrder(accessToken: string, cart: CartCardProps) {
         }
         const { data: response } = await instance.post(
             `/my/order/add`,
+            cart,
             {
-                path:{
-                    accessToken
+                params: {
+                    accessToken,
                 },
-                data:{
-                    cart
-                }
-            },
+            }
         )
         return response.data;
     } catch (err) {
