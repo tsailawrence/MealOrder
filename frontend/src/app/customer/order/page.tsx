@@ -12,6 +12,18 @@ import {
 import { getOrders } from "./_components/actions";
 import { ItemDb } from "@/lib/types/db";
 
+type StoreInfo = {
+  area: string;
+  category: number;
+  emailAddress: string;
+  favoriteCount: number;
+  id: number;
+  name: string;
+  phoneNumber: string;
+  storeImage: string;
+  userId: number;
+};
+
 interface Orders{
   id: number;
   name: string;
@@ -20,6 +32,7 @@ interface Orders{
   status: string;
   pickupTime: string;
   storeId: number;
+  storeInfo: StoreInfo;
 };
 const OrdersPage = () => {
   const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
@@ -31,7 +44,7 @@ const OrdersPage = () => {
     getOrders(accessToken)
       .then(data => {
         setOrders(data); // Assuming 'data' is the array of orders
-
+        console.log(data);
         setLoading(false);
       })
       .catch(err => {
@@ -50,7 +63,7 @@ const OrdersPage = () => {
             <AccordionContent >
               {order.orderItem && order.orderItem.map((item, index) => (
                 <div key={index}>
-                  {item.id} x {item.quantity} ${item.payment}
+                  {item.name} x {item.quantity} ${item.payment}
                   <div className="flex text-neutral-400" key={index}>
                     note : {item.specialInstructions || item.note ? (item.specialInstructions) : 'empty'}
                   </div>

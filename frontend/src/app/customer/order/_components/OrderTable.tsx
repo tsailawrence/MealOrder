@@ -3,7 +3,19 @@ import styles from "./orders.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { ItemDb } from "@/lib/types/db";
-interface Orders {
+type StoreInfo = {
+  area: string;
+  category: number;
+  emailAddress: string;
+  favoriteCount: number;
+  id: number;
+  name: string;
+  phoneNumber: string;
+  storeImage: string;
+  userId: number;
+};
+
+interface Orders{
   id: number;
   name: string;
   orderItem: ItemDb[];
@@ -11,6 +23,7 @@ interface Orders {
   status: string;
   pickupTime: string;
   storeId: number;
+  storeInfo: StoreInfo;
 };
 function formatStatusForClass(status:string) {
   return status.toLowerCase().replace(/\s+/g, '_');
@@ -30,7 +43,7 @@ export const OrderTable = ({ order }: { order: Orders }) => {
       />
       <div className={styles.details}>
         <h2 className={styles.title}>
-          {order.storeId}
+          {order.storeInfo.name}
         </h2>
         <Link href={`/customer/restaurant/${order.storeId}`}>
           <span className="bg-red-400 text-white text-xs rounded-full p-1"> order again </span>
