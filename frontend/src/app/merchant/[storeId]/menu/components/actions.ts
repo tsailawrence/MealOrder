@@ -53,9 +53,9 @@ export const updateMenuType = async (
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
     }
-    const { data: response } = await instance.put(
-      `/my/store/${storeId}/menu/type/${typeId}`,
-      data,
+    const { data: response } = await instance.post(
+      `/my/store/${storeId}/update/menu/type/${typeId}`,
+      { value: data.type },
       {
         params: {
           accessToken,
@@ -77,8 +77,11 @@ export const deleteMenuType = async (
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
     }
-    const { data: response } = await instance.delete(
-      `/my/store/${storeId}/menu/type/${typeId}`,
+
+    console.log(accessToken);
+    const { data: response } = await instance.post(
+      `/my/store/${storeId}/delete/menu/type/${typeId}`,
+      {},
       {
         params: {
           accessToken,
@@ -122,11 +125,12 @@ export const updateProduct = async (
   data: any
 ) => {
   try {
+    data.menuTypeId = parseInt(data.menuTypeId);
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
     }
-    const { data: response } = await instance.put(
-      `/my/store/${storeId}/menu/${productId}`,
+    const { data: response } = await instance.post(
+      `/my/store/update/${storeId}/menu/${productId}`,
       data,
       {
         params: {
@@ -149,8 +153,9 @@ export const deleteProduct = async (
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
     }
-    const { data: response } = await instance.delete(
-      `/my/store/${storeId}/menu/${productId}`,
+    const { data: response } = await instance.post(
+      `/my/store/delete/${storeId}/menu/${productId}`,
+      {},
       {
         params: {
           accessToken,
@@ -163,45 +168,45 @@ export const deleteProduct = async (
   }
 };
 
-export const getMenuHour = async (accessToken: string, storeId: string) => {
-  try {
-    if (!accessToken) {
-      throw new Error("AccessToken Not Exist.");
-    }
-    const { data: response } = await instance.get(
-      `/my/store/${storeId}/menu/hour`,
-      {
-        params: {
-          accessToken,
-        },
-      }
-    );
-    return response.data;
-  } catch (err) {
-    return;
-  }
-};
+// export const getMenuHour = async (accessToken: string, storeId: string) => {
+//   try {
+//     if (!accessToken) {
+//       throw new Error("AccessToken Not Exist.");
+//     }
+//     const { data: response } = await instance.get(
+//       `/my/store/${storeId}/menu/hour`,
+//       {
+//         params: {
+//           accessToken,
+//         },
+//       }
+//     );
+//     return response.data;
+//   } catch (err) {
+//     return;
+//   }
+// };
 
-export const updateMenuHour = async (
-  accessToken: string,
-  storeId: string,
-  data: any
-) => {
-  try {
-    if (!accessToken) {
-      throw new Error("AccessToken Not Exist.");
-    }
-    const { data: response } = await instance.put(
-      `/my/store/${storeId}/menu/hour`,
-      data,
-      {
-        params: {
-          accessToken,
-        },
-      }
-    );
-    return response.data;
-  } catch (err) {
-    return;
-  }
-};
+// export const updateMenuHour = async (
+//   accessToken: string,
+//   storeId: string,
+//   data: any
+// ) => {
+//   try {
+//     if (!accessToken) {
+//       throw new Error("AccessToken Not Exist.");
+//     }
+//     const { data: response } = await instance.put(
+//       `/my/store/${storeId}/menu/hour`,
+//       data,
+//       {
+//         params: {
+//           accessToken,
+//         },
+//       }
+//     );
+//     return response.data;
+//   } catch (err) {
+//     return;
+//   }
+// };

@@ -2,19 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { toast } from "react-hot-toast";
 import { useParams } from "next/navigation";
 
-import { getMenu } from "@/app/merchant/[storeId]/menu/components/actions";
+import {
+  getMenu,
+  deleteMenuType,
+} from "@/app/merchant/[storeId]/menu/components/actions";
 import { MenuTab } from "@/app/merchant/[storeId]/menu/components/MenuTab";
 import { MenuTypeModal } from "@/app/merchant/[storeId]/menu/components/MenuTypeModal";
 import { ProductSheet } from "@/app/merchant/[storeId]/menu/components/ProductSheet";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs2";
+import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs2";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { ProductCard } from "./ProductCard";
@@ -37,13 +36,24 @@ export const Menu = () => {
   const fetchMenu = () => {
     getMenu(accessToken, params.storeId)
       .then((data) => {
-        console.log(data);
         setMenuType(data.menuTypes);
         setProducts(data.menus);
       })
       .catch((err) => {
         console.error("Error fetching menu:", err);
       });
+  };
+
+  const onDelete = async (menuTypeId) => {
+    try {
+      await deleteMenuType(accessToken, params.storeId, menuTypeId);
+      toast.success("Category deleted");
+    } catch (error) {
+      toast.error("Something went wrong deleting the category");
+      console.log(error);
+    } finally {
+      fetchMenu();
+    }
   };
 
   useEffect(() => {
@@ -82,6 +92,9 @@ export const Menu = () => {
                   onEdit={() => {
                     setMenuTypeModalOpen(true);
                     setEditMenuType(type);
+                  }}
+                  onDelete={() => {
+                    onDelete(type.id);
                   }}
                 />
               ))}

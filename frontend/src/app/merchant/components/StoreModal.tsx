@@ -95,7 +95,11 @@ export const StoreModal = ({ open, setOpen, storeInfo }: StoreModalProps) => {
     try {
       setLoading(true);
       if (storeInfo) {
-        const store = await updateStore(accessToken, values);
+        const store = await updateStore(
+          accessToken,
+          storeInfo.id.toString(),
+          values
+        );
         if (store) {
           toast.success("Store updated");
         }

@@ -5,6 +5,7 @@ const Joi = require("joi");
 
 const { rejectTheRequest } = require("../utils/error");
 const { auth, verifyClerk } = require("../middleware/index");
+
 const getMyInfo = require("../controllers/get-my-info");
 const register = require("../controllers/register");
 const clerkRegister = require("../controllers/clerk-register");
@@ -226,6 +227,7 @@ router.get(
 router.get(
   "getMyFavoriteRestaurant",
   "/my/favoriteRestaurant",
+  "/my/favoriteRestaurant",
   validate({
     query: {
       accessToken: Joi.string().required(),
@@ -372,15 +374,15 @@ router.post(
 );
 
 router.post(
-    'updateMyStoreOrder',
-    '/my/store/updateOrder/:orderId',
-    validate({
-        query: {
-            accessToken: Joi.string().required(),
-        },
-    }),
-    verifyClerk,
-    updateMyStoreOrder
+  "updateMyStoreOrder",
+  "/my/store/updateOrder/:orderId",
+  validate({
+    query: {
+      accessToken: Joi.string().required(),
+    },
+  }),
+  verifyClerk,
+  updateMyStoreOrder
 );
 
 router.post(
