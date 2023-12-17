@@ -26,9 +26,11 @@
     }
   },
   "sendgrid": {
-    "cloudinary": {
-      "sendgridApiKey": "dsfbt6sdd",
-      "sendgridAccount": "asdasd"
-    }
+    "sendgridApiKey": "dsfbt6sdd",
+    "sendgridAccount": "asdasd"
+  },
+  "email": {
+    "ntuAccount": "b04501067",
+    "ntuAccountPassword": "甜自己的"
   }
 }
