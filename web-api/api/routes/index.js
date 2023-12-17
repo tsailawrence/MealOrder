@@ -26,16 +26,17 @@ const getMyOrder = require("../controllers/get-my-order");
 const getMyCurrentMonthPayment = require("../controllers/get-my-current-month-payment");
 const addMyStore = require("../controllers/add-my-store");
 const getMyStore = require("../controllers/get-my-store");
-const updateMyStore = require("../controllers/update-my-store");
-const updateMyStoreOrder = require("../controllers/update-my-store-order");
-const deleteMyOrder = require("../controllers/delete-my-order");
-const updateMyStoreMenu = require("../controllers/update-my-store-menu");
-const deleteMyStoreMenu = require("../controllers/delete-my-store-menu");
-const updateMyStoreMenuType = require("../controllers/update-my-store-menu-type");
-const deleteMyStoreMenuType = require("../controllers/delete-my-store-menu-type");
-const getMyStoreMenuTypeCustomerMonthlyBilling = require("../controllers/get-my-store-customer-monthly-billing");
-const getMyStoreMonthlyOrders = require("../controllers/get-my-store-monthly-orders");
+const lineBinding = require("../controllers/handle-line-binding");
 
+const updateMyStore  = require('../controllers/update-my-store')
+const updateMyStoreOrder  = require('../controllers/update-my-store-order')
+const deleteMyOrder   = require('../controllers/delete-my-order')
+const updateMyStoreMenu   = require('../controllers/update-my-store-menu')
+const deleteMyStoreMenu   = require('../controllers/delete-my-store-menu')
+const updateMyStoreMenuType = require('../controllers/update-my-store-menu-type');
+const deleteMyStoreMenuType = require('../controllers/delete-my-store-menu-type');
+const getMyStoreMenuTypeCustomerMonthlyBilling = require('../controllers/get-my-store-customer-monthly-billing');
+const getMyStoreMonthlyOrders = require('../controllers/get-my-store-monthly-orders');
 const router = new Router();
 
 router.post("/webhook", handleLineWebhook);
@@ -343,15 +344,32 @@ router.post(
 );
 
 router.post(
-  "updateMyStore",
-  "/my/store/update/:storeId",
+  "lineBinding",
+  "/line/:lineId",
   validate({
     query: {
-      accessToken: Joi.string().required(),
+      accessToken: Joi.string()
+        .required(),
     },
+    params: {
+      lineId: Joi.string()
+          .required()
+    }
   }),
   verifyClerk,
-  updateMyStore
+  lineBinding
+);
+
+router.post(
+    'updateMyStore',
+    '/my/store/update/:storeId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    updateMyStore
 );
 
 router.post(
@@ -367,91 +385,92 @@ router.post(
 );
 
 router.post(
-  "deleteMyOrder",
-  "/my/order/delete/:orderId",
-  validate({
-    query: {
-      accessToken: Joi.string().required(),
-    },
-  }),
-  verifyClerk,
-  deleteMyOrder
+    'deleteMyOrder',
+    '/my/order/delete/:orderId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    deleteMyOrder
 );
 
 router.post(
-  "updateMyStoreMenu",
-  "/my/store/update/:storeId/menu/:menuId",
-  validate({
-    query: {
-      accessToken: Joi.string().required(),
-    },
-  }),
-  verifyClerk,
-  updateMyStoreMenu
+    'updateMyStoreMenu',
+    '/my/store/update/:storeId/menu/:menuId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    updateMyStoreMenu
 );
 
 router.post(
-  "deleteMyStoreMenu",
-  "/my/store/delete/:storeId/menu/:menuId",
-  validate({
-    query: {
-      accessToken: Joi.string().required(),
-    },
-  }),
-  verifyClerk,
-  deleteMyStoreMenu
+    'deleteMyStoreMenu',
+    '/my/store/delete/:storeId/menu/:menuId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    deleteMyStoreMenu
 );
 
 router.post(
-  "updateMyStoreMenuType",
-  "/my/store/:storeId/update/menu/type/:menuTypeId",
-  validate({
-    query: {
-      accessToken: Joi.string().required(),
-    },
-    body: {
-      value: Joi.string(),
-    },
-  }),
-  verifyClerk,
-  updateMyStoreMenuType
+    'updateMyStoreMenuType',
+    '/my/store/:storeId/update/menu/type/:menuTypeId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+        body: {
+            value: Joi.string(),
+        }
+    }),
+    verifyClerk,
+    updateMyStoreMenuType
 );
 
 router.post(
-  "deleteMyStoreMenuType",
-  "/my/store/:storeId/delete/menu/type/:menuTypeId",
-  validate({
-    query: {
-      accessToken: Joi.string().required(),
-    },
-  }),
-  verifyClerk,
-  deleteMyStoreMenuType
+    'deleteMyStoreMenuType',
+    '/my/store/:storeId/delete/menu/type/:menuTypeId',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    deleteMyStoreMenuType
 );
 
 router.get(
-  "getMyStoreMenuTypeCustomerMonthlyBilling",
-  "/my/store/:storeId/order/customerMonthlyBilling/:month",
-  validate({
-    query: {
-      accessToken: Joi.string().required(),
-    },
-  }),
-  verifyClerk,
-  getMyStoreMenuTypeCustomerMonthlyBilling
+    'getMyStoreMenuTypeCustomerMonthlyBilling',
+    '/my/store/:storeId/order/customerMonthlyBilling/:month',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    getMyStoreMenuTypeCustomerMonthlyBilling
 );
 
 router.get(
-  "getMyStoreMonthlyOrders",
-  "/my/store/:storeId/order/getMonthly/:month",
-  validate({
-    query: {
-      accessToken: Joi.string().required(),
-    },
-  }),
-  verifyClerk,
-  getMyStoreMonthlyOrders
+    'getMyStoreMonthlyOrders',
+    '/my/store/:storeId/order/getMonthly/:month',
+    validate({
+        query: {
+            accessToken: Joi.string().required(),
+        },
+    }),
+    verifyClerk,
+    getMyStoreMonthlyOrders
 );
+
 
 // bad request example
 router.get("/error", async () => {

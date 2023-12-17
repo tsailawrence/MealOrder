@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useCookies } from "react-cookie";
 import {
   Sheet,
   SheetClose,
@@ -23,8 +24,11 @@ import {
 import { Item } from "@/lib/types/db";
 import { DatePicker } from "@/components/DatePicker";
 import { HourMinute } from "@/components/HourMinute";
+import { addMyOrder } from "./actions";
+import { CartCardProps } from "@/lib/types/db";
 type Cart = {
   restaurantName: string;
+  storeId: number;
   items: Item[]; //item name, price, quantity
 };
 type Orders = {
@@ -32,10 +36,28 @@ type Orders = {
   pickupTime: Date;
   userId: string;
 };
+const formatDateForMySQL = (dateString: string): string => {
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // getMonth() returns 0-11
+  const day = date.getDate();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+  return formattedDate;
+};
+
 const CustomerCartHeader = () => {
-  const [cart, setCart] = useState<Cart>({ restaurantName: '', items: [] });
+  const [cart, setCart] = useState<Cart>({ restaurantName: '', storeId: 0, items: [] });
   const [dateTime, setDateTime] = useState<Date | null>(null);
-  
+  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { __session: accessToken = '' } = cookies;
   const handleDateTimeChange = (date: Date, hour: string, minute: string, ampm: string) => {
     console.log('date:');
     if (date && hour && minute) {
@@ -67,6 +89,7 @@ const CustomerCartHeader = () => {
         } else {
           cart.items[index].quantity = Math.max(1, cart.items[index].quantity + change);
         }
+        console.log('cart:', cart);
         // Save the updated cart back to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         setCart(cart);
@@ -101,12 +124,26 @@ const CustomerCartHeader = () => {
       userId: '1'
     }
     console.log('orders:', orders);
-    // Delete cart from local storage
-    let newCart = { restaurantName: '', items: [] }
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    console.log('newCart:', newCart);
+    // Add order to database
+    const ordersData: CartCardProps = {
+      storeId: cart.storeId,
+      payment: cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0),
+      items: cart.items.map((item) => ({
+        menuId: item.menuId,
+        quantity: item.quantity,
+        payment: item.price * item.quantity,
+        specialInstructions: item.note,
+      })),
+      pickupTime: formatDateForMySQL(orders.pickupTime?.toString()),
+    }
+    console.log('ordersData:', ordersData);
+    // addMyOrder(accessToken,ordersData);
     //refresh the page
-    window.location.reload();
+    // Delete cart from local storage
+    // let newCart = { restaurantName: '', storeid: 0, items: [] }
+    // localStorage.setItem('cart', JSON.stringify(newCart));
+    // console.log('newCart:', newCart);
+    // window.location.reload();
   }
   return (
     <Sheet>
@@ -185,13 +222,27 @@ const CustomerCartHeader = () => {
                   </AccordionContent>}
                 </AccordionItem>))}
             </Accordion>
+            <div className="flex justify-between mt-4">
+              <div className="text-base font-semibold">Subtotal</div>
+              <div className="text-base font-semibold">
+                ${cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0)}
+              </div>
+            </div>
           </div>
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="reset" onClick={handleSubmit}>Place Order</Button>
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              disabled={!dateTime || dateTime<new Date()}
+            >
+              Place Order
+            </Button>
           </SheetClose>
         </SheetFooter>
+        {cart.items.length === 0 && <div className='text-red-600 text-end'>Please add items to cart</div>}
+        {dateTime && dateTime<new Date() && <div className='text-red-600 text-end'>Please select a future pickup time</div>}
       </SheetContent>
     </Sheet>
   );

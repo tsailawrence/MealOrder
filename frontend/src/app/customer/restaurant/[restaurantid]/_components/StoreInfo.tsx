@@ -1,15 +1,21 @@
 import * as React from "react";
+import { useCookies } from "react-cookie";
 import Image from "next/image";
 import { RestaurantCardProps } from "@/lib/types/db";
 import { Heart } from 'lucide-react';
-
+import { Phone } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import { addMyFavoriteRestaurant } from "./actions";
 const StoreInfo: React.FC<RestaurantCardProps> = ({
+    id,
     name,
     imageSrc,
     starNumber,
-    address,
-    likes,
+    phoneNumber,
+    area,
 }) => {
+    const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
+    const { __session: accessToken = '' } = cookies;
     return (
         <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
             <div className="flex items-stretch justify-between gap-5 mt-2">
@@ -28,16 +34,19 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                         </h1>
                         <div className="flex gap-2 mt-2">
                             <div className="text-red-600 text-2xl font-black leading-6">
-                                {likes ? <Heart fill='red' /> : <Heart />}
+                                <Heart fill='red' /> 
                             </div>
                             <div className="text-red-600 text-2xl leading-7 self-stretch whitespace-nowrap">
                                 {starNumber}
                             </div>
                         </div>
                     </div>
-                    <p className="text-neutral-400 text-base leading-6 whitespace-nowrap mt-2">
-                        {address}
-                    </p>
+                    {area && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
+                        <MapPin /> {area}
+                    </span>}
+                    {phoneNumber && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
+                        <Phone /> {phoneNumber}
+                    </span>}
                 </div>
             </div>
             <div className="justify-center items-stretch border border-[color:var(--Red,#E60012)] flex gap-2 mt-4 pl-8 pr-8 py-3 rounded-3xl border-solid self-start ">
@@ -50,7 +59,9 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                     alt="Favorite Icon"
                 />
                 <div className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap">
-                    <a href="#">Add to favorite</a>
+                    <button type="button" className="text-red-600" onClick={() => addMyFavoriteRestaurant(accessToken, id)}>
+                        Add to favorite
+                    </button>
                 </div>
             </div>
         </article>
