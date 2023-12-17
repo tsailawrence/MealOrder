@@ -57,7 +57,8 @@ const CustomerHome = () => {
         </a>
       </header>
       <div className="self-center w-full max-w-[84%] mt-9 px-5 max-md:max-w-full overflow-x-auto flex gap-5 whitespace-nowrap">
-        {favoriteData && favoriteData.length!=0 ? favoriteData.map((card, index) => (
+        {loading ? <div>Loading...</div> :
+        (favoriteData && favoriteData.length!=0 ? favoriteData.map((card, index) => (
           <div
             key={index}
             className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
@@ -74,7 +75,7 @@ const CustomerHome = () => {
           <a
             href="/customer/all" className="flex text-center p-5 text-lg font-semibold text-gray-700 bg-gray-100 rounded-md shadow-lg gap-3">
             <Heart fill='red' /> Add Favorite Restaurant Now
-          </a>}
+          </a>)}
       </div>
       <header className="self-center flex w-full max-w-[90%] items-start justify-between mt-4 px-5 max-md:max-w-full max-md:flex-wrap max-md:mt-10">
         <h1 className="text-black text-3xl font-semibold self-center grow shrink my-auto">

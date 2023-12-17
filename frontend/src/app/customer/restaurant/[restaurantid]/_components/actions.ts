@@ -29,7 +29,9 @@ export async function addMyFavoriteRestaurant(accessToken: string, id: number) {
         const { data: response } = await instance.post(
             `/my/favoriteStore/add/${id}`,
             {
-                accessToken,
+                params: {
+                    accessToken,
+                },
             }
         )
         return response.data;
