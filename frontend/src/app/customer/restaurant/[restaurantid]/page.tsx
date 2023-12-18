@@ -40,6 +40,7 @@ interface Store {
     category: number;
     menu: MenuItem[];
     menuTypes: menuType[];
+    storeImage: string;
 }
 
 const RestaurantPage = () => {
@@ -68,7 +69,7 @@ const RestaurantPage = () => {
             {loading ? <div>Loading...</div> :
                 (restaurant ?
                     <>
-                        <StoreInfo id={restaurant.id} name={restaurant.name} area={restaurant.area} phoneNumber={restaurant.phoneNumber} starNumber={restaurant.favoriteCount} imageSrc={restaurantData[0].uri} />
+                        <StoreInfo id={restaurant.id} name={restaurant.name} area={restaurant.area} phoneNumber={restaurant.phoneNumber} starNumber={restaurant.favoriteCount} imageSrc={restaurant.storeImage} />
                         <StoreMenu restaurantName={restaurant.name} menus={restaurant.menu} menutypes={restaurant.menuTypes}/>
                     </>
                     : <div>No data</div>
