@@ -4,7 +4,7 @@ const nextConfig = {
         domains: ['cdn.builder.io','res.cloudinary.com'],
     },
     env: {
-        baseUrl: process.env.BASE_URL,
+        baseUrl: 'https://api.foody-app.shop/',
         privateKey: process.env.PRIVATE_KEY,
     },
 }
