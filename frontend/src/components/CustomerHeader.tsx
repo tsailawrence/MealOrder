@@ -24,10 +24,6 @@ const Header = () => {
     {
       href: "/customer/monthlyPayment",
       label: "Monthly Payment"
-    },
-    {
-      href: "/customer/settings",
-      label: "Settings"
     }
   ];
 

@@ -77,7 +77,7 @@ const CustomerHome = () => {
           >
             <CardComponent
               id={card.id}
-              uri={"https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"}
+              uri={card.storeImage? card.storeImage : "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"}
               name={card.name}
               starNumber={card.favoriteCount}
               likes={true}
@@ -109,7 +109,7 @@ const CustomerHome = () => {
             >
               <CardComponent
                 id={card.id}
-                uri={"https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"}
+                uri={card.storeImage?card.storeImage:"https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"}
                 name={card.name}
                 starNumber={card.favoriteCount}
                 likes={card.liked}

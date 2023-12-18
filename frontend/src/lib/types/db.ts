@@ -93,4 +93,5 @@ export type RestaurantCard = {
     name: string;
     phoneNumber: number;
     userId: number;
+    storeImage: string;
 }

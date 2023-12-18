@@ -37,9 +37,9 @@ export const OrderTable = ({ order }: { order: Orders }) => {
       <div key={order.id} className={styles.orderItem}>
         <Image
           className={styles.image}
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"
-          width={86}
-          height={86}
+          src={order.storeInfo.storeImage?order.storeInfo.storeImage:"https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"}
+          width={60}
+          height={60}
           alt={order.name}
         />
         <div className={styles.details}>
