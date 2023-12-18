@@ -23,7 +23,7 @@ module.exports = async ctx => {
       data.messages.push({
         type: 'text',
         text:
-            '請點擊以下連結訂餐 \n 待補'
+            '請點擊以下連結訂餐 \n https://foody-app.shop/customer/restaurant'
       });
 
       try {
@@ -47,7 +47,7 @@ module.exports = async ctx => {
           text:
               `
                 請點選下列連結進行綁定： \n
-                http://localhost:3000/customer/restaurant?sender_id=${source?.userId}
+                https://foody-app.shop/customer/restaurant?sender_id=${source?.userId}
               `
         });
 
@@ -83,7 +83,7 @@ module.exports = async ctx => {
         theOrders = orders.filter(({ id }) => id === orders[0]?.id);
         
         await sendMessage({
-          to: 'Ue58b74645bc9f723811406a1ad72562c',
+          to: source?.userId || 'Ue58b74645bc9f723811406a1ad72562c',
           orderNum: theOrders[0]?.id,
           storeName: theOrders[0]?.storeName,
           storeName: theOrders[0]?.storeName,
