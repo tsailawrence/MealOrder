@@ -88,13 +88,6 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
     },
   });
 
-  // 一旦選單狀態改變，就會觸發這個函式
-
-  // useEffect(() => {
-  //   if (form.formState.isDirty) {
-  //     handleChangeStatus();
-  //   }
-  // }, [values: z.infer<typeof formSchema>]);
   const ChangeStatus = async () => {
     try {
       await updateProduct(accessToken, params.storeId, product.id, {

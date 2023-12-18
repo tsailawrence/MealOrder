@@ -25,6 +25,7 @@ exports.getOrdersDetailByStoreId = async ({ storeId }) => {
       `${TABLE_ITEM}.quantity`,
       `${TABLE_ITEM}.payment`,
       `${TABLE_ITEM}.menuId`,
+      `${TABLE_ITEM}.specialInstructions`,
       `${TABLE_MENU}.name`,
     ])
     .from(TABLE_ITEM)
@@ -43,28 +44,28 @@ exports.getOrdersDetailByStoreId = async ({ storeId }) => {
     return acc;
   }, {});
 
-  const theOrderItemNotes = await datastore
-    .select(["orderItemId", "note"])
-    .from(TABLE_ITEM_NOTE)
-    .where(
-      "orderItemId",
-      "IN",
-      theOrderItems.map(({ id }) => id)
-    );
+  // const theOrderItemNotes = await datastore
+  //   .select(["orderItemId", "note"])
+  //   .from(TABLE_ITEM_NOTE)
+  //   .where(
+  //     "orderItemId",
+  //     "IN",
+  //     theOrderItems.map(({ id }) => id)
+  //   );
 
-  const orderItemNotesMap = theOrderItemNotes.reduce((acc, item) => {
-    if (!acc[item.orderItemId]) {
-      acc[item.orderItemId] = [];
-    }
-    acc[item.orderItemId].push(item);
-    return acc;
-  }, {});
+  // const orderItemNotesMap = theOrderItemNotes.reduce((acc, item) => {
+  //   if (!acc[item.orderItemId]) {
+  //     acc[item.orderItemId] = [];
+  //   }
+  //   acc[item.orderItemId].push(item);
+  //   return acc;
+  // }, {});
 
   return theOrders.map((order) => ({
     ...order,
     orderItems: (orderItemsMap?.[order?.id] ?? []).map((item) => ({
       ...item,
-      note: orderItemNotesMap?.[item?.id] ?? [],
+      // note: orderItemNotesMap?.[item?.id] ?? [],
     })),
   }));
 };
