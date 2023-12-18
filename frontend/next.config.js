@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   images: {
     domains: ["cdn.builder.io", "res.cloudinary.com", "via.placeholder.com"],
   },

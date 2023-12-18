@@ -10,8 +10,11 @@ module.exports = async ctx => {
         } = {},
     } = ctx;
 
+    const nowCity = ctx.cookies.get('nowCity');
+
     const topFavoriteStores = await Store.getTopFavoriteStore({
     });
+
 
     const theFavoriteStoresIdObjArray = await FavoriteStore.getUserFavoriteStoreId({
         userId,
@@ -24,8 +27,14 @@ module.exports = async ctx => {
         ...store,
         liked: theFavoriteStoresIds.includes(store.id),
     }));
+
+    let topFavoriteStoresWithLikedWithArea = topFavoriteStoresWithLiked
+
+    if(nowCity){
+        topFavoriteStoresWithLikedWithArea = topFavoriteStoresWithLiked.filter(store => store.area === nowCity);
+    }
     
-    ctx.body = topFavoriteStoresWithLiked;
+    ctx.body = topFavoriteStoresWithLikedWithArea;
     
     return true;
 }

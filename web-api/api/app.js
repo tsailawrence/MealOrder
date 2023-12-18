@@ -3,12 +3,12 @@ const { v4: UUID } = require('uuid');
 const Logger = require('./utils/koa-logger');
 const cors = require('koa2-cors');
 const koaBody = require('koa-body');
-
+const cookies = require('koa-cookie').default();
 const router = require('./routes');
 
 const init = () => {
     const app = new Koa();
-
+    app.use(cookies);
     // setup request uuid
     app.use((ctx, next) => {
         const uuid = UUID();
