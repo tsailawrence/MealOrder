@@ -18,12 +18,10 @@
     }
   },
   "cloudinary": {
-    "cloudinary": {
-      "cloud_name": "dsfbt6sdd",
-      "api_key": "998375137972511",
-      "api_secret": "83pZh_ov5r-7CcuOasu6aovPxQ8",
-      "secure": true
-    }
+    "cloud_name": "dsfbt6sdd",
+    "api_key": "998375137972511",
+    "api_secret": "83pZh_ov5r-7CcuOasu6aovPxQ8",
+    "secure": true
   },
   "sendgrid": {
     "sendgridApiKey": "dsfbt6sdd",

@@ -82,7 +82,6 @@ const PaymentsPage: React.FC = () => {
     getMyCurrentMonthPayment(accessToken)
       .then(data => {
         setPayments(data);
-        console.log(data);
         setLoading(false);
       })
       .catch(err => {

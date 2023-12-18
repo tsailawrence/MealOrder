@@ -14,17 +14,25 @@ module.exports = async (ctx) => {
     request: { body: { name, description, price, menuTypeId,uri } = {} } = {},
   } = ctx;
 
-  cloudinary.config(config.cloudinary);
-  // const cdn = await cloudinary.uploader.upload(
-  //   uri, 
-  //   {
-  //     folder: "image",
-  //     width: 300, // 解析度 自己調
-  //     height: 480,
-  //     crop: "crop"
-  //   }
-  // );
 
+  let cdn = {}
+  
+  try {
+    cloudinary.config(config.cloudinary);
+    cdn = await cloudinary.uploader.upload(
+      uri, 
+      {
+        folder: "image",
+        width: 300,
+        height: 480,
+        crop: "crop"
+      }
+    );
+  } catch (error) { 
+    console.log(error);
+  }
+
+  
   const [theStore] = await Store.getStoreByStoreId({
     storeId,
   });
@@ -41,6 +49,8 @@ module.exports = async (ctx) => {
     return errorResponser(ctx, 403, "Not a valid type.");
   }
 
+  const menuImage = cdn && cdn.secure_url ? cdn.secure_url : '';
+
   await Menu.insert({
     name,
     description,
@@ -48,12 +58,14 @@ module.exports = async (ctx) => {
     menuTypeId,
     storeId,
     onShelfStatus: 1,
-    // menuImage:cdn,
+    menuImage,
   });
+
 
   ctx.body = {
     result: "success",
   };
 
   return true;
+
 };
