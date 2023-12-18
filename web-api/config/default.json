@@ -1,0 +1,34 @@
+{
+  "api": {
+    "version": "0.1.0",
+    "privateKey": "koa-api"
+  },
+  "chatGPT": {
+    "token": "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"
+  },
+  "db": {
+    "mainDB": {
+      "client": "mysql",
+      "database": "foody",
+      "host": "34.80.86.39",
+      "password": "ggit_member",
+      "port": 3306,
+      "user": "ggit_member",
+      "ConnectionTimeoutInSecond": 10
+    }
+  },
+  "cloudinary": {
+    "cloud_name": "dsfbt6sdd",
+    "api_key": "998375137972511",
+    "api_secret": "83pZh_ov5r-7CcuOasu6aovPxQ8",
+    "secure": true
+  },
+  "sendgrid": {
+    "sendgridApiKey": "dsfbt6sdd",
+    "sendgridAccount": "asdasd"
+  },
+  "email": {
+    "ntuAccount": "b04501067",
+    "ntuAccountPassword": "甜自己的"
+  }
+}
