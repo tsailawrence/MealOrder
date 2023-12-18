@@ -14,7 +14,7 @@ export function Navbar({
 
   const routes = [
     {
-      href: `/merchant/${params.storeId}/orderBox`,
+      href: `/merchant/${params.storeId}/order`,
       label: "Orders",
       active: pathname === `/merchant/${params.storeId}/order`,
     },
