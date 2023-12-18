@@ -13,7 +13,8 @@ module.exports = async ctx => {
         } = {},
     } = ctx;
 
-    const theUserOrders = await Order.getOrderByCustomerId({
+    const theUserOrders = 
+    await Order.getOrderByCustomerId({
         userId,
     });
 

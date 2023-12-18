@@ -8,7 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const instance = axios.create({
-  baseURL: process?.env?.baseUrl
+  baseURL: process?.env?.baseUrl,
+  withCredentials: true, // Include cookies in the requests
 });
 
 instance.interceptors.request.use(async (config) => {

@@ -11,6 +11,8 @@ module.exports = async ctx => {
         } = {},
     } = ctx;
 
+    const nowCity = ctx.cookies.get('nowCity');
+
     const [theStore] = await Store.getStoreByStoreId({
         storeId,
     });
@@ -32,7 +34,13 @@ module.exports = async ctx => {
         }) => ({ id, type })),
     };
 
-    ctx.body = theStoreWithMenu;
+    let theStoreWithArea = theStoreWithMenu
+
+    if(nowCity){
+        theStoreWithArea = theStoreWithMenu.filter(store => store.area === nowCity);
+    }
+
+    ctx.body = theStoreWithArea;
 
     return true;
 }

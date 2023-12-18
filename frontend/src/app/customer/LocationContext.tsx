@@ -10,11 +10,22 @@ const LocationContext = createContext<LocationContextType | null>(null);
 
 export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) => {
     const [location, setLocation] = useState<string>('');
+
+    // 设置Cookie的函数
+    function setCookie(name: string, value: string, days: number): void {
+        const expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + expirationDate.toUTCString();
+
+        document.cookie = name + "=" + value + "; " + expires + "; path=/";
+      }
+
     useEffect(() => {
         const handleSuccess = async (position: GeolocationPosition) => {
             const { nowCity } = await getPlace(position.coords.latitude, position.coords.longitude);
             if (nowCity) {
                 setLocation(nowCity);
+                setCookie('nowCity', 'north', 7);
             }
         };
 
