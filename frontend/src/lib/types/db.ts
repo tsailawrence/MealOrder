@@ -112,3 +112,10 @@ export type OrderItem = {
   quantity: number;
   specialInstructions?: string;
 };
+
+export type CustomerBilling = {
+  customerId: number;
+  customerName: string;
+  totalOrders: number;
+  totalCosts: number;
+};

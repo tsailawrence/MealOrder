@@ -1,22 +1,23 @@
-
-import { instance } from '@/lib/utils';
-export const getMyCurrentMonthPayment = async (accessToken: string) => {
-    // Register
-    try {
-        if (!accessToken) {
-            throw new Error('AccessToken Not Exist.')
-        }
-        const { data: response } = await instance.get(
-            `/my/order/getMyCurrentMonthPayment`,
-            {
-                params: {
-                    accessToken
-                }
-            }
-        )
-        return response.data;
-    } catch (err) {
-        // TODO: login again
-        console.log('getAllOrders error', err);
+import { instance } from "@/lib/utils";
+export const getMonthlyCustomerData = async (
+  accessToken: string,
+  storeId: string,
+  month: string
+) => {
+  try {
+    if (!accessToken) {
+      throw new Error("AccessToken Not Exist.");
     }
-}
+    const { data: response } = await instance.get(
+      `/my/store/${storeId}/order/customerMonthlyBilling/${month}`,
+      {
+        params: {
+          accessToken,
+        },
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.log("getAllOrders error", err);
+  }
+};
