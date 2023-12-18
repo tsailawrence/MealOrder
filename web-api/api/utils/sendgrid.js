@@ -1,4 +1,4 @@
-import { config } from '../config';
+const config = require('config');
 
 const sgMail = require('@sendgrid/mail');
 
@@ -15,7 +15,7 @@ const CreateMessage = (to, subject, text, html) => {
   return msg;
 };
 
-export const sendEmail = async (to, subject, text, html) => {
+const sendEmail = async (to, subject, text, html) => {
   const msg = CreateMessage(to, subject, text, html);
 
   try {
@@ -25,3 +25,5 @@ export const sendEmail = async (to, subject, text, html) => {
     console.log(`${err} / @sendgrid.sendEmail`);
   }
 };
+
+module.exports = sendEmail;

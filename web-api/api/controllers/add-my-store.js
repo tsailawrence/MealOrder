@@ -10,23 +10,31 @@ module.exports = async (ctx) => {
     request: { body: { name, category, area, uri } = {} } = {},
   } = ctx;
 
-  cloudinary.config(config.cloudinary);
-//   const cdn = await cloudinary.uploader.upload(
-//     uri, 
-//     {
-//       folder: "image",
-//       width: 300, // 解析度 自己調
-//       height: 480,
-//       crop: "crop"
-//     }
-//   );
+  let cdn = {}
+  
+  try {
+    cloudinary.config(config.cloudinary);
+    cdn = await cloudinary.uploader.upload(
+      uri, 
+      {
+        folder: "image",
+        width: 300,
+        height: 480,
+        crop: "crop"
+      }
+    );
+  } catch (error) { 
+    console.log(error);
+  }
+
+  const storeImage = cdn && cdn.secure_url ? cdn.secure_url : '';
 
   const data = {
     userId,
     name,
     category,
     area,
-    // storeImage:cdn,
+    storeImage,
   };
 
   if (type !== User.TYPE.MERCHANT) {

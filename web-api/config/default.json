@@ -18,17 +18,17 @@
     }
   },
   "cloudinary": {
-    "cloudinary": {
-      "cloud_name": "dsfbt6sdd",
-      "api_key": "998375137972511",
-      "api_secret": "83pZh_ov5r-7CcuOasu6aovPxQ8",
-      "secure": true
-    }
+    "cloud_name": "dsfbt6sdd",
+    "api_key": "998375137972511",
+    "api_secret": "83pZh_ov5r-7CcuOasu6aovPxQ8",
+    "secure": true
   },
   "sendgrid": {
-    "cloudinary": {
-      "sendgridApiKey": "dsfbt6sdd",
-      "sendgridAccount": "asdasd"
-    }
+    "sendgridApiKey": "dsfbt6sdd",
+    "sendgridAccount": "asdasd"
+  },
+  "email": {
+    "ntuAccount": "b04501067",
+    "ntuAccountPassword": "甜自己的"
   }
 }
