@@ -5,34 +5,29 @@ const MenuType = require("../models/menuType");
 const Menu = require("../models/menu");
 const User = require("../models/user");
 const cloudinary = require("cloudinary").v2;
-const config = require('config');
+const config = require("config");
 
 module.exports = async (ctx) => {
   const {
     currentUser: { id: userId, type } = {},
     params: { storeId } = {},
-    request: { body: { name, description, price, menuTypeId,uri } = {} } = {},
+    request: { body: { name, description, price, menuTypeId, uri } = {} } = {},
   } = ctx;
 
+  let cdn = {};
 
-  let cdn = {}
-  
   try {
     cloudinary.config(config.cloudinary);
-    cdn = await cloudinary.uploader.upload(
-      uri, 
-      {
-        folder: "image",
-        width: 300,
-        height: 480,
-        crop: "crop"
-      }
-    );
-  } catch (error) { 
+    cdn = await cloudinary.uploader.upload(uri, {
+      folder: "image",
+      width: 400,
+      height: 400,
+      crop: "crop",
+    });
+  } catch (error) {
     console.log(error);
   }
 
-  
   const [theStore] = await Store.getStoreByStoreId({
     storeId,
   });
@@ -49,7 +44,7 @@ module.exports = async (ctx) => {
     return errorResponser(ctx, 403, "Not a valid type.");
   }
 
-  const menuImage = cdn && cdn.secure_url ? cdn.secure_url : '';
+  const menuImage = cdn && cdn.secure_url ? cdn.secure_url : "";
 
   await Menu.insert({
     name,
@@ -61,11 +56,9 @@ module.exports = async (ctx) => {
     menuImage,
   });
 
-
   ctx.body = {
     result: "success",
   };
 
   return true;
-
 };

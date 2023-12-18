@@ -98,6 +98,7 @@ export const createProduct = async (
   storeId: string,
   data: any
 ) => {
+  data.uri = data.menuImage;
   try {
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
@@ -123,6 +124,7 @@ export const updateProduct = async (
   productId: string,
   data: any
 ) => {
+  data.uri = data.menuImage;
   try {
     data.menuTypeId = parseInt(data.menuTypeId);
     if (!accessToken) {

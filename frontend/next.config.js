@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['cdn.builder.io','res.cloudinary.com'],
-    },
-    env: {
-        baseUrl: 'https://api.foody-app.shop/',
-        privateKey: process.env.PRIVATE_KEY,
-    },
-}
 
-module.exports = nextConfig
+  images: {
+    domains: ["cdn.builder.io", "res.cloudinary.com", "via.placeholder.com"],
+  },
+  env: {
+    baseUrl: process.env.BASE_URL,
+    privateKey: process.env.PRIVATE_KEY,
+  },
+};
+
+module.exports = nextConfig;

@@ -60,7 +60,7 @@ const formSchema = z.object({
 type Product = {
   id: number;
   menuTypeId: number;
-  uri: string;
+  menuImage: string;
   name: string;
   description: string;
   price: number;
@@ -110,12 +110,13 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
           <div>
             <Image
               src={
-                "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"
+                product.menuImage !== null && product.menuImage !== ""
+                  ? product.menuImage
+                  : "https://via.placeholder.com/86x86.png?text=No+Image"
               }
-              alt={"product.name"}
-              width={86}
-              height={86}
-              className=""
+              alt={"product image"}
+              width={100}
+              height={100}
             />
           </div>
           <div className="w-full flex justify-between items-center px-4">

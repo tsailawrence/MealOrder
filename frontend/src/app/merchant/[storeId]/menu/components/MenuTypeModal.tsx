@@ -110,8 +110,8 @@ export const MenuTypeModal = ({
 
   return (
     <Modal
-      title="Store Details"
-      description="Edit your store details here."
+      title="Menu Type"
+      description={menuTypeInfo ? "Edit Menu Type" : "Add Menu Type"}
       isOpen={open}
       onClose={() => setOpen(false)}
     >

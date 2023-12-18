@@ -41,7 +41,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   name: z.string().min(1),
-  uri: z.string(),
+  menuImage: z.string(),
   menuTypeId: z.string().min(1),
   description: z.string().min(1),
   price: z.string().min(1),
@@ -50,7 +50,7 @@ const formSchema = z.object({
 type Product = {
   id: number;
   menuTypeId: number;
-  uri: string;
+  menuImage: string;
   name: string;
   description: string;
   price: number;
@@ -96,7 +96,7 @@ export const ProductSheet = ({
       if (productInfo) {
         form.reset({
           name: productInfo.name,
-          uri: productInfo.uri,
+          menuImage: productInfo.menuImage,
           menuTypeId: productInfo.menuTypeId.toString(),
           description: productInfo.description,
           price: productInfo.price.toString(),
@@ -105,7 +105,7 @@ export const ProductSheet = ({
     } else {
       form.reset({
         name: "",
-        uri: "",
+        menuImage: "",
         menuTypeId: "",
         description: "",
         price: "0",
@@ -114,6 +114,8 @@ export const ProductSheet = ({
   }, [open, productInfo, form.reset, menuTypes]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log("original", productInfo);
+    console.log("values", values);
     try {
       setLoading(true);
       if (productInfo) {
@@ -178,7 +180,7 @@ export const ProductSheet = ({
               >
                 <FormField
                   control={form.control}
-                  name="uri"
+                  name="menuImage"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Image</FormLabel>
@@ -192,7 +194,7 @@ export const ProductSheet = ({
                               const reader = new FileReader();
                               reader.onloadend = () => {
                                 const base64String = reader.result;
-                                form.setValue("uri", base64String);
+                                form.setValue("menuImage", base64String);
                               };
                               reader.readAsDataURL(file);
                             }
