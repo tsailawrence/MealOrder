@@ -114,8 +114,6 @@ export const ProductSheet = ({
   }, [open, productInfo, form.reset, menuTypes]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log("original", productInfo);
-    console.log("values", values);
     try {
       setLoading(true);
       if (productInfo) {
