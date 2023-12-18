@@ -36,6 +36,7 @@ export const Menu = () => {
   const fetchMenu = () => {
     getMenu(accessToken, params.storeId)
       .then((data) => {
+        console.log("Menu:", data);
         setMenuType(data.menuTypes);
         setProducts(data.menus);
       })

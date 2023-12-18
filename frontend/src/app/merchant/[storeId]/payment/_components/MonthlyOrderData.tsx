@@ -60,7 +60,7 @@ export const MonthlyOrderData = () => {
   );
   const [selectedMonthData, setSelectedMonthData] = useState({
     month: new Date().getMonth() + 1,
-    year: new Date().getFullYear() - 1,
+    year: new Date().getFullYear(),
   });
 
   const fetchMonthlyCustomerData = () => {
