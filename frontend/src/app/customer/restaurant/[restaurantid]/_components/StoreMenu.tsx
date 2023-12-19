@@ -39,26 +39,26 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ restaurantName, menus, menutypes })
         return menuTypeObj?.type || '';
     }
     let defaultValue ='0';
-    if (menutypes.length > 0) defaultValue = menus[0].menuTypeId.toString();
+    if (menus.length > 0) defaultValue = menus[0].menuTypeId.toString();
     return (
         <Tabs className="w-full" defaultValue={defaultValue}>
             <TabsList
                 className="grid w-full grid-flow-col mt-6 overflow-x-auto"
                 style={{ gridAutoColumns: 'minmax(100px, 1fr)' }}
             >
-                {menutypes.map((type, index) => (
+                {menutypes && menutypes.map((type, index) => (
                     <TabsTrigger key={index} value={type.id.toString()}>{menuTypeIdToName(type.id)}</TabsTrigger>
                 ))}
             </TabsList>
 
-            {menutypes.map((type, index) => (
+            {menutypes && menutypes.map((type) => (
                 <TabsContent key={type.id} value={type.id.toString()}>
                 {
-                    menus.filter((item) => item.menuTypeId === type.id).length === 0 ?
+                    menus && menus.filter((item) => item.menuTypeId === type.id).length === 0 ?
                     <div className="flex justify-center items-center w-full h-96">No items in this category</div> :
                     <div className="flex flex-wrap w-full mt-6">
                         {
-                            menus.filter((item) => item.menuTypeId === type.id).map((item) => (
+                            menus && menus.filter((item) => item.menuTypeId === type.id).map((item) => (
                                 <div key={item.id} className="flex-none w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-[250px] mb-3">
                                     <CardPriceComponent 
                                         restaurantName={restaurantName} 
