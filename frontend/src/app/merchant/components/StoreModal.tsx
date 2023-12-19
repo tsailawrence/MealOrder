@@ -94,6 +94,7 @@ export const StoreModal = ({ open, setOpen, storeInfo }: StoreModalProps) => {
         category: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, storeInfo]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -149,8 +150,9 @@ export const StoreModal = ({ open, setOpen, storeInfo }: StoreModalProps) => {
                             const file = e.target.files[0];
                             const reader = new FileReader();
                             reader.onloadend = () => {
-                              const base64String = reader.result;
-                              form.setValue("storeImage", base64String);
+                              const base64String = reader.result?.toString();
+                              if (base64String)
+                                form.setValue("storeImage", base64String);
                             };
                             reader.readAsDataURL(file);
                           }

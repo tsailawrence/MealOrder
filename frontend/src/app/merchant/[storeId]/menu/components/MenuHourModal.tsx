@@ -6,11 +6,6 @@ import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import ScheduleSelector from "react-schedule-selector";
 
-import {
-  getMenuHour,
-  updateMenuHour,
-} from "@/app/merchant/[storeId]/menu/components/actions";
-
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
 import { CalendarClock } from "lucide-react";
@@ -26,7 +21,7 @@ export const MenuHourModal = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [menuHour, setMenuHour] = useState([]);
+  const [menuHour, setMenuHour] = useState<Date[]>([]);
   const params = useParams();
 
   //當 modal 打開時，會去取得 menu hour 的資料，並且將資料放入 menuHour state 中

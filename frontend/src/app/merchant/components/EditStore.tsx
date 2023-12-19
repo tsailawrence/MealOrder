@@ -10,13 +10,14 @@ import { getStore } from "@/app/merchant/components/actions";
 import { Button } from "@/components/ui/button";
 import { StoreModal } from "@/app/merchant/components/StoreModal";
 import { Pencil } from "lucide-react";
+import { StoreInfo } from "@/lib/types/db";
 
 const EditStore = () => {
   const [open, setOpen] = useState(false);
-  const [storeInfo, setStoreInfo] = useState();
+  const [storeInfo, setStoreInfo] = useState<StoreInfo | undefined>();
   const router = useRouter();
   const params = useParams();
-  const { storeId } = params;
+  const storeId = params.storeId?.toString();
   const [cookies, setCookie] = useCookies([
     "refreshToken",
     "accessToken",
@@ -40,6 +41,7 @@ const EditStore = () => {
 
   useEffect(() => {
     storeInfoCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, storeId]);
 
   return (
