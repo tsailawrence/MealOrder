@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { toast } from "react-hot-toast";
-import { useParams } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { toast } from 'react-hot-toast';
+import { useParams } from 'next/navigation';
 
 import {
   getMenu,
   deleteMenuType,
-} from "@/app/merchant/[storeId]/menu/components/actions";
-import { MenuTab } from "@/app/merchant/[storeId]/menu/components/MenuTab";
-import { MenuTypeModal } from "@/app/merchant/[storeId]/menu/components/MenuTypeModal";
-import { ProductSheet } from "@/app/merchant/[storeId]/menu/components/ProductSheet";
+} from '@/app/merchant/[storeId]/menu/components/actions';
+import { MenuTab } from '@/app/merchant/[storeId]/menu/components/MenuTab';
+import { MenuTypeModal } from '@/app/merchant/[storeId]/menu/components/MenuTypeModal';
+import { ProductSheet } from '@/app/merchant/[storeId]/menu/components/ProductSheet';
 
-import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs2";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import { ProductCard } from "./ProductCard";
+import { Tabs, TabsContent, TabsList } from '@/components/ui/tabs2';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
+import { ProductCard } from './ProductCard';
 
 type MenuType = {
   id: number;
@@ -35,11 +35,11 @@ type Product = {
 
 export const Menu = () => {
   const [cookies, setCookie] = useCookies([
-    "refreshToken",
-    "accessToken",
-    "__session",
+    'refreshToken',
+    'accessToken',
+    '__session',
   ]);
-  const { __session: accessToken = "" } = cookies;
+  const { __session: accessToken = '' } = cookies;
   const params = useParams();
   const storeId = params.storeId?.toString();
   const [menuType, setMenuType] = useState<MenuType[] | undefined>();
@@ -51,22 +51,22 @@ export const Menu = () => {
 
   const fetchMenu = () => {
     getMenu(accessToken, storeId)
-      .then((data) => {
-        console.log("Menu:", data);
+      .then(data => {
+        console.log('Menu:', data);
         setMenuType(data.menuTypes);
         setProducts(data.menus);
       })
-      .catch((err) => {
-        console.error("Error fetching menu:", err);
+      .catch(err => {
+        console.error('Error fetching menu:', err);
       });
   };
 
-  const onDelete = async (menuTypeId:string) => {
+  const onDelete = async (menuTypeId: string) => {
     try {
       await deleteMenuType(accessToken, storeId, menuTypeId);
-      toast.success("Category deleted");
+      toast.success('Category deleted');
     } catch (error) {
-      toast.error("Something went wrong deleting the category");
+      toast.error('Something went wrong deleting the category');
       console.log(error);
     } finally {
       fetchMenu();
@@ -78,7 +78,7 @@ export const Menu = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken]);
 
-  const handleClickCard = (product:Product) => {
+  const handleClickCard = (product: Product) => {
     setEditProduct(product);
     setProductSheetOpen(true);
   };
@@ -102,7 +102,7 @@ export const Menu = () => {
         {menuType && menuType.length !== 0 && (
           <Tabs defaultValue={menuType[0].id.toString()}>
             <TabsList className="w-full border-b-2 py-0">
-              {menuType.map((type) => (
+              {menuType.map(type => (
                 <MenuTab
                   key={type.id.toString()}
                   categoryId={type.id.toString()}
@@ -132,6 +132,7 @@ export const Menu = () => {
             <Button
               variant="ghost"
               className="w-full my-2"
+              id="add-product"
               onClick={() => {
                 setEditProduct(undefined);
                 setProductSheetOpen(true);
@@ -140,21 +141,22 @@ export const Menu = () => {
               <Plus size={16} className="mr-1" />
               Add
             </Button>
-            {menuType.map((type) => (
+            {menuType.map(type => (
               <TabsContent
                 key={type.id.toString()}
                 value={type.id.toString()}
                 className="grid grid-cols-2 gap-4 mt-0"
               >
-                {products && products
-                  .filter((product) => product.menuTypeId === type.id)
-                  .map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      onClick={handleClickCard}
-                    />
-                  ))}
+                {products &&
+                  products
+                    .filter(product => product.menuTypeId === type.id)
+                    .map(product => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        onClick={handleClickCard}
+                      />
+                    ))}
               </TabsContent>
             ))}
           </Tabs>
@@ -171,7 +173,7 @@ export const Menu = () => {
                 }}
                 aria-label="Add menu type"
               >
-                {" "}
+                {' '}
                 Add
               </Button>
             </TabsList>
