@@ -38,6 +38,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     fetchAllOrders();
+    //eslint-disable-next-line
   }, [accessToken]);
 
   const todayOrders =

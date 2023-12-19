@@ -12,30 +12,10 @@ import {
 import { getOrders, deleteMyOrder } from "./_components/actions";
 import { ItemDb } from "@/lib/types/db";
 import { Trash2 } from 'lucide-react';
+import { Orders } from "@/lib/types/db";
 
 
-type StoreInfo = {
-  area: string;
-  category: number;
-  emailAddress: string;
-  favoriteCount: number;
-  id: number;
-  name: string;
-  phoneNumber: string;
-  storeImage: string;
-  userId: number;
-};
 
-interface Orders {
-  id: number;
-  name: string;
-  orderItem: ItemDb[];
-  payment: string;
-  status: string;
-  pickupTime: string;
-  storeId: number;
-  storeInfo: StoreInfo;
-};
 const OrdersPage = () => {
   const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
   const [orderData, setOrders] = useState<Orders[] | null>(null);
@@ -59,6 +39,7 @@ const OrdersPage = () => {
   useEffect(() => {
     getOrders(accessToken)
       .then(data => {
+        console.log(data);  
         setOrders(data); // Assuming 'data' is the array of orders
         setLoading(false);
       })

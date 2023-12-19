@@ -52,7 +52,8 @@ export const MonthlyOrderData = () => {
     "__session",
   ]);
   const { __session: accessToken = "" } = cookies;
-  const { storeId } = useParams();
+  const params = useParams();
+  const storeId = params.storeId?.toString();
 
   const [loading, setLoading] = useState(true);
   const [customerData, setCustomerData] = useState<CustomerBilling[] | null>(

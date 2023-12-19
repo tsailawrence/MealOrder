@@ -42,16 +42,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-
-export type Order = {
-  customerId: number;
-  id: string;
-  // orderItems: OrderItem[]; // Replace 'any' with a more specific type if possible
-  payment: number;
-  pickupTime: string;
-  status: 'Confirmed' | 'Preparing' | 'To Pick Up' | 'Completed' | 'Canceled';
-  time: string;
-};
+import { Order } from '@/lib/types/db';
 
 export const columns: ColumnDef<Order>[] = [
   {

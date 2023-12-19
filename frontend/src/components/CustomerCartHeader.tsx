@@ -136,13 +136,14 @@ const CustomerCartHeader = () => {
       })),
       pickupTime: formatDateForMySQL(orders.pickupTime?.toString()),
     }
+    //if success, then invoke toast
     addMyOrder(accessToken,ordersData);
     //refresh the page
     // Delete cart from local storage
     let newCart = { restaurantName: '', storeid: 0, items: [] }
     localStorage.setItem('cart', JSON.stringify(newCart));
     console.log('newCart:', newCart);
-    // window.location.reload();
+    window.location.reload();
   }
   return (
     <Sheet>

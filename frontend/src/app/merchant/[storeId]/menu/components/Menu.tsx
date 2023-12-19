@@ -18,6 +18,21 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { ProductCard } from './ProductCard';
 
+type MenuType = {
+  id: number;
+  type: string;
+};
+
+type Product = {
+  id: number;
+  menuTypeId: number;
+  menuImage: string;
+  name: string;
+  description: string;
+  price: number;
+  onShelfStatus: number;
+};
+
 export const Menu = () => {
   const [cookies, setCookie] = useCookies([
     'refreshToken',
@@ -26,16 +41,18 @@ export const Menu = () => {
   ]);
   const { __session: accessToken = '' } = cookies;
   const params = useParams();
-  const [menuType, setMenuType] = useState([]);
+  const storeId = params.storeId?.toString();
+  const [menuType, setMenuType] = useState<MenuType[] | undefined>();
   const [menuTypeModalOpen, setMenuTypeModalOpen] = useState(false);
-  const [editMenuType, setEditMenuType] = useState();
-  const [products, setProducts] = useState([]);
+  const [editMenuType, setEditMenuType] = useState<MenuType | undefined>();
+  const [products, setProducts] = useState<Product[] | undefined>();
   const [productSheetOpen, setProductSheetOpen] = useState(false);
-  const [editProduct, setEditProduct] = useState();
+  const [editProduct, setEditProduct] = useState<Product | undefined>();
 
   const fetchMenu = () => {
-    getMenu(accessToken, params.storeId)
+    getMenu(accessToken, storeId)
       .then(data => {
+        console.log('Menu:', data);
         setMenuType(data.menuTypes);
         setProducts(data.menus);
       })
@@ -44,9 +61,9 @@ export const Menu = () => {
       });
   };
 
-  const onDelete = async menuTypeId => {
+  const onDelete = async (menuTypeId: string) => {
     try {
-      await deleteMenuType(accessToken, params.storeId, menuTypeId);
+      await deleteMenuType(accessToken, storeId, menuTypeId);
       toast.success('Category deleted');
     } catch (error) {
       toast.error('Something went wrong deleting the category');
@@ -58,9 +75,10 @@ export const Menu = () => {
 
   useEffect(() => {
     fetchMenu();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken]);
 
-  const handleClickCard = product => {
+  const handleClickCard = (product: Product) => {
     setEditProduct(product);
     setProductSheetOpen(true);
   };
@@ -94,7 +112,7 @@ export const Menu = () => {
                     setEditMenuType(type);
                   }}
                   onDelete={() => {
-                    onDelete(type.id);
+                    onDelete(type.id?.toString());
                   }}
                 />
               ))}
@@ -129,15 +147,16 @@ export const Menu = () => {
                 value={type.id.toString()}
                 className="grid grid-cols-2 gap-4 mt-0"
               >
-                {products
-                  .filter(product => product.menuTypeId === type.id)
-                  .map(product => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      onClick={handleClickCard}
-                    />
-                  ))}
+                {products &&
+                  products
+                    .filter(product => product.menuTypeId === type.id)
+                    .map(product => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        onClick={handleClickCard}
+                      />
+                    ))}
               </TabsContent>
             ))}
           </Tabs>
