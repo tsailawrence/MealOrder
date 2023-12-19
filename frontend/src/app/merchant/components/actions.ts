@@ -33,6 +33,7 @@ export const getCategories = async (accessToken: string) => {
 };
 
 export const createStore = async (accessToken: string, data: any) => {
+  data.uri = data.storeImage;
   try {
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
@@ -53,6 +54,7 @@ export const updateStore = async (
   storeId: string,
   data: any
 ) => {
+  data.uri = data.storeImage;
   try {
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
