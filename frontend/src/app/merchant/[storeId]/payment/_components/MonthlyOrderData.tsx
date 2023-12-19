@@ -102,7 +102,7 @@ export const MonthlyOrderData = () => {
           {monthNames[selectedMonthData.month - 1]}, {selectedMonthData.year}{" "}
           <div className="flex mt-2 gap-2">
             <Select
-              value={selectedMonthData.month}
+              value={selectedMonthData.month.toString()}
               onValueChange={(e) => {
                 setSelectedMonthData({
                   ...selectedMonthData,
@@ -116,7 +116,7 @@ export const MonthlyOrderData = () => {
               <SelectContent className="h-fit max-h-[150px]">
                 <SelectGroup>
                   {monthNames.map((month, index) => (
-                    <SelectItem key={index} value={index + 1}>
+                    <SelectItem key={index} value={(index + 1).toString()}>
                       {month}
                     </SelectItem>
                   ))}
@@ -124,7 +124,7 @@ export const MonthlyOrderData = () => {
               </SelectContent>
             </Select>
             <Select
-              value={selectedMonthData.year}
+              value={selectedMonthData.year.toString()}
               onValueChange={(e) => {
                 setSelectedMonthData({
                   ...selectedMonthData,
@@ -138,7 +138,7 @@ export const MonthlyOrderData = () => {
               <SelectContent className="h-fit max-h-[150px]">
                 <SelectGroup>
                   {years.map((year) => (
-                    <SelectItem key={year} value={year}>
+                    <SelectItem key={year} value={year.toString()}>
                       {year}
                     </SelectItem>
                   ))}
