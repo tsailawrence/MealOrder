@@ -6,6 +6,7 @@ import { AllOrderTable } from "./_components/AllOrderTable";
 import { useCookies } from "react-cookie";
 import { getAllOrders } from "./_components/actions";
 import { useEffect, useState } from "react";
+import { set } from "date-fns";
 
 type Order = {
   customerId: number;
@@ -41,7 +42,7 @@ const OrderBox = () => {
         setError(err);
         setLoading(false);
       });
-  }, [accessToken]); // Dependency array
+  }, [accessToken,orders]); // Dependency array
 
   const todayOrders =
     orders &&

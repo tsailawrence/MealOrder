@@ -56,18 +56,16 @@ type Product = {
   price: number;
   onShelfStatus: number;
 };
-
+type MenuType = {
+  id: number;
+  type: string;
+};
 interface ProductSheetProps {
   open: boolean;
   setOpen: (open: boolean) => void;
   onChange: () => void;
   productInfo: Product | undefined;
-  menuTypes: [
-    {
-      id: number;
-      type: string;
-    }
-  ];
+  menuTypes: MenuType[] | undefined;
 }
 
 export const ProductSheet = ({
@@ -85,6 +83,7 @@ export const ProductSheet = ({
   const { __session: accessToken = "" } = cookies;
 
   const params = useParams();
+  const storeId = params.storeId?.toString();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -111,6 +110,7 @@ export const ProductSheet = ({
         price: "0",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, productInfo, form.reset, menuTypes]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -119,8 +119,8 @@ export const ProductSheet = ({
       if (productInfo) {
         const newProduct = await updateProduct(
           accessToken,
-          params.storeId,
-          productInfo.id,
+          storeId,
+          productInfo.id?.toString(),
           values
         );
         if (newProduct) {
@@ -129,7 +129,7 @@ export const ProductSheet = ({
       } else {
         const newProduct = await createProduct(
           accessToken,
-          params.storeId,
+          storeId,
           values
         );
         if (newProduct) {
@@ -150,7 +150,7 @@ export const ProductSheet = ({
     try {
       setLoading(true);
       if (productInfo) {
-        await deleteProduct(accessToken, params.storeId, productInfo.id);
+        await deleteProduct(accessToken, storeId, productInfo.id?.toString());
         toast.success("Product deleted");
       }
     } catch (error) {
@@ -192,7 +192,8 @@ export const ProductSheet = ({
                               const reader = new FileReader();
                               reader.onloadend = () => {
                                 const base64String = reader.result;
-                                form.setValue("menuImage", base64String);
+                                if (base64String) 
+                                  form.setValue("menuImage", base64String?.toString());
                               };
                               reader.readAsDataURL(file);
                             }

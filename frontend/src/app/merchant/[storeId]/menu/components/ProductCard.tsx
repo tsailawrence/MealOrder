@@ -81,6 +81,7 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
   const { __session: accessToken = "" } = cookies;
 
   const params = useParams();
+  const storeId = params.storeId?.toString();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -90,7 +91,7 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
 
   const ChangeStatus = async () => {
     try {
-      await updateProduct(accessToken, params.storeId, product.id, {
+      await updateProduct(accessToken, storeId, product.id?.toString(), {
         onShelfStatus: parseInt(form.getValues("onShelfStatus")),
       });
       toast.success("Product updated");

@@ -2,30 +2,8 @@ import React from "react";
 import styles from "./orders.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { ItemDb } from "@/lib/types/db";
-import { Button } from "@/components/ui/button"
-type StoreInfo = {
-  area: string;
-  category: number;
-  emailAddress: string;
-  favoriteCount: number;
-  id: number;
-  name: string;
-  phoneNumber: string;
-  storeImage: string;
-  userId: number;
-};
+import { Orders } from "@/lib/types/db";
 
-interface Orders {
-  id: number;
-  name: string;
-  orderItem: ItemDb[];
-  payment: string;
-  status: string;
-  pickupTime: string;
-  storeId: number;
-  storeInfo: StoreInfo;
-};
 function formatStatusForClass(status: string) {
   return status.toLowerCase().replace(/\s+/g, '_');
 }
