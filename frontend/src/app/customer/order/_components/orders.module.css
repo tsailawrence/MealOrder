@@ -1,0 +1,80 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.orderItem {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.image {
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.details {
+  text-align: left;
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.info {
+  color: #666;
+  margin: 0;
+}
+
+.status {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.statusBadge {
+  display: inline-block;
+  margin: 2%;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.preparing {
+  background-color: rgba(202, 241, 110, 0.15);
+  color: #5c4e07;
+}
+
+.confirmed {
+  background-color: rgba(255, 153, 0, 0.17);
+  color: #ff9900;
+}
+
+.completed {
+  background-color: rgba(15, 189, 0, 0.15);
+  color: #0fbd00;
+}
+
+.canceled {
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #ef1111;
+}
+
+.to_pick_up{
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #8db2f2;
+}
+
+

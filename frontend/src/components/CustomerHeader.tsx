@@ -1,41 +1,42 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
-import { Cross2Icon } from "@radix-ui/react-icons";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetClose,
+  SheetClose
 } from "@/components/ui/sheet";
-import { Menu, ShoppingCart } from "lucide-react";
-
+import { useLocation } from "@/app/customer/LocationContext";
+import CustomerCartHeader from "./CustomerCartHeader";
+import { Menu, MapPin } from "lucide-react";
 const Header = () => {
   const routes = [
     {
       href: "/customer/restaurant",
-      label: "Restauarant",
+      label: "Restauarant"
     },
     {
       href: "/customer/order",
-      label: "Order",
+      label: "Order"
     },
     {
       href: "/customer/monthlyPayment",
-      label: "Monthly Payment",
+      label: "Monthly Payment"
     },
     {
       href: "/customer/settings",
-      label: "Settings",
-    },
+      label: "Settings"
+    }
   ];
 
+  const { location } = useLocation();
+
   return (
-    <header className="sm:flex sm:justify-between px-10 border-b">
-      <div className="relative  flex h-20 items-center justify-between w-full">
-        <div className="flex items-center gap-8">
+    <header className="fixed top-0 left-0 z-50 w-full bg-white border-b px-10">
+      <div className="flex justify-between items-center w-full h-20">
+        <div className="flex items-center gap-4">
           <Sheet>
             <SheetTrigger>
               <Menu className="h-6 w-6" color="#E60012"></Menu>
@@ -57,17 +58,13 @@ const Header = () => {
           <Link href="/" className="">
             <Image src="/logo.png" alt="logo" width={90} height={30} />
           </Link>
+          <div className="flex text-xm text-black overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-90px)] rounded-full border border-black p-2">
+            <MapPin />{location ? location : 'Loading...'}
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>
-            <Button
-              variant="ghost"
-              size="icon"
-              className=""
-              aria-label="Shopping Cart"
-            >
-              <ShoppingCart className="h-6 w-6" color="#E60012" />
-            </Button>
+            <CustomerCartHeader />
             <UserButton />
           </SignedIn>
         </div>
