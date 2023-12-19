@@ -108,7 +108,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
         console.log('Updated cart:', cart.items);
     }
     let cart: Cart = JSON.parse(localStorage.getItem('cart') || '{}');
-    const totalcost = cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    const totalcost = cart.items?.reduce((acc, item) => acc + item.price * item.quantity, 0)
     return (
         <Dialog>
             <DialogTrigger
