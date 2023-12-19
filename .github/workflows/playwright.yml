@@ -32,6 +32,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
         working-directory: ./qa
+
       - name: Stop and remove Docker container
         if: always()
         run: |
