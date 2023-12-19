@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useCookies } from "react-cookie";
+import Image from "next/image";
 
 import { getStore } from "@/app/merchant/components/actions";
 
@@ -43,7 +44,20 @@ const EditStore = () => {
 
   return (
     <>
-      <div className="text-2xl font-bold">
+      <div className="text-2xl font-bold flex items-center gap-2">
+        {storeInfo && (
+          <Image
+            src={
+              storeInfo.storeImage !== null && storeInfo.storeImage !== ""
+                ? storeInfo.storeImage
+                : "https://via.placeholder.com/86x86.png?text=No+Image"
+            }
+            alt={"product image"}
+            width={50}
+            height={50}
+          />
+        )}
+
         {storeInfo ? storeInfo.name : "Loading..."}
         <Button
           variant="outline"

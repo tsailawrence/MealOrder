@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_cHJvZm91bmQtYmFib29uLTgyLmNsZXJrLmFjY291bnRzLmRldiQ CLERK_SECRET_KEY=sk_test_5gjLuv9YrEZZYVsVQ1h6HwdN5MgmSur4prqcuyTKqL next start",
     "lint": "next lint"
   },
   "dependencies": {

@@ -11,7 +11,9 @@ module.exports = async (ctx) => {
   const {
     currentUser: { id: userId, type } = {},
     params: { storeId, menuId } = {},
-    request: { body: { name, description, price, menuTypeId, uri } = {} } = {},
+    request: {
+      body: { name, description, price, menuTypeId, uri, onShelfStatus } = {},
+    } = {},
   } = ctx;
 
   let cdn = {};
@@ -35,6 +37,7 @@ module.exports = async (ctx) => {
     price,
     menuTypeId,
     menuImage,
+    onShelfStatus,
   };
   // 遍历 data 对象的属性，如果属性值为 undefined 或 null 或空字符串，则从对象中删除该属性
   for (const key in data) {
