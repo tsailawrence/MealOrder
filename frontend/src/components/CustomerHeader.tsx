@@ -1,30 +1,30 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetClose
-} from "@/components/ui/sheet";
-import { useLocation } from "@/app/customer/LocationContext";
-import CustomerCartHeader from "./CustomerCartHeader";
-import { Menu, MapPin } from "lucide-react";
+  SheetClose,
+} from '@/components/ui/sheet';
+import { useLocation } from '@/app/customer/LocationContext';
+import CustomerCartHeader from './CustomerCartHeader';
+import { Menu, MapPin } from 'lucide-react';
 const Header = () => {
   const routes = [
     {
-      href: "/customer/restaurant",
-      label: "Restauarant"
+      href: '/customer/restaurant',
+      label: 'Restauarant',
     },
     {
-      href: "/customer/order",
-      label: "Order"
+      href: '/customer/order',
+      label: 'Order',
     },
     {
-      href: "/customer/monthlyPayment",
-      label: "Monthly Payment"
-    }
+      href: '/customer/monthlyPayment',
+      label: 'Monthly Payment',
+    },
   ];
 
   const { location } = useLocation();
@@ -35,10 +35,10 @@ const Header = () => {
         <div className="flex items-center gap-4">
           <Sheet>
             <SheetTrigger>
-              <Menu className="h-6 w-6" color="#E60012"></Menu>
+              <Menu className="h-6 w-6" color="#E60012" id="menu-button"></Menu>
             </SheetTrigger>
             <SheetContent side="left" className="w-[250px] sm:w-[300px]">
-              <nav className="flex flex-col gap-4">
+              <nav className="flex flex-col gap-4" id="nav-bar">
                 {routes.map((route, i) => (
                   <Link
                     key={i}
@@ -54,8 +54,12 @@ const Header = () => {
           <Link href="/" className="">
             <Image src="/logo.png" alt="logo" width={90} height={30} />
           </Link>
-          <div className="flex text-xm text-black overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-90px)] rounded-full border border-black p-2">
-            <MapPin />{location ? location : 'Loading...'}
+          <div
+            id="locator"
+            className="flex text-xm text-black overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-90px)] rounded-full border border-black p-2"
+          >
+            <MapPin />
+            {location ? location : 'Loading...'}
           </div>
         </div>
         <div className="flex items-center gap-4">
