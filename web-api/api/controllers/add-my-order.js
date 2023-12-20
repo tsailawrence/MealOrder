@@ -29,6 +29,8 @@ module.exports = async ctx => {
         payment: payment,
         pickupTime: pickupTime,
     },items);
+
+
    const [usrInfo] = await User.getUserById({
         id: userId,
     });
@@ -42,6 +44,16 @@ module.exports = async ctx => {
         const [theMenu] = await Menu.getMenuByMenuId({
             menuId,
         });
+        const amount = theMenu.amount - item.quantity;
+        const data= {
+            ...theMenu,
+            amount
+        }
+
+        const theMenuUpdate = await Menu.update({
+            data,
+            menuId,
+          });
 
         return {
             ...item,
