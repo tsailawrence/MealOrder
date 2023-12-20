@@ -35,10 +35,11 @@ jobs:
           aws-secret-access-key: ZUUlaLTFqBS+v31KRN4bgMMDONlFR23I4RmP9sUg
           aws-region: us-east-1
 
-      # Login to Amazon ECR
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+      # Login to Amazon ECR Public
+      - name: Login to Amazon ECR Public
+        run: |
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/z6r7z5c0
+
 
       # Build, tag, and push Frontend image to Amazon ECR
       - name: Build, tag, and push Frontend image to Amazon ECR
