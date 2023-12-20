@@ -1,11 +1,11 @@
 import { instance } from "@/lib/utils";
 
-export const getStore = async (accessToken: string) => {
+export const getStore = async (accessToken: string,id : string) => {
   try {
     if (!accessToken) {
       throw new Error("AccessToken Not Exist.");
     }
-    const { data: response } = await instance.get(`/admin/store`, {
+    const { data: response } = await instance.get(`/admin/store/${id}`, {
       params: {
         accessToken,
       },

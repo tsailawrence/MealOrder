@@ -27,7 +27,7 @@ const EditStore = () => {
   const storeInfoCheck = async () => {
     const { __session: accessToken = "" } = cookies;
 
-    const store = await getStore(accessToken);
+    const store = await getStore(accessToken, storeId);
     setStoreInfo(store);
   };
 
