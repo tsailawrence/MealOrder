@@ -92,7 +92,7 @@ export const ProductSheet = ({
           menuTypeId: productInfo.menuTypeId.toString(),
           description: productInfo.description,
           price: productInfo.price.toString(),
-          number: productInfo.number.toString(),
+          number: productInfo.number?.toString(),
         });
       }
     } else {

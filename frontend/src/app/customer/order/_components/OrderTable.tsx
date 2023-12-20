@@ -30,7 +30,7 @@ export const OrderTable = ({ order }: { order: Orders }) => {
           <p
             className={styles.info}
           >
-            {`${itemnumber} items, ${order.pickupTime}`}
+            {`${itemnumber} items, ${order.time}`}
           </p>
           <p className={styles.info}>
             {`Total ${order.payment}`}</p>

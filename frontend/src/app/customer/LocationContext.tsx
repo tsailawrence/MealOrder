@@ -14,32 +14,32 @@ type CityAreaMapping = {
 // Data for city-to-area mapping specific to Taiwan
 const cityAreaData: CityAreaMapping = {
     // North Area
-    "臺北市": "North",
-    "新北市": "North",
-    "基隆市": "North",
-    "新竹市": "North",
-    "桃園市": "North",
-    "新竹縣": "North",
-    "宜蘭縣": "North",
+    "臺北市": "north",
+    "新北市": "north",
+    "基隆市": "north",
+    "新竹市": "north",
+    "桃園市": "north",
+    "新竹縣": "north",
+    "宜蘭縣": "north",
 
     // Central Area
-    "臺中市": "Central",
-    "苗栗縣": "Central",
-    "彰化縣": "Central",
-    "南投縣": "Central",
-    "雲林縣": "Central",
+    "臺中市": "central",
+    "苗栗縣": "central",
+    "彰化縣": "central",
+    "南投縣": "central",
+    "雲林縣": "central",
 
     // South Area
-    "高雄市": "South",
-    "臺南市": "South",
-    "嘉義市": "South",
-    "嘉義縣": "South",
-    "屏東縣": "South",
-    "澎湖縣": "South",
+    "高雄市": "south",
+    "臺南市": "south",
+    "嘉義市": "south",
+    "嘉義縣": "south",
+    "屏東縣": "south",
+    "澎湖縣": "south",
 
     // East Area
-    "花蓮縣": "East",
-    "臺東縣": "East"
+    "花蓮縣": "east",
+    "臺東縣": "east"
 };
 
 // Function to classify city names to areas
@@ -73,6 +73,7 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) 
             if (nowCity) {
                 setLocation(nowCity);
                 const area = classifyCityToArea(nowCity);
+                console.log('area', area);
                 setCookie('nowCity', area, 7);
             }
         };
@@ -89,6 +90,14 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) 
             // Handle the case where the browser doesn't support Geolocation
         }
     }, []);
+
+    useEffect(() => {
+        if (location) {
+            const area = classifyCityToArea(location);
+            setCookie('nowCity', area, 7);
+            console.log(`Cookie set for location: ${location} as area: ${area}`);
+        }
+    }, [location]); // Dependency array includes location
 
     return (
         <LocationContext.Provider value={{ location, setLocation }}>

@@ -14,8 +14,8 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
     phoneNumber,
     area,
 }) => {
-    const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
-    const { __session: accessToken = '' } = cookies;
+    const [cookies] = useCookies(['refreshToken', 'accessToken', '__session', 'nowCity']);
+    const { __session: accessToken = '',nowCity } = cookies;
     return (
         <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
             <div className="flex items-stretch justify-between gap-5 mt-2">
@@ -42,8 +42,9 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                         </div>
                     </div>
                     {area && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
-                        <MapPin /> {area}
+                        <MapPin /> {area } 
                     </span>}
+                    {(area && area!==nowCity) && <span className="text-red-600"> Far from your location !!!</span>}
                     {phoneNumber && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
                         <Phone /> {phoneNumber}
                     </span>}
@@ -52,9 +53,9 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
             <div className="justify-center items-stretch border border-[color:var(--Red,#E60012)] flex gap-2 mt-4 pl-8 pr-8 py-3 rounded-3xl border-solid self-start ">
                 <Image
                     loading="lazy"
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/61e469bf-3fa4-4814-928e-fdf1a9b6b529?apiKey=5d949b60a548481d8fbc5fec7da626b0"
-                    width={5}
-                    height={5}
+                    src={imageSrc}
+                    width={10}
+                    height={10}
                     className="aspect-square object-contain object-center w-5 overflow-hidden shrink-0 max-w-full"
                     alt="Favorite Icon"
                 />

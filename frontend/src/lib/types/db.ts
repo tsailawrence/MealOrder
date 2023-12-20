@@ -120,6 +120,16 @@ export type CustomerBilling = {
   totalCosts: number;
 };
 
+export type merchantBillingProps = {
+  customerId: number;
+  id: number;
+  orderItems: OrderItem[];
+  payment: number;
+  pickupTime: string;
+  status: string;
+  time: string;
+}
+
 export type StoreInfo = {
   area: string;
   category: number;

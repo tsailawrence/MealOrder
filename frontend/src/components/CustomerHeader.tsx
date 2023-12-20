@@ -46,17 +46,17 @@ const cityOptions: string[] = [
 const Header = () => {
   const routes = [
     {
-      href: "/customer/restaurant",
-      label: "Restauarant"
+      href: '/customer/restaurant',
+      label: 'Restauarant',
     },
     {
-      href: "/customer/order",
-      label: "Order"
+      href: '/customer/order',
+      label: 'Order',
     },
     {
-      href: "/customer/monthlyPayment",
-      label: "Monthly Payment"
-    }
+      href: '/customer/monthlyPayment',
+      label: 'Monthly Payment',
+    },
   ];
 
   const { location,setLocation } = useLocation();
@@ -70,10 +70,10 @@ const Header = () => {
         <div className="flex items-center gap-4">
           <Sheet>
             <SheetTrigger>
-              <Menu className="h-6 w-6" color="#E60012"></Menu>
+              <Menu className="h-6 w-6" color="#E60012" id="menu-button"></Menu>
             </SheetTrigger>
             <SheetContent side="left" className="w-[250px] sm:w-[300px]">
-              <nav className="flex flex-col gap-4">
+              <nav className="flex flex-col gap-4" id="nav-bar">
                 {routes.map((route, i) => (
                   <Link
                     key={i}

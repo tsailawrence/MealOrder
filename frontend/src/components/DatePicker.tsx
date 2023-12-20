@@ -34,12 +34,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({ onDateChange }) => {
                 <Button
                     variant={"outline"}
                     className={cn(
-                        "w-[150px] justify-start text-left font-normal",
+                        "w-[150px] flex justify-center items-center font-normal",
                         !date && "text-muted-foreground"
                     )}
                 >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, "PPP") : <span>Pick a date</span>}
+                    <span>{date ? format(date, "PPP") : "Pick a date"}</span>
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
