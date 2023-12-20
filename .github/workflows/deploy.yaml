@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: public.ecr.aws/z6r7z5c0/foody 
+  ECR_REPOSITORY: foody 
   ECS_CLUSTER: foody # set this to your Amazon ECS cluster name
   # 前端服務配置
   FRONTEND_ECS_SERVICE: frontend-443
