@@ -6,7 +6,9 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY .next ./.next
+RUN npm run build
+
+# COPY .next ./.next
 
 COPY . .
 
