@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
 import StoreInfo from './_components/StoreInfo';
 import StoreMenu from './_components/StoreMenu';
-import { restaurantData } from '@/app/dbTemplate/cardData';
 import { getRestaurantData, getMenu } from './_components/actions';
 
 interface MenuItem {
