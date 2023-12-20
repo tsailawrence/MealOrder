@@ -1,21 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 const baseURL = 'http://localhost:3000';
-const customerAccount = 'foodytry1@gmail.com';
-const customerPassword = 'Foodytryaccount1';
+test.use({ storageState: 'playwright/.auth/customer.json' });
 
 test.describe('Customer', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
-    await page.getByText('Continue with Google').click();
-    await page.waitForTimeout(2000);
-    await page.locator('input[type="email"]').fill(customerAccount);
-    await page.keyboard.press('Enter');
-    await page.waitForTimeout(2000);
-    await page.locator('input[type="password"]').first().fill(customerPassword);
-    await page.keyboard.press('Enter');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
   });
 
   test.describe('Components', () => {
