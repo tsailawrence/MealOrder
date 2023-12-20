@@ -1,23 +1,20 @@
 import { test as setup, expect } from '@playwright/test';
 
 const baseURL = 'http://localhost:3000';
-const customerAccount = 'foodytry1@gmail.com';
-const customerPassword = 'Foodytryaccount1';
-const merchantAccount = 'foodytry2@gmail.com';
-const merchantPassword = 'Foodytryaccount2';
+const customerAccount = 'customer+clerk_test@test.com';
+const customerPassword = 'Customertest';
+const merchantAccount = 'merchant+clerk_test@test.com';
+const merchantPassword = 'Merchanttest';
 
 const customerFile = 'playwright/.auth/customer.json';
 setup('authenticate as customer', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
   await page.goto(baseURL);
   await page.getByText('Go to Restaurant').click();
-  await page.waitForTimeout(2000);
-  await page.getByText('Continue with Google').click();
-  await page.waitForTimeout(2000);
-  await page.locator('input[type="email"]').fill(customerAccount);
+  await page.locator('#identifier-field').fill(customerAccount);
   await page.keyboard.press('Enter');
   await page.waitForTimeout(2000);
-  await page.locator('input[type="password"]').first().fill(customerPassword);
+  await page.locator('#password-field').fill(customerPassword);
   await page.keyboard.press('Enter');
   await page.waitForLoadState('networkidle');
   // Wait until the page receives the cookies.
@@ -33,13 +30,10 @@ setup('authenticate as merchant', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
   await page.goto(baseURL);
   await page.getByText('Go to Restaurant').click();
-  await page.waitForTimeout(2000);
-  await page.getByText('Continue with Google').click();
-  await page.waitForTimeout(2000);
-  await page.locator('input[type="email"]').fill(merchantAccount);
+  await page.locator('#identifier-field').fill(merchantAccount);
   await page.keyboard.press('Enter');
   await page.waitForTimeout(2000);
-  await page.locator('input[type="password"]').first().fill(merchantPassword);
+  await page.locator('#password-field').fill(merchantPassword);
   await page.keyboard.press('Enter');
   await page.waitForLoadState('networkidle');
   // Wait until the page receives the cookies.

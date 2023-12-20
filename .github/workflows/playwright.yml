@@ -14,9 +14,6 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install xvfb
-        run: sudo apt-get update && sudo apt-get install -y xvfb
-
       - name: Start services using Docker Compose
         run: docker-compose up -d
         working-directory: ./
@@ -38,7 +35,7 @@ jobs:
         working-directory: ./qa
 
       - name: Run Playwright tests
-        run: xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npx playwright test
+        run: npx playwright test
         working-directory: ./qa
 
       - name: Upload Playwright report
