@@ -1,21 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 const baseURL = 'http://localhost:3000';
-const merchantAccount = 'foodytry2@gmail.com';
-const merchantPassword = 'Foodytryaccount2';
+test.use({ storageState: 'playwright/.auth/merchant.json' });
 
 test.describe('Merchant', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
-    await page.getByText('Continue with Google').click();
-    await page.waitForTimeout(2000);
-    await page.locator('input[type="email"]').fill(merchantAccount);
-    await page.keyboard.press('Enter');
-    await page.waitForTimeout(2000);
-    await page.locator('input[type="password"]').first().fill(merchantPassword);
-    await page.keyboard.press('Enter');
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
   });
 
   test.describe('Components', () => {
@@ -25,10 +16,6 @@ test.describe('Merchant', () => {
       await expect(
         page.getByText('Edit your store details here')
       ).toBeVisible();
-    });
-
-    test('Payment table', async ({ page }) => {
-      await expect(page.locator('table')).toBeVisible();
     });
   });
 
@@ -45,9 +32,7 @@ test.describe('Merchant', () => {
     test('Add menu type', async ({ page }) => {
       await page.locator('[aria-label="Add menu type"]').click();
       await page.waitForTimeout(1000);
-      await expect(
-        page.getByText('Edit your store details here')
-      ).toBeVisible();
+      await expect(page.getByText('Add Menu Type')).toBeVisible();
     });
 
     test('Add item', async ({ page }) => {

@@ -12,7 +12,7 @@ module.exports = async (ctx) => {
     currentUser: { id: userId, type } = {},
     params: { storeId, menuId } = {},
     request: {
-      body: { name, description, price, menuTypeId, uri, onShelfStatus } = {},
+      body: { name, description, price, menuTypeId, amount, uri, onShelfStatus } = {},
     } = {},
   } = ctx;
 
@@ -35,6 +35,7 @@ module.exports = async (ctx) => {
     name,
     description,
     price,
+    amount,
     menuTypeId,
     menuImage,
     onShelfStatus,
