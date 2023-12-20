@@ -5,23 +5,7 @@ import { useParams } from 'next/navigation';
 import StoreInfo from './_components/StoreInfo';
 import StoreMenu from './_components/StoreMenu';
 import { getRestaurantData } from './_components/actions';
-
-interface MenuItem {
-    id: number;
-    name: string;
-    menuImage: string;
-    description: string;
-    price: number;
-    storeId: number;
-    menuTypeId: number;
-    onShelfStatus: number;
-    updated_time: string;
-}
-
-type menuType = {
-    id: number,
-    type: string
-}
+import { MenuItem, menuType } from '@/lib/types/db';
 
 interface Store {
     id: number;
@@ -57,6 +41,7 @@ const RestaurantPage = () => {
         try {
             const data = await getRestaurantData(token, id);
             setRestaurant(data);
+            console.log('Fetching restaurant data',data);
         } catch (err) {
             console.error('Error fetching restaurant data:', err);
             setError('Failed to load data');

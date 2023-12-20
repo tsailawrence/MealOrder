@@ -30,6 +30,7 @@ type Cart = {
     items: Item[]; //item name, price, quantity
 }
 type CardPriceProps = {
+    amount: number;
     storeId: number;
     restaurantName: string;
     uri: string;
@@ -39,7 +40,7 @@ type CardPriceProps = {
     description: string;
     specialInstructions?: SpecialInstruction[];
 }
-export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaurantName, uri, name, menuId , price, description }) => {
+export const CardPriceComponent: React.FC<CardPriceProps> = ({ amount, storeId ,restaurantName, uri, name, menuId , price, description }) => {
     const [itemQuantity, setitemQuantity] = useState(1);
     // const [isOptionSelected, setIsOptionSelected] = useState(true);
     // const [selectedOption, setSelectedOption] = useState<string[]>([]);
@@ -49,7 +50,8 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
     }
 
     const handleAdd = () => {
-        setitemQuantity(itemQuantity + 1);
+        if (itemQuantity < amount)
+            setitemQuantity(itemQuantity + 1);
     }
 
     const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -57,7 +59,6 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
     };
 
     const handleSubmit = () => {
-        console.log('Form submitted');
         addCart(); // Call the function to add item to cart
         window.location.reload(); // Refresh the page
     }
@@ -74,6 +75,10 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
             quantity: itemQuantity,
             note: textAreaValue,
             // specialInstructions: selectedOption || [],
+        }
+        if (itemQuantity > amount) {
+            alert('Please select a valid quantity');
+            return;
         }
         console.log('newItem:', newItem);
         // Retrieve existing cart data from local storage
@@ -190,6 +195,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
                             </Button>
                         </div>
                     </div>
+                    <div className='text-neutral-400 text-end'>Remain Amount : {amount}</div>
                     <div className='text-neutral-400 text-end'>Total Cost : {totalcost + price * itemQuantity}</div>
                 </DialogHeader>
                 <DialogFooter>
