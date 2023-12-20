@@ -14,7 +14,6 @@ setup('authenticate as customer', async ({ page }) => {
   console.log(page.url());
   await page.locator('span:text("Get Started")').click();
   await page.waitForTimeout(8000);
-  await page.screenshot({ path: '/screenshots/customerScreenshot.png' });
   console.log(page.url());
   await page.locator('#identifier-field').fill(customerAccount);
   await page.keyboard.press('Enter');
@@ -40,7 +39,6 @@ setup('authenticate as merchant', async ({ page }) => {
   console.log(page.url());
   await page.locator('span:text("Get Started")').click();
   await page.waitForTimeout(8000);
-  await page.screenshot({ path: '/screenshots/merchantScreenshot.png' });
   console.log(page.url());
   await page.locator('#identifier-field').fill(merchantAccount);
   await page.keyboard.press('Enter');
