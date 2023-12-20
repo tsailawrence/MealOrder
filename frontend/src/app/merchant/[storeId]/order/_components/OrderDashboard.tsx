@@ -38,7 +38,8 @@ export const Dashboard = () => {
 
   useEffect(() => {
     fetchAllOrders();
-  }, [accessToken]);
+    //eslint-disable-next-line
+  }, []);
 
   const todayOrders =
     allOrders &&
@@ -59,7 +60,7 @@ export const Dashboard = () => {
       const today = new Date();
       const orderDate = new Date(order.pickupTime);
       return (
-        today.toDateString() < orderDate.toDateString()
+        today.getTime() < orderDate.getTime()
         // order.status !== "Canceled"
       );
     });

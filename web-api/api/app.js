@@ -26,7 +26,10 @@ const init = () => {
         })
     );
     // cross domain
-    app.use(cors());
+    app.use(cors({
+        origin: 'https://foody-app.shop',
+        credentials: true,
+    }));
 
     // register routers
     app.use(router.routes()).use(router.allowedMethods());

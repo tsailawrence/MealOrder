@@ -22,21 +22,15 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
+import { Product } from "@/lib/types/db";
 import { updateProduct } from "@/app/merchant/[storeId]/menu/components/actions";
-import { parse } from "path";
 
 const shelfStatus = [
   ///已下架
@@ -57,15 +51,6 @@ const formSchema = z.object({
   onShelfStatus: z.string().max(1),
 });
 
-type Product = {
-  id: number;
-  menuTypeId: number;
-  uri: string;
-  name: string;
-  description: string;
-  price: number;
-  onShelfStatus: number;
-};
 
 interface ProductCardProps {
   product: Product;
@@ -73,7 +58,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, onClick }: ProductCardProps) => {
-  const [cookies, setCookie] = useCookies([
+  const [cookies] = useCookies([
     "refreshToken",
     "accessToken",
     "__session",
@@ -81,6 +66,7 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
   const { __session: accessToken = "" } = cookies;
 
   const params = useParams();
+  const storeId = params.storeId?.toString();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -90,7 +76,7 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
 
   const ChangeStatus = async () => {
     try {
-      await updateProduct(accessToken, params.storeId, product.id, {
+      await updateProduct(accessToken, storeId, product.id?.toString(), {
         onShelfStatus: parseInt(form.getValues("onShelfStatus")),
       });
       toast.success("Product updated");
@@ -110,22 +96,24 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
           <div>
             <Image
               src={
-                "https://cdn.builder.io/api/v1/image/assets/TEMP/86ce9750-e81c-48aa-87ee-33718641708b?apiKey=5d949b60a548481d8fbc5fec7da626b0&width=100"
+                product.menuImage !== null && product.menuImage !== ""
+                  ? product.menuImage
+                  : "https://via.placeholder.com/86x86.png?text=No+Image"
               }
-              alt={"product.name"}
-              width={86}
-              height={86}
-              className=""
+              alt={"product image"}
+              width={100}
+              height={100}
             />
           </div>
-          <div className="w-full flex justify-between items-center px-4">
+          <div className="w-full flex items-center px-4">
             <div>
               <div>{product.name}</div>
               <div className="text-gray-400 text-sm font-normal mt-1">
                 Some choices
               </div>
             </div>
-            <Badge variant="secondary">$ {product.price}</Badge>
+            <Badge variant="secondary" className="ml-auto ">$ {product.price}</Badge>
+            <Badge variant="secondary" className="ml-2"> Num : {product.amount}</Badge>
           </div>
           <div>
             <Form {...form}>

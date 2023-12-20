@@ -40,6 +40,7 @@ function getStatus(status: string) {
         action: null,
       };
   }
+  return null;
 }
 export const OrderCard = ({ order, handleUpdate }: OrderCardProps) => {
   return (
@@ -55,7 +56,7 @@ export const OrderCard = ({ order, handleUpdate }: OrderCardProps) => {
           </div>
           <Badge
             variant="outline"
-            className={`${getStatus(order.status).color} text-xs`}
+            className={`${getStatus(order.status)?.color} text-xs`}
           >
             {order.status}
           </Badge>
@@ -94,16 +95,18 @@ export const OrderCard = ({ order, handleUpdate }: OrderCardProps) => {
           }}
           disabled={order.status === "Canceled"}
         >
-          Cancel
+          {order.status === "Canceled" ? "Canceled" : "Cancel"}
         </Button>
-        {getStatus(order.status).action !== null && (
+        {getStatus(order.status)?.action && (
           <Button
             variant="destructive"
             onClick={() => {
-              handleUpdate(order.id, getStatus(order.status).action[1]);
+              // Using optional chaining and nullish coalescing for safety
+              {order.status && handleUpdate(order.id, getStatus(order.status)?.action?.[1] ?? "Preparing")}
             }}
           >
-            {getStatus(order.status).action[0]}
+            {/* Safely accessing the first element of the action array */}
+            {order.status && (getStatus(order.status)?.action?.[0] ?? "Preparing")}
           </Button>
         )}
       </CardFooter>

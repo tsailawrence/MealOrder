@@ -34,6 +34,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
+  storeImage: z.string(),
   name: z.string().min(1),
   area: z.string().min(1),
   category: z.string(),
@@ -46,6 +47,7 @@ type Category = {
 
 type Store = {
   id: number;
+  storeImage: string;
   name: string;
   area: string;
   category: number;
@@ -78,6 +80,7 @@ export const StoreModal = ({ open, setOpen, storeInfo }: StoreModalProps) => {
       // Set default values for editing
       if (storeInfo) {
         form.reset({
+          storeImage: storeInfo.storeImage,
           name: storeInfo.name,
           area: storeInfo.area,
           category: storeInfo.category.toString(),
@@ -85,12 +88,15 @@ export const StoreModal = ({ open, setOpen, storeInfo }: StoreModalProps) => {
       }
     } else {
       form.reset({
+        storeImage: "",
         name: "",
         area: "",
         category: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, storeInfo]);
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
@@ -129,6 +135,34 @@ export const StoreModal = ({ open, setOpen, storeInfo }: StoreModalProps) => {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="storeImage"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Image</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="file"
+                        disabled={loading}
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            const file = e.target.files[0];
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              const base64String = reader.result?.toString();
+                              if (base64String)
+                                form.setValue("storeImage", base64String);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="name"

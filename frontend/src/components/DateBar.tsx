@@ -39,7 +39,7 @@ export const DateBar: React.FC<DateBarProps> = ({ className, onDateChange }) => 
             id="date"
             variant={"outline"}
             className={cn(
-              "w-[300px] justify-start text-left font-normal",
+              "w-[300px] justify-center item-center font-normal",
               !date && "text-muted-foreground"
             )}
           >
@@ -54,7 +54,7 @@ export const DateBar: React.FC<DateBarProps> = ({ className, onDateChange }) => 
                 format(date.from, "LLL dd, y")
               )
             ) : (
-              <span>Pick a date</span>
+              <span>Pick a de</span>
             )}
           </Button>
         </PopoverTrigger>

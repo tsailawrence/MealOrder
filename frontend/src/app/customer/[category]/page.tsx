@@ -5,15 +5,14 @@ import { useParams } from 'next/navigation';
 import CategoryMenu from './_components/CategoryMenu';
 import { getCategorys } from './_components/actions';
 import { CategoryProps } from '@/lib/types/db';
-import { ca } from 'date-fns/locale';
 
 const RestaurantPage = () => {
     const { category } = useParams();
     const categoryString = category.toString();
-    const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
+    const [cookies] = useCookies(['refreshToken', 'accessToken', '__session', 'nowCity']);
     const [categoryData, setCategoryData] = useState<CategoryProps[] | null>(null);
     const [loading, setLoading] = useState(true);
-    const { __session: accessToken = '' } = cookies;
+    const { __session: accessToken = '',nowCity } = cookies;
     useEffect(() => {
         getCategorys(accessToken)
             .then(data => {
@@ -23,8 +22,8 @@ const RestaurantPage = () => {
             .catch(err => {
                 console.error('Error fetching orders:', err);
             });
-    }, [accessToken]); // Dependency array
-    // Use 'id' to fetch data or for other purposes
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [nowCity]); // Dependency array
     return (
         <>
             {loading||categoryData===null ? <div>Loading...</div> :

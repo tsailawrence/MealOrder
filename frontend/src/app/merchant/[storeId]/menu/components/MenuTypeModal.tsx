@@ -55,6 +55,7 @@ export const MenuTypeModal = ({
   const { __session: accessToken = "" } = cookies;
 
   const params = useParams();
+  const storeId = params.storeId?.toString();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -73,6 +74,7 @@ export const MenuTypeModal = ({
         type: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, menuTypeInfo, form.reset]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -81,8 +83,8 @@ export const MenuTypeModal = ({
       if (menuTypeInfo) {
         const menuType = await updateMenuType(
           accessToken,
-          params.storeId,
-          menuTypeInfo.id,
+          storeId,
+          menuTypeInfo.id?.toString(),
           values
         );
         if (menuType) {
@@ -91,7 +93,7 @@ export const MenuTypeModal = ({
       } else {
         const menuType = await createMenuType(
           accessToken,
-          params.storeId,
+          storeId,
           values
         );
         if (menuType) {
@@ -110,8 +112,8 @@ export const MenuTypeModal = ({
 
   return (
     <Modal
-      title="Store Details"
-      description="Edit your store details here."
+      title="Menu Type"
+      description={menuTypeInfo ? "Edit Menu Type" : "Add Menu Type"}
       isOpen={open}
       onClose={() => setOpen(false)}
     >
