@@ -161,6 +161,24 @@ export type Product = {
   name: string;
   description: string;
   price: number;
-  number: number;
+  amount: number;
   onShelfStatus: number;
 };
+
+export interface MenuItem {
+  amount: number;
+  id: number;
+  name: string;
+  menuImage: string;
+  description: string;
+  price: number;
+  storeId: number;
+  menuTypeId: number;
+  onShelfStatus: number;
+  updated_time: string;
+}
+
+export type menuType = {
+  id: number,
+  type: string
+}
