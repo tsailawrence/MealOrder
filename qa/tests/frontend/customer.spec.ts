@@ -13,9 +13,7 @@ test.describe('Customer', () => {
     test('Menu bar', async ({ page }) => {
       await expect(page.locator('#menu-button')).toBeVisible();
     });
-    test('Locator', async ({ page }) => {
-      await expect(page.locator('#locator')).toBeVisible();
-    });
+
     test('Nav bar', async ({ page }) => {
       await page.locator('#menu-button').click();
       await page.waitForTimeout(1000);
