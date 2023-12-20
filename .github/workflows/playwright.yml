@@ -34,8 +34,12 @@ jobs:
         run: npx playwright install --with-deps
         working-directory: ./qa
 
+      # - name: Run Playwright tests
+      #   run: xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npx playwright test
+      #   working-directory: ./qa
+
       - name: Run Playwright tests
-        run: xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" npx playwright test
+        run: npx playwright test
         working-directory: ./qa
 
       - name: Upload Playwright report
