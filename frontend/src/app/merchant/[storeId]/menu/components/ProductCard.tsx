@@ -113,7 +113,7 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
               </div>
             </div>
             <Badge variant="secondary" className="ml-auto ">$ {product.price}</Badge>
-            <Badge variant="secondary" className="ml-2"> Num : {product.number ? product.number : product.price}</Badge>
+            <Badge variant="secondary" className="ml-2"> Num : {product.amount}</Badge>
           </div>
           <div>
             <Form {...form}>

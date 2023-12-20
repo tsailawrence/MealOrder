@@ -46,7 +46,7 @@ const formSchema = z.object({
   menuTypeId: z.string().min(1),
   description: z.string().min(1),
   price: z.string().min(1),
-  number: z.string().min(1).optional(),
+  amount: z.string().min(1).optional(),
 });
 
 type MenuType = {
@@ -92,8 +92,8 @@ export const ProductSheet = ({
           menuTypeId: productInfo.menuTypeId.toString(),
           description: productInfo.description,
           price: productInfo.price.toString(),
-          number: productInfo.number?.toString(),
-        });
+          amount: productInfo.amount?.toString(),
+        }); 
       }
     } else {
       form.reset({
@@ -284,10 +284,10 @@ export const ProductSheet = ({
                 />
                 <FormField
                   control={form.control}
-                  name="number"
+                  name="amount"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Remain Number</FormLabel>
+                      <FormLabel>Remain Amount</FormLabel>
                       <FormControl>
                         <Input
                           type="number"
