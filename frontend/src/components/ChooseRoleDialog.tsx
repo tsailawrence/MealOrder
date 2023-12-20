@@ -59,6 +59,9 @@ export default function ChooseRoleDialog(props: any) {
       }
 
       if (userRole) {
+        if (userRole === 'admin') {
+            router.push('/admin');
+        }
         router.push(
           userRole === 'employee' ? '/customer/restaurant' : '/merchant'
         );
