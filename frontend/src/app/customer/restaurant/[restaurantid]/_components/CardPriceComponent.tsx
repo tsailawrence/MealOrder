@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import toast from 'react-hot-toast';
 
 type Item = {
     menuId: number;

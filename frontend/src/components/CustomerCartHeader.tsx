@@ -54,9 +54,7 @@ const formatDateForMySQL = (dateString: string): string => {
 const CustomerCartHeader = () => {
   const [cart, setCart] = useState<Cart>({ restaurantName: '', storeId: 0, items: [] });
   const [dateTime, setDateTime] = useState<Date | null>(null);
-  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
   const { __session: accessToken = '' } = cookies;
   const handleDateTimeChange = (date: Date, hour: string, minute: string, ampm: string) => {
     console.log('date:');
@@ -137,13 +135,14 @@ const CustomerCartHeader = () => {
       pickupTime: formatDateForMySQL(orders.pickupTime?.toString()),
     }
     //if success, then invoke toast
-    addMyOrder(accessToken,ordersData);
+    addMyOrder(accessToken, ordersData);
     //refresh the page
     // Delete cart from local storage
     let newCart = { restaurantName: '', storeid: 0, items: [] }
     localStorage.setItem('cart', JSON.stringify(newCart));
     console.log('newCart:', newCart);
-    window.location.reload();
+    //to order page
+    window.location.href = '/customer/order';
   }
   return (
     <Sheet>
@@ -162,8 +161,10 @@ const CustomerCartHeader = () => {
           <SheetTitle>Shopping Cart</SheetTitle>
           <SheetDescription>
             Choose Pick Up Time : <br />
-            <DatePicker onDateChange={(date) => handleDateTimeChange(date, '00', '00', 'AM')} />
-            <HourMinute onTimeChange={(hour, minute, ampm) => dateTime && handleDateTimeChange(dateTime, hour, minute, ampm)} />
+            <div className="flex flex-col items-center justify-center mt-2 gap-2">
+              <DatePicker onDateChange={(date) => handleDateTimeChange(date, '00', '00', 'AM')} />
+              <HourMinute onTimeChange={(hour, minute, ampm) => dateTime && handleDateTimeChange(dateTime, hour, minute, ampm)} />
+            </div>
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 py-4">
@@ -235,14 +236,14 @@ const CustomerCartHeader = () => {
             <Button
               type="submit"
               onClick={handleSubmit}
-              disabled={!dateTime || dateTime<new Date()}
+              disabled={!dateTime || dateTime < new Date()}
             >
               Place Order
             </Button>
           </SheetClose>
         </SheetFooter>
         {cart.items.length === 0 && <div className='text-red-600 text-end'>Please add items to cart</div>}
-        {dateTime && dateTime<new Date() && <div className='text-red-600 text-end'>Please select a future pickup time</div>}
+        {dateTime && dateTime < new Date() && <div className='text-red-600 text-end'>Please select a future pickup time</div>}
       </SheetContent>
     </Sheet>
   );

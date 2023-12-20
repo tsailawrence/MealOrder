@@ -1,16 +1,48 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/link';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+"use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetClose,
-} from '@/components/ui/sheet';
-import { useLocation } from '@/app/customer/LocationContext';
-import CustomerCartHeader from './CustomerCartHeader';
-import { Menu, MapPin } from 'lucide-react';
+  SheetClose
+} from "@/components/ui/sheet";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { useLocation } from "@/app/customer/LocationContext";
+import CustomerCartHeader from "./CustomerCartHeader";
+import { Menu, MapPin } from "lucide-react";
+// Data for city-to-area mapping specific to Taiwan
+const cityOptions: string[] = [
+  "臺北市",
+  "新北市",
+  "基隆市",
+  "新竹市",
+  "桃園市",
+  "新竹縣",
+  "宜蘭縣",
+  "臺中市",
+  "苗栗縣",
+  "彰化縣",
+  "南投縣",
+  "雲林縣",
+  "高雄市",
+  "臺南市",
+  "嘉義市",
+  "嘉義縣",
+  "屏東縣",
+  "澎湖縣",
+  "花蓮縣",
+  "臺東縣"
+];
+
 const Header = () => {
   const routes = [
     {
@@ -27,7 +59,10 @@ const Header = () => {
     },
   ];
 
-  const { location } = useLocation();
+  const { location,setLocation } = useLocation();
+  const handleLocationChange = async (value:string) => {
+    setLocation(value);
+  };
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full bg-white border-b px-10">
@@ -54,13 +89,17 @@ const Header = () => {
           <Link href="/" className="">
             <Image src="/logo.png" alt="logo" width={90} height={30} />
           </Link>
-          <div
-            id="locator"
-            className="flex text-xm text-black overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-90px)] rounded-full border border-black p-2"
-          >
-            <MapPin />
-            {location ? location : 'Loading...'}
-          </div>
+          {location ?
+            <Select onValueChange={(value) => handleLocationChange(value)}>
+              <SelectTrigger className="w-[180px]">
+                <MapPin /><SelectValue placeholder={location} />
+              </SelectTrigger>
+              <SelectContent>
+                {cityOptions.map((city) => (
+                  <SelectItem key={city} value={city}>{city}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select> : 'Loading...'}
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>
