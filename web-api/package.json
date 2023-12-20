@@ -55,7 +55,6 @@
     "koa-body": "^4.2.0",
     "koa-cookie": "^1.0.0",
     "koa-cors": "^0.0.16",
-    "koa-cookie": "^1.0.0",
     "koa-router": "^7.2.1",
     "koa-session": "^5.8.1",
     "koa2-cors": "^2.0.5",
