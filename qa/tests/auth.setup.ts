@@ -17,6 +17,7 @@ setup('authenticate as customer', async ({ page }) => {
   await page.locator('#password-field').fill(customerPassword);
   await page.keyboard.press('Enter');
   await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(1000);
   // Wait until the page receives the cookies.
   // Alternatively, you can wait until the page reaches a state where all cookies are set.
   await expect(page.locator('#logo')).toBeVisible();
@@ -36,6 +37,7 @@ setup('authenticate as merchant', async ({ page }) => {
   await page.locator('#password-field').fill(merchantPassword);
   await page.keyboard.press('Enter');
   await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(1000);
   // Wait until the page receives the cookies.
   // Alternatively, you can wait until the page reaches a state where all cookies are set.
   await expect(page.locator('h2:text("Menu")')).toBeVisible();
