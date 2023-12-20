@@ -95,7 +95,7 @@ export const OrderCard = ({ order, handleUpdate }: OrderCardProps) => {
           }}
           disabled={order.status === "Canceled"}
         >
-          Cancel
+          {order.status === "Canceled" ? "Canceled" : "Cancel"}
         </Button>
         {getStatus(order.status)?.action && (
           <Button

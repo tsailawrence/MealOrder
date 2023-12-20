@@ -22,21 +22,15 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
+import { Product } from "@/lib/types/db";
 import { updateProduct } from "@/app/merchant/[storeId]/menu/components/actions";
-import { parse } from "path";
 
 const shelfStatus = [
   ///已下架
@@ -57,15 +51,6 @@ const formSchema = z.object({
   onShelfStatus: z.string().max(1),
 });
 
-type Product = {
-  id: number;
-  menuTypeId: number;
-  menuImage: string;
-  name: string;
-  description: string;
-  price: number;
-  onShelfStatus: number;
-};
 
 interface ProductCardProps {
   product: Product;
@@ -73,7 +58,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, onClick }: ProductCardProps) => {
-  const [cookies, setCookie] = useCookies([
+  const [cookies] = useCookies([
     "refreshToken",
     "accessToken",
     "__session",
@@ -120,14 +105,15 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
               height={100}
             />
           </div>
-          <div className="w-full flex justify-between items-center px-4">
+          <div className="w-full flex items-center px-4">
             <div>
               <div>{product.name}</div>
               <div className="text-gray-400 text-sm font-normal mt-1">
                 Some choices
               </div>
             </div>
-            <Badge variant="secondary">$ {product.price}</Badge>
+            <Badge variant="secondary" className="ml-auto ">$ {product.price}</Badge>
+            <Badge variant="secondary" className="ml-2"> Num : {product.number ? product.number : product.price}</Badge>
           </div>
           <div>
             <Form {...form}>

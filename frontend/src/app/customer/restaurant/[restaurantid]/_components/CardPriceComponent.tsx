@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import toast from 'react-hot-toast';
 
 type Item = {
     menuId: number;
@@ -108,7 +109,7 @@ export const CardPriceComponent: React.FC<CardPriceProps> = ({ storeId ,restaura
         console.log('Updated cart:', cart.items);
     }
     let cart: Cart = JSON.parse(localStorage.getItem('cart') || '{}');
-    const totalcost = cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    const totalcost = cart.items?.reduce((acc, item) => acc + item.price * item.quantity, 0)
     return (
         <Dialog>
             <DialogTrigger

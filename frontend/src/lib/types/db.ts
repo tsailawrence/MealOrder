@@ -120,6 +120,16 @@ export type CustomerBilling = {
   totalCosts: number;
 };
 
+export type merchantBillingProps = {
+  customerId: number;
+  id: number;
+  orderItems: OrderItem[];
+  payment: number;
+  pickupTime: string;
+  status: string;
+  time: string;
+}
+
 export type StoreInfo = {
   area: string;
   category: number;
@@ -142,4 +152,15 @@ export interface Orders {
   storeId: number;
   storeInfo: StoreInfo;
   time: string;
+};
+
+export type Product = {
+  id: number;
+  menuTypeId: number;
+  menuImage: string;
+  name: string;
+  description: string;
+  price: number;
+  number: number;
+  onShelfStatus: number;
 };

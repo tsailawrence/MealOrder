@@ -38,24 +38,17 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Product } from "@/lib/types/db";
 
 const formSchema = z.object({
   name: z.string().min(1),
-  menuImage: z.string(),
+  menuImage: z.string().optional(),
   menuTypeId: z.string().min(1),
   description: z.string().min(1),
   price: z.string().min(1),
+  number: z.string().min(1).optional(),
 });
 
-type Product = {
-  id: number;
-  menuTypeId: number;
-  menuImage: string;
-  name: string;
-  description: string;
-  price: number;
-  onShelfStatus: number;
-};
 type MenuType = {
   id: number;
   type: string;
@@ -75,7 +68,7 @@ export const ProductSheet = ({
   productInfo,
   menuTypes,
 }: ProductSheetProps) => {
-  const [cookies, setCookie] = useCookies([
+  const [cookies] = useCookies([
     "refreshToken",
     "accessToken",
     "__session",
@@ -99,6 +92,7 @@ export const ProductSheet = ({
           menuTypeId: productInfo.menuTypeId.toString(),
           description: productInfo.description,
           price: productInfo.price.toString(),
+          number: productInfo.number?.toString(),
         });
       }
     } else {
@@ -275,6 +269,25 @@ export const ProductSheet = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Price</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min={0}
+                          disabled={loading}
+                          placeholder="None"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="number"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Remain Number</FormLabel>
                       <FormControl>
                         <Input
                           type="number"

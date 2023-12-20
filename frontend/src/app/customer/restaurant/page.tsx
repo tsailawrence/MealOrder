@@ -20,6 +20,7 @@ const CustomerHome = () => {
     'accessToken',
     '__session',
     'senderId',
+    'nowCity',
   ]);
   const [cardData, setCardData] = useState<RestaurantCard[] | null>(null);
   const [categoryData, setCategoryData] = useState<CategoryProps[] | null>(
@@ -29,7 +30,7 @@ const CustomerHome = () => {
     null
   ); // [1
   const [loading, setLoading] = useState(true);
-  const { __session: accessToken = '' } = cookies;
+  const { __session: accessToken = '',nowCity } = cookies;
   useEffect(() => {
     getCardData(accessToken)
       .then(data => {
@@ -58,7 +59,8 @@ const CustomerHome = () => {
         console.error('Error fetching orders:', err);
         setLoading(false);
       });
-  }, [accessToken]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nowCity]);
 
   const params = useSearchParams();
   const senderId = params.get('sender_id');
@@ -89,7 +91,7 @@ const CustomerHome = () => {
           favoriteData.map((card, index) => (
             <div
               key={index}
-              className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
+              className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px] mt-2 mb-2"
             >
               <CardComponent
                 id={card.id}
@@ -131,7 +133,7 @@ const CustomerHome = () => {
           cardData.map((card, index) => (
             <div
               key={index}
-              className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px]"
+              className="flex-none w-[calc(25%-1.25rem)] min-w-[175px] max-w-[250px] mt-2 mb-2"
             >
               <CardComponent
                 id={card.id}
@@ -164,7 +166,7 @@ const CustomerHome = () => {
       <div className="self-center w-full max-w-[80%] mt-9 px-5 max-md:max-w-full overflow-x-auto flex gap-5 whitespace-nowrap ">
         {categoryData &&
           categoryData.map((category, index) => (
-            <div key={index} className="flex-none min-w-[100px] max-w-[200px]">
+            <div key={index} className="flex-none min-w-[100px] max-w-[200px] ">
               <CategoryCard
                 id={category.id}
                 categoryImage={
