@@ -52,7 +52,13 @@ const Header = () => {
             </SheetContent>
           </Sheet>
           <Link href="/" className="">
-            <Image src="/logo.png" alt="logo" width={90} height={30} />
+            <Image
+              id="logo"
+              src="/logo.png"
+              alt="logo"
+              width={90}
+              height={30}
+            />
           </Link>
           <div
             id="locator"
