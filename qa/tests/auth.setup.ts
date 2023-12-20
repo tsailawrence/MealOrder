@@ -10,6 +10,8 @@ const customerFile = 'playwright/.auth/customer.json';
 setup('authenticate as customer', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
   await page.goto(baseURL);
+  await page.getByText('Go to Restaurant').click();
+  await page.waitForTimeout(2000);
   await page.getByText('Continue with Google').click();
   await page.waitForTimeout(2000);
   await page.locator('input[type="email"]').fill(customerAccount);
@@ -30,6 +32,8 @@ const merchantFile = 'playwright/.auth/merchant.json';
 setup('authenticate as merchant', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
   await page.goto(baseURL);
+  await page.getByText('Go to Restaurant').click();
+  await page.waitForTimeout(2000);
   await page.getByText('Continue with Google').click();
   await page.waitForTimeout(2000);
   await page.locator('input[type="email"]').fill(merchantAccount);
