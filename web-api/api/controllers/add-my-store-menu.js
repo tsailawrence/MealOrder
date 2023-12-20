@@ -11,7 +11,7 @@ module.exports = async (ctx) => {
   const {
     currentUser: { id: userId, type } = {},
     params: { storeId } = {},
-    request: { body: { name, description, price, menuTypeId, uri } = {} } = {},
+    request: { body: { name, description, price, menuTypeId,amount, uri } = {} } = {},
   } = ctx;
 
   let cdn = {};
@@ -53,6 +53,7 @@ module.exports = async (ctx) => {
     menuTypeId,
     storeId,
     onShelfStatus: 1,
+    amount,
     menuImage,
   });
 
