@@ -18,13 +18,13 @@ jobs:
         run: docker-compose up -d
         working-directory: ./
 
-      - name: Check Docker container logs (Frontend)
-        if: always()
-        run: docker-compose logs frontend
+      # - name: Check Docker container logs (Frontend)
+      #   if: always()
+      #   run: docker-compose logs frontend
 
-      - name: Check Docker container logs (Backend)
-        if: always()
-        run: docker-compose logs backend
+      # - name: Check Docker container logs (Backend)
+      #   if: always()
+      #   run: docker-compose logs backend
 
       - name: Install Playwright dependencies
         run: npm ci
