@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: foody 
+  ECR_REPOSITORY: public.ecr.aws/z6r7z5c0/foody 
   ECS_CLUSTER: foody # set this to your Amazon ECS cluster name
   # 前端服務配置
   FRONTEND_ECS_SERVICE: frontend-443
@@ -47,9 +47,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           FRONTEND_IMAGE_TAG: frontend_latest
         run: |
-          docker build -f ./frontend/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$FRONTEND_IMAGE_TAG ./frontend
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$FRONTEND_IMAGE_TAG
-          echo "frontend-image=$ECR_REGISTRY/$ECR_REPOSITORY:$FRONTEND_IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -f ./frontend/Dockerfile -t ${{ env.ECR_REPOSITORY }}:$FRONTEND_IMAGE_TAG ./frontend
+          docker push ${{ env.ECR_REPOSITORY }}:$FRONTEND_IMAGE_TAG
+          echo "frontend-image=${{ env.ECR_REPOSITORY }}:$FRONTEND_IMAGE_TAG" >> $GITHUB_OUTPUT
 
       # Build, tag, and push Backend image to Amazon ECR
       - name: Build, tag, and push Backend image to Amazon ECR
@@ -58,9 +58,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           BACKEND_IMAGE_TAG: backend_latest
         run: |
-          docker build -f ./web-api/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$BACKEND_IMAGE_TAG ./web-api
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$BACKEND_IMAGE_TAG
-          echo "backend-image=$ECR_REGISTRY/$ECR_REPOSITORY:$BACKEND_IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -f ./backend/Dockerfile -t ${{ env.ECR_REPOSITORY }}:$BACKEND_IMAGE_TAG ./backend
+          docker push ${{ env.ECR_REPOSITORY }}:$BACKEND_IMAGE_TAG
+          echo "backend-image=${{ env.ECR_REPOSITORY }}:$BACKEND_IMAGE_TAG" >> $GITHUB_OUTPUT
 
       # Fill in the new Frontend image ID in the Amazon ECS task definition
       - name: Fill in the new Frontend image ID in the Amazon ECS task definition
