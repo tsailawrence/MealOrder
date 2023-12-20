@@ -1,16 +1,5 @@
 import { CartCardProps } from "@/lib/types/db";
 import { instance } from "@/lib/utils";
-//get tthe city name from the lat and lng
-// interface GeocodingApiResponse {
-//     results: {
-//         address_components: {
-//             long_name: string;
-//         }[];
-
-//     }[];
-//     status: string;
-//     // Include other fields if necessary
-// }
 
 async function fetchPlaceName(latitude: number, longitude: number): Promise<string | null> {
     try {
@@ -21,8 +10,8 @@ async function fetchPlaceName(latitude: number, longitude: number): Promise<stri
         const data = await response.text();
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(data, "text/xml");
-        const townNode = xmlDoc.getElementsByTagName('townName')[0];
-        return townNode.textContent; // This will be '臺北市' in your case
+        const ctyNode = xmlDoc.getElementsByTagName('ctyName')[0];
+        return ctyNode.textContent; // This will be '臺北市' in your case
     } catch (error) {
         console.error("Failed to fetch place name:", error);
         return null;

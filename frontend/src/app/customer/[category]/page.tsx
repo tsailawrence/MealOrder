@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation';
 import CategoryMenu from './_components/CategoryMenu';
 import { getCategorys } from './_components/actions';
 import { CategoryProps } from '@/lib/types/db';
-import { ca } from 'date-fns/locale';
 
 const RestaurantPage = () => {
     const { category } = useParams();
@@ -23,8 +22,8 @@ const RestaurantPage = () => {
             .catch(err => {
                 console.error('Error fetching orders:', err);
             });
-    }, [accessToken]); // Dependency array
-    // Use 'id' to fetch data or for other purposes
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Dependency array
     return (
         <>
             {loading||categoryData===null ? <div>Loading...</div> :

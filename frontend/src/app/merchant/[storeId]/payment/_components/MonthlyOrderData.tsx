@@ -52,7 +52,8 @@ export const MonthlyOrderData = () => {
     "__session",
   ]);
   const { __session: accessToken = "" } = cookies;
-  const { storeId } = useParams();
+  const params = useParams();
+  const storeId = params.storeId?.toString();
 
   const [loading, setLoading] = useState(true);
   const [customerData, setCustomerData] = useState<CustomerBilling[] | null>(
@@ -82,11 +83,13 @@ export const MonthlyOrderData = () => {
 
   useEffect(() => {
     fetchMonthlyCustomerData();
-  }, [accessToken]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     console.log("selectedMonthData:", selectedMonthData);
     fetchMonthlyCustomerData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedMonthData]);
 
   const storeTotalRevenue =
@@ -102,7 +105,7 @@ export const MonthlyOrderData = () => {
           {monthNames[selectedMonthData.month - 1]}, {selectedMonthData.year}{" "}
           <div className="flex mt-2 gap-2">
             <Select
-              value={selectedMonthData.month}
+              value={selectedMonthData.month.toString()}
               onValueChange={(e) => {
                 setSelectedMonthData({
                   ...selectedMonthData,
@@ -116,7 +119,7 @@ export const MonthlyOrderData = () => {
               <SelectContent className="h-fit max-h-[150px]">
                 <SelectGroup>
                   {monthNames.map((month, index) => (
-                    <SelectItem key={index} value={index + 1}>
+                    <SelectItem key={index} value={(index + 1).toString()}>
                       {month}
                     </SelectItem>
                   ))}
@@ -124,7 +127,7 @@ export const MonthlyOrderData = () => {
               </SelectContent>
             </Select>
             <Select
-              value={selectedMonthData.year}
+              value={selectedMonthData.year.toString()}
               onValueChange={(e) => {
                 setSelectedMonthData({
                   ...selectedMonthData,
@@ -138,7 +141,7 @@ export const MonthlyOrderData = () => {
               <SelectContent className="h-fit max-h-[150px]">
                 <SelectGroup>
                   {years.map((year) => (
-                    <SelectItem key={year} value={year}>
+                    <SelectItem key={year} value={year.toString()}>
                       {year}
                     </SelectItem>
                   ))}

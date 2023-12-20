@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -8,26 +9,60 @@ import {
   SheetTrigger,
   SheetClose
 } from "@/components/ui/sheet";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { useLocation } from "@/app/customer/LocationContext";
 import CustomerCartHeader from "./CustomerCartHeader";
 import { Menu, MapPin } from "lucide-react";
+// Data for city-to-area mapping specific to Taiwan
+const cityOptions: string[] = [
+  "臺北市",
+  "新北市",
+  "基隆市",
+  "新竹市",
+  "桃園市",
+  "新竹縣",
+  "宜蘭縣",
+  "臺中市",
+  "苗栗縣",
+  "彰化縣",
+  "南投縣",
+  "雲林縣",
+  "高雄市",
+  "臺南市",
+  "嘉義市",
+  "嘉義縣",
+  "屏東縣",
+  "澎湖縣",
+  "花蓮縣",
+  "臺東縣"
+];
+
 const Header = () => {
   const routes = [
     {
-      href: "/customer/restaurant",
-      label: "Restauarant"
+      href: '/customer/restaurant',
+      label: 'Restauarant',
     },
     {
-      href: "/customer/order",
-      label: "Order"
+      href: '/customer/order',
+      label: 'Order',
     },
     {
-      href: "/customer/monthlyPayment",
-      label: "Monthly Payment"
-    }
+      href: '/customer/monthlyPayment',
+      label: 'Monthly Payment',
+    },
   ];
 
-  const { location } = useLocation();
+  const { location,setLocation } = useLocation();
+  const handleLocationChange = async (value:string) => {
+    setLocation(value);
+  };
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full bg-white border-b px-10">
@@ -35,10 +70,10 @@ const Header = () => {
         <div className="flex items-center gap-4">
           <Sheet>
             <SheetTrigger>
-              <Menu className="h-6 w-6" color="#E60012"></Menu>
+              <Menu className="h-6 w-6" color="#E60012" id="menu-button"></Menu>
             </SheetTrigger>
             <SheetContent side="left" className="w-[250px] sm:w-[300px]">
-              <nav className="flex flex-col gap-4">
+              <nav className="flex flex-col gap-4" id="nav-bar">
                 {routes.map((route, i) => (
                   <Link
                     key={i}
@@ -52,11 +87,25 @@ const Header = () => {
             </SheetContent>
           </Sheet>
           <Link href="/" className="">
-            <Image src="/logo.png" alt="logo" width={90} height={30} />
+            <Image
+              id="logo"
+              src="/logo.png"
+              alt="logo"
+              width={90}
+              height={30}
+            />
           </Link>
-          <div className="flex text-xm text-black overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-90px)] rounded-full border border-black p-2">
-            <MapPin />{location ? location : 'Loading...'}
-          </div>
+          {location ?
+            <Select onValueChange={(value) => handleLocationChange(value)}>
+              <SelectTrigger className="w-[180px]">
+                <MapPin /><SelectValue placeholder={location} />
+              </SelectTrigger>
+              <SelectContent>
+                {cityOptions.map((city) => (
+                  <SelectItem key={city} value={city}>{city}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select> : 'Loading...'}
         </div>
         <div className="flex items-center gap-4">
           <SignedIn>

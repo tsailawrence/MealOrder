@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { getMyCurrentMonthPayment } from "./_components/actions";
@@ -9,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -89,7 +87,8 @@ const PaymentsPage: React.FC = () => {
         setError(err.message || 'Failed to fetch data');
         setLoading(false);
       });
-  }, [accessToken]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const totalCost = payments.reduce((acc, cur) => acc + cur.payment, 0);
   const totalOrders = payments.length;

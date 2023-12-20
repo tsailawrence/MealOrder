@@ -119,3 +119,48 @@ export type CustomerBilling = {
   totalOrders: number;
   totalCosts: number;
 };
+
+export type merchantBillingProps = {
+  customerId: number;
+  id: number;
+  orderItems: OrderItem[];
+  payment: number;
+  pickupTime: string;
+  status: string;
+  time: string;
+}
+
+export type StoreInfo = {
+  area: string;
+  category: number;
+  emailAddress: string;
+  favoriteCount: number;
+  id: number;
+  name: string;
+  phoneNumber: string;
+  storeImage: string;
+  userId: number;
+};
+
+export interface Orders {
+  id: number;
+  name: string;
+  orderItem: ItemDb[];
+  payment: string;
+  status: string;
+  pickupTime: string;
+  storeId: number;
+  storeInfo: StoreInfo;
+  time: string;
+};
+
+export type Product = {
+  id: number;
+  menuTypeId: number;
+  menuImage: string;
+  name: string;
+  description: string;
+  price: number;
+  number: number;
+  onShelfStatus: number;
+};
