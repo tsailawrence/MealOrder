@@ -20,6 +20,7 @@ setup('authenticate as customer', async ({ page }) => {
   await page.waitForLoadState('networkidle');
   // Wait until the page receives the cookies.
   // Alternatively, you can wait until the page reaches a state where all cookies are set.
+  console.log(page.url());
   await expect(page.locator('#logo')).toBeVisible();
 
   // End of authentication steps.
@@ -40,6 +41,7 @@ setup('authenticate as merchant', async ({ page }) => {
   await page.waitForLoadState('networkidle');
   // Wait until the page receives the cookies.
   // Alternatively, you can wait until the page reaches a state where all cookies are set.
+  console.log(page.url());
   await expect(page.locator('h2:text("Menu")')).toBeVisible();
 
   // End of authentication steps.
