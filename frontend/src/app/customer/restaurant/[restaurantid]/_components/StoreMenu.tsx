@@ -6,24 +6,9 @@ import {
 } from "@/components/ui/tabs";
 
 import { CardPriceComponent } from "./CardPriceComponent";
-
+import { MenuItem, menuType } from "@/lib/types/db";
 // Define the structure of each category in the menu
-interface MenuItem {
-    id: number;
-    name: string;
-    menuImage?: string;
-    description: string;
-    price: number;
-    storeId: number;
-    menuTypeId: number;
-    onShelfStatus: number;
-    updated_time?: string;
-}
 
-type menuType = {
-    id: number,
-    type: string
-}
 // Define the structure of the restaurant data
 interface TabsDemoProps {
     restaurantName: string;
@@ -61,6 +46,7 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ restaurantName, menus, menutypes })
                             menus && menus.filter((item) => item.menuTypeId === type.id).map((item) => (
                                 <div key={item.id} className="flex-none w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-[250px] mb-3">
                                     <CardPriceComponent 
+                                        amount={item.amount}
                                         restaurantName={restaurantName} 
                                         storeId={item.storeId} 
                                         uri={item.menuImage ? item.menuImage : ''} 
