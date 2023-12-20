@@ -9,6 +9,7 @@ const merchantPassword = 'Merchanttest';
 const customerFile = 'playwright/.auth/customer.json';
 setup('authenticate as customer', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
+  console.log('customer test');
   await page.goto(baseURL);
   console.log(page.url());
   await page.locator('span:text("Get Started")').click();
@@ -34,6 +35,7 @@ setup('authenticate as customer', async ({ page }) => {
 const merchantFile = 'playwright/.auth/merchant.json';
 setup('authenticate as merchant', async ({ page }) => {
   // Perform authentication steps. Replace these actions with your own.
+  console.log('merchant test');
   await page.goto(baseURL);
   console.log(page.url());
   await page.locator('span:text("Get Started")').click();
