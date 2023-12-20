@@ -59,7 +59,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           BACKEND_IMAGE_TAG: backend_latest
         run: |
-          docker build -f ./backend/Dockerfile -t ${{ env.ECR_REPOSITORY }}:$BACKEND_IMAGE_TAG ./backend
+          docker build -f ./web-api/Dockerfile -t ${{ env.ECR_REPOSITORY }}:$BACKEND_IMAGE_TAG ./web-api
           docker push ${{ env.ECR_REPOSITORY }}:$BACKEND_IMAGE_TAG
           echo "backend-image=${{ env.ECR_REPOSITORY }}:$BACKEND_IMAGE_TAG" >> $GITHUB_OUTPUT
 
