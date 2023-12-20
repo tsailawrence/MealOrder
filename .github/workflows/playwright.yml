@@ -42,6 +42,13 @@ jobs:
         run: npx playwright test
         working-directory: ./qa
 
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: playwright-screenshots
+          path: ./qa/screenshots/
+
       - name: Upload Playwright report
         uses: actions/upload-artifact@v3
         if: always()

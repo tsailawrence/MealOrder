@@ -13,7 +13,6 @@ setup('authenticate as customer', async ({ page }) => {
   console.log(page.url());
   await page.locator('span:text("Get Started")').click();
   await page.waitForTimeout(5000);
-  await page.screenshot({ path: 'screenshot.png' });
   console.log(page.url());
   await page.locator('#identifier-field').fill(customerAccount);
   await page.keyboard.press('Enter');
