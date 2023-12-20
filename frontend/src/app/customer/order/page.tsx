@@ -48,7 +48,8 @@ const OrdersPage = () => {
         setError(err);
         setLoading(false);
       });
-  }, [accessToken]); // Dependency array
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Dependency array
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Orders</h1>

@@ -54,9 +54,7 @@ const formatDateForMySQL = (dateString: string): string => {
 const CustomerCartHeader = () => {
   const [cart, setCart] = useState<Cart>({ restaurantName: '', storeId: 0, items: [] });
   const [dateTime, setDateTime] = useState<Date | null>(null);
-  const [cookies, setCookie] = useCookies(['refreshToken', 'accessToken', '__session']);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [cookies] = useCookies(['refreshToken', 'accessToken', '__session']);
   const { __session: accessToken = '' } = cookies;
   const handleDateTimeChange = (date: Date, hour: string, minute: string, ampm: string) => {
     console.log('date:');

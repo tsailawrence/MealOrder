@@ -83,11 +83,13 @@ export const MonthlyOrderData = () => {
 
   useEffect(() => {
     fetchMonthlyCustomerData();
-  }, [accessToken]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     console.log("selectedMonthData:", selectedMonthData);
     fetchMonthlyCustomerData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedMonthData]);
 
   const storeTotalRevenue =

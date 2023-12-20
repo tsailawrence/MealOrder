@@ -143,3 +143,14 @@ export interface Orders {
   storeInfo: StoreInfo;
   time: string;
 };
+
+export type Product = {
+  id: number;
+  menuTypeId: number;
+  menuImage: string;
+  name: string;
+  description: string;
+  price: number;
+  number: number;
+  onShelfStatus: number;
+};

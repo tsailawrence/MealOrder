@@ -22,7 +22,8 @@ const RestaurantPage = () => {
             .catch(err => {
                 console.error('Error fetching orders:', err);
             });
-    }, [accessToken]); // Dependency array
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Dependency array
     return (
         <>
             {loading||categoryData===null ? <div>Loading...</div> :

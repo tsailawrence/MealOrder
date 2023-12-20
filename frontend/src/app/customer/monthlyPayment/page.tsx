@@ -88,7 +88,7 @@ const PaymentsPage: React.FC = () => {
         setLoading(false);
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
+  }, []);
 
   const totalCost = payments.reduce((acc, cur) => acc + cur.payment, 0);
   const totalOrders = payments.length;

@@ -44,7 +44,8 @@ const CustomerHome = () => {
         console.error('Error fetching orders:', err);
         setLoading(false);
       });
-  }, [accessToken]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const params = useSearchParams();
   const senderId = params.get('sender_id');

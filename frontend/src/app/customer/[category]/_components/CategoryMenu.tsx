@@ -42,7 +42,7 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
         setLoading(true);
         fetchRestaurants();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [accessToken, categoryOption, categorys]);
+    }, [categoryOption, categorys]);
 
     const fetchRestaurants = async () => {
         try {

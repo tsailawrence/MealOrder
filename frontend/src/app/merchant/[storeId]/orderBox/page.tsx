@@ -42,7 +42,8 @@ const OrderBox = () => {
         setError(err);
         setLoading(false);
       });
-  }, [accessToken,orders]); // Dependency array
+      //eslint-disable-next-line
+  }, [orders]); // Dependency array
 
   const todayOrders =
     orders &&

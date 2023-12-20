@@ -17,20 +17,11 @@ import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs2";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { ProductCard } from "./ProductCard";
+import { Product } from "@/lib/types/db";
 
 type MenuType = {
   id: number;
   type: string;
-};
-
-type Product = {
-  id: number;
-  menuTypeId: number;
-  menuImage: string;
-  name: string;
-  description: string;
-  price: number;
-  onShelfStatus: number;
 };
 
 export const Menu = () => {
@@ -76,7 +67,7 @@ export const Menu = () => {
   useEffect(() => {
     fetchMenu();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
+  }, []);
 
   const handleClickCard = (product:Product) => {
     setEditProduct(product);

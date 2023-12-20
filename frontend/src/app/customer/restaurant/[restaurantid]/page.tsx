@@ -49,7 +49,8 @@ const RestaurantPage = () => {
         if (restaurantid) {
             fetchRestaurantData(restaurantid.toString(), accessToken);
         }
-    }, [restaurantid, accessToken]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [restaurantid]);
 
     const fetchRestaurantData = async (id: string, token: string) => {
         setLoading(true);
