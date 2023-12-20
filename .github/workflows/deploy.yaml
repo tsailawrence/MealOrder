@@ -1,0 +1,99 @@
+name: Deploy to Amazon ECS
+
+on:
+  push:
+    branches:
+      - production
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: public.ecr.aws/z6r7z5c0/foody 
+  ECS_CLUSTER: foody # set this to your Amazon ECS cluster name
+  # 前端服務配置
+  FRONTEND_ECS_SERVICE: frontend-443
+  FRONTEND_ECS_TASK_DEFINITION: ../frontend-task-revision14.json
+  FRONTEND_CONTAINER_NAME: frontend-container
+  # 後端服務配置
+  BACKEND_ECS_SERVICE: backend-443
+  BACKEND_ECS_TASK_DEFINITION: ../backend-task-revision4.json
+  BACKEND_CONTAINER_NAME: backend-container
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        with:
+          aws-access-key-id: AKIAWJ2ZXVWZPMAVVRDX
+          aws-secret-access-key: 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
+          aws-region: us-east-1
+
+      # Login to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+
+      # Build, tag, and push Frontend image to Amazon ECR
+      - name: Build, tag, and push Frontend image to Amazon ECR
+        id: build-image-frontend
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          FRONTEND_IMAGE_TAG: frontend_latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$FRONTEND_IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$FRONTEND_IMAGE_TAG
+          echo "frontend-image=$ECR_REGISTRY/$ECR_REPOSITORY:$FRONTEND_IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      # Build, tag, and push Backend image to Amazon ECR
+      - name: Build, tag, and push Backend image to Amazon ECR
+        id: build-image-backend
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          BACKEND_IMAGE_TAG: backend_latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$BACKEND_IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$BACKEND_IMAGE_TAG
+          echo "backend-image=$ECR_REGISTRY/$ECR_REPOSITORY:$BACKEND_IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      # Fill in the new Frontend image ID in the Amazon ECS task definition
+      - name: Fill in the new Frontend image ID in the Amazon ECS task definition
+        id: task-def-frontend
+        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        with:
+          task-definition: ${{ env.FRONTEND_ECS_TASK_DEFINITION }}
+          container-name: ${{ env.FRONTEND_CONTAINER_NAME }}
+          image: ${{ steps.build-image-frontend.outputs.image }}
+
+      # Deploy Frontend Amazon ECS task definition
+      - name: Deploy Frontend Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
+        with:
+          task-definition: ${{ steps.task-def-frontend.outputs.task-definition }}
+          service: ${{ env.FRONTEND_ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+      # Fill in the new Backend image ID in the Amazon ECS task definition
+      - name: Fill in the new Backend image ID in the Amazon ECS task definition
+        id: task-def-backend
+        uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        with:
+          task-definition: ${{ env.BACKEND_ECS_TASK_DEFINITION }}
+          container-name: ${{ env.BACKEND_CONTAINER_NAME }}
+          image: ${{ steps.build-image-backend.outputs.image }}
+
+      # Deploy Backend Amazon ECS task definition
+      - name: Deploy Backend Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@df9643053eda01f169e64a0e60233aacca83799a
+        with:
+          task-definition: ${{ steps.task-def-backend.outputs.task-definition }}
+          service: ${{ env.BACKEND_ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
