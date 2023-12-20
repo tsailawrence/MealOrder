@@ -5,6 +5,10 @@ const User = require("../models/user");
 
 module.exports = async (ctx) => {
     const {
+        currentUser: {
+            id: userId,
+            type,
+        } = {},
         params: {
             storeId
         } = {},
