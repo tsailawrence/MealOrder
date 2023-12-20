@@ -10,12 +10,14 @@ test.describe('Merchant', () => {
     });
     expect(response.status()).toBe(200);
   });
+
   test('Get my store orders', async ({ request }) => {
     const response = await request.get(`${baseURL}/my/store/orders`, {
       params: { accessToken: merchantToken },
     });
     expect(response.status()).toBe(200);
   });
+
   test('Get my store monthly orders', async ({ request }) => {
     const response = await request.get(
       `${baseURL}/my/store/1/order/getMonthly/11`,
@@ -25,6 +27,7 @@ test.describe('Merchant', () => {
     );
     expect(response.status()).toBe(200);
   });
+
   test('Get my store customer monthly billing', async ({ request }) => {
     const response = await request.get(
       `${baseURL}/my/store/1/order/customerMonthlyBilling/11`,

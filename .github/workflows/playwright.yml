@@ -8,17 +8,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Build Docker image
-        run: docker build -t myapp ./web-api
+      - name: Start services using Docker Compose
+        run: docker-compose up -d
+        working-directory: ./
 
-      - name: Start Docker container
-        run: docker run -d --name myapp-container -p 3001:3001 myapp
+      - name: Check Docker container logs (Frontend)
+        if: always()
+        run: docker-compose logs frontend
 
-      - name: Install dependencies
+      - name: Check Docker container logs (Backend)
+        if: always()
+        run: docker-compose logs backend
+
+      - name: Install Playwright dependencies
         run: npm ci
         working-directory: ./qa
 
@@ -26,21 +34,19 @@ jobs:
         run: npx playwright install --with-deps
         working-directory: ./qa
 
-      - name: Check Docker container logs
-        run: docker logs myapp-container
-
       - name: Run Playwright tests
-        run: npx playwright test tests/backend
+        run: npx playwright test
         working-directory: ./qa
 
-      - name: Stop and remove Docker container
-        if: always()
-        run: |
-          docker stop myapp-container
-          docker rm myapp-container
-      - uses: actions/upload-artifact@v3
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: playwright-report
           path: ./qa/playwright-report/
           retention-days: 30
+
+      - name: Stop and remove services
+        if: always()
+        run: docker-compose down
+        working-directory: ./
