@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { toast } from "react-hot-toast";
-import { useParams } from "next/navigation";
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { toast } from 'react-hot-toast';
+import { useParams } from 'next/navigation';
 
 import {
   createMenuType,
   updateMenuType,
-} from "@/app/admin/[storeId]/menu/components/actions";
+} from '@/app/admin/[storeId]/menu/components/actions';
 
-import { Modal } from "@/components/ui/modal";
-import { Input } from "@/components/ui/input";
+import { Modal } from '@/components/ui/modal';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -22,8 +22,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 
 const formSchema = z.object({
   type: z.string().min(1),
@@ -48,11 +48,11 @@ export const MenuTypeModal = ({
   menuTypeInfo,
 }: MenuTypeModalProps) => {
   const [cookies, setCookie] = useCookies([
-    "refreshToken",
-    "accessToken",
-    "__session",
+    'refreshToken',
+    'accessToken',
+    '__session',
   ]);
-  const { __session: accessToken = "" } = cookies;
+  const { __session: accessToken = '' } = cookies;
 
   const params = useParams();
   const storeId = params.storeId?.toString();
@@ -71,7 +71,7 @@ export const MenuTypeModal = ({
       }
     } else {
       form.reset({
-        type: "",
+        type: '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,21 +88,17 @@ export const MenuTypeModal = ({
           values
         );
         if (menuType) {
-          toast.success("Menu type updated");
+          toast.success('Menu type updated');
         }
       } else {
-        const menuType = await createMenuType(
-          accessToken,
-          storeId,
-          values
-        );
+        const menuType = await createMenuType(accessToken, storeId, values);
         if (menuType) {
-          toast.success("Menu type updated");
+          toast.success('Menu type updated');
         }
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong when updating store");
+      toast.error('Something went wrong when updating store');
     } finally {
       onChange();
       setLoading(false);
@@ -113,7 +109,7 @@ export const MenuTypeModal = ({
   return (
     <Modal
       title="Menu Type"
-      description={menuTypeInfo ? "Edit Menu Type" : "Add Menu Type"}
+      description={menuTypeInfo ? 'Edit Menu Type' : 'Add Menu Type'}
       isOpen={open}
       onClose={() => setOpen(false)}
     >
@@ -130,7 +126,7 @@ export const MenuTypeModal = ({
                     <FormControl>
                       <Input
                         disabled={loading}
-                        placeholder="Stroe Type"
+                        placeholder="Menu Type"
                         {...field}
                       />
                     </FormControl>

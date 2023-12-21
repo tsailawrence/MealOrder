@@ -6,7 +6,7 @@ test.use({ storageState: 'playwright/.auth/merchant.json' });
 test.describe('Merchant', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
-    await page.locator('span:text("Get Started")').click();
+    await page.locator('button:text("Get Started")').click();
     await page.waitForLoadState('networkidle');
   });
 
