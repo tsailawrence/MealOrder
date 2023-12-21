@@ -73,7 +73,7 @@ export const Menu = () => {
     setEditProduct(product);
     setProductSheetOpen(true);
   };
-
+  
   return (
     <>
       <MenuTypeModal

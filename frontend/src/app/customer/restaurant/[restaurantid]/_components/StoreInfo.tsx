@@ -36,9 +36,9 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                             <div className="text-red-600 text-2xl font-black leading-6">
                                 <Heart fill='red' /> 
                             </div>
-                            <div className="text-red-600 text-2xl leading-7 self-stretch whitespace-nowrap">
+                            {/* <div className="text-red-600 text-2xl leading-7 self-stretch whitespace-nowrap">
                                 {starNumber}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     {area && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
