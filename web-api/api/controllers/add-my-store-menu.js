@@ -32,8 +32,28 @@ module.exports = async (ctx) => {
     storeId,
   });
 
-  if (!theStore || type !== User.TYPE.MERCHANT || theStore.userId !== userId) {
-    return errorResponser(ctx, 401, "Operation error.");
+  if (
+    !theStore
+    || type !== User.TYPE.MERCHANT
+  ) {
+          return errorResponser(
+              ctx,
+              401,
+              'Operation error.'
+          );
+  }
+
+  if( theStore.userId !== userId){
+      const [usrInfo] = await User.getUserById({
+          id: userId,
+      });
+      if(usrInfo.isAdmin != true){
+          return errorResponser(
+              ctx,
+              401,
+              'Operation error.'
+          );
+      }
   }
 
   const theTypes = await MenuType.getMenuTypeByStoreId({

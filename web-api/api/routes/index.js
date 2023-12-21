@@ -37,6 +37,8 @@ const updateMyStoreMenuType = require('../controllers/update-my-store-menu-type'
 const deleteMyStoreMenuType = require('../controllers/delete-my-store-menu-type');
 const getMyStoreMenuTypeCustomerMonthlyBilling = require('../controllers/get-my-store-customer-monthly-billing');
 const getMyStoreMonthlyOrders = require('../controllers/get-my-store-monthly-orders');
+const getAnyStore  = require('../controllers/get-any-store');
+
 const router = new Router();
 
 router.post("/webhook", handleLineWebhook);
@@ -469,6 +471,18 @@ router.get(
     }),
     verifyClerk,
     getMyStoreMonthlyOrders
+);
+
+router.get(
+  'getAnyStore',
+  '/admin/store/:storeId',
+  validate({
+      query: {
+          accessToken: Joi.string().required(),
+      },
+  }),
+  verifyClerk,
+  getAnyStore
 );
 
 

@@ -6,6 +6,7 @@ test.use({ storageState: 'playwright/.auth/customer.json' });
 test.describe('Customer', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
+    await page.locator('button:text("Get Started")').click();
     await page.waitForLoadState('networkidle');
   });
 

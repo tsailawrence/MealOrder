@@ -12,7 +12,7 @@ import {
   getCategories,
   createStore,
   updateStore,
-} from '@/app/merchant/components/actions';
+} from '@/app/admin/components/actions';
 
 import { Modal } from '@/components/ui/modal';
 import { Input } from '@/components/ui/input';

@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation';
 import {
   createMenuType,
   updateMenuType,
-} from '@/app/merchant/[storeId]/menu/components/actions';
+} from '@/app/admin/[storeId]/menu/components/actions';
 
 import { Modal } from '@/components/ui/modal';
 import { Input } from '@/components/ui/input';
