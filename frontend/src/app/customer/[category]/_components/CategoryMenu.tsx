@@ -92,9 +92,9 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
                     <div className="text-red-600 text-2xl font-black mt-5">
                         <Utensils />
                     </div>
-                    {/* <div className="text-red-600 text-2xl mt-4">
+                    <div className="text-red-600 text-2xl mt-4">
                         {restaurantCount}  
-                    </div> */}
+                    </div>
                 </div>
             )}
         </div>
