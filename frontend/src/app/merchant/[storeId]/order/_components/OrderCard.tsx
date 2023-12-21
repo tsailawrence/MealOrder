@@ -93,9 +93,9 @@ export const OrderCard = ({ order, handleUpdate }: OrderCardProps) => {
           onClick={() => {
             handleUpdate(order.id, "Canceled");
           }}
-          disabled={order.status === "Canceled"}
+          disabled={order.status === "Canceled" || order.status === "To Pick Up" || order.status === "Completed"}
         >
-          {order.status === "Canceled" ? "Canceled" : "Cancel"}
+          {order.status === "Canceled" || order.status === "To Pick Up" || order.status === "Completed" ? order.status : "Cancel"}
         </Button>
         {getStatus(order.status)?.action && (
           <Button
