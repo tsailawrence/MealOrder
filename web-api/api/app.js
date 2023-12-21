@@ -6,6 +6,12 @@ const koaBody = require('koa-body');
 
 const router = require('./routes');
 
+const allowedOrigins = [
+  'https://foody-app.shop',
+  'https://0.0.0.0:3000',
+  'http://localhost:3000',
+];
+
 const init = () => {
   const app = new Koa();
 
@@ -26,13 +32,9 @@ const init = () => {
     })
   );
   // cross domain
-  // app.use(cors({
-  //     origin: 'https://foody-app.shop',
-  //     credentials: true,
-  // }));
   app.use(
     cors({
-      origin: 'http://localhost:3000',
+      origin: allowedOrigins,
       credentials: true,
     })
   );

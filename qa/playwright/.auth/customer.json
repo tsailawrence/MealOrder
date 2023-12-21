@@ -2,17 +2,17 @@
   "cookies": [
     {
       "name": "__cf_bm",
-      "value": "KqVWX5NT6Hebrx43pQZSOQOJCW1dbcadYCi6H1vXm5E-1703126304-1-AZLEq7lsYtDYTxlI7vJU8ESxV6HHIEZ7iDg3Kf59oCUMdgReA3eL7ILSGlj1cnsnkKrwg/kzmXlE6HwvuwQbbBY=",
+      "value": "MTl6pNxK9gMcYia2NF_86_ZTwZpp_Wuj12brlHxv468-1703134708-1-AYzHh/LGTp00pwO8v6PsbyWmlRnUA56dc0lFGckdDjCzDPc9PihNlyMjes9ZW0ChLSBgry5IyCgyM+yzojJyXKY=",
       "domain": ".probable-prawn-62.clerk.accounts.dev",
       "path": "/",
-      "expires": 1703128104.232561,
+      "expires": 1703136508.575399,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "_cfuvid",
-      "value": "Rob90TwOi9_Fu5Ocz0Ot6pQKXAJt8GGsUioILEws3kU-1703126304224-0-604800000",
+      "value": "a9wuHXFQhyq6nN_8qwkhkAzHBpHZNKAFltnPOngWjBQ-1703134708532-0-604800000",
       "domain": ".probable-prawn-62.clerk.accounts.dev",
       "path": "/",
       "expires": -1,
@@ -22,17 +22,17 @@
     },
     {
       "name": "__cf_bm",
-      "value": "iJLWSaMYdWdu_aEnXGzMVmslCddy5Ks_cCqPSpgFBUY-1703126305-1-AU1qHfZm/kw02bb1S9LL3wjAvXehv/UZU9GvdHeO+4NruWBgJIHa24Sq5JLUUxg+3kDq/tyxUc0w/EyQJxtqJP4=",
+      "value": "n9DWAitEmDyikJ6P7uBlRiL8aD6SPrudrZ4Sho4xp0o-1703134709-1-AavwQcY855ZlE7h/xJ09YIdejmPY7pf8CQYLGKLSTkD0f5JXtdE+vnCfSmuXwLjo03ZHyzswwd2ntZNK9KTNrwA=",
       "domain": ".probable-prawn-62.accounts.dev",
       "path": "/",
-      "expires": 1703128105.74607,
+      "expires": 1703136509.730656,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "_cfuvid",
-      "value": "ORk3.P3x7535C6v3x1pmc.d8_Ta1YQTia8CN.345I74-1703126305715-0-604800000",
+      "value": "WOl11LoInqWDmsPxVGlaSZpLJgfj8dMM0rvDS7ORm6I-1703134709649-0-604800000",
       "domain": ".probable-prawn-62.accounts.dev",
       "path": "/",
       "expires": -1,
@@ -42,50 +42,50 @@
     },
     {
       "name": "__clerk_db_jwt",
-      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpwa0ZMN3pqbHFtbVFnY2dQTDNhaHk0enJyIiwiaWQiOiJjbGllbnRfMlpwa0Z4TWtwMmZiUTR4cFdPYm9WbnJVb1BIIiwicm90YXRpbmdfdG9rZW4iOiI5dzRlcWswYTBmdXVncjd6M3owNTNzaDhvNzB0aDF5Mno4bmxoMmM2In0.ODqaUQUJG3-y1-56_GRxlhpI3ziUIVJTHMYzYceIfwiUoDS1ivQHJdNopig-I-3qVgmi1xsS9XNvFUICyZlotMtuSZ_Nvx4IblqBZiSDtHCFBRkNnX1WgOqQNXUB4ESi1lOr2UnbWzNyV6aotw12N3V4muw4HmfmfSguFxnyYw8BYEpK1qnrqPKqoOWYnEGrNyyiVAvtAOsSZvBLRiKMpYgKjFQ_xAqXLqsDhfX0mIKx4WWswFyB2xTbLcNy7BcnR3ECMJg42wTxmM8xAjP21QuCWmPeTwbXSIZZb7pH4gNCFMcHnZ0j0S9bdua8HN97_V_khRSgPpSkpg0xPWWOcg",
+      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpxMUhlYnZWSFQzY25BYm5nb01lSnBNQk5VIiwiaWQiOiJjbGllbnRfMlpxMUh2ejU0M2NtODMzeWRvak05UlpId2prIiwicm90YXRpbmdfdG9rZW4iOiJyMHZnYXp6enFrbWFza3A5aHZzdG5rZm81Y3J1YXUzY2VsbTNka3JmIn0.KrE_ZxgrITmw55fMwdQshvrzW0o1GuC0kGIwWg1bW0J79vFWwQ5f6VLo9GKkIwgXsIzYwuwRNRnnIDDgi-Iu9JYKTUFjAsBUyyLXOUkoert0vRVJss5bEQx7OB2q2Z31DyNY0YEogRrU8q08_pBqd0vVABgorRehvkv_y4SugfvbxmnOxsikBnNj78nFd-rH_pAP_bKwWNiUMZKRayP5tn7l30lqk0F5NqKk6dlaD_sNVeK5dyTx9-wyYePv2nD-NLXyx81836kZQs0h-G4TefpiFYtvDI7MDBM_9XNrzfqPn3OQ_coHhJVYLa0jgCcKd4xEf9aECJU0US2kah0l9w",
       "domain": "probable-prawn-62.accounts.dev",
       "path": "/",
-      "expires": 1734748709,
+      "expires": 1734757112,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "__session",
-      "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yWHFEQ3NzTnhUYUdiczZTeHM0bXN4Y1dQUW4iLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwczovL3Byb2JhYmxlLXByYXduLTYyLmFjY291bnRzLmRldiIsImV4cCI6MTcwMzEyNjM2OSwiaWF0IjoxNzAzMTI2MzA5LCJpc3MiOiJodHRwczovL3Byb2JhYmxlLXByYXduLTYyLmNsZXJrLmFjY291bnRzLmRldiIsIm5iZiI6MTcwMzEyNjI5OSwic2lkIjoic2Vzc18yWnBrRzZ3V3BFUzBVaklBNElTejVIRHg5RWQiLCJzdWIiOiJ1c2VyXzJab3VpUk14T05pNmxTUFg5VnVzT2VLb1FhViJ9.JTaHXjbhDLZWXOXvR4hC_l9XsICbQKtbQG7amhI3FRpD_dzsjmJlASrRfsg50At_3qg-trAMWUMPCjoScdHkm7U6vuppWegh7o0jeihftBgWNMDpAosd6N76QKvr1EgdP3XbAz0Izg0XE9zqd4FWCQe_UidR04C2dUK7vJiK5Kz0q_xI1CnGqMveq_BYYXng8rH6NyQ2-48ETGV2nLj0pHoqd6yfaphQcne297BPRxpYBsifdo9SBXRNZWTC2d-dwpvO3D0DCB6XYOwwvLIAeuug6b5c88yVZsfOKw_NY_OOgYWRZHwIfDb2zEdn7Qe35OoKlxu2OCn29hpdiTC-9w",
+      "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yWHFEQ3NzTnhUYUdiczZTeHM0bXN4Y1dQUW4iLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwczovL3Byb2JhYmxlLXByYXduLTYyLmFjY291bnRzLmRldiIsImV4cCI6MTcwMzEzNDc3MiwiaWF0IjoxNzAzMTM0NzEyLCJpc3MiOiJodHRwczovL3Byb2JhYmxlLXByYXduLTYyLmNsZXJrLmFjY291bnRzLmRldiIsIm5iZiI6MTcwMzEzNDcwMiwic2lkIjoic2Vzc18yWnExSUFXSGtvendLNnFiaXhpOHRJNHdtQTkiLCJzdWIiOiJ1c2VyXzJab3VpUk14T05pNmxTUFg5VnVzT2VLb1FhViJ9.oTCsAKgwwnyMOLXnydNaKKC-LsT9l0uEGTPJIFmcrglPVAKwO8hM4_meAKcMl1O1Q3HSOPegJVfvoJoDcRQ5BkLc90b3DU4Jj9RJKNYq5TEXd29w1tqmaMKvd6_ZjnMyR64ZJFwA2TUnuzCMWzglR8uTUPn4A1yqfQhB1__XlVn05HTV-smVFhx9iKNlj5qqWWlQ9v7FtpUTm8NrprJQBvQOHbyg3fwhXeM8mq6V9oqbTCPvxUm9DrEA0JV-XEvlod5hV-f5w2PWGUgzbcrLYpQm32GuhgvsSQlZfiA3YtuID8MMintOoojGLJ6YjI3YUjnTikkoUuQ8-pD9a4O5Ww",
       "domain": "probable-prawn-62.accounts.dev",
       "path": "/",
-      "expires": 1734748709,
+      "expires": 1734757112,
       "httpOnly": false,
       "secure": true,
       "sameSite": "Lax"
     },
     {
       "name": "__client_uat",
-      "value": "1703126309",
-      "domain": "localhost",
+      "value": "1703134712",
+      "domain": "0.0.0.0",
       "path": "/",
-      "expires": 1734748711,
+      "expires": 1734757114,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Strict"
     },
     {
       "name": "__clerk_db_jwt",
-      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpwa0ZMN3pqbHFtbVFnY2dQTDNhaHk0enJyIiwiaWQiOiJjbGllbnRfMlpwa0Z4TWtwMmZiUTR4cFdPYm9WbnJVb1BIIiwicm90YXRpbmdfdG9rZW4iOiI5dzRlcWswYTBmdXVncjd6M3owNTNzaDhvNzB0aDF5Mno4bmxoMmM2In0.ODqaUQUJG3-y1-56_GRxlhpI3ziUIVJTHMYzYceIfwiUoDS1ivQHJdNopig-I-3qVgmi1xsS9XNvFUICyZlotMtuSZ_Nvx4IblqBZiSDtHCFBRkNnX1WgOqQNXUB4ESi1lOr2UnbWzNyV6aotw12N3V4muw4HmfmfSguFxnyYw8BYEpK1qnrqPKqoOWYnEGrNyyiVAvtAOsSZvBLRiKMpYgKjFQ_xAqXLqsDhfX0mIKx4WWswFyB2xTbLcNy7BcnR3ECMJg42wTxmM8xAjP21QuCWmPeTwbXSIZZb7pH4gNCFMcHnZ0j0S9bdua8HN97_V_khRSgPpSkpg0xPWWOcg",
-      "domain": "localhost",
+      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpxMUhlYnZWSFQzY25BYm5nb01lSnBNQk5VIiwiaWQiOiJjbGllbnRfMlpxMUh2ejU0M2NtODMzeWRvak05UlpId2prIiwicm90YXRpbmdfdG9rZW4iOiJyMHZnYXp6enFrbWFza3A5aHZzdG5rZm81Y3J1YXUzY2VsbTNka3JmIn0.KrE_ZxgrITmw55fMwdQshvrzW0o1GuC0kGIwWg1bW0J79vFWwQ5f6VLo9GKkIwgXsIzYwuwRNRnnIDDgi-Iu9JYKTUFjAsBUyyLXOUkoert0vRVJss5bEQx7OB2q2Z31DyNY0YEogRrU8q08_pBqd0vVABgorRehvkv_y4SugfvbxmnOxsikBnNj78nFd-rH_pAP_bKwWNiUMZKRayP5tn7l30lqk0F5NqKk6dlaD_sNVeK5dyTx9-wyYePv2nD-NLXyx81836kZQs0h-G4TefpiFYtvDI7MDBM_9XNrzfqPn3OQ_coHhJVYLa0jgCcKd4xEf9aECJU0US2kah0l9w",
+      "domain": "0.0.0.0",
       "path": "/",
-      "expires": 1734748711,
+      "expires": 1734757114,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "__session",
-      "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yWHFEQ3NzTnhUYUdiczZTeHM0bXN4Y1dQUW4iLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJleHAiOjE3MDMxMjYzNzEsImlhdCI6MTcwMzEyNjMxMSwiaXNzIjoiaHR0cHM6Ly9wcm9iYWJsZS1wcmF3bi02Mi5jbGVyay5hY2NvdW50cy5kZXYiLCJuYmYiOjE3MDMxMjYzMDEsInNpZCI6InNlc3NfMlpwa0c2d1dwRVMwVWpJQTRJU3o1SER4OUVkIiwic3ViIjoidXNlcl8yWm91aVJNeE9OaTZsU1BYOVZ1c09lS29RYVYifQ.SKx-a95TFN8oIoCas6Qy8AyDdaxyslEbeDblpOO5Mo31bXRmp8Km-3DR7kAV0jTjJLakN765hwPZvB-IFL62l4IDUSX5h4edNnjinGTBM8d9BK8_7nKLVndO_M63cX7li6PXJRTfQPJ9tjPeQDAjuSXNPDgenP-6mCieAT04r4oC4w8iCWywThuN9bvlme4Gh2a586ELuusAZQ9NAWLcKEy--heLiRqkbUP9Ko8ZTXZCbbiVbiqJef2wJmEbyMwo34jet7O060jtTnUHh9rq0ugNHN84-7V7YW3Tfn3rpprWb8qYkR-_sEHsQwiT1nvWvs-uNzgFcIVa-KSp-nVAyA",
-      "domain": "localhost",
+      "value": "eyJhbGciOiJSUzI1NiIsImtpZCI6Imluc18yWHFEQ3NzTnhUYUdiczZTeHM0bXN4Y1dQUW4iLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vMC4wLjAuMDozMDAwIiwiZXhwIjoxNzAzMTM0NzczLCJpYXQiOjE3MDMxMzQ3MTMsImlzcyI6Imh0dHBzOi8vcHJvYmFibGUtcHJhd24tNjIuY2xlcmsuYWNjb3VudHMuZGV2IiwibmJmIjoxNzAzMTM0NzAzLCJzaWQiOiJzZXNzXzJacTFJQVdIa296d0s2cWJpeGk4dEk0d21BOSIsInN1YiI6InVzZXJfMlpvdWlSTXhPTmk2bFNQWDlWdXNPZUtvUWFWIn0.S000At7RicdMQDKqHiZgtP0OML6Pkn4YkpfZG8P64yBs0weYZUSq3pqPFw9GczBwxF2gYM89-C4-C0JCpuqZycdClRnrdlKu1dphjn0stSKvsMIBr8rYiRqCrtx6Ht6u2Guj5ZWvJZOeWB1QwQfltIpMwGYTi2EE4shwcbn0z2I4tJjx1ADLCoPv4cWBRBLEXSHgmMw4oLjN_PFHLlWTkXWznzh_IgqeNhtah3uUZQhQ7AxQkd6bxS4-ieqTGrDXIhjbZb7yp4IZzeySpzZiuORQxGLAsDzn_YMMdZ8ZHlIOdlU5BaFb1Xl0ciOsuRINdq0Lw_CQxwIV20d5a1yxkw",
+      "domain": "0.0.0.0",
       "path": "/",
-      "expires": 1734748711,
+      "expires": 1734757114,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -93,11 +93,11 @@
   ],
   "origins": [
     {
-      "origin": "http://localhost:3000",
+      "origin": "http://0.0.0.0:3000",
       "localStorage": [
         {
           "name": "clerk-db-jwt",
-          "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpwa0ZMN3pqbHFtbVFnY2dQTDNhaHk0enJyIiwiaWQiOiJjbGllbnRfMlpwa0Z4TWtwMmZiUTR4cFdPYm9WbnJVb1BIIiwicm90YXRpbmdfdG9rZW4iOiI5dzRlcWswYTBmdXVncjd6M3owNTNzaDhvNzB0aDF5Mno4bmxoMmM2In0.ODqaUQUJG3-y1-56_GRxlhpI3ziUIVJTHMYzYceIfwiUoDS1ivQHJdNopig-I-3qVgmi1xsS9XNvFUICyZlotMtuSZ_Nvx4IblqBZiSDtHCFBRkNnX1WgOqQNXUB4ESi1lOr2UnbWzNyV6aotw12N3V4muw4HmfmfSguFxnyYw8BYEpK1qnrqPKqoOWYnEGrNyyiVAvtAOsSZvBLRiKMpYgKjFQ_xAqXLqsDhfX0mIKx4WWswFyB2xTbLcNy7BcnR3ECMJg42wTxmM8xAjP21QuCWmPeTwbXSIZZb7pH4gNCFMcHnZ0j0S9bdua8HN97_V_khRSgPpSkpg0xPWWOcg"
+          "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpxMUhlYnZWSFQzY25BYm5nb01lSnBNQk5VIiwiaWQiOiJjbGllbnRfMlpxMUh2ejU0M2NtODMzeWRvak05UlpId2prIiwicm90YXRpbmdfdG9rZW4iOiJyMHZnYXp6enFrbWFza3A5aHZzdG5rZm81Y3J1YXUzY2VsbTNka3JmIn0.KrE_ZxgrITmw55fMwdQshvrzW0o1GuC0kGIwWg1bW0J79vFWwQ5f6VLo9GKkIwgXsIzYwuwRNRnnIDDgi-Iu9JYKTUFjAsBUyyLXOUkoert0vRVJss5bEQx7OB2q2Z31DyNY0YEogRrU8q08_pBqd0vVABgorRehvkv_y4SugfvbxmnOxsikBnNj78nFd-rH_pAP_bKwWNiUMZKRayP5tn7l30lqk0F5NqKk6dlaD_sNVeK5dyTx9-wyYePv2nD-NLXyx81836kZQs0h-G4TefpiFYtvDI7MDBM_9XNrzfqPn3OQ_coHhJVYLa0jgCcKd4xEf9aECJU0US2kah0l9w"
         }
       ]
     },
@@ -106,7 +106,7 @@
       "localStorage": [
         {
           "name": "clerk-db-jwt",
-          "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpwa0ZMN3pqbHFtbVFnY2dQTDNhaHk0enJyIiwiaWQiOiJjbGllbnRfMlpwa0Z4TWtwMmZiUTR4cFdPYm9WbnJVb1BIIiwicm90YXRpbmdfdG9rZW4iOiI5dzRlcWswYTBmdXVncjd6M3owNTNzaDhvNzB0aDF5Mno4bmxoMmM2In0.ODqaUQUJG3-y1-56_GRxlhpI3ziUIVJTHMYzYceIfwiUoDS1ivQHJdNopig-I-3qVgmi1xsS9XNvFUICyZlotMtuSZ_Nvx4IblqBZiSDtHCFBRkNnX1WgOqQNXUB4ESi1lOr2UnbWzNyV6aotw12N3V4muw4HmfmfSguFxnyYw8BYEpK1qnrqPKqoOWYnEGrNyyiVAvtAOsSZvBLRiKMpYgKjFQ_xAqXLqsDhfX0mIKx4WWswFyB2xTbLcNy7BcnR3ECMJg42wTxmM8xAjP21QuCWmPeTwbXSIZZb7pH4gNCFMcHnZ0j0S9bdua8HN97_V_khRSgPpSkpg0xPWWOcg"
+          "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJkdmJfMlpxMUhlYnZWSFQzY25BYm5nb01lSnBNQk5VIiwiaWQiOiJjbGllbnRfMlpxMUh2ejU0M2NtODMzeWRvak05UlpId2prIiwicm90YXRpbmdfdG9rZW4iOiJyMHZnYXp6enFrbWFza3A5aHZzdG5rZm81Y3J1YXUzY2VsbTNka3JmIn0.KrE_ZxgrITmw55fMwdQshvrzW0o1GuC0kGIwWg1bW0J79vFWwQ5f6VLo9GKkIwgXsIzYwuwRNRnnIDDgi-Iu9JYKTUFjAsBUyyLXOUkoert0vRVJss5bEQx7OB2q2Z31DyNY0YEogRrU8q08_pBqd0vVABgorRehvkv_y4SugfvbxmnOxsikBnNj78nFd-rH_pAP_bKwWNiUMZKRayP5tn7l30lqk0F5NqKk6dlaD_sNVeK5dyTx9-wyYePv2nD-NLXyx81836kZQs0h-G4TefpiFYtvDI7MDBM_9XNrzfqPn3OQ_coHhJVYLa0jgCcKd4xEf9aECJU0US2kah0l9w"
         }
       ]
     }

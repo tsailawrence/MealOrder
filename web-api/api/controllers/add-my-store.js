@@ -1,10 +1,10 @@
-const { errorResponser } = require("../libs/controller-helper");
-const User = require("../models/user");
-const Store = require("../models/store");
-const cloudinary = require("cloudinary").v2;
-const config = require("config");
+const { errorResponser } = require('../libs/controller-helper');
+const User = require('../models/user');
+const Store = require('../models/store');
+const cloudinary = require('cloudinary').v2;
+const config = require('config');
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   const {
     currentUser: { id: userId, type } = {},
     request: { body: { name, category, area, uri } = {} } = {},
@@ -15,16 +15,16 @@ module.exports = async (ctx) => {
   try {
     cloudinary.config(config.cloudinary);
     cdn = await cloudinary.uploader.upload(uri, {
-      folder: "image",
+      folder: 'image',
       width: 400,
       height: 400,
-      crop: "crop",
+      crop: 'crop',
     });
   } catch (error) {
     console.log(error);
   }
 
-  const storeImage = cdn && cdn.secure_url ? cdn.secure_url : "";
+  const storeImage = cdn && cdn.secure_url ? cdn.secure_url : '';
 
   const data = {
     userId,
@@ -35,7 +35,7 @@ module.exports = async (ctx) => {
   };
 
   if (type !== User.TYPE.MERCHANT) {
-    return errorResponser(ctx, 401, "Not a valid merchant");
+    return errorResponser(ctx, 401, 'Not a valid merchant');
   }
 
   const [theStore] = await Store.addStoreByUserId({
@@ -43,7 +43,7 @@ module.exports = async (ctx) => {
   });
 
   ctx.body = {
-    result: "success",
+    result: 'success',
   };
 
   return true;

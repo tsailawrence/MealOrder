@@ -1,17 +1,19 @@
-const { errorResponser } = require("../libs/controller-helper");
+const { errorResponser } = require('../libs/controller-helper');
 
-const Store = require("../models/store");
-const MenuType = require("../models/menuType");
-const Menu = require("../models/menu");
-const User = require("../models/user");
-const cloudinary = require("cloudinary").v2;
-const config = require("config");
+const Store = require('../models/store');
+const MenuType = require('../models/menuType');
+const Menu = require('../models/menu');
+const User = require('../models/user');
+const cloudinary = require('cloudinary').v2;
+const config = require('config');
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   const {
     currentUser: { id: userId, type } = {},
     params: { storeId } = {},
-    request: { body: { name, description, price, menuTypeId,amount, uri } = {} } = {},
+    request: {
+      body: { name, description, price, menuTypeId, amount, uri } = {},
+    } = {},
   } = ctx;
 
   let cdn = {};
@@ -19,10 +21,10 @@ module.exports = async (ctx) => {
   try {
     cloudinary.config(config.cloudinary);
     cdn = await cloudinary.uploader.upload(uri, {
-      folder: "image",
+      folder: 'image',
       width: 400,
       height: 400,
-      crop: "crop",
+      crop: 'crop',
     });
   } catch (error) {
     console.log(error);
@@ -32,28 +34,17 @@ module.exports = async (ctx) => {
     storeId,
   });
 
-  if (
-    !theStore
-    || type !== User.TYPE.MERCHANT
-  ) {
-          return errorResponser(
-              ctx,
-              401,
-              'Operation error.'
-          );
+  if (!theStore || type !== User.TYPE.MERCHANT) {
+    return errorResponser(ctx, 401, 'Operation error.');
   }
 
-  if( theStore.userId !== userId){
-      const [usrInfo] = await User.getUserById({
-          id: userId,
-      });
-      if(usrInfo.isAdmin != true){
-          return errorResponser(
-              ctx,
-              401,
-              'Operation error.'
-          );
-      }
+  if (theStore.userId !== userId) {
+    const [usrInfo] = await User.getUserById({
+      id: userId,
+    });
+    if (usrInfo.isAdmin != true) {
+      return errorResponser(ctx, 401, 'Operation error.');
+    }
   }
 
   const theTypes = await MenuType.getMenuTypeByStoreId({
@@ -61,10 +52,10 @@ module.exports = async (ctx) => {
   });
 
   if (!theTypes.map(({ id }) => id).includes(menuTypeId)) {
-    return errorResponser(ctx, 403, "Not a valid type.");
+    return errorResponser(ctx, 403, 'Not a valid type.');
   }
 
-  const menuImage = cdn && cdn.secure_url ? cdn.secure_url : "";
+  const menuImage = cdn && cdn.secure_url ? cdn.secure_url : '';
 
   await Menu.insert({
     name,
@@ -78,7 +69,7 @@ module.exports = async (ctx) => {
   });
 
   ctx.body = {
-    result: "success",
+    result: 'success',
   };
 
   return true;
