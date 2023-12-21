@@ -28,7 +28,7 @@ function getStatus(status: string) {
         action: ["Complete Preparing", "To Pick Up"],
       };
     case "To Pick Up":
-      return { color: "text-green-500 border-green-500", action: null };
+      return { color: "text-green-500 border-green-500", action: ["Pick Up","Completed"] };
     case "Completed":
       return {
         color: "text-blue-400 border-blue-400",
@@ -93,9 +93,9 @@ export const OrderCard = ({ order, handleUpdate }: OrderCardProps) => {
           onClick={() => {
             handleUpdate(order.id, "Canceled");
           }}
-          disabled={order.status === "Canceled"}
+          disabled={order.status === "Canceled" || order.status === "To Pick Up" || order.status === "Completed"}
         >
-          {order.status === "Canceled" ? "Canceled" : "Cancel"}
+          {order.status === "Canceled" || order.status === "To Pick Up" || order.status === "Completed" ? order.status : "Cancel"}
         </Button>
         {getStatus(order.status)?.action && (
           <Button

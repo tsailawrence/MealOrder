@@ -45,24 +45,28 @@ const RestaurantPage = () => {
             setLoading(false);
         }
     };
+
     if (loading) {
         return <div>Loading...</div>;
     }
+
     if (error) {
         return <div>{error}</div>;
     }
+
     if (!restaurant) {
         return <div>No data</div>;
     }
+
     return (
         <>
-            <StoreInfo
-                id={restaurant.id}
-                name={restaurant.name}
-                area={restaurant.area}
-                phoneNumber={restaurant.phoneNumber}
-                starNumber={restaurant.favoriteCount}
-                imageSrc={restaurant.storeImage || ''}
+            <StoreInfo 
+                id={restaurant.id} 
+                name={restaurant.name} 
+                area={restaurant.area} 
+                phoneNumber={restaurant.phoneNumber} 
+                starNumber={restaurant.favoriteCount} 
+                imageSrc={restaurant.storeImage || ''} 
             />
             {restaurant.menu && <StoreMenu restaurantName={restaurant.name} menus={restaurant.menu} menutypes={restaurant.menuTypes} />}
         </>

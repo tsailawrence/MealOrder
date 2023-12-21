@@ -2,43 +2,14 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CardProps, CardPriceProps } from '@/lib/types/db';
+import { CardProps } from '@/lib/types/db';
 import { Heart } from 'lucide-react';
 
-type Item = {
-    name: string;
-    price: number;
-    quantity: number;
-}
-type Cart = {
-    reastaurantName: string;
-    imageSrc: string; //restaurant image
-    username: string;
-    pickupTime: Date;
-    status: string;
-    item: Item[]; //item name, price, quantity
-}
-const ItemTemplate = {
-    name: '',
-    price: 0,
-    quantity: 0,
-    flavor: '',
-    note: '',
-}
-const CartTemplate = {
-    reastaurantName: '',
-    imageSrc: null, //restaurant image
-    username: '',
-    pickupTime: new Date(),
-    status: '',
-    item:[], //item name, price, quantity
-}
+export const CardComponent: React.FC<CardProps> = ({id, uri, name, starNumber, likes = true}) => {
 
-export const CardComponent: React.FC<CardProps> = ({ id, uri, name, starNumber, likes = false }) => {
-    const RestauarantId = id.toString();
     return (
-        <Link href={`/customer/restaurant/${RestauarantId}`} >
-            <div className="flex flex-col items-center w-full max-w-xs mx-auto bg-white rounded-2xl overflow-hidden shadow-lg max-md:w-full">
+        <Link href={`/admin/${id}/menu`} >
+            <div className="flex flex-col items-center w-[95%] max-w-xs mx-auto bg-white rounded-2xl overflow-hidden shadow-lg ">
                 <div className="w-full">
                     <div className="relative w-full h-0" style={{ paddingBottom: '84%' }}>
                         <Image
@@ -56,7 +27,7 @@ export const CardComponent: React.FC<CardProps> = ({ id, uri, name, starNumber, 
                     </h2>
                     <div className="flex items-center justify-between mt-3">
                         <span className="text-red-600 text-2xl font-black">
-                            {likes ? <Heart fill='red'/> : <Heart/>}
+                            {likes ? <Heart fill='red' /> : <Heart />}
                         </span>
                         {/* <span className="text-red-600 text-xl">
                             {starNumber}

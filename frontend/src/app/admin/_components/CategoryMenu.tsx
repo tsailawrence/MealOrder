@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/tabs";
 import React, { useState, useEffect } from "react";
 import { Utensils } from "lucide-react";
-import { CardComponent } from "@/app/customer/allFavorite/_components/CardComponent";
+import { CardComponent } from "./CardComponent";
 import { useCookies } from 'react-cookie';
 import { getStores } from './actions';
 import { CategoryProps } from "@/lib/types/db";
@@ -76,9 +76,6 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
     }
 
     const idToName = (id: number) => {
-        if (id === 0) {
-            return "all";
-        }
         return categorys.find((category) => category.id === id)?.categoryName;
     }
 
@@ -102,7 +99,7 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
 
     const renderTabsTriggers = () => (
         <>
-            <TabsTrigger key='all' value="all">All</TabsTrigger>
+            <TabsTrigger value="all">All</TabsTrigger>
             {categorys.map((category) => (
                 <TabsTrigger key={category.id} value={category.categoryName}>
                     {category.categoryName}
@@ -118,19 +115,18 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
             </div>
         ))
     );
-    console.log(defaultId)
-    console.log(idToName(defaultId))
+
     return (
         <>
             <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
                 {renderCategoryHeader()}
             </article>
-            <Tabs className="w-full" defaultValue={idToName(defaultId)} onValueChange={handleCategory}>
+            <Tabs className="w-full" defaultValue={'all'} onValueChange={handleCategory}>
                 <TabsList className="grid grid-flow-col mt-6 overflow-x-auto" style={{ gridAutoColumns: 'minmax(100px, 1fr)' }}>
                     {renderTabsTriggers()}
                 </TabsList>
 
-                <TabsContent key='all' value="all">
+                <TabsContent value="all">
                     <div className="flex flex-wrap w-full mt-6">
                         {restaurants.length ? renderRestaurantCards(restaurants.flatMap(category => category.items)) : <div className="flex justify-center items-center w-full h-96">No items in this category</div>}
                     </div>
