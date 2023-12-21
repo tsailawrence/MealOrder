@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function Home() {
   // Get the userId from auth() -- if null, the user is not logged in
@@ -19,24 +19,31 @@ export default async function Home() {
         </main>
       </div> */}
       <div className="flex min-h-screen">
-      {/* Left Half - Image */}
-      <div className="w-1/2 flex justify-center items-center bg-gray-100">
-        <Image
-          src="/logo.png"
-          alt="Descriptive Alt Text"
-          width={500}
-          height={500}
-        />
-      </div>
+        {/* Left Half - Image */}
+        <div className="w-1/2 flex justify-center items-center">
+          <Image
+            src="/logo.png"
+            alt="Descriptive Alt Text"
+            width={500}
+            height={500}
+          />
+        </div>
 
-      <div className="w-1/2 flex flex-col justify-center items-center bg-red-400 p-12 text-center">
-        <h1 className="text-4xl text-white font-bold mb-4">Welcome to Foody !!</h1>
-        <p className="mb-8 text-white ">Explore our amazing features and get started on your journey.</p>
-        <Link href="/login">
-            <span className="text-white underline text-2xl">Get Started</span>
+        <div className="w-1/2 flex flex-col justify-center items-center bg-red-500 p-12 text-center">
+          <h1 className="text-4xl text-white font-bold mb-4">
+            Welcome to Foody!!!
+          </h1>
+          <p className="mb-8 text-white ">
+            Find your restaurant. Find your food.
+          </p>
+          <Link href="/login">
+            <button className="bg-white hover:bg-gray-200 font-bold py-2 px-4 rounded">
+              Get Started
+            </button>
+            {/* <span className="text-white underline text-2xl">Get Started</span> */}
           </Link>
+        </div>
       </div>
-    </div>
     </>
   );
 }
