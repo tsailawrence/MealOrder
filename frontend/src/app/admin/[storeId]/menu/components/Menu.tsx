@@ -51,7 +51,21 @@ export const Menu = () => {
         console.error('Error fetching menu:', err);
       });
   };
+  const [num, setNum] = useState(0);
+  function useDebounce(text: number, delay: number) {
+    console.log('text:', text);
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        setNum(text+1);
+      }, delay);
+      return () => {
+        clearTimeout(timerId);
+      };
+    }, [text, delay]);
+    return num;
+  }
 
+  const debouncedValue = useDebounce(num, 1000);
   const onDelete = async (menuTypeId: string) => {
     try {
       await deleteMenuType(accessToken, storeId, menuTypeId);
@@ -67,7 +81,7 @@ export const Menu = () => {
   useEffect(() => {
     fetchMenu();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [debouncedValue]);
 
   const handleClickCard = (product: Product) => {
     setEditProduct(product);
