@@ -1,5 +1,13 @@
 import { test as setup, expect } from '@playwright/test';
 const { chromium } = require('playwright');
+const fs = require('fs');
+const path = require('path');
+
+// 确保截图目录存在
+const screenshotsDir = path.join(__dirname, 'screenshots');
+if (!fs.existsSync(screenshotsDir)) {
+  fs.mkdirSync(screenshotsDir, { recursive: true });
+}
 
 const baseURL = 'http://localhost:3000';
 const customerAccount = 'customer+clerk_test@test.com';
@@ -20,6 +28,7 @@ setup('authenticate as customer', async ({}) => {
   console.log(page.url());
   await page.locator('span:text("Get Started")').click();
   await page.waitForTimeout(5000);
+  await page.screenshot({ path: path.join(screenshotsDir, 'screenshot1.png') });
   console.log(page.url());
   await page.locator('#identifier-field').fill(customerAccount);
   await page.keyboard.press('Enter');
@@ -46,6 +55,7 @@ setup('authenticate as merchant', async ({ page }) => {
   await page.locator('span:text("Get Started")').click();
   await page.waitForTimeout(8000);
   console.log(page.url());
+  await page.screenshot({ path: path.join(screenshotsDir, 'screenshot2.png') });
   await page.locator('#identifier-field').fill(merchantAccount);
   await page.keyboard.press('Enter');
   await page.waitForTimeout(8000);
