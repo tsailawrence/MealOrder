@@ -7,9 +7,9 @@ const koaBody = require('koa-body');
 const router = require('./routes');
 
 const allowedOrigins = [
-  // 'https://foody-app.shop',
+  'https://foody-app.shop',
   // 'https://0.0.0.0:3000',
-  'http://localhost:3000',
+  // 'http://localhost:3000',
 ];
 
 const init = () => {
