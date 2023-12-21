@@ -46,7 +46,7 @@ export const Dashboard = () => {
     return num;
   }
 
-  const debouncedValue = useDebounce(num, 1000);
+  const debouncedValue = useDebounce(num, 5000);
   const fetchAllOrders = () => {
     getAllOrders(accessToken)
       .then(data => {

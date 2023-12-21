@@ -65,7 +65,7 @@ export const Menu = () => {
     return num;
   }
 
-  const debouncedValue = useDebounce(num, 1000);
+  const debouncedValue = useDebounce(num, 5000);
   const onDelete = async (menuTypeId: string) => {
     try {
       await deleteMenuType(accessToken, storeId, menuTypeId);

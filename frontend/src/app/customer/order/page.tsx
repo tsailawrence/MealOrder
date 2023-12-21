@@ -49,7 +49,7 @@ const OrdersPage = () => {
     return num;
   }
 
-  const debouncedValue = useDebounce(num, 1000);
+  const debouncedValue = useDebounce(num, 5000);
   useEffect(() => {
     getOrders(accessToken)
       .then(data => {
