@@ -121,7 +121,7 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
             <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
                 {renderCategoryHeader()}
             </article>
-            <Tabs className="w-full" defaultValue={idToName(defaultId)} onValueChange={handleCategory}>
+            <Tabs className="w-full" defaultValue={'all'} onValueChange={handleCategory}>
                 <TabsList className="grid grid-flow-col mt-6 overflow-x-auto" style={{ gridAutoColumns: 'minmax(100px, 1fr)' }}>
                     {renderTabsTriggers()}
                 </TabsList>
