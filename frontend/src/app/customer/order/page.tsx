@@ -35,7 +35,21 @@ const OrdersPage = () => {
       // Handle error (e.g., show a message to the user)
     }
   };
+  const [num, setNum] = useState(0);
+  function useDebounce(text: number, delay: number) {
+    console.log('text:', text);
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        setNum(text+1);
+      }, delay);
+      return () => {
+        clearTimeout(timerId);
+      };
+    }, [text, delay]);
+    return num;
+  }
 
+  const debouncedValue = useDebounce(num, 1000);
   useEffect(() => {
     getOrders(accessToken)
       .then(data => {
@@ -49,7 +63,7 @@ const OrdersPage = () => {
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Dependency array
+  }, [debouncedValue]); // Dependency array
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>Orders</h1>

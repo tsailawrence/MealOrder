@@ -1,49 +1,71 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { toast } from "react-hot-toast";
+'use client';
+import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { toast } from 'react-hot-toast';
+import { Order } from '@/lib/types/db';
+import { getAllOrders, updateOrderStatus } from './actions';
+import { OrderCard } from '@/app/merchant/[storeId]/order/_components/OrderCard';
+import { AllOrderTable } from '@/app/merchant/[storeId]/order/_components/AllOrderTable';
 
-import { Order } from "@/lib/types/db";
-import { getAllOrders, updateOrderStatus } from "./actions";
-import { OrderCard } from "@/app/merchant/[storeId]/order/_components/OrderCard";
-import { AllOrderTable } from "@/app/merchant/[storeId]/order/_components/AllOrderTable";
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Define the props for TabsDemo component
 export const Dashboard = () => {
   const [cookies, setCookie] = useCookies([
-    "refreshToken",
-    "accessToken",
-    "__session",
+    'refreshToken',
+    'accessToken',
+    '__session',
   ]);
-  const { __session: accessToken = "" } = cookies;
-
+  const { __session: accessToken = '' } = cookies;
   const [loading, setLoading] = useState(true);
   const [allOrders, setAllOrders] = useState<Order[] | null>(null);
 
+  // const setNumber = () => {
+  //   if (i) {
+  //     return;
+  //   }
+  //   setInterval(() => {
+  //     i = setNum(num + 1);
+  //   }, 1000);
+  // };
+  // useEffect(() => {
+  //   setNumber();
+  // }),[];
+  const [num, setNum] = useState(0);
+  function useDebounce(text: number, delay: number) {
+    console.log('text:', text);
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        setNum(text+1);
+      }, delay);
+      return () => {
+        clearTimeout(timerId);
+      };
+    }, [text, delay]);
+    return num;
+  }
+
+  const debouncedValue = useDebounce(num, 1000);
   const fetchAllOrders = () => {
-    setLoading(true);
     getAllOrders(accessToken)
-      .then((data) => {
-        console.log("Orders:", data);
+      .then(data => {
         setAllOrders(data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Error fetching orders:", err);
+      .catch(err => {
+        console.error('Error fetching orders:', err);
       });
   };
 
   useEffect(() => {
     fetchAllOrders();
     //eslint-disable-next-line
-  }, []);
+  }, [debouncedValue]);
 
   const todayOrders =
     allOrders &&
-    allOrders.filter((order) => {
+    allOrders.filter(order => {
       const today = new Date();
       const orderDate = new Date(order.pickupTime);
       return (
@@ -52,11 +74,11 @@ export const Dashboard = () => {
       );
     });
 
-  console.log("todayOrders:", todayOrders);
+  console.log('todayOrders:', todayOrders);
 
   const upcomingOrders =
     allOrders &&
-    allOrders.filter((order) => {
+    allOrders.filter(order => {
       const today = new Date();
       const orderDate = new Date(order.pickupTime);
       return (
@@ -69,7 +91,7 @@ export const Dashboard = () => {
     try {
       await updateOrderStatus(accessToken, orderId, status);
       fetchAllOrders();
-      toast.success("Order status updated");
+      toast.success('Order status updated');
     } catch (error) {
       console.log(error);
     }
