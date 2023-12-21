@@ -1,10 +1,10 @@
-const { errorResponser } = require("../libs/controller-helper");
-const User = require("../models/user");
-const Store = require("../models/store");
-const cloudinary = require("cloudinary").v2;
-const config = require("config");
+const { errorResponser } = require('../libs/controller-helper');
+const User = require('../models/user');
+const Store = require('../models/store');
+const cloudinary = require('cloudinary').v2;
+const config = require('config');
 
-module.exports = async (ctx) => {
+module.exports = async ctx => {
   const {
     currentUser: { id: userId, type } = {},
     params: { storeId } = {},
@@ -16,16 +16,16 @@ module.exports = async (ctx) => {
   try {
     cloudinary.config(config.cloudinary);
     cdn = await cloudinary.uploader.upload(uri, {
-      folder: "image",
+      folder: 'image',
       width: 400,
       height: 400,
-      crop: "crop",
+      crop: 'crop',
     });
   } catch (error) {
     console.log(error);
   }
 
-  const storeImage = cdn && cdn.secure_url ? cdn.secure_url : "";
+  const storeImage = cdn && cdn.secure_url ? cdn.secure_url : '';
 
   const data = {
     userId,
@@ -37,13 +37,13 @@ module.exports = async (ctx) => {
 
   // 遍历 data 对象的属性，如果属性值为 undefined 或 null 或空字符串，则从对象中删除该属性
   for (const key in data) {
-    if (data[key] === undefined || data[key] === null || data[key] === "") {
+    if (data[key] === undefined || data[key] === null || data[key] === '') {
       delete data[key];
     }
   }
 
   if (type !== User.TYPE.MERCHANT) {
-    return errorResponser(ctx, 401, "Not a valid merchant");
+    return errorResponser(ctx, 401, 'Not a valid merchant');
   }
 
   const theStore = await Store.updateStoreByStoreId({
@@ -52,7 +52,7 @@ module.exports = async (ctx) => {
   });
 
   ctx.body = {
-    result: "success",
+    result: 'success',
   };
 
   return true;
