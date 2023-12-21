@@ -26,16 +26,16 @@ const init = () => {
     })
   );
   // cross domain
-  // app.use(cors({
-  //     origin: 'https://foody-app.shop',
-  //     credentials: true,
-  // }));
-  app.use(
-    cors({
-      origin: 'http://localhost:3000',
+  app.use(cors({
+      origin: 'https://foody-app.shop',
       credentials: true,
-    })
-  );
+  }));
+//   app.use(
+//     cors({
+//       origin: 'http://localhost:3000',
+//       credentials: true,
+//     })
+//   );
 
   // register routers
   app.use(router.routes()).use(router.allowedMethods());
