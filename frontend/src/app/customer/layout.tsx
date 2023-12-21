@@ -1,6 +1,7 @@
 "use client";
 import Header from "@/components/CustomerHeader";
 import { LocationProvider } from './LocationContext';
+import { Toaster } from "react-hot-toast";
 
 type Item = {
   name: string;
@@ -31,6 +32,7 @@ export default function CustomerLayout({
   return (
     <LocationProvider>
     <div className="flex flex-col min-h-screen">
+      <Toaster />
         <Header/>
         <main className="flex flex-col items-center p-4 pt-20 mx-auto w-[95%] grow">
           {children}

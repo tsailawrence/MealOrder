@@ -16,6 +16,7 @@ export const getMonthlyCustomerData = async (
         },
       }
     );
+    console.log("getMonthlyCustomerData response", response);
     return response.data;
   } catch (err) {
     console.log("getAllOrders error", err);

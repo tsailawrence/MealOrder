@@ -6,6 +6,8 @@ import { Heart } from 'lucide-react';
 import { Phone } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 import { addMyFavoriteRestaurant } from "./actions";
+import { toast } from "react-hot-toast";
+
 const StoreInfo: React.FC<RestaurantCardProps> = ({
     id,
     name,
@@ -15,7 +17,16 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
     area,
 }) => {
     const [cookies] = useCookies(['refreshToken', 'accessToken', '__session', 'nowCity']);
-    const { __session: accessToken = '',nowCity } = cookies;
+    const { __session: accessToken = '', nowCity } = cookies;
+    const handleFavorite = () => {
+        addMyFavoriteRestaurant(accessToken, id)
+            .then(() => {
+                toast.success('Add to favorite successfully');
+            })
+            .catch((err) => {
+                toast.error('Add to favorite failed');
+            });
+    }
     return (
         <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
             <div className="flex items-stretch justify-between gap-5 mt-2">
@@ -34,7 +45,7 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                         </h1>
                         <div className="flex gap-2 mt-2">
                             <div className="text-red-600 text-2xl font-black leading-6">
-                                <Heart fill='red' /> 
+                                <Heart fill='red' />
                             </div>
                             {/* <div className="text-red-600 text-2xl leading-7 self-stretch whitespace-nowrap">
                                 {starNumber}
@@ -42,9 +53,9 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                         </div>
                     </div>
                     {area && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
-                        <MapPin /> {area } 
+                        <MapPin /> {area}
                     </span>}
-                    {(area && area!==nowCity) && <span className="text-red-600"> Far from your location !!!</span>}
+                    {(area && area !== nowCity) && <span className="text-red-600"> Far from your location !!!</span>}
                     {phoneNumber && <span className="flex text-neutral-400 text-base whitespace-nowrap mt-1">
                         <Phone /> {phoneNumber}
                     </span>}
@@ -60,7 +71,7 @@ const StoreInfo: React.FC<RestaurantCardProps> = ({
                     alt="Favorite Icon"
                 />
                 <div className="text-red-600 text-sm font-semibold leading-5 whitespace-nowrap">
-                    <button type="button" className="text-red-600" onClick={() => addMyFavoriteRestaurant(accessToken, id)}>
+                    <button type="button" className="text-red-600" onClick={() => handleFavorite()}>
                         Add to favorite
                     </button>
                 </div>
