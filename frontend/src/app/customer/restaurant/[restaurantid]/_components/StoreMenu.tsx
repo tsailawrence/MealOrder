@@ -43,7 +43,7 @@ const TabsDemo: React.FC<TabsDemoProps> = ({ restaurantName, menus, menutypes })
                     <div className="flex justify-center items-center w-full h-96">No items in this category</div> :
                     <div className="flex flex-wrap w-full mt-6">
                         {
-                            menus && menus.filter((item) => item.menuTypeId === type.id).map((item) => (
+                            menus && menus.filter((item) => item.menuTypeId === type.id && item.onShelfStatus===1).map((item) => (
                                 <div key={item.id} className="flex-none w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-[250px] mb-3">
                                     <CardPriceComponent 
                                         amount={item.amount}

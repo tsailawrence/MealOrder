@@ -29,9 +29,9 @@ export const CardComponent: React.FC<CardProps> = ({id, uri, name, starNumber, l
                         <span className="text-red-600 text-2xl font-black">
                             {likes ? <Heart fill='red' /> : <Heart />}
                         </span>
-                        <span className="text-red-600 text-xl">
+                        {/* <span className="text-red-600 text-xl">
                             {starNumber}
-                        </span>
+                        </span> */}
                     </div>
                 </div>
             </div>

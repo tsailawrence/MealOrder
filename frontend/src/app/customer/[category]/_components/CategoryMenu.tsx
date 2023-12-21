@@ -76,6 +76,9 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
     }
 
     const idToName = (id: number) => {
+        if (id === 0) {
+            return "all";
+        }
         return categorys.find((category) => category.id === id)?.categoryName;
     }
 
@@ -89,9 +92,9 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
                     <div className="text-red-600 text-2xl font-black mt-5">
                         <Utensils />
                     </div>
-                    <div className="text-red-600 text-2xl mt-4">
+                    {/* <div className="text-red-600 text-2xl mt-4">
                         {restaurantCount}  
-                    </div>
+                    </div> */}
                 </div>
             )}
         </div>
@@ -99,7 +102,7 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
 
     const renderTabsTriggers = () => (
         <>
-            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger key='all' value="all">All</TabsTrigger>
             {categorys.map((category) => (
                 <TabsTrigger key={category.id} value={category.categoryName}>
                     {category.categoryName}
@@ -115,7 +118,8 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
             </div>
         ))
     );
-
+    console.log(defaultId)
+    console.log(idToName(defaultId))
     return (
         <>
             <article className="self-stretch flex w-full items-stretch justify-between gap-5 max-md:max-w-[80%] max-md:flex-wrap ">
@@ -126,7 +130,7 @@ const CategoryMenu: React.FC<TabsDemoProps> = ({ categorys, defaultId }) => {
                     {renderTabsTriggers()}
                 </TabsList>
 
-                <TabsContent value="all">
+                <TabsContent key='all' value="all">
                     <div className="flex flex-wrap w-full mt-6">
                         {restaurants.length ? renderRestaurantCards(restaurants.flatMap(category => category.items)) : <div className="flex justify-center items-center w-full h-96">No items in this category</div>}
                     </div>
